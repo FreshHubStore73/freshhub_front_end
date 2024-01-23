@@ -1,9 +1,9 @@
+import Header from '@/components/Header/Header';
+
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="global-wrapper">
-            <header style={{ background: 'grey' }}>
-                <div className="container">HEADER</div>
-            </header>
+            <Header />
             <main>
                 <section className="container">{children}</section>
             </main>
