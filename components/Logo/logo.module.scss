@@ -1,7 +1,14 @@
 .logo {
     text-decoration: none;
     color: inherit;
-    & span {
+    img {
+        margin-right: 10px;
+    }
+    &_wrapper {
+        display: flex;
+        align-items: center;
+    }
+    &_text {
         font-size: 32px;
     }
 }

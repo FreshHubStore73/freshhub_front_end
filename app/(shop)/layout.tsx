@@ -1,16 +1,18 @@
-import Header from '@/components/Header/Header';
+import HeaderMain from '../../components/HeaderMain/HeaderMain';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="global-wrapper">
-            <Header />
+        <>
+            <HeaderMain />
             <main>
                 <section className="container">{children}</section>
             </main>
             <footer style={{ background: 'grey' }}>
-                <div className="container">&copy; {new Date().getFullYear()} FreshHub</div>
+                <div style={{ textAlign: 'center', marginBlock: 10 }} className="container">
+                    &copy; {new Date().getFullYear()} FreshHub
+                </div>
             </footer>
-        </div>
+        </>
     );
 };
 

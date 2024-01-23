@@ -1,17 +1,21 @@
-body,
-html {
-    height: 100%;
+* {
+    box-sizing: border-box;
+}
+html,
+body {
     margin: 0;
+    padding: 0;
+    height: 100%;
 }
-.container {
-    max-width: 1276px;
-    margin: 0 auto;
-}
-.global-wrapper {
+body {
     display: flex;
     flex-direction: column;
-    min-height: 100%;
 }
 main {
-    flex: 1;
+    flex-grow: 1;
+}
+.container {
+    max-width: 1440px;
+    padding-inline: 82px;
+    margin: 0 auto;
 }
