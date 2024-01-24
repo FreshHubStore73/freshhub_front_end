@@ -1,0 +1,19 @@
+.navbar {
+    &_wrapper {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        justify-content: center;
+    }
+    &_link {
+        display: inline-block;
+        text-decoration: none;
+        color: inherit;
+        font-weight: bold;
+        transition: all 0.3s;
+        &:hover {
+            color: #fff;
+        }
+    }
+}
