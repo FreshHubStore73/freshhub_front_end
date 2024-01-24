@@ -1,0 +1,14 @@
+.header {
+    width: 100%;
+    position: fixed;
+    height: 111px;
+    background-color: grey;
+    padding-block: 25px;
+    &_wrapper {
+        display: flex;
+        align-items: center;
+    }
+    & + main {
+        padding-top: 111px;
+    }
+}

@@ -1,9 +1,9 @@
+import HeaderAuth from '@/components/HeaderAuth/HeaderAuth';
+
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
-            <header style={{ background: 'grey' }}>
-                <div className="container">NO HEADER</div>
-            </header>
+            <HeaderAuth />
             <main>
                 <section className="container">{children}</section>
             </main>
