@@ -1,0 +1,41 @@
+.numberControl {
+    display: flex;
+    align-items: center;
+}
+
+.numberLeft,
+.numberRight {
+    content: attr(data-content);
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    color: white;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.numberQuantity {
+    padding: 0 0.25rem;
+    line-height: 28px;
+    font-size: 1rem;
+    border: 0;
+    width: 50px;
+    -moz-appearance: textfield;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: right;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.numberLeft:hover,
+.numberRight:hover {
+    background-color: #666666;
+}

@@ -1,0 +1,13 @@
+.title {
+    text-align: center;
+    margin-block: 50px;
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 50px;
+}
+.link {
+    text-decoration: none;
+}

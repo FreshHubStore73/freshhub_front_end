@@ -1,0 +1,14 @@
+.addToCard {
+    background-color: #d51116;
+    line-height: 40px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    padding-inline: 20px;
+    min-width: 100px;
+    transition: all 200ms;
+    &:hover {
+        cursor: pointer;
+        transform: scale(105%);
+    }
+}

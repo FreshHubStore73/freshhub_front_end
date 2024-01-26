@@ -1,0 +1,80 @@
+.card {
+    position: relative;
+    max-width: 350px;
+    padding: 0 20px 25px;
+    border-radius: 0 20px 20px;
+    background-color: white;
+    transition: all 200ms;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    * {
+        color: var(--color-txt);
+        text-decoration: none;
+    }
+    &:hover {
+        filter: drop-shadow(3px 3px 5px grey);
+        .dishImg,
+        .dishTitle,
+        .dishDescr {
+            filter: opacity(75%);
+        }
+    }
+}
+.wrapper {
+    padding-block: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+.advice {
+    position: absolute;
+    padding: 3px 5px;
+    border-radius: 2px;
+    top: 0;
+    left: 0;
+    background-color: var(--color-txt-l);
+}
+.dishImg {
+    vertical-align: middle;
+    position: relative;
+    width: 70%;
+    aspect-ratio: 1;
+    // overflow: hidden;
+    img {
+        object-fit: cover;
+        border-radius: 100%;
+    }
+}
+.dishPrice {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 100%;
+    background-color: #ffbb5c;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 100%;
+    border: 5px solid #fff;
+    color: #000;
+    font-family: Cookie;
+    font-weight: bold;
+}
+.dishTitle {
+    font-weight: bold;
+    font-style: 1.5rem;
+    text-align: center;
+    padding-block: 10px;
+}
+.dishDescr {
+    font-weight: normal;
+    font-style: 1rem;
+    text-align: justify;
+    height: 5rem;
+    text-wrap: wrap;
+}
