@@ -26,8 +26,7 @@ export default function NavMenuDrawer({ categories }: Props) {
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography variant="h4" sx={{ my: 2 }}>
-                {/* 𝕱𝖗𝖊𝖘𝖍𝕳𝖚𝖇 */}
+            <Typography variant="header" component="div" sx={{ my: '43.5px' }}>
                 Logo
             </Typography>
             <Divider />
@@ -36,14 +35,13 @@ export default function NavMenuDrawer({ categories }: Props) {
     );
     return (
         <>
-            <Box onClick={handleDrawerToggle} sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Box onClick={handleDrawerToggle} sx={{ display: { xs: 'flex', md: 'none' }, mr: 3 }}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
                     onClick={handleOpenNavMenu}
-                    color="inherit"
                 >
                     <MenuIcon />
                 </IconButton>

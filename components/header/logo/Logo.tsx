@@ -14,19 +14,14 @@ export default function Logo() {
             }}
         >
             <Link href="/" className={styles.logo}>
-                {/* <Image src="/Logo.jpg" width={60} height={60} alt="Logo" /> */}
                 <Typography
-                    variant="h6"
+                    variant="header"
                     noWrap
                     component="span"
                     sx={{
                         mr: 2,
-                        // display: { xs: 'none', lg: 'flex' },
-                        fontWeight: 700,
-                        fontSize: '32px',
                     }}
                 >
-                    {/* 𝕱𝖗𝖊𝖘𝖍𝕳𝖚𝖇 */}
                     Logo
                 </Typography>
             </Link>

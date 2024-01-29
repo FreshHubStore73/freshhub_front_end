@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./home.module.scss";
 import { List } from "@mui/material";
+import { Typography } from '@mui/material';
 
 const Home = () => {
   return (

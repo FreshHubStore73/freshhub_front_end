@@ -30,6 +30,7 @@ const NavBar = async () => {
         <Box
             sx={{
                 flexGrow: 1,
+                gap: '50px',
                 display: { xs: 'none', md: 'flex' },
                 justifyContent: 'center',
             }}
