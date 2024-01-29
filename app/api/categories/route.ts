@@ -1,7 +1,7 @@
 import Category from '../../../utils/models/Category';
 import connect from '../../../utils/db';
 import { NextResponse } from 'next/server';
-import type { CategoryItem } from '../../../components/NavBar/NavBar';
+import type { CategoryItem } from '../../../components/header/navBar/NavBar';
 
 export const GET = async (req: Request) => {
     try {

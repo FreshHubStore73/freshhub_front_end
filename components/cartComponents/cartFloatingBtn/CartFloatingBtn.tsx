@@ -2,7 +2,6 @@
 import { useShoppingCart } from '../../../store';
 
 import ShoppingCartSharp from '@mui/icons-material/ShoppingCartSharp';
-import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import Fab from '@mui/material/Fab';
 import React from 'react';
 import { Badge, Box } from '@mui/material';
