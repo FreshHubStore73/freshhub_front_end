@@ -5,26 +5,22 @@ import { List } from "@mui/material";
 const Home = () => {
   return (
     // <h1 className={styles.title}>FreshHub | HomePage</h1>
-    <div className={styles.container}>
-      <main className={styles.main}>
+    <div>
+      <section className={styles.main}>
         <div className={styles.main_context}>
-          {/* <h1 className={styles.main_title}>Hot Delicious Fresh</h1> */}
-          <h1 className={styles.main_title}>Hot</h1>
-          <h1 className={styles.main_title}> Delicious</h1>
-          <h1 className={styles.main_title}>Fresh</h1>
+          <h1 className={styles.main_title}>Hot Delicious Fresh</h1>
           <p className={styles.main_description}>Free delivery to everyone</p>
           <a className={styles.main_btn} src="#">
             Learn more
           </a>
         </div>
-
         <div className={styles.main_img}>
           <img
             src="/images/main-picture.jpg
                 "
           />
         </div>
-      </main>
+      </section>
       <section className={styles.about}>
         <h2 className={styles.title}>About us</h2>
         <div className={styles.about_container}>
@@ -105,7 +101,7 @@ const Home = () => {
           <div className={styles.contacts_info}>
             <ul className={styles.contacts_list}>
               <li className={styles.contacts_item}>
-                <div className={styles.contacts_link}>
+                <div className={`${styles.contacts_link} ${styles.contacts_link__calendar}`}>
                   <img src="/images/calendar.svg" />
                   <p className={styles.contacts_text}>We accept your orders:</p>
                   <p className={styles.contacts_details}>From 10:30 to 21:30</p>
