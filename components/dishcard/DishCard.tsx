@@ -28,7 +28,9 @@ const DishCard = ({ item }: { item: DishItem }) => {
                 <span className={styles.advice}>recomended</span>
                 <div className={styles.wrapper}>
                     <div className={styles.dishImg}>
-                        <Image src={picture} alt={'dishImg'} fill />
+                 
+                        <Image className={styles.img} src={picture} alt={'dishImg'} fill />
+                    
                         <span className={styles.dishPrice}>{price} ₴</span>
                     </div>
                     <h3 className={styles.dishTitle}>{title}</h3>

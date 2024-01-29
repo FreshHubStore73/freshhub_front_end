@@ -1,49 +1,99 @@
 :root {
-    --color-bg: #2c2c32;
-    --color-active: #0f7dc6;
-    --color-txt-l: #47c789;
-    --color-txt: #000;
+  --color-bg: #2c2c32;
+  --color-active: #0f7dc6;
+  --color-txt-l: #47c789;
+  --color-txt: #000;
+  --color-txt-big: #3e3b3b;
+  --color-title: #f15c30;
+  --color-txt-black: #040705;
+  --color-beige: #e1d5c9;
+  --color-peach: #ffc182;
+  // --logo-w: 193px;
+  // --logo-h: 60px;
+  // --padding: #{vw(104, 1440)};
 }
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-html,
+html {
+  font-size: 100%;
+} /*16px*/
+
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-width: 320px;
+  max-width: 100vw;
+  font-weight: 400;
+  line-height: 1;
+  overflow-x: hidden;
+  position: relative;
 }
-body {
-    display: flex;
-    flex-direction: column;
-}
-main {
-    flex-grow: 1;
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
-.container {
-    width: 1440px;
-    margin: 0 auto;
-    padding: 0;
+button:hover,
+a:hover,
+select:hover {
+  cursor: pointer;
 }
-@media screen and (max-width: 1440px) {
-    .container {
-        width: 100%;
-        padding: 0 82px;
-    }
+
+body *:focus {
+  outline: none;
 }
-@media screen and (max-width: 1200px) {
-    .container {
-        padding: 0 60px;
-    }
+a {
+  text-decoration: none;
 }
-@media screen and (max-width: 900px) {
-    .container {
-        padding: 0 32px;
-    }
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-@media screen and (max-width: 600px) {
-    .container {
-        padding: 0 16px;
-    }
+p {
+  margin: 0;
 }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  text-transform: capitalize;
+}
+// .container {
+//     // width: 1440px;
+//     max-width: 1440px;
+//     // margin: 0 auto;
+//     // padding: 0;
+// }
+// @media screen and (max-width: 1440px) {
+//     .container {
+//         width: 100%;
+//         padding: 0 82px;
+//     }
+// }
+// @media screen and (max-width: 1200px) {
+//     .container {
+//         padding: 0 60px;
+//     }
+// }
+// @media screen and (max-width: 900px) {
+//     .container {
+//         padding: 0 32px;
+//     }
+// }
+// @media screen and (max-width: 600px) {
+//     .container {
+//         padding: 0 16px;
+//     }
+// }

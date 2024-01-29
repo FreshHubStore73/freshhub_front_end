@@ -38,16 +38,28 @@
     left: 0;
     background-color: var(--color-txt-l);
 }
+// .dishImgCont{
+//     max-width: 400px;
+//     max-height: 334px;
+//     flex-shrink: 0;
+//     border-radius: 40px;
+//     overflow: hidden;
+//     background-color:red;
+   
+// }
+// .img{
+//         position: relative !important;
+//     }
 .dishImg {
     vertical-align: middle;
     position: relative;
     width: 70%;
     aspect-ratio: 1;
     // overflow: hidden;
-    img {
-        object-fit: cover;
-        border-radius: 100%;
-    }
+    // img {
+    //     object-fit: cover;
+    //     border-radius: 100%;
+    // }
 }
 .dishPrice {
     position: absolute;
