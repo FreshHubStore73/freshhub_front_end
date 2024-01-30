@@ -9,8 +9,9 @@ import { Divider, List } from '@mui/material';
 
 import styles from './navMenu.module.scss';
 import { Drawer } from '@mui/material';
-import type { CategoryItem } from '../../NavBar/NavBar';
+import type { CategoryItem } from '../../navBar/NavBar';
 import NavMenuLinks from '../navMenuLinks';
+import Logo from '../../logo';
 
 type Props = { categories: CategoryItem[] };
 
@@ -26,8 +27,18 @@ export default function NavMenuDrawer({ categories }: Props) {
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography variant="header" component="div" sx={{ my: '43.5px' }}>
-                Logo
+            <Typography
+                variant="header"
+                component="div"
+                sx={{
+                    '&.MuiTypography-header > div': {
+                        height: '111px',
+                        display: 'flex',
+                        alignItems: 'center',
+                    },
+                }}
+            >
+                <Logo />
             </Typography>
             <Divider />
             <NavMenuLinks links={categories} />
