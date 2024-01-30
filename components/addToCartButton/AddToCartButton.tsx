@@ -37,7 +37,7 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
                 borderRadius: '50px',
                 fontSize: simple ? '24px' : '16px',
                 fontWeight: '400',
-                padding: simple ? '6px 44px' : '10px 64px',
+                padding: simple ? '10px 64px' : '6px 44px',
                 '&.MuiButtonBase-root:hover': {
                     backgroundColor: 'accent.main',
                 },
