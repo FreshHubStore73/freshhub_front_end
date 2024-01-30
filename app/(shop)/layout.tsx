@@ -13,7 +13,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       </Header>
       <Toolbar />
       <main>
-        <section className="container">{children}</section>
+        <div className="container">{children}</div>
       </main>
 
       <Footer />

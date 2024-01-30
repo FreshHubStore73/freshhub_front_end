@@ -1,92 +1,60 @@
 .card {
-    position: relative;
-    max-width: 350px;
-    padding: 0 20px 25px;
-    border-radius: 0 20px 20px;
-    background-color: white;
-    transition: all 200ms;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    * {
-        color: var(--color-txt);
-        text-decoration: none;
-    }
-    &:hover {
-        filter: drop-shadow(3px 3px 5px grey);
-        .dishImg,
-        .dishTitle,
-        .dishDescr {
-            filter: opacity(75%);
-        }
-    }
+  width: calc((100% - 40px) / 3);
+  margin-right: 20px;
+  padding-bottom: 25px;
+  margin-bottom: 40px;
 }
-.wrapper {
-    padding-block: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
+.card:nth-child(3) {
+  margin-right: 0;
 }
-.advice {
-    position: absolute;
-    padding: 3px 5px;
-    border-radius: 2px;
-    top: 0;
-    left: 0;
-    background-color: var(--color-txt-l);
-}
-// .dishImgCont{
-//     max-width: 400px;
-//     max-height: 334px;
-//     flex-shrink: 0;
-//     border-radius: 40px;
-//     overflow: hidden;
-//     background-color:red;
-   
-// }
-// .img{
-//         position: relative !important;
-//     }
+
 .dishImg {
-    vertical-align: middle;
-    position: relative;
-    width: 70%;
-    aspect-ratio: 1;
-    // overflow: hidden;
-    // img {
-    //     object-fit: cover;
-    //     border-radius: 100%;
-    // }
+  border-radius: 40px;
+  overflow: hidden;
+  height: 334px;
+  margin-bottom: 10px;
 }
-.dishPrice {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    border-radius: 100%;
-    background-color: #ffbb5c;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    line-height: 50px;
-    border-radius: 100%;
-    border: 5px solid #fff;
-    color: #000;
-    font-family: Cookie;
-    font-weight: bold;
+
+.dishTitleInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 14px;
 }
 .dishTitle {
-    font-weight: bold;
-    font-style: 1.5rem;
-    text-align: center;
-    padding-block: 10px;
+  color: var(--color-txt-black);
+  font-family: __Lato_bbd8db;
+  font-size: 28px;
+  font-weight: 500;
+}
+.dishWeight {
+  color: var(--color-txt-big);
+  font-size: 20px;
+  font-weight: 400;
 }
 .dishDescr {
-    font-weight: normal;
-    font-style: 1rem;
-    text-align: justify;
-    height: 5rem;
-    text-wrap: wrap;
+  color: var(--color-txt-big);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  min-height: 48px;
+  margin-bottom: 14px;
+  padding: 0 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+}
+.dishPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 14px;
+}
+.dishPrice {
+  color: var(--color-txt-black);
+  font-size: 30px;
+  font-weight: 700;
 }

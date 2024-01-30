@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./home.module.scss";
 import { List } from "@mui/material";
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 
 const Home = () => {
   return (
@@ -102,7 +102,9 @@ const Home = () => {
           <div className={styles.contacts_info}>
             <ul className={styles.contacts_list}>
               <li className={styles.contacts_item}>
-                <div className={`${styles.contacts_link} ${styles.contacts_link__calendar}`}>
+                <div
+                  className={`${styles.contacts_link} ${styles.contacts_link__calendar}`}
+                >
                   <img src="/images/calendar.svg" />
                   <p className={styles.contacts_text}>We accept your orders:</p>
                   <p className={styles.contacts_details}>From 10:30 to 21:30</p>
