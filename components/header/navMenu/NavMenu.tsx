@@ -1,8 +1,8 @@
 import React from 'react';
 
 import NavMenuDrawer from './navMenuDrawer';
-import { getCategories } from '../NavBar/NavBar';
-import type { CategoryItem } from '../NavBar/NavBar';
+import { getCategories } from '../navBar/NavBar';
+import type { CategoryItem } from '../navBar/NavBar';
 
 import styles from './navMenu.module.scss';
 
