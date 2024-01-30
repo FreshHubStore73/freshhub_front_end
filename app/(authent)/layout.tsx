@@ -1,4 +1,4 @@
-import HeaderAuth from '@/components/HeaderAuth/HeaderAuth';
+import HeaderAuth from '@/components/header/headerAuth/HeaderAuth';
 import { Toolbar } from '@mui/material';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
