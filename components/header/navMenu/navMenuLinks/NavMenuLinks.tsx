@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Typography } from '@mui/material';
 
-import { CategoryItem } from '../../NavBar/NavBar';
+import { CategoryItem } from '../../navBar/NavBar';
 
 import styles from './navMenuLinks.module.scss';
 
