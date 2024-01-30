@@ -22,8 +22,6 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
         content = isInCart ? '✓' : 'Add';
     }
 
-    console.log('added to cart');
-
     return (
         <Button
             variant="contained"
