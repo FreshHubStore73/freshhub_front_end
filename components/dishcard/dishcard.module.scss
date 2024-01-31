@@ -1,10 +1,10 @@
 .card {
-  width: calc((100% - 40px) / 3);
-  margin-right: 20px;
+  width: calc((100% - 90px) / 4);
+  margin-right: 30px;
   padding-bottom: 25px;
   margin-bottom: 40px;
 }
-.card:nth-child(3) {
+.card:nth-child(4) {
   margin-right: 0;
 }
 
@@ -13,6 +13,12 @@
   overflow: hidden;
   height: 334px;
   margin-bottom: 10px;
+}
+.dishImg img {
+  transition: all 0.5s ease-in-out;
+}
+.dishImg:hover img {
+  transform: scale(103%);
 }
 
 .dishTitleInfo {
@@ -57,4 +63,31 @@
   color: var(--color-txt-black);
   font-size: 30px;
   font-weight: 700;
+}
+@media screen and (max-width: 1440px) {
+  .card {
+    width: calc((100% - 40px) / 3);
+    margin-right: 20px;
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+  }
+  .card:nth-child(3) {
+    margin-right: 0;
+  }
+  .card:nth-child(4) {
+    margin-right: 20px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .dishImg {
+    height: 224px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .card {
+    width: 100%;
+    margin-right: 0;
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+  }
 }

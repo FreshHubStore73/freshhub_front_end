@@ -5,7 +5,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
             <HeaderAuth />
-            <Toolbar />
+            {/* <Toolbar /> */}
             <main>
                 <section className="container">{children}</section>
             </main>
