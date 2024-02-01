@@ -177,7 +177,7 @@ const theme = createTheme({
                     backgroundColor: '#F15C30',
                 },
                 root: {
-                    // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                    background: '#F15C30',
                     // border: 0,
                     // borderRadius: 3,
                     // borderRadius: '100%',

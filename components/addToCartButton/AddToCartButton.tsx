@@ -1,16 +1,17 @@
 'use client';
-import { MouseEventHandler, useEffect } from 'react';
-import styles from './addToCart.module.scss';
-import shallow from 'zustand/shallow';
+
+import { MouseEventHandler } from 'react';
+import { Button } from '@mui/material';
+
 import { useShoppingCart } from '../../store';
 import type { DishInCart } from '../../store';
-import { Button } from '@mui/material';
 
 const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: boolean }) => {
     const addDish = useShoppingCart((state) => state.addDish);
     const dishes = useShoppingCart((state) => state.dishes);
 
     const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+        if (!simple) e.preventDefault();
         addDish(dish);
     };
 
@@ -36,8 +37,14 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
                 fontSize: simple ? '24px' : '16px',
                 fontWeight: '400',
                 padding: simple ? '10px 64px' : '6px 44px',
+                transition: 'none',
                 '&.MuiButtonBase-root:hover': {
                     backgroundColor: 'accent.main',
+                },
+                '&.MuiButtonBase-root:disabled': {
+                    color: '#F15C30',
+                    backgroundColor: 'white',
+                    border: '2px solid #F15C30',
                 },
             }}
         >
