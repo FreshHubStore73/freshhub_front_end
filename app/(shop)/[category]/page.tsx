@@ -24,7 +24,11 @@ const Category = async ({ params, searchParams }: Props) => {
         category,
         sortType,
     };
-    return <CategoryItem dishes={dishes} path={path} />;
+    return (
+        <>
+            <CategoryItem dishes={dishes} path={path} />
+        </>
+    );
 };
 
 export default Category;

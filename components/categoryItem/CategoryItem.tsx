@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import type { DishItem } from '@/components/dishcard/DishCard';
+import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 
 import DishCard from '@/components/dishcard';
 import SortSelect from '@/components/sortSelect/SortSelect';
@@ -19,11 +20,13 @@ type Props = {
 export default function CategoryItem({ dishes, path }: Props) {
     return (
         <Box mt={'111px'}>
-            <Box display="flex" justifyContent={'space-between'} mb={'30px'}>
+            <BreadCrumbs />
+
+            <Box display="flex" justifyContent={'space-between'} mt={'44px'} mb={'30px'}>
                 <Typography variant="h2" component="h1">
                     {path.category}
                 </Typography>
-                <SortSelect path={path} />
+                <SortSelect />
             </Box>
             <section>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>

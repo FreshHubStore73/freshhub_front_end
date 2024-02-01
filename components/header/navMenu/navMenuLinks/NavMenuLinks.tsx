@@ -17,7 +17,7 @@ const NavMenuLinks = ({ links }: { links: CategoryItem[] }) => {
                 const catName = link.name.toLowerCase();
                 const isActive = pathname === catName;
                 return (
-                    <Link href={`/categories/${catName}`} key={catName} className={styles.link}>
+                    <Link href={`/${catName}`} key={catName} className={styles.link}>
                         <ListItem
                             key={catName}
                             disablePadding
