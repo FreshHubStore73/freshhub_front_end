@@ -1,10 +1,7 @@
-import { Box, Typography } from '@mui/material';
-
-import DishCard from '@/components/dishcard';
-import SortSelect from '@/components/sortSelect/SortSelect';
 import type { DishItem } from '@/components/dishcard/DishCard';
 
 import styles from './category.module.scss';
+import CategoryItem from '@/components/categoryItem/CategoryItem';
 
 async function getDishes(category: string, sortType: string) {
     const q = sortType ? `?sort=${sortType}` : '';
@@ -27,21 +24,7 @@ const Category = async ({ params, searchParams }: Props) => {
         category,
         sortType,
     };
-    return (
-        <>
-            <Box display="flex" justifyContent={'space-between'} mt={'111px'}>
-                <Typography variant="h2">{category}</Typography>
-                <SortSelect path={path} />
-            </Box>
-            <section>
-                <div className={styles.wrapper}>
-                    {dishes.map((dish) => (
-                        <DishCard key={dish._id} item={dish} />
-                    ))}
-                </div>
-            </section>
-        </>
-    );
+    return <CategoryItem dishes={dishes} path={path} />;
 };
 
 export default Category;
