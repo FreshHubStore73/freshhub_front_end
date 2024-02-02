@@ -1,114 +1,141 @@
 'use client';
-import React from 'react';
-import Link from 'next/link';
+import * as React from 'react';
+import { useParams, useRouter } from 'next/navigation';
+
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import Menu from '@mui/material/Menu';
+import Check from '@mui/icons-material/Check';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import Button from '@mui/material/Button';
 
-type Props = {};
+const options = ['Featured', 'Price: low-high', 'Price: high-low'];
 
-export default function SortSelect({}: Props) {
-    const params = useParams();
-
-    const router = useRouter();
+export default function SortSelect() {
+    const [anchorEl, setAnchorEl] = React.useState<any>(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [sort, setSort] = React.useState<string | null>(null);
 
-    const handleChange = (event: SelectChangeEvent<string>) => {
-        setSort(event.target.value as string);
+    const params = useParams();
+    const router = useRouter();
+    const sortValues = ['', 'asc', 'desc'];
+    const open = Boolean(anchorEl);
+
+    const handleClickSortButton: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuItemClick = (
+        event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+        index: number,
+    ) => {
+        setSelectedIndex(index);
+        setSort(sortValues[index]);
+        setAnchorEl(null);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
     };
 
     React.useEffect(() => {
         if (sort === null) return;
-
+        console.log('sent request');
         router.replace(`/${params.category}${sort ? `?sort=${sort}` : ''}`);
     }, [sort]);
 
-    return (
-        <div>
-            {/* <FormControl> */}
-            <Select
-                value={sort || ''}
-                onChange={handleChange}
-                displayEmpty
-                inputProps={{ 'aria-label': 'Select sorting' }}
+    const content = (isActive: boolean, text: string) =>
+        isActive ? (
+            <>
+                <ListItemIcon>
+                    <Check htmlColor="#040705" />
+                </ListItemIcon>
+                {text}
+            </>
+        ) : (
+            <ListItemText
+                inset={!isActive}
                 sx={{
-                    width: '374px',
-                    fontSize: '20px',
-
-                    '& .MuiSelect-select.MuiInputBase-input.MuiOutlinedInput-input': {
-                        padding: '18.5px 50px',
+                    '& .MuiTypography-root:hover': {
+                        color: '#F15C30',
                     },
-                    '&.MuiInputBase-root': {
-                        borderRadius: '50px',
-                    },
-                    '& .MuiSvgIcon-root.MuiSelect-icon': {
-                        right: '50px',
-                    },
-                    '& .MuiPaper-root-MuiPopover-paper-MuiMenu-paper': {},
                 }}
             >
-                <MenuItem
-                    value=""
-                    sx={{
-                        '&.MuiButtonBase-root.MuiMenuItem-root': {
-                            padding: '18.5px 50px',
+                {text}
+            </ListItemText>
+        );
+    return (
+        <div>
+            <Button
+                id="demo-customized-button"
+                aria-controls={open ? 'lock-menu for sorting' : undefined}
+                aria-haspopup="listbox"
+                aria-expanded={open ? 'true' : undefined}
+                variant="contained"
+                disableElevation
+                onClick={handleClickSortButton}
+                endIcon={<ExpandMoreRoundedIcon />}
+                sx={{
+                    '&.MuiButtonBase-root.MuiButton-root': {
+                        backgroundColor: 'white',
+                        color: '#3E3B3B',
+                        justifyContent: 'space-between',
+                        padding: '12px 50px',
+                        border: '1px solid #3E3B3B',
+                        borderRadius: '50px',
+                        fontSize: '20px',
+                        width: '374px',
+                    },
+                }}
+            >
+                {options[selectedIndex]}
+            </Button>
+            <Menu
+                id="lock-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'lock-button',
+                    role: 'listbox',
+                }}
+                sx={{
+                    '& .MuiPaper-root.MuiPopover-paper.MuiMenu-paper': {
+                        transform: 'translateY(-80px) !important',
+                        width: '374px',
+                        borderRadius: '50px',
+                        paddingBlock: '25px',
+                    },
+                }}
+            >
+                {options.map((option, index) => (
+                    <MenuItem
+                        key={option}
+                        disabled={index === selectedIndex}
+                        selected={index === selectedIndex}
+                        onClick={(event) => handleMenuItemClick(event, index)}
+                        sx={{
                             fontSize: '20px',
-
-                            '&.Mui-selected': {
-                                backgroundColor: 'white',
-                                fontWeight: '700',
-                            },
-                        },
-                        '&.MuiButtonBase-root.MuiMenuItem-root:hover': {
+                            padding: '7px 48px',
                             backgroundColor: 'white',
-                            color: '#F15C30',
-                        },
-                    }}
-                >
-                    Featured
-                </MenuItem>
-                <MenuItem
-                    value={'asc'}
-                    sx={{
-                        '&.MuiButtonBase-root.MuiMenuItem-root': {
-                            padding: '18.5px 50px',
-                            fontSize: '20px',
-
-                            '&.Mui-selected': {
+                            '&.MuiButtonBase-root.MuiMenuItem-root:hover': {
                                 backgroundColor: 'white',
-                                fontWeight: '700',
                             },
-                        },
-                        '&.MuiButtonBase-root.MuiMenuItem-root:hover': {
-                            backgroundColor: 'white',
-                            color: '#F15C30',
-                        },
-                    }}
-                >
-                    Price: low-high
-                </MenuItem>
-                <MenuItem
-                    value={'desc'}
-                    sx={{
-                        '&.MuiButtonBase-root.MuiMenuItem-root': {
-                            padding: '18.5px 50px',
-                            fontSize: '20px',
-                            '&.Mui-selected': {
+                            '&.MuiButtonBase-root.MuiMenuItem-root.Mui-selected ': {
                                 backgroundColor: 'white',
-                                fontWeight: '700',
+                                fontWeight: 700,
+                                color: '#040705',
+                                opacity: 1,
                             },
-                        },
-                        '&.MuiButtonBase-root.MuiMenuItem-root:hover': {
-                            backgroundColor: 'white',
-                            color: '#F15C30',
-                        },
-                    }}
-                >
-                    Price: high-low
-                </MenuItem>
-            </Select>
-            {/* </FormControl> */}
+                        }}
+                    >
+                        {content(index === selectedIndex, option)}
+                    </MenuItem>
+                ))}
+            </Menu>
         </div>
     );
 }

@@ -177,7 +177,7 @@ const theme = createTheme({
                     backgroundColor: '#F15C30',
                 },
                 root: {
-                    background: '#F15C30',
+                    backgroundColor: '#F15C30',
                     // border: 0,
                     // borderRadius: 3,
                     // borderRadius: '100%',
