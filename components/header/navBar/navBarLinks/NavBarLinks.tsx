@@ -9,14 +9,14 @@ import { CategoryItem } from '../NavBar';
 import styles from './navBarLinks.module.scss';
 
 const NavBarLinks = ({ links }: { links: CategoryItem[] }) => {
-    const pathname = usePathname().split('/')[2];
+    const pathname = usePathname().split('/')[1];
     return (
         <>
             {links.map((link) => {
                 const catName = link.name.toLowerCase();
                 const isActive = pathname === catName;
                 return (
-                    <Link href={`/categories/${catName}`} key={catName} className={styles.link}>
+                    <Link href={`/${catName}`} key={catName} className={styles.link}>
                         <Typography
                             variant="header"
                             className={`${isActive ? 'Mui-active' : ''}`}

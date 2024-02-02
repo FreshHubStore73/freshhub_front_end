@@ -59,7 +59,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
         fontSize: '10px',
         minWidth: '17px',
         height: '17px',
-        padding: '2px',
+        padding: '0 2px 2px',
         backgroundColor: '#F15C30',
     },
 }));

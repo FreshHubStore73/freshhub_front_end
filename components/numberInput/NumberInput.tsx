@@ -12,12 +12,8 @@ const NumberInput = ({
     const up = useRef<HTMLButtonElement>(null);
     const down = useRef<HTMLButtonElement>(null);
 
-    const handleClick = (el: HTMLButtonElement | null) => {
-        el === up.current
-            ? setQuantity(quantity + 1)
-            : el === down.current && quantity > 1
-            ? setQuantity(quantity - 1)
-            : null;
+    const handleClick = (q: number) => {
+        q + quantity ? setQuantity(quantity + q) : null;
     };
 
     return (
@@ -25,7 +21,7 @@ const NumberInput = ({
             <button
                 type="button"
                 className={styles.numberLeft}
-                onClick={() => handleClick(down.current)}
+                onClick={() => handleClick(-1)}
                 ref={down}
             >
                 -
@@ -44,7 +40,7 @@ const NumberInput = ({
                 type="button"
                 className={styles.numberRight}
                 ref={up}
-                onClick={() => handleClick(up.current)}
+                onClick={() => handleClick(1)}
             >
                 +
             </button>
