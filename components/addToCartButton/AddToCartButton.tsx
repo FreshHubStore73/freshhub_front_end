@@ -44,7 +44,7 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
                 '&.MuiButtonBase-root:disabled': {
                     color: '#F15C30',
                     backgroundColor: 'white',
-                    border: '2px solid #F15C30',
+                    border: '1px solid #F15C30',
                 },
             }}
         >
