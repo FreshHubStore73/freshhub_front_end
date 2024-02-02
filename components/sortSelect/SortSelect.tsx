@@ -104,9 +104,9 @@ export default function SortSelect() {
                 }}
                 sx={{
                     '& .MuiPaper-root.MuiPopover-paper.MuiMenu-paper': {
-                        transform: 'translateY(-80px) !important',
+                        transform: 'translateY(-60px) !important',
                         width: '374px',
-                        borderRadius: '50px',
+                        borderRadius: '28px',
                         paddingBlock: '25px',
                     },
                 }}
