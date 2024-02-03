@@ -2,26 +2,23 @@
 import * as React from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
 import Check from '@mui/icons-material/Check';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-import Button from '@mui/material/Button';
-
-const options = ['Featured', 'Price: low-high', 'Price: high-low'];
 
 export default function SortSelect() {
-    const [anchorEl, setAnchorEl] = React.useState<any>(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
-    const [sort, setSort] = React.useState<string | null>(null);
-
+    const options = ['Featured', 'Price: low-high', 'Price: high-low'];
     const params = useParams();
     const router = useRouter();
     const sortValues = ['', 'asc', 'desc'];
+
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+
     const open = Boolean(anchorEl);
 
     const handleClickSortButton: React.MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -33,19 +30,14 @@ export default function SortSelect() {
         index: number,
     ) => {
         setSelectedIndex(index);
-        setSort(sortValues[index]);
+        const sort = sortValues[index];
+        router.replace(`/${params.category}${sort ? `?sort=${sort}` : ''}`);
         setAnchorEl(null);
     };
 
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    React.useEffect(() => {
-        if (sort === null) return;
-        console.log('sent request');
-        router.replace(`/${params.category}${sort ? `?sort=${sort}` : ''}`);
-    }, [sort]);
 
     const content = (isActive: boolean, text: string) =>
         isActive ? (
