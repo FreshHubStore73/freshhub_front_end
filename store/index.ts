@@ -14,6 +14,7 @@ type UseShoppingCart = {
     totalAmount: number;
     totalDishes: number;
     addDish: (dish: DishInCart) => void;
+    removeDish: (dish: DishInCart) => void;
     changeQuantity: (id: string, quantity: number) => void;
     clearCart: () => void;
 };
@@ -60,6 +61,14 @@ export const useShoppingCart = create<UseShoppingCart>()(
                     totalAmount:
                         state.totalAmount - (dishInCart.dQuantity - quantity) * dishInCart.dPrice,
                     totalDishes: state.totalDishes - dishInCart.dQuantity + quantity,
+                };
+            }),
+        removeDish: (dish) =>
+            set((state) => {
+                return {
+                    dishes: [...state.dishes.filter((item) => item.dishId !== dish.dishId)],
+                    totalAmount: state.totalAmount - dish.dQuantity * dish.dPrice,
+                    totalDishes: state.totalDishes - dish.dQuantity,
                 };
             }),
         clearCart: () => set((state) => ({ dishes: [] })),
