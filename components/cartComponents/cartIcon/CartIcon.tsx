@@ -64,8 +64,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-const CartIcon = () => {
-    const [showDrawer, setShowDrawer] = React.useState(false);
+type Props = {
+    toggleDrawer: () => void;
+};
+const CartIcon = ({ toggleDrawer }: Props) => {
     const totalDishes = useShoppingCart((state) => state.totalDishes);
     const totalAmount = useShoppingCart((state) => state.totalAmount);
 
@@ -85,13 +87,20 @@ const CartIcon = () => {
                     </>
                 }
             >
-                <IconButton size="large" onClick={() => setShowDrawer(true)}>
+                <IconButton
+                    size="large"
+                    onClick={toggleDrawer}
+                    sx={{
+                        '&.MuiIconButton-root:hover path': {
+                            stroke: '#F15C30',
+                        },
+                    }}
+                >
                     <StyledBadge badgeContent={totalDishes} showZero>
                         <ShoppingBasket />
                     </StyledBadge>
                 </IconButton>
             </HtmlTooltip>
-            <CartDrawer showDrawer={showDrawer} setShowDrawer={setShowDrawer} />
         </>
     );
 };
