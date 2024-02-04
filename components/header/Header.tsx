@@ -8,21 +8,10 @@ import Toolbar from '@mui/material/Toolbar';
 import SearchInput from './search';
 import Logo from './logo';
 import UserIcon from './userIcon';
-import CartIcon from '../cartComponents/cartIcon';
+import Cart from '../cartComponents/cart/Cart';
 
-// import styles from './header.module.scss';
+import styles from './header.module.scss';
 
-// const Header = ({
-//     children,
-// }: {
-//     children: {
-//         burgerMenu: React.ReactNode;
-//         navbar: React.ReactNode;
-//     }
-// }) => {
-//     // const burgerMenu = children[0];
-//     // const navbar = children[1];
-//     const { burgerMenu, navbar } = children;
 const Header = ({ children }: { children: React.ReactNode[] }) => {
     const BurgerMenu = children[0];
     const Navbar = children[1];
@@ -43,7 +32,7 @@ const Header = ({ children }: { children: React.ReactNode[] }) => {
                             <SearchInput />
                             <Box sx={{ flexGrow: 0, display: 'flex' }}>
                                 <UserIcon />
-                                <CartIcon />
+                                <Cart />
                             </Box>
                         </>
                     </Toolbar>

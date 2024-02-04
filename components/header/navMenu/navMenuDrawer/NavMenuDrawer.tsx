@@ -18,9 +18,9 @@ type Props = { categories: CategoryItem[] };
 export default function NavMenuDrawer({ categories }: Props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [anchorElNav, setAnchorElNav] = React.useState<any>(null);
-    const handleOpenNavMenu: React.MouseEventHandler<HTMLButtonElement> | undefined = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
+    // const handleOpenNavMenu: React.MouseEventHandler<HTMLButtonElement> | undefined = (event) => {
+    //     setAnchorElNav(event.currentTarget);
+    // };
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
@@ -52,7 +52,7 @@ export default function NavMenuDrawer({ categories }: Props) {
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
-                    onClick={handleOpenNavMenu}
+                    // onClick={handleOpenNavMenu}
                 >
                     <MenuIcon />
                 </IconButton>

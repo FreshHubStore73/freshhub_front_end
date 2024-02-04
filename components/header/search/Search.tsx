@@ -98,7 +98,16 @@ export default function SearchInput({}: Props) {
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start" sx={{ p: 0 }}>
-                                <IconButton onClick={handleClick} sx={{ p: '12px', m: 0 }}>
+                                <IconButton
+                                    onClick={handleClick}
+                                    sx={{
+                                        p: '12px',
+                                        m: 0,
+                                        '&.MuiIconButton-root:hover path': {
+                                            fill: '#F15C30',
+                                        },
+                                    }}
+                                >
                                     <SearchIcon />
                                 </IconButton>
                             </InputAdornment>
