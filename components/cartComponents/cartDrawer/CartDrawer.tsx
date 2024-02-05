@@ -7,7 +7,7 @@ import { useShoppingCart } from '../../../store';
 
 import EmptyBlock from '@/components/emptyBlock/EmptyBlock';
 import CartHeader from '../cartHeader/CartHeader';
-import CartListItem from '../cartListItem/CartListItem';
+import CartListItem from '../../cartListItem/CartListItem';
 import CartFooter from '../cartFooter/CartFooter';
 
 const CartDrawer: FC<{
