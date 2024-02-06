@@ -2,6 +2,7 @@ import { Box, Stack, Typography } from '@mui/material';
 import React from 'react';
 import Contact from './contact/Contact';
 import BreadCrumbs from '../breadcrumbs/Breadcrumbs';
+import Address from './address/Address';
 
 type Props = {};
 
@@ -30,6 +31,7 @@ export default function OrderPage({}: Props) {
                         Placing an order
                     </Typography>
                     <Contact />
+                    <Address />
                 </Box>
                 <Box sx={{ width: '50%' }}></Box>
             </Box>
