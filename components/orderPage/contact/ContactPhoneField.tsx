@@ -23,7 +23,7 @@ export default function ContactPhoneField({ data }: Props) {
     };
 
     return (
-        <InputMask mask="+38 (099) 999 99 99" maskChar={null} disabled={!isEdit}>
+        <InputMask mask="+1 (999) 999 99 99" maskChar={null} disabled={!isEdit}>
             {/* {(inputProps) => ( */}
             <TextField
                 name="userName"
@@ -58,6 +58,7 @@ export default function ContactPhoneField({ data }: Props) {
                     ),
                 }}
                 sx={{
+                    mb: '36px',
                     '& .MuiInputAdornment-root': {
                         marginRight: '18px',
                     },
