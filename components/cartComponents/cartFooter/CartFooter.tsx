@@ -1,24 +1,31 @@
+import { FC } from 'react';
+import Link from 'next/link';
+
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
-import React, { SetStateAction } from 'react';
 
 type Props = { totalAmount: number; closeDrawer: () => void };
 
-export default function CartFooter({ totalAmount, closeDrawer }: Props) {
-    console.log('footer');
+const CartFooter: FC<Props> = ({ totalAmount, closeDrawer }) => {
     return (
-        <Stack flexGrow={'0'}>
-            <Divider />
-            <Stack flexDirection={'row'} justifyContent={'space-between'} lineHeight={'49px'}>
+        <Box flexGrow={'0'}>
+            <Divider sx={{ borderColor: '#E1D5C9' }} />
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    lineHeight: '49px',
+                    marginBlock: '12px',
+                }}
+            >
                 <Typography sx={{ fontSize: '30px', color: 'text.primary' }}>Total:</Typography>
                 <Typography sx={{ fontSize: '38px', fontWeight: 700, color: 'text.secondary' }}>
                     ${totalAmount}
                 </Typography>
-            </Stack>
-            <Divider />
+            </Box>
+            <Divider sx={{ borderColor: '#E1D5C9' }} />
             <Link href="/order">
                 <Button
                     fullWidth
@@ -35,6 +42,7 @@ export default function CartFooter({ totalAmount, closeDrawer }: Props) {
                     Checkout
                 </Button>
             </Link>
-        </Stack>
+        </Box>
     );
-}
+};
+export default CartFooter;

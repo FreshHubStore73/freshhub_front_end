@@ -1,7 +1,10 @@
-import { Box, Stack, Typography } from '@mui/material';
+'use client';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import Contact from './contact/Contact';
 import BreadCrumbs from '../breadcrumbs/Breadcrumbs';
+import OrderList from './orderList/OrderList';
+import Address from './address/Address';
 
 type Props = {};
 
@@ -11,13 +14,13 @@ export default function OrderPage({}: Props) {
             <BreadCrumbs />
             <Box
                 sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    justifyContent: 'space-between',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
                     mt: '36px',
+                    columnGap: '107px',
                 }}
             >
-                <Box sx={{ width: '50%', gap: '107px' }}>
+                <Box sx={{ overflow: 'hidden' }}>
                     <Typography
                         sx={{
                             fontWeight: 700,
@@ -30,8 +33,13 @@ export default function OrderPage({}: Props) {
                         Placing an order
                     </Typography>
                     <Contact />
+                    <Address />
                 </Box>
-                <Box sx={{ width: '50%' }}></Box>
+                <Box sx={{ overflow: 'hidden' }}>
+                    <Box sx={{ border: '1px solid #FFC182', borderRadius: '40px', p: '36px' }}>
+                        <OrderList />
+                    </Box>
+                </Box>
             </Box>
         </Box>
     );
