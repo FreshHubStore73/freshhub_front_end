@@ -44,7 +44,12 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                     gridArea: '1 / 1 / 3 / 2',
                 }}
             >
-                <Image src={dPic} fill alt={dTitle} />
+                <Image
+                    src={dPic}
+                    fill
+                    alt={dTitle}
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 30vw, 15vw"
+                />
             </Box>
             <Box
                 sx={{

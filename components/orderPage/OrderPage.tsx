@@ -3,8 +3,8 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import Contact from './contact/Contact';
 import BreadCrumbs from '../breadcrumbs/Breadcrumbs';
-import OrderList from './orderList/OrderList';
 import Address from './address/Address';
+import OrderList from './orderList/OrderList';
 
 type Props = {};
 
