@@ -29,7 +29,7 @@ export default function AddToCartForm({ dish }: { dish: DishItemType }) {
     return (
         <form onSubmit={onAddToCart}>
             <div className={styles.inputWrapper}>
-                <NumberInput quantity={quantity} setQuantity={setQuantity} />
+                <NumberInput quantity={quantity} setQuantity={setQuantity} isAccent={true} />
                 <AddToCartButton dish={dishToCart} />
             </div>
         </form>

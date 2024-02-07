@@ -31,7 +31,7 @@ export default function BreadCrumbs() {
                 {pathnames.map((chunk, i) => {
                     const last = i === pathnames.length - 1;
                     const to = `/${pathnames.slice(0, i + 1).join('/')}`;
-                    const content = decodeURIComponent(chunk);
+                    const content = decodeURIComponent(chunk).replace(/\_+/g, ' ');
                     return last ? (
                         <Typography key={content} color="text.secondary" sx={{ fontSize: '22px' }}>
                             {content}

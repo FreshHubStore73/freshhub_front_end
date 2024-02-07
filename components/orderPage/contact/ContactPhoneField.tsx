@@ -1,9 +1,10 @@
 'use client';
 import { Button, InputAdornment, Stack, TextField } from '@mui/material';
-import React, { useState, ReactNode } from 'react';
+import { useState, FC } from 'react';
 import InputMask from 'react-input-mask';
 
 type Props = { data: string };
+
 const Phone = () => (
     <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -12,7 +13,8 @@ const Phone = () => (
         />
     </svg>
 );
-export default function ContactPhoneField({ data }: Props) {
+
+const ContactPhoneField: FC<Props> = ({ data }) => {
     const [isEdit, setEdit] = useState(false);
     const btnText = isEdit ? 'Save' : 'Change';
 
@@ -23,7 +25,7 @@ export default function ContactPhoneField({ data }: Props) {
     };
 
     return (
-        <InputMask mask="+1 (999) 999 99 99" maskChar={null} disabled={!isEdit}>
+        <InputMask mask="+1 (999) 999 99 99" disabled={!isEdit}>
             {/* {(inputProps) => ( */}
             <TextField
                 name="userName"
@@ -86,4 +88,5 @@ export default function ContactPhoneField({ data }: Props) {
             {/* )} */}
         </InputMask>
     );
-}
+};
+export default ContactPhoneField;

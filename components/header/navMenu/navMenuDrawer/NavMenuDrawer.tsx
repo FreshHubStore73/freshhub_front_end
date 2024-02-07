@@ -1,23 +1,24 @@
 'use client';
-import React from 'react';
+import { FC, useState } from 'react';
 
+import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
-import { Divider, List } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
 
-import styles from './navMenu.module.scss';
-import { Drawer } from '@mui/material';
 import type { CategoryItem } from '../../navBar/NavBar';
 import NavMenuLinks from '../navMenuLinks';
 import Logo from '../../logo';
 
+import styles from './navMenu.module.scss';
+
 type Props = { categories: CategoryItem[] };
 
-export default function NavMenuDrawer({ categories }: Props) {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [anchorElNav, setAnchorElNav] = React.useState<any>(null);
+const NavMenuDrawer: FC<Props> = ({ categories }) => {
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [anchorElNav, setAnchorElNav] = useState<any>(null);
     // const handleOpenNavMenu: React.MouseEventHandler<HTMLButtonElement> | undefined = (event) => {
     //     setAnchorElNav(event.currentTarget);
     // };
@@ -46,7 +47,7 @@ export default function NavMenuDrawer({ categories }: Props) {
     );
     return (
         <>
-            <Box onClick={handleDrawerToggle} sx={{ display: { xs: 'flex', md: 'none' }, mr: 3 }}>
+            <Box onClick={handleDrawerToggle} sx={{ display: { xs: 'flex', lg: 'none' }, mr: 3 }}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -65,7 +66,7 @@ export default function NavMenuDrawer({ categories }: Props) {
                     keepMounted: true, // Better open performance on mobile.
                 }}
                 sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: 'block', lg: 'none' },
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
                         width: 270,
@@ -76,4 +77,5 @@ export default function NavMenuDrawer({ categories }: Props) {
             </Drawer>
         </>
     );
-}
+};
+export default NavMenuDrawer;
