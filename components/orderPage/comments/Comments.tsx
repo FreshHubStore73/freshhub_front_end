@@ -27,7 +27,7 @@ const CommentsArea = styled((props: TextFieldProps) => (
     },
     '& .MuiInputBase-root.MuiOutlinedInput-root': {
         borderRadius: '40px',
-        padding: '20px 26px',
+        padding: '26px 20px',
         '& .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.primary,
         },
