@@ -18,7 +18,7 @@ export default function Contact({}: Props) {
                     mb: '36px',
                 }}
             >
-                Your contact detail
+                Your contact details
             </Typography>
             <ContactField data={userName.concat(' ', userLastName)} />
             <ContactPhoneField data={phone} />

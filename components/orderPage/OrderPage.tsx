@@ -5,6 +5,7 @@ import Contact from './contact/Contact';
 import BreadCrumbs from '../breadcrumbs/Breadcrumbs';
 import Address from './address/Address';
 import OrderList from './orderList/OrderList';
+import CustomizedAccordions from './comments/Comments';
 
 type Props = {};
 
@@ -36,6 +37,7 @@ export default function OrderPage({}: Props) {
                     <Address />
                 </Box>
                 <Box sx={{ overflow: 'hidden' }}>
+                    <CustomizedAccordions />
                     <Box sx={{ border: '1px solid #FFC182', borderRadius: '40px', p: '36px' }}>
                         <OrderList />
                     </Box>
