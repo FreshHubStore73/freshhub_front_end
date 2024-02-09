@@ -6,6 +6,7 @@ import BreadCrumbs from '../breadcrumbs/Breadcrumbs';
 import Address from './address/Address';
 import OrderList from './orderList/OrderList';
 import CustomizedAccordions from './comments/Comments';
+import PaymentsPC from './paymentsPC/PaymentsPC';
 
 type Props = {};
 
@@ -23,11 +24,13 @@ export default function OrderPage({}: Props) {
             >
                 <Box sx={{ overflow: 'hidden' }}>
                     <Typography
+                        component={'h1'}
                         sx={{
                             fontWeight: 700,
                             fontSize: '40px',
                             mb: '24px',
                             color: 'text.secondary',
+                            textTransform: 'none',
                         }}
                     >
                         {' '}
@@ -35,6 +38,7 @@ export default function OrderPage({}: Props) {
                     </Typography>
                     <Contact />
                     <Address />
+                    <PaymentsPC />
                 </Box>
                 <Box sx={{ overflow: 'hidden' }}>
                     <CustomizedAccordions />

@@ -32,6 +32,10 @@ const Footer = () => {
     const totalAmount = useShoppingCart((state) => state.totalAmount);
     return (
         <>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '12px' }}>
+                <Typography sx={{ fontSize: '24px' }}>Delivery</Typography>
+                <Typography sx={{ fontSize: '26px', color: 'text.secondary' }}>Free</Typography>
+            </Box>
             <Divider sx={{ mb: '15px', borderColor: '#E1D5C9' }} />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '16px' }}>
                 <Typography sx={{ fontSize: '38px' }}>To pay</Typography>

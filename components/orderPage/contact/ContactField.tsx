@@ -57,7 +57,7 @@ export const CustomInput = styled((props: TextFieldProps) => <TextField {...prop
     ({ theme }) => ({
         marginBottom: '22px',
         '& .MuiInputAdornment-root': {
-            // marginRight: '18px',
+            marginRight: '0',
         },
         '& .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.secondary,
@@ -72,6 +72,9 @@ export const CustomInput = styled((props: TextFieldProps) => <TextField {...prop
             '&.Mui-disabled > fieldset': {
                 borderColor: '#828282',
             },
+        },
+        '& .MuiInputBase-input.MuiOutlinedInput-input': {
+            paddingLeft: '18px',
         },
         fontSize: '24px',
         flexGrow: 1,

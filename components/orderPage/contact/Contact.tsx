@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, InputLabel, Typography } from '@mui/material';
 import ContactField from './ContactField';
 import { useUserProfile } from '@/store';
 import ContactPhoneField from './ContactPhoneField';
@@ -10,7 +10,7 @@ export default function Contact({}: Props) {
     const { userLastName, userName, phone } = useUserProfile((state) => state.profile);
     return (
         <Box display={'flex'} flexDirection={'column'}>
-            <Typography
+            <InputLabel
                 sx={{
                     color: 'text.secondary',
                     fontWeight: 700,
@@ -19,7 +19,7 @@ export default function Contact({}: Props) {
                 }}
             >
                 Your contact details
-            </Typography>
+            </InputLabel>
             <ContactField data={userName.concat(' ', userLastName)} />
             <ContactPhoneField data={phone} />
         </Box>

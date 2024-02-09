@@ -1,12 +1,9 @@
 'use client';
-import { Palette } from '@mui/icons-material';
+
+import React from 'react';
+
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import {
-    ThemeProvider,
-    ThemeOptions,
-    createTheme,
-    PaletteColorOptions,
-} from '@mui/material/styles';
+import { ThemeProvider, SimplePaletteColorOptions, createTheme } from '@mui/material/styles';
 import { Oswald, Lato } from 'next/font/google';
 
 declare module '@mui/material/styles' {
@@ -16,12 +13,16 @@ declare module '@mui/material/styles' {
         header: React.CSSProperties;
         text: React.CSSProperties;
     }
-    interface PaletteOptions {
-        accent?: PaletteColorOptions;
-        peach?: PaletteColorOptions;
-        beige?: PaletteColorOptions;
+    interface Palette {
+        accent: SimplePaletteColorOptions;
+        peach: SimplePaletteColorOptions;
+        beige: SimplePaletteColorOptions;
     }
-    // allow configuration using `createTheme`
+    interface PaletteOptions {
+        accent?: SimplePaletteColorOptions;
+        peach?: SimplePaletteColorOptions;
+        beige?: SimplePaletteColorOptions;
+    }
     interface TypographyVariantsOptions {
         h1_Oswald?: React.CSSProperties;
         h2_Oswald?: React.CSSProperties;
@@ -30,7 +31,6 @@ declare module '@mui/material/styles' {
     }
 }
 
-// Update the Typography's variant prop options
 declare module '@mui/material/Typography' {
     interface TypographyPropsVariantOverrides {
         h1_Oswald: true;
@@ -46,25 +46,6 @@ declare module '@mui/material/Typography' {
         overline: false;
     }
 }
-declare module '@mui/material/styles/createPalette' {
-    // interface Palette {
-    //     accent: PaletteOptions;
-    //     peach: PaletteOptions;
-    //     beige: PaletteOptions;
-    // }
-
-    interface PaletteOptions {
-        accent?: {
-            main: string;
-        };
-        peach?: {
-            main: string;
-        };
-        beige?: {
-            main: string;
-        };
-    }
-}
 
 const oswald = Oswald({
     subsets: ['latin'],
@@ -75,6 +56,7 @@ export const lato = Lato({
     subsets: ['latin'],
     weight: ['400', '700'],
 });
+
 const theme = createTheme({
     palette: {
         primary: {
@@ -197,8 +179,6 @@ const theme = createTheme({
         },
     },
 });
-
-import React from 'react';
 
 type Props = { children: React.ReactNode };
 
