@@ -1,5 +1,8 @@
-import { Box, InputLabel, SvgIcon, Typography } from '@mui/material';
 import React, { useState } from 'react';
+
+import InputLabel from '@mui/material/InputLabel';
+import Typography from '@mui/material/Typography';
+import SvgIcon from '@mui/material/SvgIcon';
 import Input from './Input';
 
 type Props = {};
