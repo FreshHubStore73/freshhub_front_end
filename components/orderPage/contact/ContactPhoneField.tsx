@@ -45,6 +45,7 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
     return (
         <InputMask mask="+1 (999) 999 99 99" disabled={!isEdit}>
             <CustomInput
+                aria-label="user-phone"
                 name="userName"
                 InputProps={{
                     startAdornment: (

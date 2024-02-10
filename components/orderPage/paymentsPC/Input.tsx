@@ -53,7 +53,9 @@ const Input: FC<INumberInput> = ({ quantity, setQuantity, name }) => {
     return (
         <NumberInput
             name={name}
-            onChange={() => {}}
+            onChange={() => {
+                return;
+            }}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position={'start'}>

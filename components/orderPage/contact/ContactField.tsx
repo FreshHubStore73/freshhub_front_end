@@ -51,6 +51,9 @@ export const EditBtn = styled((props: ButtonProps) => (
         '&:hover': {
             fontWeight: 700,
         },
+        '&:focus': {
+            boxShadow: `0 0 0 0.1rem ${theme.palette.text.secondary}`,
+        },
     },
 }));
 export const CustomInput = styled((props: TextFieldProps) => <TextField {...props} />)(
@@ -65,9 +68,9 @@ export const CustomInput = styled((props: TextFieldProps) => <TextField {...prop
         '& .MuiInputBase-root.MuiOutlinedInput-root': {
             borderRadius: '50px',
             padding: '19px 29px',
-            '&.Mui-focused > fieldset': {
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.palette.text.secondary,
-                borderWidth: '1px',
+                borderWidth: '3px',
             },
             '&.Mui-disabled > fieldset': {
                 borderColor: '#828282',
@@ -100,6 +103,7 @@ export default function ContactNameField({ data }: Props) {
     return (
         <CustomInput
             name="userName"
+            aria-label="user-name"
             disabled={!isEdit}
             InputProps={{
                 startAdornment: (
