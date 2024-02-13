@@ -1,28 +1,37 @@
 'use client';
-import { MouseEventHandler, useRef } from 'react';
+import { FC } from 'react';
 import styles from './numberInput.module.scss';
 
-const NumberInput = ({
-    quantity,
-    setQuantity,
-}: {
+interface INumberInput {
     quantity: number;
     setQuantity: (quantity: number) => void;
-}) => {
-    const up = useRef<HTMLButtonElement>(null);
-    const down = useRef<HTMLButtonElement>(null);
+    isOrder?: boolean;
+    isAccent?: boolean;
+}
 
+const NumberInput: FC<INumberInput> = ({
+    quantity,
+    setQuantity,
+    isOrder = false,
+    isAccent = false,
+}) => {
     const handleClick = (q: number) => {
         q + quantity ? setQuantity(quantity + q) : null;
     };
 
     return (
-        <div className={styles.numberControl}>
+        <div
+            className={styles.numberControl}
+            style={{
+                padding: isOrder ? '8px' : '',
+                borderColor: isAccent ? 'rgba(241, 92, 48, 1)' : 'rgba(62, 59, 59, 0.4)',
+            }}
+        >
             <button
                 type="button"
                 className={styles.numberLeft}
+                style={{ fontSize: isOrder ? '20px' : '' }}
                 onClick={() => handleClick(-1)}
-                ref={down}
             >
                 -
             </button>
@@ -30,6 +39,7 @@ const NumberInput = ({
                 type="number"
                 name="number"
                 className={styles.numberQuantity}
+                style={{ fontSize: isOrder ? '20px' : '' }}
                 value={quantity}
                 onChange={(e) => setQuantity(parseInt(e.target.value))}
                 autoComplete="off"
@@ -39,7 +49,7 @@ const NumberInput = ({
             <button
                 type="button"
                 className={styles.numberRight}
-                ref={up}
+                style={{ fontSize: isOrder ? '20px' : '' }}
                 onClick={() => handleClick(1)}
             >
                 +

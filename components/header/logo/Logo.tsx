@@ -8,7 +8,7 @@ export default function Logo() {
     return (
         <Box
             sx={{
-                flexGrow: { xs: 1, md: 0 },
+                flexGrow: { xs: 1, lg: 0 },
                 justifyContent: 'center',
             }}
         >
