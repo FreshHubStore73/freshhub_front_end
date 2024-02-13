@@ -1,4 +1,3 @@
-
 'use client';
 import 'dayjs/locale/de';
 import 'dayjs/locale/en-gb';
@@ -29,8 +28,7 @@ export default function Time() {
     const [value, setValue] = React.useState<Dayjs | null>(dayjs(currentDate));
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}
-        >
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
             <Typography variant="h4" sx={{ fontSize: "28px", mt: "36px", mb: "36px", color: '#040705', fontWeight: "700", lineHeight: '36px', fontFamily: "Lato" }}>
                 Delivery time
             </Typography>
@@ -69,14 +67,11 @@ export default function Time() {
                     onChange={(newValue) => {
                         setValue(newValue);
                     }}
-
                     views={['year', 'month', 'day']}
-
                     sx={{
                         '& .MuiPaper-root': {
                             boxShadow: 'none',
                             borderRadius: '40px',
-
                         },
                         width: '304px',
                         borderRadius: '50px',
@@ -91,7 +86,6 @@ export default function Time() {
                             boxShadow: 'none',
                             backgroundColor: '#fff',
                         },
-
                         '& .MuiSvgIcon-root': {
                             width: '2rem'
                         },
@@ -115,8 +109,6 @@ export default function Time() {
                             top: '25px',
                             left: '10px',
                         },
-
-
                     }}
                     slotProps={{
                         layout: {
@@ -124,14 +116,11 @@ export default function Time() {
                                 ' .MuiPaper-root': {
                                     boxShadow: 'none',
                                     borderRadius: '40px',
-
                                 },
                                 '.MuiDateCalendar-root': {
                                     width: '304px',
-
                                     color: '#bbdefb',
                                     borderRadius: '40px',
-
                                     borderColor: '#fff',
                                     marginTop: '8px',
                                     backgroundColor: '#fff',
@@ -142,18 +131,13 @@ export default function Time() {
                                 },
                                 ' .MuiPickersDay-root.Mui-selected': {
                                     backgroundColor: '#ffc182',
-
                                 },
-
                                 ' .MuiPickersDay-root.Mui-selected:hover': {
                                     backgroundColor: '#ffc182',
                                 },
-
                                 ' .MuiPickersCalendarHeader-label': {
                                     color: '#3e3b3b'
                                 },
-
-
                             }
                         }
                     }}
@@ -164,11 +148,9 @@ export default function Time() {
                     slots={{ openPickerIcon: SvgIcon }}
                     ampm={false}
                     defaultValue={dayjs()}
-
                     sx={{
                         width: '304px',
                         borderRadius: '50px',
-
                         '& .MuiInputBase-input': {
                             padding: ' 27px 0 14px 22px ',
                             fontSize: '24px',
@@ -179,15 +161,12 @@ export default function Time() {
                         '& .MuiPaper-root': {
                             boxShadow: 'none',
                             borderRadius: '40px',
-
                         },
                         '& .MuiFormControl-root': {
                             boxShadow: 'none',
                             borderRadius: '40px',
-
                         },
                         '& .MuiPickersPopper-paper': { boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)' },
-
                         '& .MuiSvgIcon-root': {
                             width: '2rem'
                         },
@@ -224,15 +203,12 @@ export default function Time() {
                     slotProps={{
                         layout: {
                             sx: {
-
-
                                 ' .MuiDialogActions-root': {
                                     display: 'none'
                                 },
                                 ' .MuiMultiSectionDigitalClockSection-root:not(:first-of-type)': {
                                     borderLeft: 'unset',
                                 },
-
                                 ' .MuiPaper-root': {
                                     boxShadow: 'none',
                                 },
@@ -240,18 +216,15 @@ export default function Time() {
                                     width: '304px',
                                     height: '326px',
                                 },
-
                                 ' .MuiMenuItem-root': {
                                     backgroundColor: 'transparent',
                                     color: '#040705',
                                 },
                                 ' .MuiMultiSectionDigitalClockSection-item.Mui-selected:hover': {
                                     backgroundColor: 'transparent',
-
                                 },
                                 ' .MuiMultiSectionDigitalClockSection-root': {
                                     maxHeight: '300px',
-                                    padding: '15px'
 
                                 },
                                 ' .MuiMultiSectionDigitalClock-root': {
@@ -260,17 +233,14 @@ export default function Time() {
                                     boxShadow: '0 0 10px 1px rgba(0, 0, 0, 0.15)',
                                     marginTop: '8px',
                                 },
-
                                 ' .MuiMultiSectionDigitalClockSection-item.Mui-selected': {
                                     backgroundColor: 'transparent',
                                     color: '#040705'
                                 },
-
                             }
                         }
                     }}
                 />
-
             </Box>
         </LocalizationProvider>
     );
