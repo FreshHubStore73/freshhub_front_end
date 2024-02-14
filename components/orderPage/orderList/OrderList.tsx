@@ -2,6 +2,7 @@ import { Box, Divider, Typography } from '@mui/material';
 
 import CartListItem from '@/components/cartListItem/CartListItem';
 import { useShoppingCart } from '@/store';
+import ConfirmOrder from '../confirmOrder/ConfirmOrder';
 
 const Title = () => {
     return (
@@ -44,6 +45,7 @@ const Footer = () => {
                 </Typography>
             </Box>
             <Divider sx={{ mb: '15px', borderColor: '#E1D5C9' }} />
+            <ConfirmOrder />
         </>
     );
 };

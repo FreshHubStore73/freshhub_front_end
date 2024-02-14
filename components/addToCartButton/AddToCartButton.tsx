@@ -26,7 +26,6 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
     return (
         <Button
             variant="contained"
-            color="success"
             disabled={isInCart}
             onClick={handleClick}
             type="submit"
@@ -35,13 +34,7 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
                 height: simple ? '50px' : '41px',
                 borderRadius: '50px',
                 fontSize: simple ? '24px' : '16px',
-                fontWeight: '400',
-                padding: simple ? '10px 64px' : '6px 44px',
-                transition: 'none',
-                '&.MuiButtonBase-root:hover': {
-                    backgroundColor: 'accent.main',
-                },
-                '&.MuiButtonBase-root:disabled': {
+                '&.MuiButtonBase-root.Mui-disabled': {
                     color: '#F15C30',
                     backgroundColor: 'white',
                     border: '1px solid #F15C30',

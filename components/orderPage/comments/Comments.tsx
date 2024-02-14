@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
@@ -14,7 +14,7 @@ const Accordion = styled((props: AccordionProps) => (
 });
 
 const CommentsArea = styled((props: TextFieldProps) => (
-    <TextField multiline fullWidth minRows={3} {...props} />
+    <TextField multiline name="comments" fullWidth minRows={3} {...props} />
 ))(({ theme }) => ({
     '& .MuiInputBase-input.MuiOutlinedInput-input ': {
         fontSize: '22px',
@@ -32,7 +32,7 @@ const CommentsArea = styled((props: TextFieldProps) => (
         },
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.secondary,
-            borderWidth: '3px',
+            borderWidth: '2px',
         },
     },
 }));
@@ -62,17 +62,23 @@ const AccordionDetails = styled(MuiAccordionDetails)({
 });
 
 export default function Comments() {
-    const [expanded, setExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChange = () => {
-        setExpanded((prevState) => !prevState);
+        setIsExpanded((prevState) => !prevState);
     };
 
+    useEffect(() => {
+        if (inputRef.current && isExpanded) inputRef.current.focus();
+    }, [isExpanded]);
+
     return (
-        <Accordion expanded={expanded} onChange={handleChange}>
+        <Accordion expanded={isExpanded} onChange={handleChange}>
             <AccordionSummary
                 expandIcon={
-                    expanded ? (
+                    isExpanded ? (
                         <Remove fontSize="large" sx={{ color: 'text.secondary' }} />
                     ) : (
                         <Add fontSize="large" sx={{ color: 'text.secondary' }} />
@@ -82,7 +88,10 @@ export default function Comments() {
                 <Label>Add a comment to the order</Label>
             </AccordionSummary>
             <AccordionDetails>
-                <CommentsArea placeholder="For example, information about allergens" />
+                <CommentsArea
+                    inputRef={inputRef}
+                    placeholder="For example, information about allergens"
+                />
             </AccordionDetails>
         </Accordion>
     );

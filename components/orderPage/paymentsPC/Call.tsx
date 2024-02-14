@@ -9,7 +9,13 @@ import Box from '@mui/material/Box';
 type Props = {};
 
 const FreshSwitch = styled((props: SwitchProps) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    <Switch
+        name="call"
+        focusVisibleClassName=".Mui-focusVisible"
+        disableRipple
+        inputProps={{ 'aria-label': 'Request a call' }}
+        {...props}
+    />
 ))(({ theme }) => ({
     width: 68,
     height: 38,
@@ -109,9 +115,7 @@ export default function Call({}: Props) {
                     Please check your contact details to avoid inaccuracies
                 </Typography>
             </Box>
-            <Box>
-                <FreshSwitch />
-            </Box>
+            <FreshSwitch />
         </Box>
     );
 }

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useRef, useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 import Radio, { RadioProps } from '@mui/material/Radio';
@@ -18,7 +18,7 @@ const RadioIcon = styled('span')(({ theme }) => ({
     backgroundColor: '#E0E0E0',
     '.Mui-focusVisible &': {
         outline: `2px auto ${theme.palette.text.secondary}`,
-        outlineOffset: 2,
+        // outlineOffset: 1,
     },
 }));
 
@@ -51,54 +51,66 @@ function CustomRadio(props: RadioProps) {
 
 export default function Payments({}: Props) {
     const [isCash, setIsCash] = useState(false);
-    const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const changeRef = useRef<HTMLInputElement>(null);
+
+    const handleCollapse = (event: ChangeEvent<HTMLInputElement>): void => {
         setIsCash(event.target.value === 'cash');
     };
+
+    useEffect(() => {
+        if (changeRef.current && isCash) {
+            changeRef.current.focus();
+        }
+    }, [isCash]);
+
     return (
         <>
-            <FormControl
+            {/* <FormControl
                 sx={{
                     '& .MuiFormControlLabel-root': {
                         marginLeft: '-7px',
                     },
                 }}
+            > */}
+            <FormLabel
+                sx={{
+                    fontWeight: 700,
+                    fontSize: '28px',
+                    marginBottom: '21px',
+                    '&.MuiFormLabel-root.Mui-focused': {
+                        color: 'text.secondary',
+                    },
+                }}
             >
-                <FormLabel
+                Payment
+            </FormLabel>
+            <RadioGroup
+                defaultValue="card"
+                aria-labelledby="payment-method"
+                name="payment"
+                onChange={handleCollapse}
+                sx={{
+                    marginLeft: '3px',
+                }}
+            >
+                <FormControlLabel
+                    value="card"
+                    control={<CustomRadio />}
+                    label="Pay by card"
                     sx={{
-                        fontWeight: 700,
-                        fontSize: '28px',
-                        marginBottom: '21px',
-                        '&.MuiFormLabel-root.Mui-focused': {
-                            color: 'text.secondary',
-                        },
+                        marginBottom: '13px',
+                        fontSize: '24px',
                     }}
-                >
-                    Payment
-                </FormLabel>
-                <RadioGroup
-                    defaultValue="card"
-                    aria-labelledby="payment-method"
-                    name="payment"
-                    onChange={handleChange}
-                >
-                    <FormControlLabel
-                        value="card"
-                        control={<CustomRadio />}
-                        label="Pay by card"
-                        sx={{
-                            marginBottom: '13px',
-                            fontSize: '24px',
-                        }}
-                    />
-                    <FormControlLabel
-                        value="cash"
-                        control={<CustomRadio />}
-                        label="Cash"
-                        sx={{ fontSize: '24px' }}
-                    />
-                </RadioGroup>
-            </FormControl>
-            <Change isExpanded={isCash} />
+                />
+                <FormControlLabel
+                    value="cash"
+                    control={<CustomRadio />}
+                    label="Cash"
+                    sx={{ fontSize: '24px' }}
+                />
+            </RadioGroup>
+            {/* </FormControl> */}
+            <Change isExpanded={isCash} ref={changeRef} />
         </>
     );
 }

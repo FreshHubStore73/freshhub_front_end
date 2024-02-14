@@ -37,7 +37,7 @@ export default function Persons({}: Props) {
             <PersonIcon />
             <Typography
                 sx={{
-                    width: '100%',
+                    // width: '100%',
                     fontSize: '26px',
                     fontWeight: 700,
                     textAlign: 'start',
@@ -46,7 +46,7 @@ export default function Persons({}: Props) {
             >
                 Number of persons
             </Typography>
-            <Input quantity={quantity} setQuantity={setQuantity} name={'persons'} />
+            <Input quantity={quantity} setQuantity={setQuantity} name="persons" />
         </InputLabel>
     );
 }

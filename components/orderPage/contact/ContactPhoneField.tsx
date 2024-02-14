@@ -1,6 +1,6 @@
 'use client';
 import { Button, InputAdornment, Stack, SvgIcon, TextField } from '@mui/material';
-import { useState, FC } from 'react';
+import { useState, FC, useRef, useEffect } from 'react';
 import InputMask from 'react-input-mask';
 import { CustomInput, EditBtn, StartAdornment } from './ContactField';
 
@@ -36,17 +36,24 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
     const [isEdit, setEdit] = useState(false);
     const btnText = isEdit ? 'Save' : 'Change';
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const toggleEdit = () => {
         if (isEdit) {
         }
         setEdit((prevState) => !prevState);
     };
 
+    useEffect(() => {
+        if (inputRef.current && isEdit) inputRef.current.focus();
+    }, [isEdit]);
+
     return (
         <InputMask mask="+1 (999) 999 99 99" disabled={!isEdit}>
             <CustomInput
+                inputRef={inputRef}
                 aria-label="user-phone"
-                name="userName"
+                name="userPhone"
                 InputProps={{
                     startAdornment: (
                         <StartAdornment position={'start'}>
