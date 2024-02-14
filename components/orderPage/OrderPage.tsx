@@ -7,10 +7,11 @@ import Address from './address/Address';
 import OrderList from './orderList/OrderList';
 import CustomizedAccordions from './comments/Comments';
 import PaymentsPC from './paymentsPC/PaymentsPC';
+import Time from './time/Time';
 
 type Props = {};
 
-export default function OrderPage({}: Props) {
+export default function OrderPage({ }: Props) {
     return (
         <Box mt={'111px'}>
             <BreadCrumbs />
@@ -38,6 +39,7 @@ export default function OrderPage({}: Props) {
                     </Typography>
                     <Contact />
                     <Address />
+                    <Time />
                     <PaymentsPC />
                 </Box>
                 <Box sx={{ overflow: 'hidden', marginLeft: '10px' }}>
