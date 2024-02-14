@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 const lato = Lato({
     subsets: ['latin'],
     weight: ['400', '700'],
+    preload: true,
 });
 
 export default function RootLayout({
