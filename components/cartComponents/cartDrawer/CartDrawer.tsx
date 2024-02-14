@@ -7,7 +7,7 @@ import { useShoppingCart } from '../../../store';
 
 import EmptyBlock from '@/components/emptyBlock/EmptyBlock';
 import CartHeader from '../cartHeader/CartHeader';
-import CartListItem from '../cartListItem/CartListItem';
+import CartListItem from '../../cartListItem/CartListItem';
 import CartFooter from '../cartFooter/CartFooter';
 
 const CartDrawer: FC<{
@@ -21,11 +21,12 @@ const CartDrawer: FC<{
     const content = (
         <>
             <Stack
+                component={'ul'}
                 flexGrow={'1'}
                 sx={{
                     overflowY: 'auto',
                     scrollbarWidth: 'thin',
-                    '& .MuiStack-root': {
+                    '&.MuiStack-root': {
                         paddingRight: '10px',
                         '&::-webkit-scrollbar': {
                             width: 'thin',

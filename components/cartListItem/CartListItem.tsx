@@ -1,13 +1,16 @@
 'use client';
-import React from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 
-import { Stack, SvgIcon, Typography } from '@mui/material';
+import { Box, Stack, SvgIcon, Typography } from '@mui/material';
 import { DishInCart, useShoppingCart } from '@/store';
 
 import NumberInput from '@/components/numberInput';
-
-const CartListItem = ({ dish }: { dish: DishInCart }) => {
+interface ICartListItem {
+    dish: DishInCart;
+    isOrder?: boolean;
+}
+const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
     const { dishId, dTitle, dPic, dPrice, dQuantity } = dish;
     const { removeDish, changeQuantity } = useShoppingCart();
 
@@ -20,29 +23,35 @@ const CartListItem = ({ dish }: { dish: DishInCart }) => {
     };
 
     return (
-        <Stack
-            direction="row"
-            spacing={1}
+        <Box
+            component={'li'}
             sx={{
                 display: 'grid',
-                gridTemplateColumns: '146px 1fr',
-                gridTemplateRow: 'repeat(2, 32px)',
-                gap: '27px 33px',
+                gridTemplateColumns: isOrder ? '97px 1fr' : '146px auto',
+                gridTemplateRow: 'repeat(2, auto)',
+                columnGap: isOrder ? '20px' : '27px',
+                rowGapGap: 'auto',
             }}
         >
-            <Stack
+            <Box
                 sx={{
-                    height: '121px',
+                    height: isOrder ? '81px' : '121px',
                     borderRadius: '30px',
+                    alignSelf: 'center',
                     position: 'relative',
                     overflow: 'hidden',
                     objectFit: 'contain',
                     gridArea: '1 / 1 / 3 / 2',
                 }}
             >
-                <Image src={dPic} fill alt={dTitle} />
-            </Stack>
-            <Stack
+                <Image
+                    src={dPic}
+                    fill
+                    alt={dTitle}
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 30vw, 15vw"
+                />
+            </Box>
+            <Box
                 sx={{
                     gridArea: '1 / 2 / 2 / 3',
                     alignSelf: 'start',
@@ -53,15 +62,20 @@ const CartListItem = ({ dish }: { dish: DishInCart }) => {
                     gap: '10px',
                 }}
             >
-                <Typography sx={{ fontWeight: 700, fontSize: '28px', color: 'text.secondary' }}>
+                <Typography
+                    sx={{
+                        fontWeight: 700,
+                        fontSize: isOrder ? '24px' : '28px',
+                        color: 'text.secondary',
+                    }}
+                >
                     {dTitle}
                 </Typography>
                 <SvgIcon
                     onClick={onRemove}
                     sx={{
                         cursor: 'pointer',
-                        height: '30px',
-                        width: '26px',
+                        height: isOrder ? '24px' : '30px',
                         '&.MuiSvgIcon-root:hover path': {
                             stroke: '#F15C30',
                         },
@@ -87,8 +101,8 @@ const CartListItem = ({ dish }: { dish: DishInCart }) => {
                         />
                     </svg>
                 </SvgIcon>
-            </Stack>
-            <Stack
+            </Box>
+            <Box
                 sx={{
                     gridArea: '2 / 2 / 3 / 3',
                     alignSelf: 'end',
@@ -98,12 +112,18 @@ const CartListItem = ({ dish }: { dish: DishInCart }) => {
                     alignItems: 'center',
                 }}
             >
-                <NumberInput quantity={dish.dQuantity} setQuantity={onChange} />
-                <Typography sx={{ fontWeight: 700, fontSize: '30px', color: 'text.secondary' }}>
+                <NumberInput quantity={dish.dQuantity} setQuantity={onChange} isOrder={isOrder} />
+                <Typography
+                    sx={{
+                        fontWeight: isOrder ? 400 : 700,
+                        fontSize: isOrder ? '24px' : '30px',
+                        color: 'text.secondary',
+                    }}
+                >
                     ${dPrice * dQuantity}
                 </Typography>
-            </Stack>
-        </Stack>
+            </Box>
+        </Box>
     );
 };
 
