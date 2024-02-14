@@ -41,7 +41,10 @@ const NumberInput: FC<INumberInput> = ({
                 className={styles.numberQuantity}
                 style={{ fontSize: isOrder ? '20px' : '' }}
                 value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value))}
+                // onChange={(e) => setQuantity(parseInt(e.target.value) || quantity)}
+                onChange={() => {
+                    return;
+                }}
                 autoComplete="off"
                 min="1"
                 step="1"
