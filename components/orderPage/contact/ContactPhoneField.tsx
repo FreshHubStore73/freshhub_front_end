@@ -1,6 +1,6 @@
 'use client';
-import { Button, InputAdornment, Stack, SvgIcon, TextField } from '@mui/material';
-import { useState, FC, useRef, useEffect } from 'react';
+import { InputAdornment, SvgIcon } from '@mui/material';
+import { useState, FC, useRef } from 'react';
 import InputMask from 'react-input-mask';
 import { CustomInput, EditBtn, StartAdornment } from './ContactField';
 
@@ -34,26 +34,30 @@ const Phone = ({ isEdit }: { isEdit: boolean }) => (
 
 const ContactPhoneField: FC<Props> = ({ data }) => {
     const [isEdit, setEdit] = useState(false);
+    const [value, setValue] = useState(data);
+
     const btnText = isEdit ? 'Save' : 'Change';
 
     const inputRef = useRef<HTMLInputElement>(null);
 
     const toggleEdit = () => {
-        if (isEdit) {
-        }
         setEdit((prevState) => !prevState);
+        if (!isEdit) {
+            inputRef.current!.focus();
+        }
+    };
+    const handleChange = (e: any) => {
+        if (!isEdit) return;
+        setValue(e.target.value);
     };
 
-    useEffect(() => {
-        if (inputRef.current && isEdit) inputRef.current.focus();
-    }, [isEdit]);
-
     return (
-        <InputMask mask="+1 (999) 999 99 99" disabled={!isEdit}>
+        <InputMask mask="+1 (999) 999 99 99" onChange={handleChange} value={value}>
             <CustomInput
                 inputRef={inputRef}
-                aria-label="user-phone"
                 name="userPhone"
+                aria-label="user-phone"
+                isdisabled={!isEdit}
                 InputProps={{
                     startAdornment: (
                         <StartAdornment position={'start'}>
@@ -66,7 +70,6 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
                         </InputAdornment>
                     ),
                 }}
-                defaultValue={data}
             />
         </InputMask>
     );
