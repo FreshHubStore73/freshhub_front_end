@@ -2,7 +2,7 @@
 import Button, { ButtonProps } from '@mui/material/Button';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import InputAdornment, { InputAdornmentProps } from '@mui/material/InputAdornment';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { SvgIcon } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -56,33 +56,36 @@ export const EditBtn = styled((props: ButtonProps) => <Button variant="text" {..
         },
     }),
 );
-export const CustomInput = styled((props: TextFieldProps) => <TextField {...props} />)(
-    ({ theme }) => ({
-        '& .MuiInputAdornment-root': {
-            marginRight: '0',
+interface StyledCustomInputProps {
+    isdisabled?: boolean;
+}
+export const CustomInput = styled((props: TextFieldProps) => (
+    <TextField {...props} autoComplete="off" />
+))<StyledCustomInputProps>(({ theme, isdisabled }) => ({
+    '& .MuiInputAdornment-root': {
+        marginRight: '0',
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
+    },
+    '& .MuiOutlinedInput-root': {
+        borderRadius: '50px',
+        paddingInline: '29px',
+        height: '106px',
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
+            borderWidth: isdisabled ? '1px' : '2px',
         },
-        '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.text.secondary,
-        },
-        '& .MuiOutlinedInput-root': {
-            borderRadius: '50px',
-            paddingInline: '29px',
-            height: '106px',
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: theme.palette.text.secondary,
-                borderWidth: '2px',
-            },
-            '&.Mui-disabled > fieldset': {
-                borderColor: '#828282',
-            },
-        },
-        '& .MuiInputBase-input.MuiOutlinedInput-input': {
-            paddingLeft: '18px',
-        },
-        fontSize: '24px',
-        flexGrow: 1,
-    }),
-);
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+        borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
+    },
+    '& .MuiInputBase-input.MuiOutlinedInput-input': {
+        paddingLeft: '18px',
+    },
+    fontSize: '24px',
+    flexGrow: 1,
+}));
 export const StartAdornment = styled((props: InputAdornmentProps) => <InputAdornment {...props} />)(
     () => ({
         '&.MuiInputAdornment-root': {
@@ -92,23 +95,31 @@ export const StartAdornment = styled((props: InputAdornmentProps) => <InputAdorn
 );
 export default function ContactNameField({ data }: Props) {
     const [isEdit, setEdit] = useState(false);
+    const [value, setValue] = useState(data);
+
     const btnText = isEdit ? 'Save' : 'Change';
+
     const inputRef = useRef<HTMLInputElement>(null);
+
     const toggleEdit = () => {
-        if (isEdit) {
-        }
         setEdit((prevState) => !prevState);
+        if (!isEdit) {
+            inputRef.current!.focus();
+        }
     };
-    useEffect(() => {
-        if (inputRef.current && isEdit) inputRef.current.focus();
-    }, [isEdit]);
+
+    const handleChange = (e: any) => {
+        if (!isEdit) return;
+        setValue(e.target.value);
+    };
 
     return (
         <CustomInput
             inputRef={inputRef}
             name="userName"
             aria-label="user-name"
-            disabled={!isEdit}
+            isdisabled={!isEdit}
+            onChange={handleChange}
             InputProps={{
                 startAdornment: (
                     <StartAdornment position={'start'}>
@@ -121,7 +132,7 @@ export default function ContactNameField({ data }: Props) {
                     </InputAdornment>
                 ),
             }}
-            defaultValue={data}
+            value={value}
         />
     );
 }

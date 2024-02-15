@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React from 'react';
 import { Stack, SvgIcon, Typography } from '@mui/material';
 
 type Props = {
@@ -6,8 +6,6 @@ type Props = {
 };
 
 export default function CartHeader({ closeDrawer }: Props) {
-    console.log('header');
-
     return (
         <>
             <Stack
