@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Typography';
 import SvgIcon from '@mui/material/SvgIcon';
-import Input from './Input';
+import NumberInput from '../../numberInput/Input';
 
 type Props = {};
 const PersonIcon = () => (
@@ -46,7 +46,12 @@ export default function Persons({}: Props) {
             >
                 Number of persons
             </Typography>
-            <Input quantity={quantity} setQuantity={setQuantity} name="persons" />
+            <NumberInput
+                quantity={quantity}
+                setQuantity={setQuantity}
+                name="persons"
+                type="persons"
+            />
         </InputLabel>
     );
 }

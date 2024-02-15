@@ -2,10 +2,10 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import { Box, Stack, SvgIcon, Typography } from '@mui/material';
+import { Box, SvgIcon, Typography } from '@mui/material';
 import { DishInCart, useShoppingCart } from '@/store';
 
-import NumberInput from '@/components/numberInput';
+import NumberInput from '../numberInput/Input';
 interface ICartListItem {
     dish: DishInCart;
     isOrder?: boolean;
@@ -112,7 +112,11 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                     alignItems: 'center',
                 }}
             >
-                <NumberInput quantity={dish.dQuantity} setQuantity={onChange} isOrder={isOrder} />
+                <NumberInput
+                    quantity={dish.dQuantity}
+                    setQuantity={onChange}
+                    type={isOrder ? 'order' : 'cart'}
+                />
                 <Typography
                     sx={{
                         fontWeight: isOrder ? 400 : 700,
