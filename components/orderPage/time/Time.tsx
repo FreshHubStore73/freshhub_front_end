@@ -29,30 +29,48 @@ export default function Time() {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
-            <Typography variant="h4" sx={{ fontSize: "28px", mt: "36px", mb: "36px", color: '#040705', fontWeight: "700", lineHeight: '36px', fontFamily: "Lato" }}>
+            <Typography
+                component="h4"
+                sx={{
+                    fontSize: '28px',
+                    mt: '36px',
+                    mb: '36px',
+                    color: '#040705',
+                    fontWeight: '700',
+                    lineHeight: '36px',
+                }}
+            >
                 Delivery time
             </Typography>
-            <Box sx={{
-                display: 'flex',
-                gap: '20px',
-                marginBottom: '32px',
-            }}>
-                <Chip label='As soon as possible' sx={{
-                    width: '304px',
-                    height: '66px',
-                    borderRadius: '50px',
-                    color: '#040705',
-                    fontSize: '22px',
-                    backgroundColor: '#bdbdbd'
-                }} />
-                <Chip label='Time and date' sx={{
-                    width: '304px',
-                    height: '66px',
-                    borderRadius: '50px',
-                    color: '#040705',
-                    fontSize: '22px',
-                    backgroundColor: ' #ffc182'
-                }} />
+            <Box
+                sx={{
+                    display: 'flex',
+                    gap: '20px',
+                    marginBottom: '32px',
+                }}
+            >
+                <Chip
+                    label="As soon as possible"
+                    sx={{
+                        width: '100%',
+                        height: '66px',
+                        borderRadius: '50px',
+                        color: '#040705',
+                        fontSize: '22px',
+                        backgroundColor: '#bdbdbd',
+                    }}
+                />
+                <Chip
+                    label="Time and date"
+                    sx={{
+                        width: '100%',
+                        height: '66px',
+                        borderRadius: '50px',
+                        color: '#040705',
+                        fontSize: '22px',
+                        backgroundColor: ' #ffc182',
+                    }}
+                />
             </Box>
             <Box
                 sx={{
@@ -62,6 +80,7 @@ export default function Time() {
             >
                 <DatePicker
                     label="Delivery date"
+                    name="delivery_date"
                     slots={{ openPickerIcon: SvgIcon }}
                     value={value}
                     onChange={(newValue) => {
@@ -69,25 +88,20 @@ export default function Time() {
                     }}
                     views={['year', 'month', 'day']}
                     sx={{
-                        '& .MuiPaper-root': {
-                            boxShadow: 'none',
-                            borderRadius: '40px',
-                        },
-                        width: '304px',
+                        width: '100%',
                         borderRadius: '50px',
                         '& .MuiInputBase-input': {
                             padding: ' 27px 0 14px 22px ',
                             fontSize: '24px',
-                            fontFamily: "Lato",
-                            fontWeight: "400",
-                            lineHeight: "28px",
+                            fontWeight: '400',
+                            lineHeight: '28px',
                         },
-                        '& .MuiPaper-root-MuiPickersPopper-paper': {
+                        '& .MuiPaper-root.MuiPickersPopper-paper': {
                             boxShadow: 'none',
                             backgroundColor: '#fff',
                         },
                         '& .MuiSvgIcon-root': {
-                            width: '2rem'
+                            width: '2rem',
                         },
                         '& .MuiOutlinedInput-root': {
                             borderRadius: '50px',
@@ -101,7 +115,7 @@ export default function Time() {
                             backgroundColor: 'transparent',
                         },
                         '& .MuiFormLabel-root.Mui-focused': {
-                            color: '#828282'
+                            color: '#828282',
                         },
                         '& .MuiFormLabel-root': {
                             color: '#828282',
@@ -111,64 +125,52 @@ export default function Time() {
                         },
                     }}
                     slotProps={{
+                        desktopPaper: {
+                            sx: {
+                                marginBlock: '8px',
+                                borderRadius: '40px',
+                                boxShadow: '0px 0px 10px 1px rgba(0, 0, 0, 0.15)',
+                            },
+                        },
                         layout: {
                             sx: {
-                                ' .MuiPaper-root': {
-                                    boxShadow: 'none',
-                                    borderRadius: '40px',
-                                },
-                                '.MuiDateCalendar-root': {
-                                    width: '304px',
+                                '& .MuiDateCalendar-root': {
                                     color: '#bbdefb',
                                     borderRadius: '40px',
-                                    borderColor: '#fff',
-                                    marginTop: '8px',
-                                    backgroundColor: '#fff',
-                                    boxShadow: '0 0 10px 1px rgba(0, 0, 0, 0.15)',
+                                    // borderColor: '#fff',
+                                    // backgroundColor: '#fff',
                                 },
-                                '.MuiPaper-root.MuiPickersPopper-paper, & .MuiPopover-paper': {
-                                    boxShadow: 'none',
-                                },
-                                ' .MuiPickersDay-root.Mui-selected': {
+                                '& .MuiPickersDay-root.Mui-selected': {
                                     backgroundColor: '#ffc182',
                                 },
-                                ' .MuiPickersDay-root.Mui-selected:hover': {
+                                '& .MuiPickersDay-root.Mui-selected:hover': {
                                     backgroundColor: '#ffc182',
                                 },
-                                ' .MuiPickersCalendarHeader-label': {
-                                    color: '#3e3b3b'
+                                '& .MuiPickersCalendarHeader-label': {
+                                    color: '#3e3b3b',
                                 },
-                            }
-                        }
+                            },
+                        },
                     }}
                 />
 
                 <TimePicker
-                    label="Locale default"
+                    label="Delivery time"
+                    name="delivery_time"
                     slots={{ openPickerIcon: SvgIcon }}
                     ampm={false}
                     defaultValue={dayjs()}
                     sx={{
-                        width: '304px',
+                        width: '100%',
                         borderRadius: '50px',
                         '& .MuiInputBase-input': {
                             padding: ' 27px 0 14px 22px ',
                             fontSize: '24px',
-                            fontFamily: "Lato",
-                            fontWeight: "400",
-                            lineHeight: "28px",
+                            fontWeight: '400',
+                            lineHeight: '28px',
                         },
-                        '& .MuiPaper-root': {
-                            boxShadow: 'none',
-                            borderRadius: '40px',
-                        },
-                        '& .MuiFormControl-root': {
-                            boxShadow: 'none',
-                            borderRadius: '40px',
-                        },
-                        '& .MuiPickersPopper-paper': { boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)' },
                         '& .MuiSvgIcon-root': {
-                            width: '2rem'
+                            width: '2rem',
                         },
                         '& .MuiOutlinedInput-root': {
                             borderRadius: '50px',
@@ -182,7 +184,7 @@ export default function Time() {
                             backgroundColor: 'transparent',
                         },
                         '& .MuiFormLabel-root.Mui-focused': {
-                            color: '#828282'
+                            color: '#828282',
                         },
                         '& .MuiFormLabel-root': {
                             color: '#828282',
@@ -191,7 +193,7 @@ export default function Time() {
                             left: '10px',
                         },
                         '& .MuiStack-root': {
-                            position: 'relative'
+                            position: 'relative',
                         },
                         '& .MuiTypography-root': {
                             color: '#828282',
@@ -201,16 +203,20 @@ export default function Time() {
                         },
                     }}
                     slotProps={{
+                        desktopPaper: {
+                            sx: {
+                                marginBlock: '8px',
+                                borderRadius: '40px',
+                                boxShadow: '0px 0px 10px 1px rgba(0, 0, 0, 0.15)',
+                            },
+                        },
                         layout: {
                             sx: {
                                 ' .MuiDialogActions-root': {
-                                    display: 'none'
+                                    display: 'none',
                                 },
                                 ' .MuiMultiSectionDigitalClockSection-root:not(:first-of-type)': {
                                     borderLeft: 'unset',
-                                },
-                                ' .MuiPaper-root': {
-                                    boxShadow: 'none',
                                 },
                                 ' .MuiPickersLayout-contentWrapper ': {
                                     width: '304px',
@@ -225,20 +231,17 @@ export default function Time() {
                                 },
                                 ' .MuiMultiSectionDigitalClockSection-root': {
                                     maxHeight: '300px',
-
                                 },
                                 ' .MuiMultiSectionDigitalClock-root': {
                                     borderBottom: 'none',
-                                    borderRadius: '40px',
-                                    boxShadow: '0 0 10px 1px rgba(0, 0, 0, 0.15)',
                                     marginTop: '8px',
                                 },
                                 ' .MuiMultiSectionDigitalClockSection-item.Mui-selected': {
                                     backgroundColor: 'transparent',
-                                    color: '#040705'
+                                    color: '#040705',
                                 },
-                            }
-                        }
+                            },
+                        },
                     }}
                 />
             </Box>
