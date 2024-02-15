@@ -58,7 +58,6 @@ export const EditBtn = styled((props: ButtonProps) => <Button variant="text" {..
 );
 export const CustomInput = styled((props: TextFieldProps) => <TextField {...props} />)(
     ({ theme }) => ({
-        marginBottom: '22px',
         '& .MuiInputAdornment-root': {
             marginRight: '0',
         },

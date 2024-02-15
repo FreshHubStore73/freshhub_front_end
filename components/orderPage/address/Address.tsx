@@ -4,11 +4,10 @@ export default function Address() {
     return (
         <>
             <Typography
-                variant="h2"
+                component="h2"
                 fontSize="28px"
                 sx={{
-                    mt: 20,
-                    mb: '36px',
+                    marginBlock: '36px',
                     color: '#040705',
                     fontWeight: '700',
                     lineHeight: '36px',

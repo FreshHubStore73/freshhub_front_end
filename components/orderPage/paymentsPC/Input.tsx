@@ -35,7 +35,7 @@ const NumberInput = styled((props: TextFieldProps) => (
         borderRadius: '50px',
         paddingInline: '5px',
         color: theme.palette.text.secondary,
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline, &: focus .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline':
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline, &:focus .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline':
             {
                 borderColor: type === 'dish' ? theme.palette.accent.main : 'rgba(62, 59, 59, 0.4)',
 
