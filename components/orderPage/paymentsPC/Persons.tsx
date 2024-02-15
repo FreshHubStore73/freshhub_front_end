@@ -32,12 +32,12 @@ export default function Persons({}: Props) {
                 alignItems: 'center',
                 gap: '20px',
                 marginBottom: '37px',
+                p: '1px',
             }}
         >
             <PersonIcon />
             <Typography
                 sx={{
-                    // width: '100%',
                     fontSize: '26px',
                     fontWeight: 700,
                     textAlign: 'start',

@@ -31,7 +31,7 @@ const CheckedRadioIcon = styled(RadioIcon)({
         position: 'absolute',
         top: '17px',
         left: '17px',
-        backgroundImage: 'radial-gradient(#F15C30,#F15C30 55%,transparent 62%)',
+        backgroundImage: 'radial-gradient(#F15C30,#F15C30 66%,transparent 74%)',
         content: '""',
     },
 });
@@ -91,6 +91,7 @@ export default function Payments({}: Props) {
                 onChange={handleCollapse}
                 sx={{
                     marginLeft: '3px',
+                    marginTop: '25px',
                 }}
             >
                 <FormControlLabel
