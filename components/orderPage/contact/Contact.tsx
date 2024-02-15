@@ -21,8 +21,16 @@ export default function Contact({}: Props) {
                 >
                     Your contact details
                 </FormLabel>
-                <ContactField data={userName.concat(' ', userLastName)} />
-                <ContactPhoneField data={phone} />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '22px',
+                    }}
+                >
+                    <ContactField data={userName.concat(' ', userLastName)} />
+                    <ContactPhoneField data={phone} />
+                </Box>
             </FormControl>
         </Box>
     );

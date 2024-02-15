@@ -11,11 +11,24 @@ import Time from './time/Time';
 
 type Props = {};
 
-export default function OrderPage({ }: Props) {
+export default function OrderPage({}: Props) {
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        let jsonObject: { [key: string]: any } = {};
+
+        formData.forEach((value, key) => {
+            jsonObject[key] = value;
+        });
+        let jsonData = JSON.stringify(jsonObject);
+        console.log(jsonData);
+    };
     return (
         <Box mt={'111px'}>
             <BreadCrumbs />
             <Box
+                component={'form'}
+                onSubmit={handleSubmit}
                 sx={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
