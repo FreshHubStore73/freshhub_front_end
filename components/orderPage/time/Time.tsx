@@ -8,8 +8,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Typography, Box, Chip } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import 'dayjs/locale/en';
 
 const SvgIcon = () => (
@@ -26,7 +24,23 @@ export default function Time() {
     const [locale, setLocale] = React.useState<LocaleKey>('de');
     const currentDate = dayjs().format('L');
     const [value, setValue] = React.useState<Dayjs | null>(dayjs(currentDate));
+    const [showDatePicker, setShowDatePicker] = React.useState(false);
+    const [isAsSoonAsPossibleSelected, setIsAsSoonAsPossibleSelected] = React.useState(false);
 
+    const handleAsSoonAsPossibleClick = () => {
+        if (!isAsSoonAsPossibleSelected) {
+            setShowDatePicker(false);
+            setIsAsSoonAsPossibleSelected(true);
+        }
+    };
+
+    // Функція для обробки кліку на чип "Time and date"
+    const handleTimeAndDateClick = () => {
+        if (isAsSoonAsPossibleSelected) {
+            setShowDatePicker(true);
+            setIsAsSoonAsPossibleSelected(false);
+        }
+    };
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
             <Typography
@@ -51,36 +65,44 @@ export default function Time() {
             >
                 <Chip
                     label="As soon as possible"
+                    onClick={handleAsSoonAsPossibleClick}
+                    disabled={isAsSoonAsPossibleSelected}
                     sx={{
                         width: '100%',
                         height: '66px',
                         borderRadius: '50px',
                         color: '#040705',
                         fontSize: '22px',
-                        backgroundColor: '#bdbdbd',
+                        backgroundColor: isAsSoonAsPossibleSelected ? '#bdbdbd' : '#ffc182',
                     }}
                 />
                 <Chip
                     label="Time and date"
+                    onClick={handleTimeAndDateClick}
+                    disabled={!isAsSoonAsPossibleSelected}
                     sx={{
                         width: '100%',
                         height: '66px',
                         borderRadius: '50px',
                         color: '#040705',
                         fontSize: '22px',
-                        backgroundColor: ' #ffc182',
+                        backgroundColor: showDatePicker ? '#bdbdbd' : '#ffc182',
+                        '&:hover': {
+                            backgroundColor: showDatePicker ? '#ffc182' : '#bdbdbd',
+                        },
                     }}
                 />
             </Box>
-            <Box
+            {showDatePicker && <Box
                 sx={{
                     display: 'flex',
                     gap: '20px',
                 }}
             >
                 <DatePicker
+                    name={isAsSoonAsPossibleSelected ? "as_soon_as_possible" : "delivery_date"}
                     label="Delivery date"
-                    name="delivery_date"
+                    // name="delivery_date"
                     slots={{ openPickerIcon: SvgIcon }}
                     value={value}
                     onChange={(newValue) => {
@@ -137,8 +159,6 @@ export default function Time() {
                                 '& .MuiDateCalendar-root': {
                                     color: '#bbdefb',
                                     borderRadius: '40px',
-                                    // borderColor: '#fff',
-                                    // backgroundColor: '#fff',
                                 },
                                 '& .MuiPickersDay-root.Mui-selected': {
                                     backgroundColor: '#ffc182',
@@ -156,7 +176,8 @@ export default function Time() {
 
                 <TimePicker
                     label="Delivery time"
-                    name="delivery_time"
+                    // name="delivery_time"
+                    name={isAsSoonAsPossibleSelected ? "as_soon_as_possible" : "delivery_time"}
                     slots={{ openPickerIcon: SvgIcon }}
                     ampm={false}
                     defaultValue={dayjs()}
@@ -244,7 +265,8 @@ export default function Time() {
                         },
                     }}
                 />
-            </Box>
+            </Box>}
+
         </LocalizationProvider>
     );
 }
