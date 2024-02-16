@@ -3,13 +3,7 @@ import { FC } from 'react';
 import { styled } from '@mui/material/styles';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 
-import {
-    IconButton,
-    IconButtonProps,
-    IconProps,
-    InputAdornment,
-    SvgIconProps,
-} from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
 import { Add, Remove } from '@mui/icons-material';
 
 interface INumberInput {
@@ -18,7 +12,7 @@ interface INumberInput {
     name?: string;
 }
 interface StyledNumberInputProps {
-    type?: 'cart' | 'small' | 'dish';
+    type: 'cart' | 'order' | 'dish' | 'persons';
 }
 const NumberInput = styled((props: TextFieldProps) => (
     <TextField {...props} />
@@ -27,34 +21,32 @@ const NumberInput = styled((props: TextFieldProps) => (
         margin: '0',
     },
     '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: type === 'cart' ? 'rgba(62, 59, 59, 0.4)' : theme.palette.accent.main,
+        borderColor: type === 'dish' ? theme.palette.accent.main : 'rgba(62, 59, 59, 0.4)',
     },
     '& .MuiOutlinedInput-root': {
-        width: type === 'cart' || type === 'dish' ? '112px' : '85px',
-        height: type === 'cart' ? '52px' : type === 'dish' ? '50px' : '40px',
+        width: type === 'order' ? '85px' : '112px',
+        height: type === 'order' ? '40px' : type === 'dish' ? '50px' : '52px',
         borderRadius: '50px',
-        paddingInline: '5px',
+        paddingInline: type === 'order' ? '2px' : '5px',
         color: theme.palette.text.secondary,
         '&.Mui-focused .MuiOutlinedInput-notchedOutline, &:focus .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline':
             {
                 borderColor: type === 'dish' ? theme.palette.accent.main : 'rgba(62, 59, 59, 0.4)',
-
                 borderWidth: '1px',
             },
 
         '& .MuiInputBase-input.MuiOutlinedInput-input': {
             textAlign: 'center',
-            // color: theme.palette.text.secondary,
         },
         lineHeight: '1',
     },
-    fontSize: type === 'cart' || type === 'dish' ? '24px' : '20px',
+    fontSize: type === 'order' ? '20px' : '24px',
 }));
 
-const StyledIconButton = styled('div')(({ theme }) => ({
-    width: '34px',
-    height: '34px',
-    paddingBlock: '5px',
+const StyledIconButton = styled('div')<StyledNumberInputProps>(({ theme, type }) => ({
+    width: type === 'order' ? '27px' : '34px',
+    height: type === 'order' ? '27px' : '34px',
+    paddingBlock: type === 'order' ? '2px' : '5px',
     borderRadius: '40px',
     textAlign: 'center',
     cursor: 'pointer',
@@ -70,7 +62,12 @@ const StyledIconButton = styled('div')(({ theme }) => ({
     },
 }));
 
-const Input: FC<INumberInput> = ({ quantity, setQuantity, name }) => {
+const Input: FC<INumberInput & StyledNumberInputProps> = ({
+    quantity,
+    setQuantity,
+    name,
+    type,
+}) => {
     const handleClick = (q: number) => {
         q + quantity ? setQuantity(quantity + q) : null;
     };
@@ -83,12 +80,13 @@ const Input: FC<INumberInput> = ({ quantity, setQuantity, name }) => {
 
     return (
         <NumberInput
-            type="cart"
+            type={type}
             name={name}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position={'start'}>
                         <StyledIconButton
+                            type={type}
                             tabIndex={0}
                             onClick={() => handleClick(-1)}
                             onKeyDown={(e) => handleKeyPress(e, -1)}
@@ -100,6 +98,7 @@ const Input: FC<INumberInput> = ({ quantity, setQuantity, name }) => {
                 endAdornment: (
                     <InputAdornment position="end">
                         <StyledIconButton
+                            type={type}
                             tabIndex={0}
                             onClick={() => handleClick(1)}
                             onKeyDown={(e) => handleKeyPress(e, 1)}

@@ -17,7 +17,6 @@ const CartDrawer: FC<{
     const dishes = useShoppingCart((state) => state.dishes);
     const totalAmount = useShoppingCart((state) => state.totalAmount);
 
-    console.log('drawer');
     const content = (
         <>
             <Stack

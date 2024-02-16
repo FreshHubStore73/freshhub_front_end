@@ -14,8 +14,6 @@ const ConfirmBtn = styled((props: ButtonProps) => (
 });
 
 export default function ConfirmOrder({}: Props) {
-    const handleSubmit = () => {
-        console.log('first');
-    };
+    const handleSubmit = () => {};
     return <ConfirmBtn onClick={handleSubmit}>Confirm order</ConfirmBtn>;
 }

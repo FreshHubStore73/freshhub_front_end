@@ -8,10 +8,30 @@ import OrderList from './orderList/OrderList';
 import CustomizedAccordions from './comments/Comments';
 import PaymentsPC from './paymentsPC/PaymentsPC';
 import Time from './time/Time';
+import { useShoppingCart } from '@/store';
 
 type Props = {};
+interface IOrder {
+    recipient: string;
+    phoneNumber: string;
+    streetHouse: string;
+    flat: string;
+    floor: string;
+    numberPersons: number;
+    call: boolean;
+    payment: string;
+    comment: string;
+    orderedDishes: {
+        id: number;
+        quantity: number;
+        price: number;
+    }[];
+}
+
 
 export default function OrderPage({ }: Props) {
+    const dishes = useShoppingCart((state) => state.dishes);
+
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -19,6 +39,24 @@ export default function OrderPage({ }: Props) {
         formData.forEach((value, key) => {
             jsonObject[key] = value;
         });
+
+        // let order: IOrder = {
+        // recipient: formData.get();
+        // phoneNumber: string;
+        // streetHouse: string;
+        // flat: string;
+        // floor: string;
+        // numberPersons: number;
+        // call: boolean;
+        // payment: string;
+        // comment: string;
+        // orderedDishes: {
+        //     id: number;
+        //     quantity: number;
+        //     price: number;
+        // }[];
+        // };
+
         let jsonData = JSON.stringify(jsonObject);
         console.log(jsonData);
     };
@@ -59,9 +97,7 @@ export default function OrderPage({ }: Props) {
                 </Box>
                 <Box sx={{ overflow: 'hidden', marginLeft: '10px' }}>
                     <CustomizedAccordions />
-                    <Box sx={{ border: '1px solid #FFC182', borderRadius: '40px', p: '36px' }}>
-                        <OrderList />
-                    </Box>
+                    <OrderList />
                 </Box>
             </Box>
         </Box>

@@ -10,6 +10,7 @@ type Props = {};
 
 const FreshSwitch = styled((props: SwitchProps) => (
     <Switch
+        defaultChecked={false}
         name="call"
         focusVisibleClassName=".Mui-focusVisible"
         disableRipple
