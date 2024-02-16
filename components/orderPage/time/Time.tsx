@@ -25,8 +25,21 @@ export default function Time() {
     const currentDate = dayjs().format('L');
     const [value, setValue] = React.useState<Dayjs | null>(dayjs(currentDate));
     const [showDatePicker, setShowDatePicker] = React.useState(false);
-    const handleChipClick = () => {
-        setShowDatePicker(prevState => !prevState);
+    const [isAsSoonAsPossibleSelected, setIsAsSoonAsPossibleSelected] = React.useState(false);
+
+    const handleAsSoonAsPossibleClick = () => {
+        if (!isAsSoonAsPossibleSelected) {
+            setShowDatePicker(false);
+            setIsAsSoonAsPossibleSelected(true);
+        }
+    };
+
+    // Функція для обробки кліку на чип "Time and date"
+    const handleTimeAndDateClick = () => {
+        if (isAsSoonAsPossibleSelected) {
+            setShowDatePicker(true);
+            setIsAsSoonAsPossibleSelected(false);
+        }
     };
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
@@ -52,6 +65,21 @@ export default function Time() {
             >
                 <Chip
                     label="As soon as possible"
+                    onClick={handleAsSoonAsPossibleClick}
+                    disabled={isAsSoonAsPossibleSelected}
+                    sx={{
+                        width: '100%',
+                        height: '66px',
+                        borderRadius: '50px',
+                        color: '#040705',
+                        fontSize: '22px',
+                        backgroundColor: isAsSoonAsPossibleSelected ? '#bdbdbd' : '#ffc182',
+                    }}
+                />
+                <Chip
+                    label="Time and date"
+                    onClick={handleTimeAndDateClick}
+                    disabled={!isAsSoonAsPossibleSelected}
                     sx={{
                         width: '100%',
                         height: '66px',
@@ -59,18 +87,6 @@ export default function Time() {
                         color: '#040705',
                         fontSize: '22px',
                         backgroundColor: showDatePicker ? '#bdbdbd' : '#ffc182',
-                    }}
-                />
-                <Chip
-                    label="Time and date"
-                    onClick={handleChipClick}
-                    sx={{
-                        width: '100%',
-                        height: '66px',
-                        borderRadius: '50px',
-                        color: '#040705',
-                        fontSize: '22px',
-                        backgroundColor: showDatePicker ? '#ffc182' : '#bdbdbd',
                         '&:hover': {
                             backgroundColor: showDatePicker ? '#ffc182' : '#bdbdbd',
                         },
@@ -84,8 +100,9 @@ export default function Time() {
                 }}
             >
                 <DatePicker
+                    name={isAsSoonAsPossibleSelected ? "as_soon_as_possible" : "delivery_date"}
                     label="Delivery date"
-                    name="delivery_date"
+                    // name="delivery_date"
                     slots={{ openPickerIcon: SvgIcon }}
                     value={value}
                     onChange={(newValue) => {
@@ -159,7 +176,8 @@ export default function Time() {
 
                 <TimePicker
                     label="Delivery time"
-                    name="delivery_time"
+                    // name="delivery_time"
+                    name={isAsSoonAsPossibleSelected ? "as_soon_as_possible" : "delivery_time"}
                     slots={{ openPickerIcon: SvgIcon }}
                     ampm={false}
                     defaultValue={dayjs()}
