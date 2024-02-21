@@ -1,39 +1,40 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, FormHelperText, TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { useFormState } from 'react-dom';
+import SubmitButton from '../../submitButton/SubmitButton';
+
+import { login } from '@/utils/actions';
 
 type Props = {};
-
+const initialState: {
+    message?: string;
+    // success?: boolean;
+} = {};
 export default function SignInForm({}: Props) {
-    const router = useRouter();
+    const [state, formAction] = useFormState(login, initialState);
+    // const { replace } = useRouter();
 
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const credentials = Object.fromEntries(formData);
-        console.log(JSON.stringify(credentials));
-        // const res = await signIn('credentials', { ...credentials, redirect: false });
-        // if (res && !res.error) {
-        setTimeout(() => router.push('/profile'), 2000);
-        // } else {
-        //     console.log(res);
-        // }
-    };
-
+    // if (state.message === 'Ok. Now you will be redirected to Home page') replace('/');
+    // useEffect(() => {
+    //     if (state?.success) {
+    //         replace('/');
+    //     }
+    // }, [state]);
     return (
         <Box
             component="form"
-            onSubmit={handleSubmit}
+            action={formAction}
             sx={{
                 display: 'grid',
                 gap: '24px',
             }}
         >
-            <TextField type="text" name="phone" placeholder="Phone number" required />
+            <TextField type="text" name="phoneNumber" placeholder="Phone number" required />
             <TextField type="password" name="password" placeholder="Password" required />
-            <FormHelperText>{}</FormHelperText>
-            <Button type="submit">Sign In</Button>
+            {state?.message && <FormHelperText>{state?.message}</FormHelperText>}
+            <SubmitButton text="Sign In" />
         </Box>
     );
 }

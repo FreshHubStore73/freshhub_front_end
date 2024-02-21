@@ -1,36 +1,24 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, FormHelperText, TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { register } from '@/utils/actions';
+import { useFormState } from 'react-dom';
+import SubmitButton from '../../submitButton/SubmitButton';
 
 type Props = {};
 
 export default function SignUpForm({}: Props) {
-    const [error, setError] = useState<any>(null);
-    const router = useRouter();
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const body = JSON.stringify(Object.fromEntries(formData));
-        try {
-            const response = await fetch('/api/auth/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body,
-            });
-            // response.status === 201 && setTimeout(() => router.replace('/login'), 1000);
-            response.status === 201 && router.replace('/login');
-        } catch (error) {
-            setError(error);
-        }
-    };
-
+    const [state, formAction] = useFormState(register, { message: '' });
+    const { replace } = useRouter();
+    // useEffect(() => {
+    if (state.message === 'User has been created') replace('/login');
+    // }, [state]);
     return (
         <Box
             component="form"
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
+            action={formAction}
             sx={{
                 display: 'grid',
                 gap: '24px',
@@ -38,11 +26,11 @@ export default function SignUpForm({}: Props) {
         >
             <TextField type="text" name="firstName" placeholder="Your first name" required />
             <TextField type="text" name="lastName" placeholder="Your last name" required />
-            <TextField type="text" name="phone" placeholder="Your phone number" />
+            <TextField type="text" name="phoneNumber" placeholder="Your phone number" required />
             <TextField type="password" name="password" required />
 
-            {error && <FormHelperText>Something went wrong</FormHelperText>}
-            <Button type="submit">Sign Un</Button>
+            {state && <FormHelperText>{state?.message}</FormHelperText>}
+            <SubmitButton text="Sign up" />
         </Box>
     );
 }

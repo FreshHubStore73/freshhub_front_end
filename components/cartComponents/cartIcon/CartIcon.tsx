@@ -87,19 +87,21 @@ const CartIcon = ({ toggleDrawer }: Props) => {
                     </>
                 }
             >
-                <IconButton
-                    size="large"
-                    onClick={toggleDrawer}
-                    sx={{
-                        '&.MuiIconButton-root:hover path': {
-                            stroke: '#F15C30',
-                        },
-                    }}
-                >
-                    <StyledBadge badgeContent={totalDishes} showZero>
-                        <ShoppingBasket />
-                    </StyledBadge>
-                </IconButton>
+                <span>
+                    <IconButton
+                        size="large"
+                        onClick={toggleDrawer}
+                        sx={{
+                            '&.MuiIconButton-root:hover path': {
+                                stroke: '#F15C30',
+                            },
+                        }}
+                    >
+                        <StyledBadge badgeContent={totalDishes} showZero>
+                            <ShoppingBasket />
+                        </StyledBadge>
+                    </IconButton>
+                </span>
             </HtmlTooltip>
         </>
     );
