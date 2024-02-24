@@ -1,6 +1,8 @@
 'use client';
-import { Box, Typography } from '@mui/material';
 import React from 'react';
+
+import { Box, Typography } from '@mui/material';
+
 import Contact from './contact/Contact';
 import BreadCrumbs from '../breadcrumbs/Breadcrumbs';
 import Address from './address/Address';
@@ -66,7 +68,7 @@ export default function OrderPage({ }: Props) {
 
     return (
         <Box mt={'111px'}>
-            <BreadCrumbs />
+            <BreadCrumbs singlePage="Order Page" />
             <Box
                 component={'form'}
                 onSubmit={handleSubmit}

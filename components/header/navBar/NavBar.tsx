@@ -17,15 +17,16 @@ export type CategoryItem = {
 };
 
 export async function getCategories() {
-    const res = await fetch('http://localhost:3000/api/categories', {
-        cache: 'no-store',
-    });
+    const res = await fetch('http://localhost:3000/api/categories');
     if (!res.ok) throw new Error("Couldn't fetch categories");
-    return res.json();
+    const data: CategoryItem[] = await res.json();
+    const categories = data.map((item) => item.name.toLowerCase());
+    const pages = [...categories, 'search', 'order page'];
+    return { categories, pages };
 }
 
 const NavBar = async () => {
-    const categories: CategoryItem[] = await getCategories();
+    const { categories } = await getCategories();
     return (
         <Box
             sx={{

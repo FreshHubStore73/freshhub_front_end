@@ -8,13 +8,12 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 
-import type { CategoryItem } from '../../navBar/NavBar';
 import NavMenuLinks from '../navMenuLinks';
 import Logo from '../../logo';
 
 import styles from './navMenu.module.scss';
 
-type Props = { categories: CategoryItem[] };
+type Props = { categories: string[] };
 
 const NavMenuDrawer: FC<Props> = ({ categories }) => {
     const [mobileOpen, setMobileOpen] = useState(false);

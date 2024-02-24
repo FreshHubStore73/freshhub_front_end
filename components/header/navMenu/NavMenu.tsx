@@ -9,6 +9,6 @@ import styles from './navMenu.module.scss';
 type Props = {};
 
 export default async function NavMenu({}: Props) {
-    const categories: CategoryItem[] = await getCategories();
+    const { categories } = await getCategories();
     return <NavMenuDrawer categories={categories} />;
 }

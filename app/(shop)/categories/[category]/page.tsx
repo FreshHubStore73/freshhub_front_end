@@ -5,7 +5,7 @@ import CategoryItem from '@/components/categoryItem/CategoryItem';
 
 async function getDishes(category: string, sortType: string) {
     const q = sortType ? `?sort=${sortType}` : '';
-    const res = await fetch(`http://localhost:3000/api/${category}${q}`, {
+    const res = await fetch(`http://localhost:3000/api/categories/${category}${q}`, {
         cache: 'no-store',
     });
     if (!res.ok) throw new Error('Failed to fetch dishes');
@@ -20,13 +20,9 @@ const Category = async ({ params, searchParams }: Props) => {
     const category = params.category;
     const sortType = searchParams.sort;
     const dishes: DishItem[] = await getDishes(category, sortType);
-    const path = {
-        category,
-        sortType,
-    };
     return (
         <>
-            <CategoryItem dishes={dishes} path={path} />
+            <CategoryItem dishes={dishes} path={category} />
         </>
     );
 };

@@ -17,22 +17,22 @@ const Footer = () => {
                         <Logo />
                         <ul className={styles.footer_list}>
                             <li className={styles.footer_item}>
-                                <Link href="/pizza" className={styles.footer_link}>
+                                <Link href="/categories/pizza" className={styles.footer_link}>
                                     Pizza
                                 </Link>
                             </li>
                             <li className={styles.footer_item}>
-                                <Link href="/burgers" className={styles.footer_link}>
+                                <Link href="/categories/burgers" className={styles.footer_link}>
                                     Burgers
                                 </Link>
                             </li>
                             <li className={styles.footer_item}>
-                                <Link href="/salads" className={styles.footer_link}>
+                                <Link href="/categories/salads" className={styles.footer_link}>
                                     Salads
                                 </Link>
                             </li>
                             <li className={styles.footer_item}>
-                                <Link href="/desserts" className={styles.footer_link}>
+                                <Link href="/categories/desserts" className={styles.footer_link}>
                                     Dessert
                                 </Link>
                             </li>
