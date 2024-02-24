@@ -29,7 +29,7 @@ const DishCard = ({ item }: { item: DishItem }) => {
         <div className={styles.card}>
             <div className={styles.wrapper}>
                 <Link
-                    href={`/${category}/${_id}/${title.replace(/\s+/g, '_')}`}
+                    href={`/categories/${category}/${_id}/${title.replace(/\s+/g, '_')}`}
                     className={styles.link}
                 >
                     <div className={styles.dishImg}>

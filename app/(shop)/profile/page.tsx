@@ -1,12 +1,18 @@
+import { getUser } from '@/components/authItems/auth';
+import { redirect } from 'next/navigation';
+
 import styles from './page.module.scss';
 
 type Props = { params: { userId: string } };
 
-const page = ({ params }: Props) => {
-    const { userId } = params;
+const Page = async ({ params }: Props) => {
+    const data = await getUser();
+
+    if (!data?.user) redirect('/login');
+    // const { userId } = params;
     return (
         <>
-            <h1 style={{ textAlign: 'center' }}>User {userId} profile page</h1>
+            <h1 style={{ textAlign: 'center' }}>User {data?.user.firstName} profile page</h1>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsam officia dolorum,
                 fugit deserunt saepe praesentium commodi sequi nisi libero iusto ipsum provident
@@ -230,4 +236,4 @@ const page = ({ params }: Props) => {
     );
 };
 
-export default page;
+export default Page;

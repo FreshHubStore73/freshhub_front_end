@@ -5,19 +5,17 @@ import { usePathname } from 'next/navigation';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Typography } from '@mui/material';
 
-import { CategoryItem } from '../../navBar/NavBar';
-
 import styles from './navMenuLinks.module.scss';
 
-const NavMenuLinks = ({ links }: { links: CategoryItem[] }) => {
+const NavMenuLinks = ({ links }: { links: string[] }) => {
     const pathname = usePathname().split('/')[2];
     return (
         <List>
             {links.map((link) => {
-                const catName = link.name.toLowerCase();
+                const catName = link.toLowerCase();
                 const isActive = pathname === catName;
                 return (
-                    <Link href={`/${catName}`} key={catName} className={styles.link}>
+                    <Link href={`/categories/${catName}`} key={catName} className={styles.link}>
                         <ListItem
                             key={catName}
                             disablePadding

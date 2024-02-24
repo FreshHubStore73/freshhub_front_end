@@ -1,23 +1,24 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import { Box, Button, FormHelperText, TextField } from '@mui/material';
-import { useRouter } from 'next/navigation';
-import { register } from '@/utils/actions';
+import React from 'react';
 import { useFormState } from 'react-dom';
+import { useRouter } from 'next/navigation';
+
+import { Box, FormHelperText, TextField } from '@mui/material';
+
 import SubmitButton from '../../submitButton/SubmitButton';
+import { register } from '@/components/authItems/auth';
 
 type Props = {};
 
 export default function SignUpForm({}: Props) {
     const [state, formAction] = useFormState(register, { message: '' });
     const { replace } = useRouter();
-    // useEffect(() => {
+
     if (state.message === 'User has been created') replace('/login');
-    // }, [state]);
+
     return (
         <Box
             component="form"
-            // onSubmit={handleSubmit}
             action={formAction}
             sx={{
                 display: 'grid',

@@ -31,7 +31,7 @@ export default function SortSelect() {
     ) => {
         setSelectedIndex(index);
         const sort = sortValues[index];
-        router.replace(`/${params.category}${sort ? `?sort=${sort}` : ''}`);
+        router.replace(`/categories/${params.category}${sort ? `?sort=${sort}` : ''}`);
         setAnchorEl(null);
     };
 

@@ -1,26 +1,42 @@
 'use client';
-import Box from '@mui/material/Box';
 import React from 'react';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import Link from 'next/link';
 
-import styles from './breadcrumbs.module.scss';
+import Box from '@mui/material/Box';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Typography } from '@mui/material';
 
-export default function BreadCrumbs() {
-    const pathnames: string[] = usePathname().split('/').toSpliced(0, 1);
+import styles from './breadcrumbs.module.scss';
+
+export default function BreadCrumbs({
+    pages,
+    singlePage,
+}: {
+    pages?: string[];
+    singlePage?: string;
+}) {
+    const pathnames: string[] = usePathname()
+        .split('/')
+        .toSpliced(0, 1)
+        .filter((i) => i !== 'categories');
+
+    if (!pages?.includes(pathnames[0])) pathnames.shift();
 
     const params: {
-        [key: string]: string | string[];
+        category: string;
+        dishId: string | string[];
     } = useParams();
+
+    //removing extra path (dishId) from breadcrumbs
     if (params?.dishId) {
         pathnames.splice(
             pathnames.findIndex((chunk) => chunk === params?.dishId[0]),
             1,
         );
     }
+
     return (
         <Box pt="64px" role="presentation" className={styles.links}>
             <Breadcrumbs
@@ -28,20 +44,33 @@ export default function BreadCrumbs() {
                 aria-label="breadcrumb"
             >
                 <Link href="/">Home</Link>
-                {pathnames.map((chunk, i) => {
-                    const last = i === pathnames.length - 1;
-                    const to = `/${pathnames.slice(0, i + 1).join('/')}`;
-                    const content = decodeURIComponent(chunk).replace(/\_+/g, ' ');
-                    return last ? (
-                        <Typography key={content} color="text.secondary" sx={{ fontSize: '22px' }}>
-                            {content}
-                        </Typography>
-                    ) : (
-                        <Link key={content} href={to}>
-                            {content}
-                        </Link>
-                    );
-                })}
+                {singlePage ? (
+                    <Typography color="text.secondary" sx={{ fontSize: '22px' }}>
+                        {singlePage}
+                    </Typography>
+                ) : (
+                    pathnames.map((chunk, i) => {
+                        const last = i === pathnames.length - 1;
+                        const to = `/categories/${pathnames.slice(0, i + 1).join('/')}`;
+                        const content =
+                            chunk === 'order'
+                                ? 'Order page'
+                                : decodeURIComponent(chunk).replace(/\_+/g, ' ');
+                        return last ? (
+                            <Typography
+                                key={content}
+                                color="text.secondary"
+                                sx={{ fontSize: '22px' }}
+                            >
+                                {content}
+                            </Typography>
+                        ) : (
+                            <Link key={content} href={to}>
+                                {content}
+                            </Link>
+                        );
+                    })
+                )}
             </Breadcrumbs>
         </Box>
     );

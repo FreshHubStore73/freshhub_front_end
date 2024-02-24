@@ -1,10 +1,13 @@
 import OrderPage from '@/components/orderPage/OrderPage';
 import styles from './page.module.scss';
+import { getCategories } from '@/components/header/navBar/NavBar';
 
 type Props = { params: {} };
 
-const Page = (params: Props) => {
-    return <OrderPage />;
+const Page = async (params: Props) => {
+    const { pages } = await getCategories();
+
+    return <OrderPage pages={pages} />;
 };
 
-export default OrderPage;
+export default Page;

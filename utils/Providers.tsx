@@ -5,6 +5,7 @@ import React from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ThemeProvider, SimplePaletteColorOptions, createTheme } from '@mui/material/styles';
 import { Oswald, Lato } from 'next/font/google';
+import { AuthProvider } from '@/hocs/AuthContext';
 
 declare module '@mui/material/styles' {
     interface TypographyVariants {
@@ -177,7 +178,9 @@ type Props = { children: React.ReactNode };
 export default function Providers({ children }: Props) {
     return (
         <ThemeProvider theme={theme}>
-            <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+            <AppRouterCacheProvider>
+                <AuthProvider>{children}</AuthProvider>
+            </AppRouterCacheProvider>
         </ThemeProvider>
     );
 }
