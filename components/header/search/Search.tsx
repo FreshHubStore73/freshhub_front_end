@@ -2,7 +2,7 @@ import React, { KeyboardEvent, MouseEvent, useState } from 'react';
 
 import { Box, InputAdornment, SvgIcon, TextField, IconButton } from '@mui/material';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
-
+import { useRouter } from 'next/navigation';
 const SearchIcon = (props: any) => {
     return (
         <SvgIcon
@@ -36,10 +36,10 @@ type Props = {};
 
 type InputEvent = KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>;
 
-export default function SearchInput({}: Props) {
+export default function SearchInput({ }: Props) {
     const [expanded, setExpanded] = useState(false);
     const [search, setSearch] = useState('');
-
+    const rout = useRouter();
     const handleClickAway = () => {
         !search.length && setExpanded(false);
     };
@@ -70,6 +70,9 @@ export default function SearchInput({}: Props) {
     const handleSearchClick = (event: MouseEvent<HTMLButtonElement>) => {
         // expanded ? handleClickOrEnter(event) : setExpanded(true);
         expanded && search.length ? console.log('Search...', search) : setExpanded(true);
+        if (search) {
+            rout.push(`/categories/search?search=${search}`);
+        }
     };
 
     return (
