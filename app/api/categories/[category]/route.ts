@@ -7,10 +7,18 @@ export const GET = async (req: Request) => {
     const { pathname, searchParams } = new URL(req.url);
     const category = pathname.split('/')[3];
     const sortType = searchParams?.get('sort');
+    const searchQuery = searchParams?.get('search');
     try {
         await connect();
         let dishes: DishItem[] = await Dish.find();
-        dishes = dishes.filter((dish) => dish.category === category);
+        if (!searchParams) {
+            dishes = dishes.filter((dish) => dish.category === category);
+        }
+        if (searchQuery) {
+            dishes = dishes.filter((dish) =>
+                dish.title.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
         if (sortType) {
             sortType === 'asc'
                 ? dishes.sort((a, b) => a.price - b.price)

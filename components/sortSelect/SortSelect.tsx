@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -12,7 +12,8 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 export default function SortSelect() {
     const options = ['Featured', 'Price: low-high', 'Price: high-low'];
-    const params = useParams();
+    // const pathName = window.location.pathname;
+    const searchParams = new URLSearchParams(window.location.search);
     const router = useRouter();
     const sortValues = ['', 'asc', 'desc'];
 
@@ -31,7 +32,11 @@ export default function SortSelect() {
     ) => {
         setSelectedIndex(index);
         const sort = sortValues[index];
-        router.replace(`/categories/${params.category}${sort ? `?sort=${sort}` : ''}`);
+        searchParams.set('sort', sort);
+        const url = new URL(window.location.pathname, window.location.href);
+        url.search = searchParams.toString();
+        console.log(url.toString());
+        router.replace(url.toString());
         setAnchorEl(null);
     };
 
