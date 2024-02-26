@@ -43,7 +43,9 @@ export default function BreadCrumbs({
                 separator={<FiberManualRecordIcon sx={{ fontSize: '12px' }} />}
                 aria-label="breadcrumb"
             >
-                <Link href="/">Home</Link>
+                <Link href="/" className={styles.links_home}>
+                    Home
+                </Link>
                 {singlePage ? (
                     <Typography color="text.secondary" sx={{ fontSize: '22px' }}>
                         {singlePage}
