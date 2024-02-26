@@ -13,4 +13,11 @@
             color: var(--color-title);
         }
     }
+    .links_home {
+        color: var(--color-brcrb);
+        font-size: 22px;
+        &:hover {
+            color: var(--color-title);
+        }
+    }
 }

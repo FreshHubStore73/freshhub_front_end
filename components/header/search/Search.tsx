@@ -1,8 +1,9 @@
-import React, { KeyboardEvent, MouseEvent, useState } from 'react';
+import React, { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Box, InputAdornment, SvgIcon, TextField, IconButton } from '@mui/material';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
-import { useRouter } from 'next/navigation';
+
 const SearchIcon = (props: any) => {
     return (
         <SvgIcon
@@ -34,52 +35,54 @@ const SearchIcon = (props: any) => {
 
 type Props = {};
 
-type InputEvent = KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>;
+export default function SearchInput({}: Props) {
+    const [search, setSearch] = useState(
+        new URLSearchParams(decodeURIComponent(window.location.search)).get('search') || '',
+    );
+    const [expanded, setExpanded] = useState(!!search.length);
+    const { push } = useRouter();
+    const inputRef = useRef<HTMLInputElement>(null);
 
-export default function SearchInput({ }: Props) {
-    const [expanded, setExpanded] = useState(false);
-    const [search, setSearch] = useState('');
-    const rout = useRouter();
     const handleClickAway = () => {
         !search.length && setExpanded(false);
     };
 
-    // const handleClickOrEnter = (event: InputEvent) => {
-    //     if (!search.length) setExpanded(false);
-    //     if (event.type === 'click') {
-    //         // Обработка события клика мышкой
-    //         console.log('Search...', search);
-    //         // setTimeout(() => {
-    //         //     setSearch('');
-    //         // }, 1000);
-    //     } else if (
-    //         event.type === 'keydown' &&
-    //         (event as KeyboardEvent<HTMLInputElement>).code === '13'
-    //     ) {
-    //         console.log('press on enter');
-
-    //         // Обработка события нажатия кнопки Enter
-    //         console.log('Search...', search);
-    //     }
-    // };
+    useEffect(() => {
+        if (inputRef.current)
+            inputRef.current.addEventListener('focus', () => {
+                setExpanded(true);
+            });
+    }, []);
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        // expanded ? handleClickOrEnter(event) : setExpanded(true);
-        !expanded && setExpanded(true);
+        if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {
+            if (search) {
+                push(`/categories/search?search=${search}`);
+            }
+        } else if (event.code === 'Escape') {
+            setSearch('');
+            setExpanded(false);
+        }
     };
+
     const handleSearchClick = (event: MouseEvent<HTMLButtonElement>) => {
-        // expanded ? handleClickOrEnter(event) : setExpanded(true);
         expanded && search.length ? console.log('Search...', search) : setExpanded(true);
         if (search) {
-            rout.push(`/categories/search?search=${search}`);
+            push(`/categories/search?search=${search}`);
         }
+    };
+
+    const handleResetSearch = () => {
+        setSearch('');
+        setExpanded(false);
     };
 
     return (
         <Box sx={{ width: '250px', display: 'flex', justifyContent: 'flex-end' }}>
             <ClickAwayListener onClickAway={handleClickAway}>
                 <TextField
-                    // onKeyDown={handleKeyDown}
+                    onKeyDown={handleKeyDown}
+                    inputRef={inputRef}
                     value={search}
                     placeholder="I want yum-yum..."
                     onChange={(e) => {
@@ -113,10 +116,13 @@ export default function SearchInput({ }: Props) {
                             <InputAdornment position="end">
                                 {expanded ? (
                                     <IconButton
-                                        disableRipple
+                                        // disableRipple
                                         aria-label="clear search"
-                                        onClick={() => {
-                                            setSearch('');
+                                        onClick={handleResetSearch}
+                                        sx={{
+                                            '&.MuiButtonBase-root.MuiIconButton-root ': {
+                                                padding: '2px 8px',
+                                            },
                                         }}
                                     >
                                         &times;

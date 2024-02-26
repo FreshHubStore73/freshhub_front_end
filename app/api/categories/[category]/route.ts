@@ -1,23 +1,24 @@
-import Dish from '../../../../utils/models/Dish';
-import connect from '../../../../utils/db';
+import Dish from '@/utils/models/Dish';
+import connect from '@/utils/db';
 import { NextResponse } from 'next/server';
-import type { DishItem } from '../../../../components/dishcard/DishCard';
+import type { DishItem } from '@/components/dishcard/DishCard';
 
 export const GET = async (req: Request) => {
     const { pathname, searchParams } = new URL(req.url);
     const category = pathname.split('/')[3];
+    // console.log(searchParams);
     const sortType = searchParams?.get('sort');
     const searchQuery = searchParams?.get('search');
     try {
         await connect();
         let dishes: DishItem[] = await Dish.find();
-        if (!searchParams) {
-            dishes = dishes.filter((dish) => dish.category === category);
-        }
+
         if (searchQuery) {
             dishes = dishes.filter((dish) =>
-                dish.title.toLowerCase().includes(searchQuery.toLowerCase())
+                dish.title.toLowerCase().includes(searchQuery.toLowerCase()),
             );
+        } else {
+            dishes = dishes.filter((dish) => dish.category === category);
         }
         if (sortType) {
             sortType === 'asc'

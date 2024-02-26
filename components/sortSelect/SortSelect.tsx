@@ -12,8 +12,7 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 export default function SortSelect() {
     const options = ['Featured', 'Price: low-high', 'Price: high-low'];
-    // const pathName = window.location.pathname;
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URL(window.location.href).searchParams;
     const router = useRouter();
     const sortValues = ['', 'asc', 'desc'];
 
@@ -32,11 +31,16 @@ export default function SortSelect() {
     ) => {
         setSelectedIndex(index);
         const sort = sortValues[index];
-        searchParams.set('sort', sort);
+        if (sort) {
+            searchParams.has('sort')
+                ? searchParams.set('sort', sort)
+                : searchParams.append('sort', sort);
+        } else {
+            searchParams.delete('sort');
+        }
         const url = new URL(window.location.pathname, window.location.href);
         url.search = searchParams.toString();
-        console.log(url.toString());
-        router.replace(url.toString());
+        router.replace(decodeURIComponent(url.toString()));
         setAnchorEl(null);
     };
 
