@@ -48,10 +48,14 @@ export default function SearchInput({}: Props) {
     };
 
     useEffect(() => {
-        if (inputRef.current)
+        if (inputRef.current) {
             inputRef.current.addEventListener('focus', () => {
                 setExpanded(true);
             });
+            return inputRef.current.removeEventListener('focus', () => {
+                setExpanded(true);
+            });
+        }
     }, []);
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {

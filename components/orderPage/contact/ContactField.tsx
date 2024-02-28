@@ -72,9 +72,13 @@ export const CustomInput = styled((props: TextFieldProps) => (
         borderRadius: '50px',
         paddingInline: '29px',
         height: '106px',
+        color: isdisabled ? '#828282' : theme.palette.text.secondary,
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
-            borderWidth: isdisabled ? '1px' : '2px',
+            borderWidth: isdisabled ? '1px' : '1,5px',
+        },
+        '&.Mui-focused .MuiOutlinedInput-input': {
+            color: theme.palette.text.secondary,
         },
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {

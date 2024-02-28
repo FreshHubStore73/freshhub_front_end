@@ -1,37 +1,90 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 
-import { Box, FormHelperText, TextField } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+
+import { useForm, FormProvider } from 'react-hook-form';
 
 import SubmitButton from '../../submitButton/SubmitButton';
-import { register } from '@/components/authItems/auth';
+import { IUserRegister, register } from '@/components/authItems/auth';
+import FirstNameInput from './FirstNameInput';
+import LastNameInput from './LastNameInput';
+import PasswordInput from './PasswordInput';
+import PhoneInput from './PhoneInput';
 
 type Props = {};
 
 export default function SignUpForm({}: Props) {
     const [state, formAction] = useFormState(register, { message: '' });
+
+    const methods = useForm<IUserRegister>({
+        defaultValues: {
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            password: '',
+        },
+    });
+
+    const {
+        formState: { isValid },
+        trigger,
+    } = methods;
+
     const { replace } = useRouter();
 
-    if (state.message === 'User has been created') replace('/login');
+    const formRef = useRef<HTMLFormElement>(null);
 
+    useEffect(() => {
+        if (state.message === 'Ok') replace('/login');
+        if (typeof state.message === 'object' && state.message.phoneNumber)
+            methods.setError('phoneNumber', { type: 'custom', message: state.message.phoneNumber });
+    }, [state.message]);
     return (
-        <Box
-            component="form"
-            action={formAction}
-            sx={{
-                display: 'grid',
-                gap: '24px',
-            }}
-        >
-            <TextField type="text" name="firstName" placeholder="Your first name" required />
-            <TextField type="text" name="lastName" placeholder="Your last name" required />
-            <TextField type="text" name="phoneNumber" placeholder="Your phone number" required />
-            <TextField type="password" name="password" required />
+        <FormProvider {...methods}>
+            <Box
+                component="form"
+                action={formAction}
+                ref={formRef}
+                sx={{
+                    width: '884px',
+                    mt: '50px',
+                    display: 'grid',
+                    rowGap: '38px',
+                    columnGap: '20px',
+                    gridTemplate: 'repeat(4, auto) / 1fr 1fr',
+                }}
+            >
+                <FirstNameInput />
+                <LastNameInput />
+                <PhoneInput />
+                <PasswordInput />
 
-            {state && <FormHelperText>{state?.message}</FormHelperText>}
-            <SubmitButton text="Sign up" />
-        </Box>
+                <Box
+                    sx={{
+                        mt: '12px',
+                        gridArea: '4 / 1 / 5 / 3',
+                        justifySelf: 'center',
+                    }}
+                >
+                    {/* временная лабуда для отслеживания ошибок сервера */}
+                    {typeof state.message === 'string' && state.message !== 'Ok' ? (
+                        <Typography>{state.message}</Typography>
+                    ) : null}
+
+                    <SubmitButton
+                        text="Sign up"
+                        isFormInvalid={!isValid}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            trigger(['firstName', 'lastName', 'phoneNumber', 'password']);
+                            if (isValid) formRef.current?.requestSubmit();
+                        }}
+                    />
+                </Box>
+            </Box>
+        </FormProvider>
     );
 }

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import SignUpForm from '@/components/authItems/forms/signUpForm/SignUpForm';
 import Link from 'next/link';
 type Props = { params: {} };
@@ -11,26 +11,40 @@ const SignUpPage = (params: Props) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '24px',
                 alignItems: 'center',
-                mt: '111px',
+                justifyContent: 'flex-start',
+                mt: '90px',
             }}
         >
-            <Typography variant="h2" component={'h1'}>
+            <Typography variant="h2_Oswald" component={'h1'} color="text.secondary">
                 Register
             </Typography>
             <SignUpForm />
-            <Typography>
-                Already registered? {'   '}
-                <Link
+            <Box
+                sx={{
+                    mt: '44px',
+                    fontSize: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                }}
+            >
+                <p>Already registered? {'   '}</p>
+                <Button
+                    disableTouchRipple
+                    variant="text"
                     href="/login"
-                    style={{
-                        color: '#F15C30',
+                    sx={{
+                        padding: '0px',
+                        fontWeight: 700,
+                        '&.MuiButton-root:hover': {
+                            backgroundColor: '#fff',
+                        },
                     }}
                 >
                     Log in
-                </Link>
-            </Typography>
+                </Button>
+            </Box>
         </Box>
     );
 };

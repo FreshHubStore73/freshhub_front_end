@@ -22,6 +22,7 @@ const CommentsArea = styled((props: TextFieldProps) => (
         '&::placeholder': {
             fontSize: '18px',
             color: '#828282',
+            opacity: 1,
         },
     },
     '& .MuiInputBase-root.MuiOutlinedInput-root': {
@@ -32,7 +33,7 @@ const CommentsArea = styled((props: TextFieldProps) => (
         },
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.secondary,
-            borderWidth: '2px',
+            borderWidth: '1,5px',
         },
     },
 }));
