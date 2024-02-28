@@ -4,7 +4,7 @@ import { BaseFormInput } from '../baseFormInput/BaseFormInput';
 
 type Props = {};
 
-export default function FirstNameInput({}: Props) {
+export default function LastNameInput({}: Props) {
     const {
         control,
         trigger,
@@ -12,7 +12,7 @@ export default function FirstNameInput({}: Props) {
     } = useFormContext();
     return (
         <Controller
-            name="firstName"
+            name="lastName"
             control={control}
             rules={{
                 required: 'This field is required',
@@ -22,14 +22,14 @@ export default function FirstNameInput({}: Props) {
                     type="text"
                     onChange={(e) => {
                         onChange(e.target.value);
-                        trigger('firstName');
+                        trigger('lastName');
                     }}
-                    placeholder="Your first name"
-                    error={!!errors.firstName?.type}
-                    helperText={errors.firstName?.type ? `${errors.firstName?.message}` : ''}
+                    placeholder="Your last name"
+                    error={!!errors.lastName?.type}
+                    helperText={errors.lastName?.type ? `${errors.lastName?.message}` : ''}
                     {...rest}
                     sx={{
-                        gridArea: '1 / 1 / 2 / 2',
+                        gridArea: '1 / 2 / 2 / 3',
                     }}
                 />
             )}

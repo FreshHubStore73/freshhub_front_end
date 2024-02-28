@@ -52,7 +52,7 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
     };
 
     return (
-        <InputMask mask="+1 (999) 999 99 99" onChange={handleChange} value={value}>
+        <InputMask mask="+1 999 999 9999" onChange={handleChange} value={value} maskPlaceholder="x">
             <CustomInput
                 inputRef={inputRef}
                 name="userPhone"

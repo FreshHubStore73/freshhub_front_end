@@ -5,18 +5,25 @@ import { forwardRef } from 'react';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
     '& .MuiOutlinedInput-root': {
-        fontSize: '24px',
         borderRadius: '50px',
         paddingInline: '38px',
         height: '106px',
 
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.secondary,
-            borderWidth: '2px',
+            borderWidth: '1,5px',
         },
         '&.Mui-focused .MuiOutlinedInput-input': {
             color: theme.palette.text.secondary,
         },
+    },
+    '& .MuiInputBase-input.MuiOutlinedInput-input ': {
+        fontSize: '24px',
+        color: theme.palette.text.primary,
+    },
+    '& input::placeholder': {
+        color: '#828282',
+        opacity: 1,
     },
     '& .MuiOutlinedInput-notchedOutline': {
         borderColor: theme.palette.text.primary,
