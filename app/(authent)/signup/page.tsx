@@ -13,7 +13,7 @@ const SignUpPage = (params: Props) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                mt: '111px',
+                mt: '90px',
             }}
         >
             <Typography variant="h2_Oswald" component={'h1'} color="text.secondary">

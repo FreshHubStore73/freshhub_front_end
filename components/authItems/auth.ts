@@ -34,13 +34,17 @@ export interface IUserResponse {
     error: string | null;
 }
 export interface IFormState {
-    message: string;
+    message: string | { phoneNumber: string };
     user: IUserAuthorized | null;
 }
 
 export async function register(
     prevState: {
-        message: string;
+        message:
+            | string
+            | {
+                  phoneNumber: string;
+              };
     },
     formData: FormData,
 ) {
@@ -68,7 +72,7 @@ export async function register(
 
     try {
         await newUser.save();
-        return { message: 'User has been created' };
+        return { message: 'Ok' };
     } catch (e: any) {
         if (e instanceof ValidationError) {
             // Обработка ошибки валидации Mongoose
@@ -76,7 +80,11 @@ export async function register(
             return { message: `Validation Error: ${errors.join(', ')}` };
         } else if (e.code === 11000) {
             // Обработка ошибки дублирования ключа MongoDB (например, уникальный индекс)
-            return { message: 'This phone number has been registered yet' };
+            return {
+                message: {
+                    phoneNumber: 'This phone number has been registered yet',
+                },
+            };
         } else {
             // Обработка других ошибок
             return { message: 'Something went wrong' };

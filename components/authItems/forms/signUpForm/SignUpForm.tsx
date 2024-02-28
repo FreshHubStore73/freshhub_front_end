@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 
@@ -12,12 +12,14 @@ import {
     SvgIcon,
     SvgIconProps,
     TextField,
+    Typography,
 } from '@mui/material';
 
 import SubmitButton from '../../submitButton/SubmitButton';
-import { register } from '@/components/authItems/auth';
+import { IUserRegister, register } from '@/components/authItems/auth';
 import ReactInputMask from 'react-input-mask';
 import { BaseFormInput } from '../baseFormInput/BaseFormInput';
+import { Controller, useForm } from 'react-hook-form';
 
 type Props = {};
 
@@ -96,20 +98,37 @@ const VisibilityOff = (props: SvgIconProps) => (
 export default function SignUpForm({}: Props) {
     const [state, formAction] = useFormState(register, { message: '' });
     const [showPassword, setShowPassword] = useState(false);
+    const {
+        control,
+        formState: { errors, isValid },
+        setError,
+        trigger,
+    } = useForm<IUserRegister>({
+        defaultValues: {
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            password: '',
+        },
+    });
     const { replace } = useRouter();
-
+    const formRef = useRef<HTMLFormElement>(null);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
-    if (state.message === 'User has been created') replace('/login');
-
+    useEffect(() => {
+        if (state.message === 'Ok') replace('/login');
+        if (typeof state.message === 'object' && state.message.phoneNumber)
+            setError('phoneNumber', { type: 'custom', message: state.message.phoneNumber });
+    }, [state.message]);
     return (
         <Box
             component="form"
             action={formAction}
+            ref={formRef}
             sx={{
                 width: '884px',
                 mt: '50px',
@@ -119,78 +138,173 @@ export default function SignUpForm({}: Props) {
                 gridTemplate: 'repeat(4, auto) / 1fr 1fr',
             }}
         >
-            <BaseFormInput
-                type="text"
+            <Controller
                 name="firstName"
-                placeholder="Your first name"
-                sx={{
-                    gridArea: '1 / 1 / 2 / 2',
+                control={control}
+                rules={{
+                    required: 'This field is required',
                 }}
+                render={({ field: { onChange, ...rest } }) => (
+                    <BaseFormInput
+                        type="text"
+                        onChange={(e) => {
+                            onChange(e.target.value);
+                            trigger('firstName');
+                        }}
+                        placeholder="Your first name"
+                        error={!!errors.firstName?.type}
+                        helperText={errors.firstName?.type ? `${errors.firstName?.message}` : ''}
+                        {...rest}
+                        sx={{
+                            gridArea: '1 / 1 / 2 / 2',
+                        }}
+                    />
+                )}
             />
-            <BaseFormInput
-                type="text"
+
+            <Controller
                 name="lastName"
-                placeholder="Your last name"
-                sx={{
-                    gridArea: '1 / 2 / 2 / 3',
+                control={control}
+                rules={{
+                    required: 'This field is required',
                 }}
+                render={({ field: { onChange, ...rest } }) => (
+                    <BaseFormInput
+                        type="text"
+                        onChange={(e) => {
+                            onChange(e.target.value);
+                            trigger('lastName');
+                        }}
+                        placeholder="Your last name"
+                        error={!!errors.lastName?.type}
+                        helperText={errors.lastName ? `${errors.lastName?.message}` : ''}
+                        {...rest}
+                        sx={{
+                            gridArea: '1 / 2 / 2 / 3',
+                        }}
+                    />
+                )}
             />
-            <ReactInputMask mask="+1 (999) 999 99 99" maskPlaceholder="x">
-                <BaseFormInput
-                    type="text"
-                    name="phoneNumber"
-                    placeholder="Your phone number"
-                    sx={{
-                        gridArea: '2 / 1 / 3 / 3',
-                    }}
-                />
-            </ReactInputMask>
 
-            <BaseFormInput
+            <Controller
+                name="phoneNumber"
+                control={control}
+                rules={{
+                    required: { value: true, message: 'This field is required' },
+                    validate: (value) =>
+                        value.replace(/[^+0-9]/g, '').length === 12 ||
+                        'The number must contain 11 digits',
+                }}
+                render={({ field: { ref, onChange, ...rest } }) => (
+                    <ReactInputMask
+                        mask="+1 (999) 999 9999"
+                        maskPlaceholder="x"
+                        onChange={(e) => {
+                            onChange(e.target.value);
+                            trigger('phoneNumber');
+                        }}
+                        {...rest}
+                    >
+                        <BaseFormInput
+                            type="text"
+                            ref={ref}
+                            placeholder="Your phone number"
+                            error={!!errors.phoneNumber?.type}
+                            helperText={
+                                errors.phoneNumber?.type ? `${errors.phoneNumber?.message}` : ''
+                            }
+                            sx={{
+                                gridArea: '2 / 1 / 3 / 3',
+                            }}
+                        />
+                    </ReactInputMask>
+                )}
+            />
+
+            <Controller
                 name="password"
-                type={showPassword ? 'text' : 'password'}
-                helperText="Must have minimum of 8 characters"
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                                disableTouchRipple
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                                sx={{
-                                    '& .MuiInputAdornment-root': {
-                                        // marginLeft: 0,
-                                        // p: 0,
-                                    },
-                                    '&:hover': {
-                                        backgroundColor: '#fff',
-                                        color: '#F15C30',
-                                    },
-                                    width: '42px',
-                                    height: '42px',
-                                }}
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility fontSize="large" />}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
+                control={control}
+                rules={{
+                    required: 'This field is required',
+                    minLength: {
+                        value: 8,
+                        message: 'Password must contain at least 8 characters',
+                    },
                 }}
-                sx={{
-                    gridArea: '3 / 1 / 4 / 3',
-                }}
+                render={({ field: { onChange, ...rest } }) => (
+                    <BaseFormInput
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Password"
+                        onChange={(e) => {
+                            onChange(e.target.value);
+                            trigger('password');
+                        }}
+                        {...rest}
+                        error={!!errors.password?.type}
+                        helperText={
+                            errors.password?.type
+                                ? `${errors.password?.message}`
+                                : 'Must have minimum of 8 characters'
+                        }
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        disableTouchRipple
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                        sx={{
+                                            '& .MuiInputAdornment-root': {
+                                                // marginLeft: 0,
+                                                // p: 0,
+                                            },
+                                            '&:hover': {
+                                                backgroundColor: '#fff',
+                                                color: '#F15C30',
+                                            },
+                                            width: '42px',
+                                            height: '42px',
+                                        }}
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility fontSize="large" />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                        sx={{
+                            gridArea: '3 / 1 / 4 / 3',
+                        }}
+                    />
+                )}
             />
 
-            <Stack
+            <Box
                 sx={{
                     mt: '12px',
                     gridArea: '4 / 1 / 5 / 3',
                     justifySelf: 'center',
                 }}
             >
-                <SubmitButton text="Sign up" />
-            </Stack>
+                {typeof state.message === 'string' && state.message !== 'Ok' ? (
+                    <Typography>{state.message}</Typography>
+                ) : null}
+
+                <SubmitButton
+                    text="Sign up"
+                    isFormInvalid={!isValid}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        trigger(['firstName', 'lastName', 'phoneNumber', 'password']);
+                        if (isValid) formRef.current?.requestSubmit();
+                    }}
+                />
+            </Box>
         </Box>
     );
 }
