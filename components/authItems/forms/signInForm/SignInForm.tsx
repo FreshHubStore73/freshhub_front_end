@@ -36,8 +36,10 @@ export default function SignInForm({}: Props) {
         >
             <TextField type="text" name="phoneNumber" placeholder="Phone number" />
             <TextField type="password" name="password" placeholder="Password" />
-            {state?.message && <FormHelperText>{state?.message}</FormHelperText>}
-            <SubmitButton text="Sign In" />
+            {typeof state?.message === 'string' && (
+                <FormHelperText>{state?.message}</FormHelperText>
+            )}
+            <SubmitButton isFormInvalid={false} text="Sign In" />
         </Box>
     );
 }

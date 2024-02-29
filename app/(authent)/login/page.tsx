@@ -4,6 +4,7 @@ import SignInForm from '@/components/authItems/forms/signInForm/SignInForm';
 import Link from 'next/link';
 
 import styles from './page.module.scss';
+import { Suspense } from 'react';
 
 type Props = { params: {} };
 
@@ -21,7 +22,9 @@ const LoginPage = (params: Props) => {
             <Typography variant="h2" component={'h1'}>
                 Log In
             </Typography>
-            <SignInForm />
+            <Suspense>
+                <SignInForm />
+            </Suspense>
             <Typography>
                 Not Registered? {'   '}
                 <Link

@@ -7,7 +7,7 @@ type Props = { params: {} };
 const Page = async (params: Props) => {
     const { pages } = await getCategories();
 
-    return <OrderPage pages={pages} />;
+    return <OrderPage />;
 };
 
 export default Page;
