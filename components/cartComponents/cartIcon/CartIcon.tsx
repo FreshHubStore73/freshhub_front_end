@@ -4,7 +4,7 @@ import React from 'react';
 
 import { SvgIcon } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Tooltip, { tooltipClasses, TooltipProps } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
@@ -12,15 +12,39 @@ import IconButton from '@mui/material/IconButton';
 import { useShoppingCart } from '../../../store';
 import CartDrawer from '../cartDrawer/CartDrawer';
 
-const HtmlTooltip = styled(({ className, ...props }: any) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
+const HtmlTooltip = styled(
+    ({ className, anchEl, ...props }: TooltipProps & { anchEl: HTMLElement | null }) => (
+        <Tooltip
+            {...props}
+            classes={{ popper: className }}
+            PopperProps={{
+                popperOptions: { placement: 'bottom' },
+                placement: 'top',
+                // anchorOrigin: {
+                //     vertical: 'bottom',
+                //     horizontal: 'center',
+                // },
+                // transformOrigin: {
+                //     vertical: 'top',
+                //     horizontal: 'center',
+                // },
+
+                anchorEl: anchEl,
+            }}
+        />
+    ),
+)(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
-        backgroundColor: '#f5f5f9',
+        backgroundColor: '#fff',
         color: 'rgba(0, 0, 0, 0.87)',
-        maxWidth: 220,
-        fontSize: theme.typography.pxToRem(12),
-        border: '1px solid #dadde9',
+        padding: '8px 14px',
+        borderRadius: '18px',
+        maxWidth: '220px',
+        minWidth: '182px',
+        boxShadow: '0px 2px 16px 1px rgba(0, 0, 0, 0.15)',
+    },
+    '&.MuiTooltip-popper[data-popper-placement*="bottom"] .MuiTooltip-tooltip': {
+        marginTop: '0px',
     },
 }));
 
@@ -60,28 +84,38 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
         minWidth: '17px',
         height: '17px',
         padding: '0 2px 2px',
-        backgroundColor: '#F15C30',
+        backgroundColor: theme.palette.accent.main,
     },
 }));
 
 type Props = {
     toggleDrawer: () => void;
+    anchEl: HTMLElement | null;
 };
-const CartIcon = ({ toggleDrawer }: Props) => {
+const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
     const totalDishes = useShoppingCart((state) => state.totalDishes);
     const totalAmount = useShoppingCart((state) => state.totalAmount);
 
     return (
         <>
             <HtmlTooltip
+                anchEl={anchEl}
                 title={
                     <>
-                        <Typography color="inherit" sx={{ fontWeight: 'bold', fontSize: '18px' }}>
+                        <Typography
+                            // color="inherit"
+                            sx={{
+                                fontWeight: 'bold',
+                                fontSize: '18px',
+                                marginBottom: '5px',
+                                color: (theme) => theme.palette.text.secondary,
+                            }}
+                        >
                             Your cart:
                         </Typography>
 
-                        <Typography color="inherit" sx={{ fontSize: '14px' }}>
-                            <b>{`${totalDishes}`}</b> {' product(s)  on  '}
+                        <Typography color="inherit" sx={{ fontSize: '16px' }}>
+                            {`${totalDishes}`} {' product(s)  on  '}
                             <b>{`${totalAmount}$`}</b>
                         </Typography>
                     </>
@@ -91,10 +125,12 @@ const CartIcon = ({ toggleDrawer }: Props) => {
                     <IconButton
                         size="large"
                         onClick={toggleDrawer}
+                        disableTouchRipple
                         sx={{
-                            '&.MuiIconButton-root:hover path': {
-                                stroke: '#F15C30',
+                            '&.MuiIconButton-root:hover': {
+                                backgroundColor: '#fff',
                             },
+                            '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
                         }}
                     >
                         <StyledBadge badgeContent={totalDishes} showZero>

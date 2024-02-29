@@ -110,7 +110,6 @@ export async function register(
     //     res.status === 200 && redirect('/login');
     //     return { message: '' };
     // } catch (err) {
-    //     console.log(err);
     //     const error = err as Error;
     //     return { message: `Failed to create user. ${error.message}` };
     // }

@@ -30,12 +30,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const signIn = (newUser: IUserAuthorized) => {
         setUser(newUser);
-        // console.log('signIn User');
         setAuthorized(true);
         if (newUser.userRole === 'admin') setAdmin(true);
         // cb();
     };
-    // console.log('AuthProvider', `isAuthorizes: ${isAuthorized}`);
 
     const signOut = () => {
         setUser(null);

@@ -2,9 +2,11 @@ import React, { useCallback } from 'react';
 import CartIcon from '../cartIcon';
 import CartDrawer from '../cartDrawer';
 
-type Props = {};
+type Props = {
+    anchEl: HTMLElement | null;
+};
 
-export default function Cart({}: Props) {
+export default function Cart({ anchEl }: Props) {
     const [showDrawer, setShowDrawer] = React.useState(false);
     const handleCloseDrawer = useCallback(() => {
         setShowDrawer(false);
@@ -12,9 +14,10 @@ export default function Cart({}: Props) {
     const toggleDrawer = () => {
         setShowDrawer((prevState) => !prevState);
     };
+
     return (
         <>
-            <CartIcon toggleDrawer={toggleDrawer} />
+            <CartIcon anchEl={anchEl} toggleDrawer={toggleDrawer} />
             <CartDrawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />
         </>
     );

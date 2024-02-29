@@ -1,5 +1,5 @@
 import React, { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Box, InputAdornment, SvgIcon, TextField, IconButton } from '@mui/material';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
@@ -36,9 +36,8 @@ const SearchIcon = (props: any) => {
 type Props = {};
 
 export default function SearchInput({}: Props) {
-    const [search, setSearch] = useState(
-        new URLSearchParams(decodeURIComponent(window.location.search)).get('search') || '',
-    );
+    const searchParams = useSearchParams();
+    const [search, setSearch] = useState(searchParams.get('search') || '');
     const [expanded, setExpanded] = useState(!!search.length);
     const { push } = useRouter();
     const inputRef = useRef<HTMLInputElement>(null);
@@ -70,10 +69,7 @@ export default function SearchInput({}: Props) {
     };
 
     const handleSearchClick = (event: MouseEvent<HTMLButtonElement>) => {
-        expanded && search.length ? console.log('Search...', search) : setExpanded(true);
-        if (search) {
-            push(`/categories/search?search=${search}`);
-        }
+        expanded && search.length ? push(`/categories/search?search=${search}`) : setExpanded(true);
     };
 
     const handleResetSearch = () => {
@@ -88,6 +84,7 @@ export default function SearchInput({}: Props) {
                     onKeyDown={handleKeyDown}
                     inputRef={inputRef}
                     value={search}
+                    autoComplete="off"
                     placeholder="I want yum-yum..."
                     onChange={(e) => {
                         setSearch(e.target.value);

@@ -6,7 +6,7 @@ import type { DishItem } from '@/components/dishcard/DishCard';
 export const GET = async (req: Request) => {
     const { pathname, searchParams } = new URL(req.url);
     const category = pathname.split('/')[3];
-    // console.log(searchParams);
+
     const sortType = searchParams?.get('sort');
     const searchQuery = searchParams?.get('search');
     try {
