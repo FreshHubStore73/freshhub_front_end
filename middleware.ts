@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
     const token = request.cookies.get('user_session')?.value;
     // const callbackUrl = headers().get('next-url');
     // const url = new URL(request.url);
-    // console.log(callbackUrl);
+
     if (!token) {
         return NextResponse.redirect(
             new URL(`/login?callbackUrl=${request.nextUrl.pathname}`, request.url),

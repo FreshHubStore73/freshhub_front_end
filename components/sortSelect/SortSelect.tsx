@@ -12,7 +12,8 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 export default function SortSelect() {
     const options = ['Featured', 'Price: low-high', 'Price: high-low'];
-    const searchParams = new URL(window.location.href).searchParams;
+    const rawQuery = useSearchParams();
+    const searchParams = new URLSearchParams(rawQuery);
     const router = useRouter();
     const sortValues = ['', 'asc', 'desc'];
 

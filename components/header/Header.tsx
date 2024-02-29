@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,6 +15,14 @@ import styles from './header.module.scss';
 const Header = ({ children }: { children: React.ReactNode[] }) => {
     const BurgerMenu = children[0];
     const Navbar = children[1];
+    const userIconAnchorRef = useRef<HTMLElement | null>(null);
+    const [anchEl, setAnchEl] = useState<HTMLElement | null>(null);
+
+    useEffect(() => {
+        if (userIconAnchorRef.current) {
+            setAnchEl(userIconAnchorRef.current);
+        }
+    }, [userIconAnchorRef.current]);
     return (
         <>
             <AppBar
@@ -29,10 +37,12 @@ const Header = ({ children }: { children: React.ReactNode[] }) => {
                             {BurgerMenu}
                             <Logo />
                             {Navbar}
-                            <SearchInput />
+                            <Suspense>
+                                <SearchInput />
+                            </Suspense>
                             <Box sx={{ flexGrow: 0, display: 'flex' }}>
-                                <UserIcon />
-                                <Cart />
+                                <UserIcon ref={userIconAnchorRef} />
+                                {userIconAnchorRef.current && <Cart anchEl={anchEl} />}
                             </Box>
                         </>
                     </Toolbar>
