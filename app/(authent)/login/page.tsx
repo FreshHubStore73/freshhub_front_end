@@ -18,15 +18,32 @@ const LoginPage = (params: Props) => {
                 mt: '111px',
             }}
         >
-            <Typography variant="h2" component={'h1'}>
+            <Typography variant="h2" component={'h1'}
+                sx={{
+                    fontFamily: 'Oswald',
+                    fontWeight: '700',
+                    fontSize: '62px',
+                    lineHeight: '100px',
+                    color: '#040705'
+
+                }}>
                 Log In
             </Typography>
             <SignInForm />
-            <Typography>
+            <Typography
+                sx={{
+                    fontFamily: 'Loto',
+                    fontWeight: '700',
+                    fontSize: '24px',
+                    color: '#040705',
+                }}>
                 Not Registered? {'   '}
                 <Link
                     href="/signup"
                     style={{
+                        fontFamily: 'Loto',
+                        fontWeight: '700',
+                        fontSize: '24px',
                         color: '#F15C30',
                     }}
                 >
