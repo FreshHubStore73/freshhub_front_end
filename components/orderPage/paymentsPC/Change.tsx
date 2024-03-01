@@ -48,11 +48,11 @@ const Change = forwardRef<HTMLInputElement, Props>((props, ref) => {
     const [value, setValue] = useState(totalAmount);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(parseFloat(e.target.value) || 0);
+        setValue(parseInt(e.target.value) || 0);
     };
 
     useLayoutEffect(() => {
-        if (value < totalAmount) setValue(totalAmount);
+        setValue(Math.ceil(totalAmount / 50) * 50);
     }, [totalAmount]);
 
     return (
