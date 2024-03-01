@@ -23,7 +23,7 @@ export default function SignInForm({}: Props) {
             signIn(state.user);
             replace(callbackUrl);
         }
-    }, [state]);
+    }, [state, callbackUrl, signIn, replace]);
 
     return (
         <Box

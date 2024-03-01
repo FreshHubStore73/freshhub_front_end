@@ -41,7 +41,7 @@ export default function SignUpForm({}: Props) {
         if (state.message === 'Ok') replace('/login');
         if (typeof state.message === 'object' && state.message.phoneNumber)
             methods.setError('phoneNumber', { type: 'custom', message: state.message.phoneNumber });
-    }, [state.message]);
+    }, [state.message, methods, replace]);
     return (
         <FormProvider {...methods}>
             <Box

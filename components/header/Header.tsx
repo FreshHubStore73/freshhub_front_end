@@ -22,7 +22,7 @@ const Header = ({ children }: { children: React.ReactNode[] }) => {
         if (userIconAnchorRef.current) {
             setAnchEl(userIconAnchorRef.current);
         }
-    }, [userIconAnchorRef.current]);
+    }, []);
     return (
         <>
             <AppBar
