@@ -19,10 +19,7 @@ export default function BreadCrumbs({
 }) {
     const pathnames: string[] = usePathname()
         .split('/')
-        .toSpliced(0, 1)
-        .filter((i) => i !== 'categories');
-
-    if (!pages?.includes(pathnames[0])) pathnames.shift();
+        .filter((i) => i && i !== 'categories');
 
     const params: {
         category: string;
