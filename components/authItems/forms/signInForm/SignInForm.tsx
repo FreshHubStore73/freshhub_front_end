@@ -6,11 +6,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Box, FormHelperText, TextField } from '@mui/material';
 
 import SubmitButton from '../../submitButton/SubmitButton';
-import { IFormState, login } from '@/components/authItems/auth';
+import { ISignInFormState, login } from '@/components/authItems/auth';
 import { useAuth } from '@/hooks/useAuth';
 
 type Props = {};
-const initialState: IFormState = { message: '', user: null };
+const initialState: ISignInFormState = { message: '', user: null };
 
 export default function SignInForm({}: Props) {
     const [state, formAction] = useFormState(login, initialState);
@@ -36,9 +36,7 @@ export default function SignInForm({}: Props) {
         >
             <TextField type="text" name="phoneNumber" placeholder="Phone number" />
             <TextField type="password" name="password" placeholder="Password" />
-            {typeof state?.message === 'string' && (
-                <FormHelperText>{state?.message}</FormHelperText>
-            )}
+            {state?.message !== 'Ok' && <FormHelperText>{state?.message}</FormHelperText>}
             <SubmitButton isFormInvalid={false} text="Sign In" />
         </Box>
     );

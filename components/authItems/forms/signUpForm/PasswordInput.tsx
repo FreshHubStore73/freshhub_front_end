@@ -99,6 +99,10 @@ export default function PasswordInput({}: Props) {
                     value: 8,
                     message: 'Password must contain at least 8 characters',
                 },
+                maxLength: {
+                    value: 15,
+                    message: "Password shouldn't contain more than 15 characters",
+                },
             }}
             render={({ field: { onChange, ...rest } }) => (
                 <BaseFormInput

@@ -1,43 +1,43 @@
-import { getUser, IUserAuthorized } from '@/components/authItems/auth';
+import { getUser, IUserInfo } from '@/components/authItems/auth';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
 interface IAuthContext {
-    user: IUserAuthorized | null;
+    user: IUserInfo | null;
     isAuthorized: boolean;
-    isAdmin: boolean;
+    // isAdmin: boolean;
     signOut: () => void;
-    signIn: (newUser: IUserAuthorized) => void;
+    signIn: (newUser: IUserInfo) => void;
 }
 const initialUser: IAuthContext = {
     user: null,
     isAuthorized: false,
-    isAdmin: false,
+    // isAdmin: false,
     signOut: () => {},
     signIn: () => {},
 };
 export const AuthContext = createContext<IAuthContext>({
     user: null,
     isAuthorized: false,
-    isAdmin: false,
+    // isAdmin: false,
     signIn: () => {},
     signOut: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<IUserAuthorized | null>(null);
+    const [user, setUser] = useState<IUserInfo | null>(null);
     const [isAuthorized, setAuthorized] = useState(false);
-    const [isAdmin, setAdmin] = useState(false);
+    // const [isAdmin, setAdmin] = useState(false);
 
-    const signIn = (newUser: IUserAuthorized) => {
+    const signIn = (newUser: IUserInfo) => {
         setUser(newUser);
         setAuthorized(true);
-        if (newUser.userRole === 'admin') setAdmin(true);
+        // if (newUser.userRole === 'admin') setAdmin(true);
         // cb();
     };
 
     const signOut = () => {
         setUser(null);
-        setAdmin(false);
+        // setAdmin(false);
         setAuthorized(false);
         // cb();
     };
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const value = {
         user,
         isAuthorized,
-        isAdmin,
+        // isAdmin,
         signIn,
         signOut,
     };
