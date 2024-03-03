@@ -59,9 +59,11 @@ export const EditBtn = styled((props: ButtonProps) => <Button variant="text" {..
 interface StyledCustomInputProps {
     isdisabled?: boolean;
 }
-export const CustomInput = styled((props: TextFieldProps) => (
-    <TextField {...props} autoComplete="off" />
-))<StyledCustomInputProps>(({ theme, isdisabled }) => ({
+export const CustomInput = styled(
+    ({ isdisabled, ...otherProps }: TextFieldProps & StyledCustomInputProps) => (
+        <TextField {...otherProps} autoComplete="off" />
+    ),
+)<StyledCustomInputProps>(({ theme, isdisabled }) => ({
     '& .MuiInputAdornment-root': {
         marginRight: '0',
     },

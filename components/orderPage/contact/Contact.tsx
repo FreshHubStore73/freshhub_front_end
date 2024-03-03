@@ -4,10 +4,11 @@ import { Box, FormControl, FormLabel, InputLabel, Typography } from '@mui/materi
 import ContactField from './ContactField';
 import { useUserProfile } from '@/store';
 import ContactPhoneField from './ContactPhoneField';
+import { useAuth } from '@/hooks/useAuth';
 type Props = {};
 
 export default function Contact({}: Props) {
-    const { userLastName, userName, phone } = useUserProfile((state) => state.profile);
+    const { user } = useAuth();
     return (
         <Box display={'flex'} flexDirection={'column'}>
             <FormControl>
@@ -28,8 +29,8 @@ export default function Contact({}: Props) {
                         gap: '22px',
                     }}
                 >
-                    <ContactField data={userName.concat(' ', userLastName)} />
-                    <ContactPhoneField data={phone} />
+                    <ContactField data={user?.firstName.concat(' ', user?.lastName) || ''} />
+                    <ContactPhoneField data={user?.phoneNumber || ''} />
                 </Box>
             </FormControl>
         </Box>

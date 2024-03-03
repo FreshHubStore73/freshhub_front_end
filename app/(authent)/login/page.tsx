@@ -4,6 +4,7 @@ import SignInForm from '@/components/authItems/forms/signInForm/SignInForm';
 import Link from 'next/link';
 
 import styles from './page.module.scss';
+import { Suspense } from 'react';
 
 type Props = { params: {} };
 
@@ -29,7 +30,9 @@ const LoginPage = (params: Props) => {
                 }}>
                 Log In
             </Typography>
-            <SignInForm />
+            <Suspense>
+                <SignInForm />
+            </Suspense>
             <Typography
                 sx={{
                     fontFamily: 'Loto',

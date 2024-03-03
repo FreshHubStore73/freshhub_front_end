@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Box, FormHelperText, TextField } from '@mui/material';
 
 import SubmitButton from '../../submitButton/SubmitButton';
-import { IFormState, login } from '@/components/authItems/auth';
+import { ISignInFormState, login } from '@/components/authItems/auth';
 import { useAuth } from '@/hooks/useAuth';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Button from '@mui/material/Button';
@@ -14,8 +14,8 @@ import { IconButton, InputAdornment, SvgIcon, SvgIconProps } from '@mui/material
 import ReactInputMask from 'react-input-mask';
 
 type Props = {};
-const initialState: IFormState = { message: '', user: null };
-export default function SignInForm({ }: Props) {
+const initialState: ISignInFormState = { message: '', user: null };
+export default function SignInForm({}: Props) {
     const [state, formAction] = useFormState(login, initialState);
     const { signIn } = useAuth();
     const { replace } = useRouter();
@@ -77,7 +77,8 @@ export default function SignInForm({ }: Props) {
             signIn(state.user);
             replace(callbackUrl);
         }
-    }, [state]);
+  }, [state, callbackUrl, signIn, replace]);
+  
     const Visibility = (props: SvgIconProps) => (
         <SvgIcon {...props} sx={{
             // '&.MuiSvgIcon-root:hover path': {
@@ -112,8 +113,6 @@ export default function SignInForm({ }: Props) {
 
         </SvgIcon>
     );
-
-
     return (
         <Box
             component="form"
@@ -123,12 +122,10 @@ export default function SignInForm({ }: Props) {
                 gap: '24px',
             }}
         >
+        
             <ReactInputMask mask="+1 (999) 999 9999" value={phoneValue}
                 onChange={handlePhoneChange}>
                 <TextField type="text" name="phoneNumber" placeholder="Phone number"
-
-
-
                     sx={{
                         minWidth: '720px',
                         fontSize: '24px',
@@ -206,7 +203,10 @@ export default function SignInForm({ }: Props) {
                 label="Password"
             />
             {passwordError ? <FormHelperText error>{passwordError}</FormHelperText> : ''}
-
+            
+        {/*{state?.message !== 'Ok' && <FormHelperText>{state?.message}</FormHelperText>}*/}
+        {/*<SubmitButton isFormInvalid={false} text="Sign In" />*/}
+            
             <Button type="submit"
                 disabled={!phoneValue || !passwordValue || phoneError || passwordError ? true : undefined}
                 sx={{
@@ -226,6 +226,6 @@ export default function SignInForm({ }: Props) {
                         }
                     }
                 }}>Log in </Button>
-        </Box >
+           </Box >
     );
 }

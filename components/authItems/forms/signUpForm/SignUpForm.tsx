@@ -8,7 +8,7 @@ import { Box, Typography } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import SubmitButton from '../../submitButton/SubmitButton';
-import { IUserRegister, register } from '@/components/authItems/auth';
+import { IUserSignUp, register } from '@/components/authItems/auth';
 import FirstNameInput from './FirstNameInput';
 import LastNameInput from './LastNameInput';
 import PasswordInput from './PasswordInput';
@@ -19,7 +19,7 @@ type Props = {};
 export default function SignUpForm({}: Props) {
     const [state, formAction] = useFormState(register, { message: '' });
 
-    const methods = useForm<IUserRegister>({
+    const methods = useForm<IUserSignUp>({
         defaultValues: {
             firstName: '',
             lastName: '',
@@ -39,9 +39,9 @@ export default function SignUpForm({}: Props) {
 
     useEffect(() => {
         if (state.message === 'Ok') replace('/login');
-        if (typeof state.message === 'object' && state.message.phoneNumber)
-            methods.setError('phoneNumber', { type: 'custom', message: state.message.phoneNumber });
-    }, [state.message]);
+        // if (typeof state.message === 'object' && state.message.phoneNumber)
+        //     methods.setError('phoneNumber', { type: 'custom', message: state.message.phoneNumber });
+    }, [state.message, methods, replace]);
     return (
         <FormProvider {...methods}>
             <Box
@@ -66,13 +66,14 @@ export default function SignUpForm({}: Props) {
                     sx={{
                         mt: '12px',
                         gridArea: '4 / 1 / 5 / 3',
-                        justifySelf: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
                 >
                     {/* временная лабуда для отслеживания ошибок сервера */}
-                    {typeof state.message === 'string' && state.message !== 'Ok' ? (
-                        <Typography>{state.message}</Typography>
-                    ) : null}
+                    {state.message !== 'Ok' ? <Typography>{state.message}</Typography> : null}
 
                     <SubmitButton
                         text="Sign up"
