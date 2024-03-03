@@ -4,7 +4,6 @@ import { MouseEventHandler } from 'react';
 import { Button } from '@mui/material';
 
 import { useShoppingCart } from '../../store';
-import type { DishInCart } from '../../store';
 
 const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: boolean }) => {
     const addDish = useShoppingCart((state) => state.addDish);
@@ -19,7 +18,7 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
     if (simple) {
         content = 'Add';
     } else {
-        isInCart = dishes.findIndex((item) => item.dishId === dish.dishId) !== -1;
+        isInCart = dishes.findIndex((item) => item.id === dish.id) !== -1;
         content = isInCart ? '✓' : 'Add';
     }
 

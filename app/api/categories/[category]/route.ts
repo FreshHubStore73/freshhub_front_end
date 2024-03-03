@@ -1,7 +1,6 @@
 import Dish from '@/utils/models/Dish';
 import connect from '@/utils/db';
 import { NextResponse } from 'next/server';
-import type { DishItem } from '@/components/dishcard/DishCard';
 
 export const GET = async (req: Request) => {
     const { pathname, searchParams } = new URL(req.url);
@@ -15,10 +14,10 @@ export const GET = async (req: Request) => {
 
         if (searchQuery) {
             dishes = dishes.filter((dish) =>
-                dish.title.toLowerCase().includes(searchQuery.toLowerCase()),
+                dish.productName.toLowerCase().includes(searchQuery.toLowerCase()),
             );
         } else {
-            dishes = dishes.filter((dish) => dish.category === category);
+            dishes = dishes.filter((dish) => dish.categoryName === category);
         }
         if (sortType) {
             sortType === 'asc'

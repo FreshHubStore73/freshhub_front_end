@@ -36,7 +36,7 @@ const CartDrawer: FC<{
                 marginBlock={'46px'}
             >
                 {dishes.map((dish) => (
-                    <CartListItem key={dish.dishId} dish={dish} />
+                    <CartListItem key={dish.id} dish={dish} />
                 ))}
             </Stack>
             <CartFooter totalAmount={totalAmount} closeDrawer={closeDrawer} />

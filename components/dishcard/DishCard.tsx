@@ -4,51 +4,39 @@ import Image from 'next/image';
 import AddToCartButton from '../addToCartButton';
 
 import styles from './dishcard.module.scss';
-
-export type DishItem = {
-    _id: string;
-    title: string;
-    picture: string;
-    descr: string;
-    price: number;
-    weight: string;
-    category: string;
-};
+const url = process.env.SERV_URL;
 
 const DishCard = ({ item }: { item: DishItem }) => {
-    const { _id, title, picture, descr, price, weight, category } = item;
-    const dish = {
-        dishId: _id,
-        dTitle: title,
-        dPic: picture,
-        dPrice: price,
-        dQuantity: 1,
-    };
-
+    const { id, photoUrl, productName, categoryId, price, description, weight, categoryName } =
+        item;
+    const link = `/categories/${categoryName.toLowerCase()}/${id}/${productName
+        .toLowerCase()
+        .replace(/\s+/g, '_')}`;
+    const photo = (photoUrl || '/dishes/istockphoto-1206323282-612x612.jpg').replace(
+        /Images\\/g,
+        `${url}/Images/`,
+    );
     return (
         <div className={styles.card}>
             <div className={styles.wrapper}>
-                <Link
-                    href={`/categories/${category}/${_id}/${title.replace(/\s+/g, '_')}`}
-                    className={styles.link}
-                >
+                <Link href={link} className={styles.link}>
                     <div className={styles.dishImg}>
                         <Image
                             className={styles.img}
-                            src={picture}
+                            src={'/dishes/istockphoto-1206323282-612x612.jpg'}
                             alt={'dishImg'}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                     </div>
                     <div className={styles.dishTitleInfo}>
-                        <h3 className={styles.dishTitle}>{title}</h3>
-                        <p className={styles.dishWeight}>{weight}</p>
+                        <h3 className={styles.dishTitle}>{productName}</h3>
+                        <p className={styles.dishWeight}>{weight}g</p>
                     </div>
-                    <p className={styles.dishDescr}>{descr}</p>
+                    <p className={styles.dishDescr}>{description}</p>
                     <div className={styles.dishPrice}>
                         <span className={styles.dishPrice}>${price}</span>
-                        <AddToCartButton dish={dish} simple={false} />
+                        <AddToCartButton dish={{ ...item, quantity: 1 }} simple={false} />
                     </div>
                 </Link>
             </div>

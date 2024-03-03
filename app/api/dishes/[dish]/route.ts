@@ -1,7 +1,6 @@
 import Dish from '../../../../utils/models/Dish';
 import connect from '../../../../utils/db';
 import { NextResponse } from 'next/server';
-import type { DishItem } from '../../../../components/dishcard/DishCard';
 
 export const GET = async (req: Request) => {
     const { pathname } = new URL(req.url);

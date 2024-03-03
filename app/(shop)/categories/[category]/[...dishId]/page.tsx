@@ -4,15 +4,7 @@ import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 import DishItem from '@/components/dishItem';
 
 import styles from './page.module.scss';
-import { getCategories } from '@/components/header/navBar/NavBar';
-
-async function getDish(_id: string) {
-    const res = await fetch(`http://localhost:3000/api/dishes/${_id}`, {
-        cache: 'no-store',
-    });
-    if (!res.ok) throw new Error('Failed to fetch dishes');
-    return res.json();
-}
+import { getCategories, getDish } from '@/utils/getData';
 
 type Props = { params: { dishId: string } };
 

@@ -1,12 +1,7 @@
-import Category from '../../../utils/models/Category';
-import connect from '../../../utils/db';
 import { NextResponse } from 'next/server';
-import type { CategoryItem } from '../../../components/header/navBar/NavBar';
 
 export const GET = async (req: Request) => {
     try {
-        // await connect();
-        // const categories: CategoryItem[] = await Category.find();
         const url = process.env.SERV_URL;
         const data: any = await fetch(`${url}/api/Category/GetAll`);
         const categories = await data.json();
