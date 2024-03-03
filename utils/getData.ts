@@ -11,7 +11,7 @@ export async function getCategories() {
 }
 
 export async function getDishes(category: string, requestSearchParams: IRequestSearchParams = {}) {
-    const { categoriesRaw } = await getCategories();
+    const { categoriesRaw, pages } = await getCategories();
 
     const categoryItem = categoriesRaw.filter((cat) => cat.name === category);
     const categoryId = categoryItem.length && categoryItem[0].id;
@@ -19,29 +19,28 @@ export async function getDishes(category: string, requestSearchParams: IRequestS
     const searchParams = new URLSearchParams([...Object.entries(requestSearchParams)]);
     const sortType = searchParams?.get('sort');
     const searchQuery = searchParams?.get('search');
-
+    if (!pages.includes(category)) return [];
     let res;
-    if (searchParams.get('search')) {
-        res = await fetch(`${url}/api/Product/GetAll`);
-    } else if (categoryId) {
-        res = await fetch(`${url}/api/Product/GetAllByCategory/${categoryId}`);
+    const link = searchParams.has('search')
+        ? `${url}/api/Product/GetAll`
+        : `${url}/api/Product/GetAllByCategory/${categoryId}`;
 
-        if (!res.ok) throw new Error('Failed to fetch dishes ' + res.statusText);
-        let dishes: DishItem[] = await res.json();
+    res = await fetch(link);
 
-        if (searchQuery) {
-            dishes = dishes.filter((dish) =>
-                dish.productName.toLowerCase().includes(searchQuery.toLowerCase()),
-            );
-        }
-        if (sortType) {
-            sortType === 'asc'
-                ? dishes.sort((a, b) => a.price - b.price)
-                : dishes.sort((a, b) => b.price - a.price);
-        }
-        return dishes;
+    if (!res.ok) throw new Error('Failed to fetch dishes ' + res.statusText);
+    let dishes: DishItem[] = await res.json();
+
+    if (searchQuery) {
+        dishes = dishes.filter((dish) =>
+            dish.productName.toLowerCase().includes(searchQuery.toLowerCase()),
+        );
     }
-    return [];
+    if (sortType) {
+        sortType === 'asc'
+            ? dishes.sort((a, b) => a.price - b.price)
+            : dishes.sort((a, b) => b.price - a.price);
+    }
+    return dishes;
 }
 
 export async function getDish(dishId: string) {
