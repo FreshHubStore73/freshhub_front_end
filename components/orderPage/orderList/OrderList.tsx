@@ -23,7 +23,7 @@ const Dishes = () => {
             sx={{ display: 'flex', gap: '26px', flexDirection: 'column', mb: '31px' }}
         >
             {dishes.map((dish) => (
-                <CartListItem key={dish.dishId} dish={dish} isOrder={true} />
+                <CartListItem key={dish.id} dish={dish} isOrder={true} />
             ))}
         </Box>
     );

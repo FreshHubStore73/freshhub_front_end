@@ -2,24 +2,13 @@
 
 import { useState } from 'react';
 
-import type { DishItem as DishItemType } from '../dishcard/DishCard';
-import type { DishInCart } from '../../store/index';
 import AddToCartButton from '../addToCartButton';
 import NumberInput from '../numberInput/Input';
 
 import styles from './addToCartForm.module.scss';
 
-export default function AddToCartForm({ dish }: { dish: DishItemType }) {
-    const { _id, title, picture, price } = dish;
+export default function AddToCartForm({ dish }: { dish: DishItem }) {
     const [quantity, setQuantity] = useState(1);
-
-    const dishToCart: DishInCart = {
-        dishId: _id,
-        dTitle: title,
-        dPic: picture,
-        dPrice: price,
-        dQuantity: quantity,
-    };
 
     const onAddToCart = (e: any) => {
         e.preventDefault();
@@ -30,7 +19,7 @@ export default function AddToCartForm({ dish }: { dish: DishItemType }) {
         <form onSubmit={onAddToCart}>
             <div className={styles.inputWrapper}>
                 <NumberInput quantity={quantity} setQuantity={setQuantity} type="dish" />
-                <AddToCartButton dish={dishToCart} />
+                <AddToCartButton dish={{ ...dish, quantity }} />
             </div>
         </form>
     );

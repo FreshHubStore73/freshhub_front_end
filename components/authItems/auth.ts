@@ -1,13 +1,6 @@
 'use server';
 import { cookies } from 'next/headers';
 import { RedirectType, redirect } from 'next/navigation';
-import bcrypt from 'bcryptjs';
-
-import { Error as MongooseError } from 'mongoose';
-const { ValidationError } = MongooseError;
-
-import connect from '../../utils/db';
-import User from '@/utils/models/User';
 
 const url = process.env.SERV_URL;
 const MAX_AGE = 60 * 60 * 24 * 5 - 600;
@@ -59,39 +52,6 @@ export async function register(
     // const phone = phoneNumber.replace(/[^+0-9]/g, '');
     // if (phone.length < 12) return { message: 'The number must contain 11 digits' };
 
-    //Logic for MongoDB
-    // await connect();
-    // const hashedPassword = await bcrypt.hash(password, 5);
-
-    // const newUser = new User({
-    //     firstName,
-    //     lastName,
-    //     phoneNumber: phone,
-    //     password: hashedPassword,
-    // });
-
-    // try {
-    //     await newUser.save();
-    //     return { message: 'Ok' };
-    // } catch (e: any) {
-    //     if (e instanceof ValidationError) {
-    //         // Обработка ошибки валидации Mongoose
-    //         const errors = Object.values(e.errors).map((error) => error.message);
-    //         return { message: `Validation Error: ${errors.join(', ')}` };
-    //     } else if (e.code === 11000) {
-    //         // Обработка ошибки дублирования ключа MongoDB (например, уникальный индекс)
-    //         return {
-    //             message: {
-    //                 phoneNumber: 'This phone number has been registered yet',
-    //             },
-    //         };
-    //     } else {
-    //         // Обработка других ошибок
-    //         return { message: 'Something went wrong' };
-    //     }
-    // }
-
-    //Logic for Yurij
     try {
         const res = await fetch(`${url}/api/User/Register`, {
             method: 'POST',
@@ -114,7 +74,6 @@ export async function register(
                 throw new Error(`Something went wrong: ${error}`);
             }
         }
-        // res.status === 200 && redirect('/login');
         return { message: 'Ok' };
     } catch (err) {
         const error = err as Error;
@@ -126,26 +85,6 @@ export async function login(prevState: ISignInFormState | undefined, formData: F
     const { password, phoneNumber } = Object.fromEntries(formData) as unknown as IUserCredentials;
     if (!password || !phoneNumber) return { message: 'Missing phone or password', user: null };
     const phone = phoneNumber.replace(/[^+0-9]/g, '');
-
-    //Logic for MongoDB.
-    // Credentials check
-    // await connect();
-    // try {
-    //     const user = await User.findOne({ phoneNumber: phone });
-    //     if (user) {
-    //         const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password!);
-    //         if (isPasswordCorrect) {
-    //             // redirect('/pizza');
-    //             return { message: 'Ok. Now you will be redirected to Home page' };
-    //         } else {
-    //             return { message: 'Password is wrong' };
-    //         }
-    //     } else {
-    //         return { message: "The user with this phone isn't registered", user: null };
-    //     }
-    // } catch (error) {
-    //     return { message: 'Something went wrong' };
-    // }
 
     //we get token
     try {

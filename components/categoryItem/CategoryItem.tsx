@@ -5,11 +5,8 @@ import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 
 import DishCard from '@/components/dishcard';
 import SortSelect from '@/components/sortSelect/SortSelect';
-import { getCategories } from '../header/navBar/NavBar';
-import type { DishItem } from '@/components/dishcard/DishCard';
 import EmptyBlock from '../emptyBlock/EmptyBlock';
-
-import styles from './categoryItem.module.scss';
+import { getCategories } from '@/utils/getData';
 
 type Props = {
     path: string;
@@ -63,7 +60,7 @@ export default async function CategoryItem({ dishes, path, searchParams }: Props
                     }}
                 >
                     {dishes.length ? (
-                        dishes.map((dish) => <DishCard key={dish._id} item={dish} />)
+                        dishes.map((dish) => <DishCard key={dish.id} item={dish} />)
                     ) : (
                         <EmptyBlock />
                     )}

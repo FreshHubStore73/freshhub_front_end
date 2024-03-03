@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Image from 'next/image';
 
 import { Box, SvgIcon, Typography } from '@mui/material';
-import { DishInCart, useShoppingCart } from '@/store';
+import { useShoppingCart } from '@/store';
 
 import NumberInput from '../numberInput/Input';
 interface ICartListItem {
@@ -11,7 +11,7 @@ interface ICartListItem {
     isOrder?: boolean;
 }
 const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
-    const { dishId, dTitle, dPic, dPrice, dQuantity } = dish;
+    const { id, photoUrl, productName, price, quantity } = dish;
     const { removeDish, changeQuantity } = useShoppingCart();
 
     const onRemove = () => {
@@ -19,7 +19,7 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
     };
 
     const onChange = (q: number) => {
-        changeQuantity(dishId, q);
+        changeQuantity(id, q);
     };
 
     return (
@@ -45,9 +45,9 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                 }}
             >
                 <Image
-                    src={dPic}
+                    src={'/dishes/istockphoto-1206323282-612x612.jpg'}
                     fill
-                    alt={dTitle}
+                    alt={productName}
                     sizes="(max-width: 768px) 50vw, (max-width: 1200px) 30vw, 15vw"
                 />
             </Box>
@@ -69,7 +69,7 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                         color: 'text.secondary',
                     }}
                 >
-                    {dTitle}
+                    {productName}
                 </Typography>
                 <SvgIcon
                     onClick={onRemove}
@@ -113,7 +113,7 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                 }}
             >
                 <NumberInput
-                    quantity={dish.dQuantity}
+                    quantity={quantity}
                     setQuantity={onChange}
                     type={isOrder ? 'order' : 'cart'}
                 />
@@ -124,7 +124,7 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                         color: 'text.secondary',
                     }}
                 >
-                    ${dPrice * dQuantity}
+                    ${price * quantity}
                 </Typography>
             </Box>
         </Box>
