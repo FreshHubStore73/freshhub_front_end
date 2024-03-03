@@ -3,7 +3,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { BaseFormInput } from '../baseFormInput/BaseFormInput';
 import { IconButton, InputAdornment, SvgIcon, SvgIconProps } from '@mui/material';
 
-type Props = {};
+type Props = { variant?: 'signin' | 'signup' };
 
 const Visibility = (props: SvgIconProps) => (
     <SvgIcon
@@ -77,7 +77,7 @@ const VisibilityOff = (props: SvgIconProps) => (
     </SvgIcon>
 );
 
-export default function PasswordInput({}: Props) {
+export default function PasswordInput({ variant = 'signup' as 'signup' }: Props) {
     const {
         control,
         trigger,
@@ -147,7 +147,7 @@ export default function PasswordInput({}: Props) {
                         ),
                     }}
                     sx={{
-                        gridArea: '3 / 1 / 4 / 3',
+                        gridArea: variant === 'signin' ? 'auto' : '3 / 1 / 4 / 3',
                     }}
                 />
             )}

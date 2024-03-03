@@ -49,7 +49,7 @@ export default function SignUpForm({}: Props) {
                 action={formAction}
                 ref={formRef}
                 sx={{
-                    width: '884px',
+                    width: '100%',
                     mt: '50px',
                     display: 'grid',
                     rowGap: '38px',
