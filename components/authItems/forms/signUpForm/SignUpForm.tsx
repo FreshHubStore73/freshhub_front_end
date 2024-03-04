@@ -8,7 +8,7 @@ import { Box, Typography } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import SubmitButton from '../../submitButton/SubmitButton';
-import { IUserSignUp, register } from '@/components/authItems/auth';
+import { register } from '@/components/authItems/auth';
 import FirstNameInput from './FirstNameInput';
 import LastNameInput from './LastNameInput';
 import PasswordInput from './PasswordInput';
@@ -26,6 +26,7 @@ export default function SignUpForm({}: Props) {
             phoneNumber: '',
             password: '',
         },
+        mode: 'onSubmit',
     });
 
     const {
@@ -49,7 +50,7 @@ export default function SignUpForm({}: Props) {
                 action={formAction}
                 ref={formRef}
                 sx={{
-                    width: '884px',
+                    width: '100%',
                     mt: '50px',
                     display: 'grid',
                     rowGap: '38px',
@@ -73,11 +74,20 @@ export default function SignUpForm({}: Props) {
                     }}
                 >
                     {/* временная лабуда для отслеживания ошибок сервера */}
-                    {state.message !== 'Ok' ? <Typography>{state.message}</Typography> : null}
+                    {state.message !== 'Ok' ? (
+                        <Typography
+                            sx={{
+                                color: (theme) => theme.palette.error.main,
+                                mb: '24px',
+                                fontSize: '20px',
+                            }}
+                        >
+                            {state.message}
+                        </Typography>
+                    ) : null}
 
                     <SubmitButton
                         text="Sign up"
-                        isFormInvalid={!isValid}
                         onClick={(e) => {
                             e.preventDefault();
                             trigger(['firstName', 'lastName', 'phoneNumber', 'password']);

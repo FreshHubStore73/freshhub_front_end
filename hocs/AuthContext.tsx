@@ -1,4 +1,4 @@
-import { getUser, IUserInfo } from '@/components/authItems/auth';
+import { getUser } from '@/components/authItems/auth';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
 interface IAuthContext {
