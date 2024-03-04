@@ -71,14 +71,19 @@ export default function SignInForm({}: Props) {
                 >
                     {/* временная лабуда для отслеживания ошибок сервера */}
                     {state?.message !== 'Ok' ? (
-                        <Typography sx={{ color: (theme) => theme.palette.error.main, mb: '24px' }}>
+                        <Typography
+                            sx={{
+                                color: (theme) => theme.palette.error.main,
+                                mb: '24px',
+                                fontSize: '20px',
+                            }}
+                        >
                             {state?.message}
                         </Typography>
                     ) : null}
 
                     <SubmitButton
                         text="Sign in"
-                        isFormInvalid={!isValid}
                         onClick={(e) => {
                             e.preventDefault();
                             trigger(['phoneNumber', 'password']);

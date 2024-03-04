@@ -6,15 +6,7 @@ import { IconButton, InputAdornment, SvgIcon, SvgIconProps } from '@mui/material
 type Props = { variant?: 'signin' | 'signup' };
 
 const Visibility = (props: SvgIconProps) => (
-    <SvgIcon
-        fontSize="large"
-        {...props}
-        sx={{
-            '&.MuiSvgIcon-root:hover path': {
-                stroke: '#F15C30',
-            },
-        }}
-    >
+    <SvgIcon fontSize="large" {...props}>
         <svg
             width="38"
             height="38"
@@ -39,15 +31,7 @@ const Visibility = (props: SvgIconProps) => (
 );
 
 const VisibilityOff = (props: SvgIconProps) => (
-    <SvgIcon
-        fontSize="large"
-        {...props}
-        sx={{
-            '&.MuiSvgIcon-root:hover path': {
-                stroke: '#F15C30',
-            },
-        }}
-    >
+    <SvgIcon fontSize="large" {...props}>
         <svg
             width="38"
             height="38"
@@ -95,22 +79,27 @@ export default function PasswordInput({ variant = 'signup' as 'signup' }: Props)
             control={control}
             rules={{
                 required: 'This field is required',
-                minLength: {
-                    value: 8,
-                    message: 'Password must contain at least 8 characters',
-                },
-                maxLength: {
-                    value: 15,
-                    message: "Password shouldn't contain more than 15 characters",
-                },
+                minLength:
+                    variant === 'signin'
+                        ? undefined
+                        : {
+                              value: 8,
+                              message: 'Password must contain at least 8 characters',
+                          },
+                maxLength:
+                    variant === 'signin'
+                        ? undefined
+                        : {
+                              value: 15,
+                              message: "Password shouldn't contain more than 15 characters",
+                          },
             }}
             render={({ field: { onChange, ...rest } }) => (
                 <BaseFormInput
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
                     onChange={(e) => {
-                        onChange(e.target.value);
-                        trigger('password');
+                        onChange(e.target.value.replace(/\W+/g, ''));
                     }}
                     {...rest}
                     error={!!errors.password?.type}
@@ -131,14 +120,6 @@ export default function PasswordInput({ variant = 'signup' as 'signup' }: Props)
                                     onMouseDown={handleMouseDownPassword}
                                     edge="end"
                                     sx={{
-                                        '& .MuiInputAdornment-root': {
-                                            // marginLeft: 0,
-                                            // p: 0,
-                                        },
-                                        '&:hover': {
-                                            backgroundColor: '#fff',
-                                            color: '#F15C30',
-                                        },
                                         width: '42px',
                                         height: '42px',
                                     }}

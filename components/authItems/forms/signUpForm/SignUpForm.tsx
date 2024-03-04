@@ -26,6 +26,7 @@ export default function SignUpForm({}: Props) {
             phoneNumber: '',
             password: '',
         },
+        mode: 'onSubmit',
     });
 
     const {
@@ -74,14 +75,19 @@ export default function SignUpForm({}: Props) {
                 >
                     {/* временная лабуда для отслеживания ошибок сервера */}
                     {state.message !== 'Ok' ? (
-                        <Typography sx={{ color: (theme) => theme.palette.error.main, mb: '24px' }}>
+                        <Typography
+                            sx={{
+                                color: (theme) => theme.palette.error.main,
+                                mb: '24px',
+                                fontSize: '20px',
+                            }}
+                        >
                             {state.message}
                         </Typography>
                     ) : null}
 
                     <SubmitButton
                         text="Sign up"
-                        isFormInvalid={!isValid}
                         onClick={(e) => {
                             e.preventDefault();
                             trigger(['firstName', 'lastName', 'phoneNumber', 'password']);

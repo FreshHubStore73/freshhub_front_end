@@ -27,7 +27,6 @@ export default function PhoneInput({ variant = 'signup' as 'signup' }: Props) {
                     maskPlaceholder="x"
                     onChange={(e) => {
                         onChange(e.target.value);
-                        trigger('phoneNumber');
                     }}
                     {...rest}
                 >
