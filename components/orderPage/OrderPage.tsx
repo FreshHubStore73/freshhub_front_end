@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
@@ -11,6 +11,7 @@ import CustomizedAccordions from './comments/Comments';
 import PaymentsPC from './paymentsPC/PaymentsPC';
 import Time from './time/Time';
 import { useShoppingCart } from '@/store';
+import Success from './success/Success';
 
 type Props = {};
 interface IOrder {
@@ -30,9 +31,12 @@ interface IOrder {
     }[];
 }
 
-
-export default function OrderPage({ }: Props) {
+export default function OrderPage({}: Props) {
     const dishes = useShoppingCart((state) => state.dishes);
+    const [openSuccess, setOpenSuccess] = React.useState(false);
+    const handleCloseSuccess = useCallback(() => {
+        setOpenSuccess(false);
+    }, []);
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
@@ -59,50 +63,50 @@ export default function OrderPage({ }: Props) {
         // }[];
         // };
 
-
         let jsonData = JSON.stringify(jsonObject);
         console.log(jsonData);
     };
 
-
-
     return (
-        <Box mt={'111px'}>
-            <BreadCrumbs singlePage="Order Page" />
-            <Box
-                component={'form'}
-                onSubmit={handleSubmit}
-                sx={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    marginTop: '36px',
-                    columnGap: '87px',
-                }}
-            >
-                <Box sx={{ overflow: 'hidden', marginRight: '10px' }}>
-                    <Typography
-                        component={'h1'}
-                        sx={{
-                            fontWeight: 700,
-                            fontSize: '40px',
-                            marginBottom: '24px',
-                            color: 'text.secondary',
-                            textTransform: 'none',
-                        }}
-                    >
-                        {' '}
-                        Placing an order
-                    </Typography>
-                    <Contact />
-                    <Address />
-                    <Time />
-                    <PaymentsPC />
-                </Box>
-                <Box sx={{ overflow: 'hidden', marginLeft: '10px' }}>
-                    <CustomizedAccordions />
-                    <OrderList />
+        <>
+            <Box mt={'111px'}>
+                <BreadCrumbs singlePage="Order Page" />
+                <Box
+                    component={'form'}
+                    onSubmit={handleSubmit}
+                    sx={{
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 1fr',
+                        marginTop: '36px',
+                        columnGap: '87px',
+                    }}
+                >
+                    <Box sx={{ overflow: 'hidden', marginRight: '10px' }}>
+                        <Typography
+                            component={'h1'}
+                            sx={{
+                                fontWeight: 700,
+                                fontSize: '40px',
+                                marginBottom: '24px',
+                                color: 'text.secondary',
+                                textTransform: 'none',
+                            }}
+                        >
+                            {' '}
+                            Placing an order
+                        </Typography>
+                        <Contact />
+                        <Address />
+                        <Time />
+                        <PaymentsPC />
+                    </Box>
+                    <Box sx={{ overflow: 'hidden', marginLeft: '10px' }}>
+                        <CustomizedAccordions />
+                        <OrderList />
+                    </Box>
                 </Box>
             </Box>
-        </Box>
+            <Success onClose={handleCloseSuccess} open={openSuccess} />
+        </>
     );
 }

@@ -1,7 +1,10 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-export default function EmptyBlock() {
+type Props = {
+    text?: string;
+};
+export default function StubBlock({ text = 'Northing' }: Props) {
     return (
         <Box
             sx={{
@@ -50,7 +53,7 @@ export default function EmptyBlock() {
                 />
             </svg>
             <Typography variant="h2_Oswald" textAlign={'center'}>
-                Northing
+                {text}
             </Typography>
         </Box>
     );

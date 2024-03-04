@@ -5,7 +5,7 @@ import Drawer from '@mui/material/Drawer';
 
 import { useShoppingCart } from '../../../store';
 
-import EmptyBlock from '@/components/emptyBlock/EmptyBlock';
+import StubBlock from '@/components/stubBlock/StubBlock';
 import CartHeader from '../cartHeader/CartHeader';
 import CartListItem from '../../cartListItem/CartListItem';
 import CartFooter from '../cartFooter/CartFooter';
@@ -55,7 +55,7 @@ const CartDrawer: FC<{
                 role="presentation"
             >
                 <CartHeader closeDrawer={closeDrawer} />
-                {dishes.length ? content : <EmptyBlock />}
+                {dishes.length ? content : <StubBlock />}
             </Box>
         </Drawer>
     );
