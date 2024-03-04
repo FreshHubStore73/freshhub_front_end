@@ -117,6 +117,8 @@ export default function PasswordInput({ variant = 'signup' as 'signup' }: Props)
                     helperText={
                         errors.password?.type
                             ? `${errors.password?.message}`
+                            : variant === 'signin'
+                            ? ''
                             : 'Must have minimum of 8 characters'
                     }
                     InputProps={{

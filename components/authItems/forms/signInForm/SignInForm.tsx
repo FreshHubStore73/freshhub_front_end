@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Box, Typography } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ISignInFormState, IUserCredentials, login } from '@/components/authItems/auth';
+import { login } from '@/components/authItems/auth';
 import { useAuth } from '@/hooks/useAuth';
 import PhoneInput from '../signUpForm/PhoneInput';
 import SubmitButton from '../../submitButton/SubmitButton';
@@ -70,7 +70,11 @@ export default function SignInForm({}: Props) {
                     }}
                 >
                     {/* временная лабуда для отслеживания ошибок сервера */}
-                    {state?.message !== 'Ok' ? <Typography>{state?.message}</Typography> : null}
+                    {state?.message !== 'Ok' ? (
+                        <Typography sx={{ color: (theme) => theme.palette.error.main, mb: '24px' }}>
+                            {state?.message}
+                        </Typography>
+                    ) : null}
 
                     <SubmitButton
                         text="Sign in"
