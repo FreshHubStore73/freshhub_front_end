@@ -5,32 +5,6 @@ import { RedirectType, redirect } from 'next/navigation';
 const url = process.env.SERV_URL;
 const MAX_AGE = 60 * 60 * 24 * 5 - 600;
 
-export interface IUserCredentials {
-    phoneNumber: string;
-    password: string;
-}
-
-export interface IUserSignUp extends IUserCredentials {
-    firstName: string;
-    lastName: string;
-}
-
-export interface IUserInfo {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    // history: any[];
-    // userRole: 'admin' | 'user';
-}
-export interface IUserResponse {
-    user: IUserInfo | null;
-    error: string | null;
-}
-export interface ISignInFormState {
-    message: string;
-    user: IUserInfo | null;
-}
-
 export async function register(
     prevState:
         | {
