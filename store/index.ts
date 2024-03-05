@@ -59,7 +59,12 @@ export const useShoppingCart = create<UseShoppingCart>()(
                             totalDishes: state.totalDishes - dish.quantity,
                         };
                     }),
-                clearCart: () => set((state) => ({ dishes: [] })),
+                clearCart: () =>
+                    set((state) => ({
+                        dishes: [],
+                        totalAmount: 0,
+                        totalDishes: 0,
+                    })),
             }),
             { name: 'cart' },
         ),

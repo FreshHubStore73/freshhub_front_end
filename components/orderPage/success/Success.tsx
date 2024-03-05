@@ -16,7 +16,17 @@ function Success({ open, onClose }: Props) {
         <Dialog fullScreen={true} open={open} onClose={onClose}>
             {/* <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle> */}
             <DialogActions>
-                <Button autoFocus onClick={onClose}>
+                <Button
+                    autoFocus
+                    onClick={onClose}
+                    disableTouchRipple
+                    sx={{
+                        fontSize: '48px',
+                        '&:hover': {
+                            backgroundColor: '#fff',
+                        },
+                    }}
+                >
                     &times;
                 </Button>
             </DialogActions>

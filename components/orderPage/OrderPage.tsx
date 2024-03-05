@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { Box, Typography } from '@mui/material';
 
@@ -11,7 +11,6 @@ import CustomizedAccordions from './comments/Comments';
 import PaymentsPC from './paymentsPC/PaymentsPC';
 import Time from './time/Time';
 import { useShoppingCart } from '@/store';
-import Success from './success/Success';
 
 type Props = {};
 interface IOrder {
@@ -33,10 +32,6 @@ interface IOrder {
 
 export default function OrderPage({}: Props) {
     const dishes = useShoppingCart((state) => state.dishes);
-    const [openSuccess, setOpenSuccess] = React.useState(false);
-    const handleCloseSuccess = useCallback(() => {
-        setOpenSuccess(false);
-    }, []);
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
@@ -106,7 +101,6 @@ export default function OrderPage({}: Props) {
                     </Box>
                 </Box>
             </Box>
-            <Success onClose={handleCloseSuccess} open={openSuccess} />
         </>
     );
 }
