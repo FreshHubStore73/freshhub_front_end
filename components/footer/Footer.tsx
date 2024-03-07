@@ -75,24 +75,26 @@ const Footer = () => {
                     </ul>
                 </footer>
             </div>
-            <ul className={`${styles.payment} container`}>
-                <li className={styles.payment_item}>
-                    <Image src={MasterCard} alt="MasterCard" />
-                    {/* <img src="/images/master.png" alt="master_card_logo" /> */}
-                </li>
-                <li className={styles.payment_item}>
-                    <Image src={Visa} alt="Visa" />
-                    {/* <img src="/images/visa.png" /> */}
-                </li>{' '}
-                <li className={styles.payment_item}>
-                    <Image src={ApplePay} alt="ApplePay" />
-                    {/* <img src="/images/apple.png" /> */}
-                </li>
-                <li className={styles.payment_item}>
-                    <Image src={GooglePay} alt="GooglePay" />
-                    {/* <img src="/images/google.png" /> */}
-                </li>
-            </ul>
+            <div className={styles.payment_wrapper}>
+                <ul className={`${styles.payment} container`}>
+                    <li className={styles.payment_item}>
+                        <Image src={MasterCard} alt="MasterCard" />
+                        {/* <img src="/images/master.png" alt="master_card_logo" /> */}
+                    </li>
+                    <li className={styles.payment_item}>
+                        <Image src={Visa} alt="Visa" />
+                        {/* <img src="/images/visa.png" /> */}
+                    </li>{' '}
+                    <li className={styles.payment_item}>
+                        <Image src={ApplePay} alt="ApplePay" />
+                        {/* <img src="/images/apple.png" /> */}
+                    </li>
+                    <li className={styles.payment_item}>
+                        <Image src={GooglePay} alt="GooglePay" />
+                        {/* <img src="/images/google.png" /> */}
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 };
