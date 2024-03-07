@@ -76,3 +76,23 @@ interface ISignInFormState {
     message: string;
     user: IUserInfo | null;
 }
+interface IOrderedDish {
+    id: string;
+    quantity: number;
+    price: number;
+}
+interface IOrder {
+    recipient: string;
+    phoneNumber: string;
+    streetHouse: string;
+    flat: string;
+    floor: string;
+    deliveryDate: string;
+    deliveryTime: string;
+    numberPerson: number;
+    call?: boolean;
+    payment?: string;
+    cashSum: number;
+    comment: string;
+    orderedDishes: IOrderedDish[] | [];
+}

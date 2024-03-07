@@ -2,7 +2,6 @@ import { Box, Divider, Typography } from '@mui/material';
 
 import CartListItem from '@/components/cartListItem/CartListItem';
 import { useShoppingCart } from '@/store';
-import ConfirmOrderButton from '../confirmOrder/ConfirmOrder';
 
 const Title = () => {
     return (
@@ -45,17 +44,16 @@ const Footer = () => {
                 </Typography>
             </Box>
             <Divider sx={{ mb: '15px', borderColor: '#E1D5C9' }} />
-            <ConfirmOrderButton />
         </>
     );
 };
 
 export default function OrderList() {
     return (
-        <Box sx={{ border: '1px solid #FFC182', borderRadius: '40px', p: '36px' }}>
+        <>
             <Title />
             <Dishes />
             <Footer />
-        </Box>
+        </>
     );
 }

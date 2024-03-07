@@ -16,7 +16,7 @@ export default function Address() {
                 Delivery address
             </Typography>
             <TextField
-                name="address_street"
+                name="streetHouse"
                 placeholder="Enter street and house number"
                 sx={{
                     fontSize: '24px',
@@ -48,7 +48,7 @@ export default function Address() {
             >
                 <TextField
                     placeholder="Flat"
-                    name="address_flat"
+                    name="flat"
                     sx={{
                         width: '100%',
                         fontSize: '24px',
@@ -71,7 +71,7 @@ export default function Address() {
                 />
                 <TextField
                     placeholder="Floor"
-                    name="address_floor"
+                    name="floor"
                     sx={{
                         width: '100%',
                         fontSize: '24px',

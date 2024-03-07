@@ -14,7 +14,7 @@ const Accordion = styled((props: AccordionProps) => (
 });
 
 const CommentsArea = styled((props: TextFieldProps) => (
-    <TextField multiline name="comments" fullWidth minRows={3} {...props} />
+    <TextField multiline name="comment" fullWidth minRows={3} {...props} />
 ))(({ theme }) => ({
     '& .MuiInputBase-input.MuiOutlinedInput-input ': {
         fontSize: '22px',
