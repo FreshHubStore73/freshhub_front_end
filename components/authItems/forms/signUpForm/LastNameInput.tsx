@@ -16,13 +16,20 @@ export default function LastNameInput({}: Props) {
             control={control}
             rules={{
                 required: 'This field is required',
+                minLength: {
+                    value: 2,
+                    message: 'Last name must be at least 2 characters long',
+                },
+                maxLength: {
+                    value: 20,
+                    message: 'Last name cannot be more than 20 characters long',
+                },
             }}
             render={({ field: { onChange, ...rest } }) => (
                 <BaseFormInput
                     type="text"
                     onChange={(e) => {
-                        onChange(e.target.value);
-                        trigger('lastName');
+                        onChange(e.target.value.trimStart().replace(/\s{2,}/g, ' '));
                     }}
                     placeholder="Your last name"
                     error={!!errors.lastName?.type}

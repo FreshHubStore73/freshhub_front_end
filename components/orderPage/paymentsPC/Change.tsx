@@ -18,7 +18,7 @@ const StartAdornment = styled((props: InputAdornmentProps) => <InputAdornment {.
     }),
 );
 
-const ChangeInput = styled((props: TextFieldProps) => <TextField name="change" {...props} />)(
+const ChangeInput = styled((props: TextFieldProps) => <TextField name="cashSum" {...props} />)(
     ({ theme }) => ({
         '& .MuiInputBase-root': {
             paddingInline: '24px 40px',

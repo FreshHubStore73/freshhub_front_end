@@ -1,5 +1,5 @@
 'use client';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import SignInForm from '@/components/authItems/forms/signInForm/SignInForm';
 import Link from 'next/link';
 
@@ -14,45 +14,44 @@ const LoginPage = (params: Props) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '24px',
                 alignItems: 'center',
-                mt: '111px',
+                justifyContent: 'flex-start',
+                width: '742px',
+                margin: '90px auto 0',
             }}
         >
-            <Typography variant="h2" component={'h1'}
-                sx={{
-                    fontFamily: 'Oswald',
-                    fontWeight: '700',
-                    fontSize: '62px',
-                    lineHeight: '100px',
-                    color: '#040705'
-
-                }}>
+            <Typography variant="h2_Oswald" component={'h1'} color="text.secondary">
                 Log In
             </Typography>
             <Suspense>
                 <SignInForm />
             </Suspense>
-            <Typography
+            <Box
                 sx={{
-                    fontFamily: 'Loto',
-                    fontWeight: '700',
+                    mt: '44px',
                     fontSize: '24px',
-                    color: '#040705',
-                }}>
-                Not Registered? {'   '}
-                <Link
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                }}
+            >
+                <p>Not Registered? {'   '}</p>
+                <Button
+                    disableTouchRipple
+                    variant="text"
                     href="/signup"
-                    style={{
-                        fontFamily: 'Loto',
-                        fontWeight: '700',
+                    sx={{
+                        padding: '0px',
+                        fontWeight: 700,
                         fontSize: '24px',
-                        color: '#F15C30',
+                        '&.MuiButton-root:hover': {
+                            backgroundColor: '#fff',
+                        },
                     }}
                 >
                     Create an account
-                </Link>
-            </Typography>
+                </Button>
+            </Box>
         </Box>
     );
 };

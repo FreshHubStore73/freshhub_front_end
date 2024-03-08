@@ -51,3 +51,48 @@ type UseUserProfile = {
     clearAuth: () => void;
     changeProfile: () => void;
 };
+interface IUserCredentials {
+    phoneNumber: string;
+    password: string;
+}
+
+interface IUserSignUp extends IUserCredentials {
+    firstName: string;
+    lastName: string;
+}
+
+interface IUserInfo {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    // history: any[];
+    // userRole: 'admin' | 'user';
+}
+interface IUserResponse {
+    user: IUserInfo | null;
+    error: string | null;
+}
+interface ISignInFormState {
+    message: string;
+    user: IUserInfo | null;
+}
+interface IOrderedDish {
+    id: string;
+    quantity: number;
+    price: number;
+}
+interface IOrder {
+    recipient: string;
+    phoneNumber: string;
+    streetHouse: string;
+    flat: string;
+    floor: string;
+    deliveryDate: string;
+    deliveryTime: string;
+    numberPerson: number;
+    call?: boolean;
+    payment?: string;
+    cashSum: number;
+    comment: string;
+    orderedDishes: IOrderedDish[] | [];
+}

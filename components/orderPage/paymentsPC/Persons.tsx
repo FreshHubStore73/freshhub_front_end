@@ -49,7 +49,7 @@ export default function Persons({}: Props) {
             <NumberInput
                 quantity={quantity}
                 setQuantity={setQuantity}
-                name="persons"
+                name="numberPerson"
                 type="persons"
             />
         </InputLabel>

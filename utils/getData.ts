@@ -5,25 +5,26 @@ export async function getCategories() {
     if (!res.ok) throw new Error("Couldn't fetch categories");
     const data: CategoryItem[] = await res.json();
     const categoriesRaw = data.map((item) => ({ ...item, name: item.name.toLowerCase() }));
-    const categories = data.map((item) => item.name);
+    const categories = data.map((item) => item.name.toLowerCase());
     const pages = [...categories, 'search', 'order page'];
     return { categories, categoriesRaw, pages };
 }
 
 export async function getDishes(category: string, requestSearchParams: IRequestSearchParams = {}) {
     const { categoriesRaw, pages } = await getCategories();
-
-    const categoryItem = categoriesRaw.filter((cat) => cat.name === category);
-    const categoryId = categoryItem.length && categoryItem[0].id;
+    if (!pages.includes(category)) return [];
 
     const searchParams = new URLSearchParams([...Object.entries(requestSearchParams)]);
     const sortType = searchParams?.get('sort');
     const searchQuery = searchParams?.get('search');
-    if (!pages.includes(category)) return [];
-    let res;
-    const link = searchParams.has('search')
-        ? `${url}/api/Product/GetAll`
-        : `${url}/api/Product/GetAllByCategory/${categoryId}`;
+
+    let res, link;
+    if (searchParams.has('search')) {
+        link = `${url}/api/Product/GetAll`;
+    } else {
+        const categoryId = categoriesRaw.filter((cat) => cat.name === category)[0].id;
+        link = `${url}/api/Product/GetAllByCategory/${categoryId}`;
+    }
 
     res = await fetch(link);
 

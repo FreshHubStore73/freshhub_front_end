@@ -13,7 +13,8 @@ const SignUpPage = (params: Props) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                mt: '90px',
+                width: '884px',
+                margin: '90px auto 0',
             }}
         >
             <Typography variant="h2_Oswald" component={'h1'} color="text.secondary">
@@ -37,6 +38,7 @@ const SignUpPage = (params: Props) => {
                     sx={{
                         padding: '0px',
                         fontWeight: 700,
+                        fontSize: '24px',
                         '&.MuiButton-root:hover': {
                             backgroundColor: '#fff',
                         },

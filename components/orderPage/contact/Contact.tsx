@@ -2,7 +2,6 @@
 import React from 'react';
 import { Box, FormControl, FormLabel, InputLabel, Typography } from '@mui/material';
 import ContactField from './ContactField';
-import { useUserProfile } from '@/store';
 import ContactPhoneField from './ContactPhoneField';
 import { useAuth } from '@/hooks/useAuth';
 type Props = {};

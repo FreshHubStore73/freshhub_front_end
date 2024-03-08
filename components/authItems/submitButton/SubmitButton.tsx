@@ -1,9 +1,9 @@
 import { Button, ButtonProps } from '@mui/material';
 import { useFormStatus } from 'react-dom';
 
-type Props = ButtonProps & { text: string; isFormInvalid: boolean };
+type Props = ButtonProps & { text: string };
 
-function SubmitButton({ text, isFormInvalid, ...rest }: Props) {
+function SubmitButton({ text, ...rest }: Props) {
     const { pending } = useFormStatus();
 
     return (
@@ -11,7 +11,7 @@ function SubmitButton({ text, isFormInvalid, ...rest }: Props) {
             type="submit"
             aria-disabled={pending}
             variant="contained"
-            disabled={pending || isFormInvalid}
+            disabled={pending}
             {...rest}
             sx={{
                 width: '380px',

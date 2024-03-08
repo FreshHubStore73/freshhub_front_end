@@ -5,7 +5,7 @@ import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 
 import DishCard from '@/components/dishcard';
 import SortSelect from '@/components/sortSelect/SortSelect';
-import EmptyBlock from '../emptyBlock/EmptyBlock';
+import StubBlock from '../stubBlock/StubBlock';
 import { getCategories } from '@/utils/getData';
 
 type Props = {
@@ -62,7 +62,7 @@ export default async function CategoryItem({ dishes, path, searchParams }: Props
                     {dishes.length ? (
                         dishes.map((dish) => <DishCard key={dish.id} item={dish} />)
                     ) : (
-                        <EmptyBlock />
+                        <StubBlock />
                     )}
                 </Box>
             </section>

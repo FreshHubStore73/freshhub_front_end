@@ -3,9 +3,9 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { BaseFormInput } from '../baseFormInput/BaseFormInput';
 import ReactInputMask from 'react-input-mask';
 
-type Props = {};
+type Props = { variant?: 'signin' | 'signup' };
 
-export default function PhoneInput({}: Props) {
+export default function PhoneInput({ variant = 'signup' as 'signup' }: Props) {
     const {
         control,
         trigger,
@@ -27,7 +27,6 @@ export default function PhoneInput({}: Props) {
                     maskPlaceholder="x"
                     onChange={(e) => {
                         onChange(e.target.value);
-                        trigger('phoneNumber');
                     }}
                     {...rest}
                 >
@@ -40,7 +39,7 @@ export default function PhoneInput({}: Props) {
                             errors.phoneNumber?.type ? `${errors.phoneNumber?.message}` : ''
                         }
                         sx={{
-                            gridArea: '2 / 1 / 3 / 3',
+                            gridArea: variant === 'signin' ? 'auto' : '2 / 1 / 3 / 3',
                         }}
                     />
                 </ReactInputMask>

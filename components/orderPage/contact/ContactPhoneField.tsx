@@ -55,7 +55,7 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
         <InputMask mask="+1 999 999 9999" onChange={handleChange} value={value} maskPlaceholder="x">
             <CustomInput
                 inputRef={inputRef}
-                name="userPhone"
+                name="phoneNumber"
                 aria-label="user-phone"
                 isdisabled={!isEdit}
                 InputProps={{

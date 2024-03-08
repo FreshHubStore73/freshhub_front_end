@@ -76,6 +76,9 @@ const theme = createTheme({
             primary: '#3E3B3B',
             secondary: '#040705',
         },
+        error: {
+            main: '#F15C30',
+        },
     },
     typography: {
         fontFamily: [lato.style.fontFamily, oswald.style.fontFamily, 'sans-serif'].join(','),

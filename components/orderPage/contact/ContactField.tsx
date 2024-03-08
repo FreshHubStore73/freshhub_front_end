@@ -122,7 +122,7 @@ export default function ContactNameField({ data }: Props) {
     return (
         <CustomInput
             inputRef={inputRef}
-            name="userName"
+            name="recipient"
             aria-label="user-name"
             isdisabled={!isEdit}
             onChange={handleChange}

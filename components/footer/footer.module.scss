@@ -53,22 +53,19 @@
 .contacts_link:hover .contacts_details {
     color: var(--color-title);
 }
-
+.payment_wrapper {
+    background-color: var(--color-beige);
+}
 .payment {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-block: 26px;
-    background-color: var(--color-beige);
 }
 .payment_item {
-    // margin-right: 12.4%;
     min-height: 28px;
     min-width: 48px;
 }
-// .payment_item:last-child {
-//     margin-right: 0;
-// }
 @media screen and (max-width: 992px) {
     .footer_nav {
         flex-direction: column;
