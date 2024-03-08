@@ -11,11 +11,11 @@ import { Typography } from '@mui/material';
 import styles from './breadcrumbs.module.scss';
 
 export default function BreadCrumbs({
-    pages,
     singlePage,
+    useSearchParams,
 }: {
-    pages?: string[];
     singlePage?: string;
+    useSearchParams?: boolean;
 }) {
     const pathnames: string[] = usePathname()
         .split('/')
@@ -33,7 +33,10 @@ export default function BreadCrumbs({
             1,
         );
     }
-
+    //logic only for profile page
+    if (pathnames.includes('profile') && useSearchParams) {
+        pathnames.push('purchase history');
+    }
     return (
         <Box pt="64px" role="presentation" className={styles.links}>
             <Breadcrumbs
@@ -50,7 +53,9 @@ export default function BreadCrumbs({
                 ) : (
                     pathnames.map((chunk, i) => {
                         const last = i === pathnames.length - 1;
-                        const to = `/categories/${pathnames.slice(0, i + 1).join('/')}`;
+                        const to = `/${
+                            pathnames.includes('profile') ? '' : 'categories/'
+                        }${pathnames.slice(0, i + 1).join('/')}`;
                         const content =
                             chunk === 'order'
                                 ? 'Order page'

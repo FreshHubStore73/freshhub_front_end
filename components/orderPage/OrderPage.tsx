@@ -59,58 +59,56 @@ export default function OrderPage({}: Props) {
 
     return (
         <>
-            <Box mt={'111px'}>
-                <BreadCrumbs singlePage="Order Page" />
-                <Box
-                    component={'form'}
-                    ref={formRef}
-                    action={formAction}
-                    // onSubmit={handleSubmit}
-                    sx={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        marginTop: '36px',
-                        columnGap: '87px',
-                    }}
-                >
-                    <Box sx={{ overflow: 'hidden', marginRight: '10px' }}>
-                        <Typography
-                            component={'h1'}
-                            sx={{
-                                fontWeight: 700,
-                                fontSize: '40px',
-                                marginBottom: '24px',
-                                color: 'text.secondary',
-                                textTransform: 'none',
-                            }}
-                        >
-                            {' '}
-                            Placing an order
-                        </Typography>
-                        <Contact />
-                        <Address />
-                        <Time />
-                        <PaymentsPC />
-                    </Box>
-                    <Box sx={{ overflow: 'hidden', marginLeft: '10px' }}>
-                        <CustomizedAccordions />
-                        <Box sx={{ border: '1px solid #FFC182', borderRadius: '40px', p: '36px' }}>
-                            <OrderList />
-                            {/* временная лабуда для отслеживания ошибок сервера */}
-                            {state.message !== 'Ok' ? (
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.palette.error.main,
-                                        marginBlock: '24px',
-                                        fontSize: '20px',
-                                    }}
-                                >
-                                    {state.message}
-                                </Typography>
-                            ) : null}
-                            <ConfirmOrderButton handleSubmit={handleSubmit} />
-                            <OrderedDishes dishes={dishes} />
-                        </Box>
+            <BreadCrumbs singlePage="Order Page" />
+            <Box
+                component={'form'}
+                ref={formRef}
+                action={formAction}
+                // onSubmit={handleSubmit}
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    marginTop: '36px',
+                    columnGap: '87px',
+                }}
+            >
+                <Box sx={{ overflow: 'hidden', marginRight: '10px' }}>
+                    <Typography
+                        component={'h1'}
+                        sx={{
+                            fontWeight: 700,
+                            fontSize: '40px',
+                            marginBottom: '24px',
+                            color: 'text.secondary',
+                            textTransform: 'none',
+                        }}
+                    >
+                        {' '}
+                        Placing an order
+                    </Typography>
+                    <Contact />
+                    <Address />
+                    <Time />
+                    <PaymentsPC />
+                </Box>
+                <Box sx={{ overflow: 'hidden', marginLeft: '10px' }}>
+                    <CustomizedAccordions />
+                    <Box sx={{ border: '1px solid #FFC182', borderRadius: '40px', p: '36px' }}>
+                        <OrderList />
+                        {/* временная лабуда для отслеживания ошибок сервера */}
+                        {state.message !== 'Ok' ? (
+                            <Typography
+                                sx={{
+                                    color: (theme) => theme.palette.error.main,
+                                    marginBlock: '24px',
+                                    fontSize: '20px',
+                                }}
+                            >
+                                {state.message}
+                            </Typography>
+                        ) : null}
+                        <ConfirmOrderButton handleSubmit={handleSubmit} />
+                        <OrderedDishes dishes={dishes} />
                     </Box>
                 </Box>
             </Box>
