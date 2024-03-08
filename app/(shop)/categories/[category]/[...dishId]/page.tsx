@@ -15,9 +15,9 @@ export default async function DishItemPage({ params }: Props) {
     const dishItem = await getDish(id);
 
     return (
-        <Box mt={'111px'}>
-            <BreadCrumbs pages={pages} />
+        <>
+            <BreadCrumbs />
             <DishItem dish={dishItem} />
-        </Box>
+        </>
     );
 }

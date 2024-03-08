@@ -26,8 +26,8 @@ export default async function CategoryItem({ dishes, path, searchParams }: Props
         : path;
 
     return (
-        <Box mt={'111px'}>
-            <BreadCrumbs pages={pages} />
+        <>
+            <BreadCrumbs />
 
             <Box
                 display="flex"
@@ -66,6 +66,6 @@ export default async function CategoryItem({ dishes, path, searchParams }: Props
                     )}
                 </Box>
             </section>
-        </Box>
+        </>
     );
 }
