@@ -96,3 +96,15 @@ interface IOrder {
     comment: string;
     orderedDishes: IOrderedDish[] | [];
 }
+type ValidateRules = {
+    minLength?: {
+        value: number;
+        message: string;
+    };
+    maxLength?: {
+        value: number;
+        message: string;
+    };
+    required?: string;
+    custom?: (value: string) => boolean;
+};
