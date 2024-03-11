@@ -34,7 +34,7 @@ const Page = async ({ params, searchParams }: Props) => {
                     mt: '14px',
                 }}
             >
-                <Box sx={{ width: '432px' }}>
+                <Box sx={{ minWidth: '432px' }}>
                     <UserCard firstName={data.user.firstName} phoneNumber={data.user.phoneNumber} />
                     <HistoryButton searchParams={!!searchParams?.history} />
                 </Box>

@@ -8,7 +8,7 @@ export async function orderAction(
 ) {
     let order: IOrder = {
         recipient: formData.get('recipient') as string,
-        phoneNumber: formData.get('phoneNumber') as string,
+        phoneNumber: (formData.get('phoneNumber') as string).replace(/\s+/, ''),
         streetHouse: formData.get('streetHouse') as string,
         flat: formData.get('flat') as string,
         floor: formData.get('floor') as string,
@@ -41,8 +41,20 @@ export async function orderAction(
     //tmp logic
     return {
         message:
-            Math.floor(Math.random() * 2) + 1 === 1
-                ? 'Lorem ipsum dolor sit amet, consectetur adip'
-                : 'Ok',
+            Math.floor(Math.random() * 2) + 1 === 1 ? 'Random error message from server' : 'Ok',
+    };
+}
+
+export async function updateUserInfo(prevState: { errorMessage: string }, formData: FormData) {
+    const updatedUser = {
+        firstName: formData.get('firstName') as string,
+        lastName: formData.get('lastName') as string,
+        phoneNumber: (formData.get('phoneNumber') as string).replace(/\s+/, ''),
+    };
+    console.log(updatedUser);
+    //tmp logic
+    return {
+        errorMessage:
+            Math.floor(Math.random() * 2) + 1 === 1 ? 'Random error message from server' : 'Ok',
     };
 }
