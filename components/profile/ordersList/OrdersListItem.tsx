@@ -6,6 +6,7 @@ import {
     Box,
     Divider,
     SvgIcon,
+    Tooltip,
     Typography,
 } from '@mui/material';
 import Image from 'next/image';
@@ -167,16 +168,37 @@ const OrdersListDish = ({
                 height="40"
                 style={{ gridArea: '1 / 1 / 3 / 2', objectFit: 'contain' }}
             />
-            <Typography
-                sx={{
-                    alignContent: 'flex-start',
-                    fontSize: '18px',
-                    color: 'text.secondary',
-                    gridArea: '1 / 2 / 3 / 3',
+            <Tooltip
+                title={dishName}
+                placement="top"
+                componentsProps={{
+                    tooltip: {
+                        sx: {
+                            backgroundColor: '#BDBDBD',
+                            color: 'text.secondary',
+                            padding: '8px 14px',
+                            borderRadius: '10px',
+                            fontSize: '14px',
+                            boxShadow: '0px 2px 16px 1px rgba(0, 0, 0, 0.15)',
+                        },
+                    },
                 }}
             >
-                {dishName}
-            </Typography>
+                <Typography
+                    sx={{
+                        alignContent: 'flex-start',
+                        fontSize: '18px',
+                        color: 'text.secondary',
+                        gridArea: '1 / 2 / 3 / 3',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {dishName}
+                </Typography>
+            </Tooltip>
             <Box
                 component={'span'}
                 sx={{
