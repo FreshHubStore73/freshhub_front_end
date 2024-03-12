@@ -108,3 +108,27 @@ type ValidateRules = {
     required?: string;
     custom?: (value: string) => boolean;
 };
+
+interface IOrdersHistoryTitle {
+    orderNumber: string;
+    ordered: string; //'17.03.2021, 5:37:00'
+    orderStatus: 'in progress' | 'done' | 'rejected';
+    totalAmount: number;
+}
+interface IOrdersHistoryBody {
+    deliveryAddress: string;
+    recipientName: string;
+    recipientPhoneNumber: string;
+    orderedDishes: {
+        dishId: string;
+        dishName: string;
+        dishPrice: number;
+        dishQuantity: number;
+        dishImage: string;
+    }[];
+    totalAmount: number;
+    payment: 'cash' | 'card';
+}
+interface IOrdersHistory extends IOrdersHistoryTitle, IOrdersHistoryBody {
+    orderId: string;
+}
