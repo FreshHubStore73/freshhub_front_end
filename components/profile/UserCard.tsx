@@ -1,3 +1,4 @@
+import { addSpaces } from '@/utils/helpers';
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 
@@ -81,12 +82,7 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                     component={'h3'}
                     sx={{ fontSize: '24px', lineHeight: '29px', fontWeight: 400 }}
                 >
-                    {[...phoneNumber]
-                        .reduce((acc: string[], cur, i) => {
-                            [2, 5, 8].some((e) => e === i) ? acc.push(' ', cur) : acc.push(cur);
-                            return acc;
-                        }, [])
-                        .join('')}
+                    {addSpaces(phoneNumber)}
                 </Typography>
             </Box>
         </Box>

@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
+
 export async function orderAction(
     prevState: {
         message: string;
@@ -37,6 +39,7 @@ export async function orderAction(
     order.orderedDishes = orderedDishes;
     const orderedDishesJson = JSON.stringify(order);
     console.log('prevState.message: ', prevState.message, orderedDishesJson);
+    // revalidateTag('orders');
 
     //tmp logic
     return {
@@ -52,6 +55,7 @@ export async function updateUserInfo(prevState: { errorMessage: string }, formDa
         phoneNumber: (formData.get('phoneNumber') as string).replace(/\s+/, ''),
     };
     console.log(updatedUser);
+    //revalidateTag('user');
     //tmp logic
     return {
         errorMessage:

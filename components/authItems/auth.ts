@@ -134,6 +134,9 @@ export async function getUser(t?: string) {
     //     headers: {
     //         Authorization: `Bearer ${token}`,
     //     },
+    // next: {
+    //     tags: ['user'];
+    // }
     // });
     // if (!res.ok) {
     //     return {

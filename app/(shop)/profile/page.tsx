@@ -1,18 +1,20 @@
-import { getUser } from '@/components/authItems/auth';
 import { redirect } from 'next/navigation';
 
-import styles from './page.module.scss';
 import { Box, Typography } from '@mui/material';
+
+import { getUser } from '@/components/authItems/auth';
 import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 import UserCard from '@/components/profile/UserCard';
 import HistoryButton from '@/components/profile/HistoryButton';
-import OrdersList from '@/components/profile/OrdersList';
+import OrdersList from '@/components/profile/ordersList/OrdersList';
 import PersonalInfo from '@/components/profile/personalInfo/PersonalInfo';
+import { getOrders } from '@/utils/getData';
 
 type Props = { params: { userId: string }; searchParams: { history?: boolean } };
 
 const Page = async ({ params, searchParams }: Props) => {
     const data = await getUser();
+    const orders = await getOrders();
     if (!data.user) redirect('/login');
 
     return (
@@ -40,7 +42,7 @@ const Page = async ({ params, searchParams }: Props) => {
                 </Box>
                 <Box sx={{ flexGrow: 1 }}>
                     {searchParams?.history ? (
-                        <OrdersList />
+                        <OrdersList history={orders} />
                     ) : (
                         <PersonalInfo
                             firstName={data.user.firstName}
