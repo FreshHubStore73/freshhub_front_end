@@ -1,5 +1,5 @@
 'use client';
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { IconButton } from '@mui/material';
@@ -78,11 +78,15 @@ const UserIcon = forwardRef<HTMLElement, UserIconProps>((props, ref) => {
                     onClick={handleOpenUserMenu}
                     disableTouchRipple
                     sx={{
-                        px: '12px',
+                        px: { mobile: '8px', tablet: '10px', desktop: '12px' },
                         '&.MuiIconButton-root:hover': {
                             backgroundColor: '#fff',
                         },
                         '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
+                        '& svg': {
+                            height: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                            width: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                        },
                     }}
                 >
                     <svg

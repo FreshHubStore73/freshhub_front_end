@@ -1,58 +1,53 @@
 'use client';
 import { FC, useState } from 'react';
 
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 
 import NavMenuLinks from '../navMenuLinks';
-import Logo from '../../logo';
-
-import styles from './navMenu.module.scss';
+import { SvgIcon, SvgIconProps } from '@mui/material';
 
 type Props = { categories: string[] };
-
+const MenuIcon = (props: SvgIconProps) => (
+    <SvgIcon>
+        <svg
+            width="22"
+            height="14"
+            viewBox="0 0 22 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M1 1H21" stroke="#040705" strokeLinecap="round" />
+            <path d="M1 7H21" stroke="#040705" strokeLinecap="round" />
+            <path d="M1 13H21" stroke="#040705" strokeLinecap="round" />
+        </svg>
+    </SvgIcon>
+);
 const NavMenuDrawer: FC<Props> = ({ categories }) => {
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [anchorElNav, setAnchorElNav] = useState<any>(null);
-    // const handleOpenNavMenu: React.MouseEventHandler<HTMLButtonElement> | undefined = (event) => {
-    //     setAnchorElNav(event.currentTarget);
-    // };
+
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
 
     const drawer = (
-        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography
-                variant="header"
-                component="div"
-                sx={{
-                    '&.MuiTypography-header > div': {
-                        height: '111px',
-                        display: 'flex',
-                        alignItems: 'center',
-                    },
-                }}
-            >
-                <Logo />
-            </Typography>
-            <Divider />
+        <Box onClick={handleDrawerToggle}>
             <NavMenuLinks links={categories} />
         </Box>
     );
     return (
         <>
-            <Box onClick={handleDrawerToggle} sx={{ display: { xs: 'flex', lg: 'none' }, mr: 3 }}>
+            <Box
+                onClick={handleDrawerToggle}
+                sx={{ display: { mobile: 'flex', tablet: 'none' }, mr: 3 }}
+            >
                 <IconButton
                     size="large"
-                    aria-label="account of current user"
+                    aria-label="dishes menu"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
-                    // onClick={handleOpenNavMenu}
                 >
                     <MenuIcon />
                 </IconButton>
@@ -61,14 +56,21 @@ const NavMenuDrawer: FC<Props> = ({ categories }) => {
                 variant="temporary"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
-                ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
-                }}
+                ModalProps={
+                    {
+                        // keepMounted: true, // Better open performance on mobile.
+                    }
+                }
                 sx={{
-                    display: { xs: 'block', lg: 'none' },
+                    display: { mobile: 'block', tablet: 'none' },
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
-                        width: 270,
+                        width: '45%',
+                        maxWidth: '260px',
+                        top: '60px',
+                    },
+                    '& .MuiBackdrop-root': {
+                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
                     },
                 }}
             >

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Box } from '@mui/material';
 
 import NavBarLinks from './navBarLinks';
@@ -11,8 +9,9 @@ const NavBar = async () => {
         <Box
             sx={{
                 flexGrow: 1,
-                gap: '50px',
-                display: { xs: 'none', lg: 'flex' },
+                gap: { tablet: '25px', desktop: '50px' },
+                marginLeft: { mobile: '0px', tablet: '40px', desktop: '0px' },
+                display: { mobile: 'none', tablet: 'flex' },
                 justifyContent: 'center',
             }}
         >

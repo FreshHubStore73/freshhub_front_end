@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 
 import { useShoppingCart } from '../../../store';
 import CartDrawer from '../cartDrawer/CartDrawer';
+import { useTheme } from '@emotion/react';
 
 const HtmlTooltip = styled(
     ({ className, anchEl, ...props }: TooltipProps & { anchEl: HTMLElement | null }) => (
@@ -77,13 +78,29 @@ const ShoppingBasket = () => {
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
-        right: 5,
-        top: 33,
+        [theme.breakpoints.up('mobile')]: {
+            right: '2px',
+            bottom: '2px',
+            fontSize: '7px',
+            minWidth: '13px',
+            height: '13px',
+        },
+        [theme.breakpoints.up('tablet')]: {
+            right: '5px',
+            bottom: '5px',
+            fontSize: '8px',
+            minWidth: '15px',
+            height: '15px',
+        },
+        [theme.breakpoints.up('desktop')]: {
+            right: '7px',
+            bottom: '7px',
+            fontSize: '10px',
+            minWidth: '17px',
+            height: '17px',
+        },
         color: '#fff',
-        fontSize: '10px',
-        minWidth: '17px',
-        height: '17px',
-        padding: '0 2px 2px',
+        padding: '2px',
         backgroundColor: theme.palette.accent.main,
     },
 }));
@@ -95,7 +112,7 @@ type Props = {
 const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
     const totalDishes = useShoppingCart((state) => state.totalDishes);
     const totalAmount = useShoppingCart((state) => state.totalAmount);
-
+    const theme = useTheme();
     return (
         <>
             <HtmlTooltip
@@ -127,13 +144,24 @@ const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
                         onClick={toggleDrawer}
                         disableTouchRipple
                         sx={{
+                            '& svg': {
+                                height: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                                width: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                            },
                             '&.MuiIconButton-root:hover': {
                                 backgroundColor: '#fff',
                             },
                             '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
                         }}
                     >
-                        <StyledBadge badgeContent={totalDishes} showZero>
+                        <StyledBadge
+                            badgeContent={totalDishes}
+                            showZero
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                        >
                             <ShoppingBasket />
                         </StyledBadge>
                     </IconButton>

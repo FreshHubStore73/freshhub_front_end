@@ -4,8 +4,6 @@ import { usePathname } from 'next/navigation';
 
 import { Typography } from '@mui/material';
 
-import styles from './navBarLinks.module.scss';
-
 const NavBarLinks = ({ links }: { links: string[] }) => {
     const pathname = usePathname().split('/')[2];
     return (
@@ -14,15 +12,19 @@ const NavBarLinks = ({ links }: { links: string[] }) => {
                 const catName = link.toLowerCase();
                 const isActive = pathname === catName;
                 return (
-                    <Link href={`/categories/${catName}`} key={catName} className={styles.link}>
+                    <Link href={`/categories/${catName}`} key={catName}>
                         <Typography
-                            variant="header"
+                            // variant="header"
                             className={`${isActive ? 'Mui-active' : ''}`}
                             sx={{
+                                fontSize: { mobile: '', tablet: '16px', desktop: '20px' },
                                 textTransform: 'capitalize',
                                 transition: 'color 0.2s',
                                 '&.MuiTypography-root.Mui-active': {
                                     color: '#F15C30',
+                                },
+                                '&:hover': {
+                                    color: `${isActive ? '' : 'red'}`,
                                 },
                             }}
                         >

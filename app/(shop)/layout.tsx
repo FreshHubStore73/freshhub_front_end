@@ -11,7 +11,13 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 <NavMenu />
                 <NavBar />
             </Header>
-            <Toolbar />
+            <Toolbar
+                sx={{
+                    '&': {
+                        minHeight: { mobile: '59px', tablet: '83px', desktop: '111px' },
+                    },
+                }}
+            />
             <main>
                 <div className="container">{children}</div>
             </main>

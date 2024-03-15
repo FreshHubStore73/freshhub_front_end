@@ -5,29 +5,19 @@ import { usePathname } from 'next/navigation';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Typography } from '@mui/material';
 
-import styles from './navMenuLinks.module.scss';
-
 const NavMenuLinks = ({ links }: { links: string[] }) => {
     const pathname = usePathname().split('/')[2];
     return (
-        <List>
+        <List sx={{ paddingBlock: '36px' }}>
             {links.map((link) => {
                 const catName = link.toLowerCase();
                 const isActive = pathname === catName;
                 return (
-                    <Link href={`/categories/${catName}`} key={catName} className={styles.link}>
-                        <ListItem
-                            key={catName}
-                            disablePadding
-                            // className={isActive ? 'Mui-active' : undefined}
-                        >
+                    <Link href={`/categories/${catName}`} key={catName}>
+                        <ListItem key={catName} disablePadding>
                             <ListItemButton
                                 sx={{
-                                    textAlign: 'left',
-                                    textTransform: 'capitalize',
-                                    '&.MuiListItemButton-root': {
-                                        backgroundColor: `${isActive ? '#FFC182' : undefined}`,
-                                    },
+                                    paddingInline: '8px',
                                 }}
                             >
                                 <ListItemText
@@ -37,6 +27,11 @@ const NavMenuLinks = ({ links }: { links: string[] }) => {
                                                 variant="header"
                                                 sx={{
                                                     textTransform: 'capitalize',
+                                                    fontSize: '22px',
+                                                    fontWeight: 700,
+                                                    color: `${
+                                                        isActive ? 'accent.main' : 'text.secondary'
+                                                    }`,
                                                 }}
                                             >
                                                 {catName}

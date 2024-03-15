@@ -47,7 +47,18 @@ declare module '@mui/material/Typography' {
         overline: false;
     }
 }
-
+declare module '@mui/material/styles' {
+    interface BreakpointOverrides {
+        xs: false; // removes the `xs` breakpoint
+        sm: false;
+        md: false;
+        lg: false;
+        xl: false;
+        mobile: true; // adds the `mobile` breakpoint
+        tablet: true;
+        desktop: true;
+    }
+}
 const oswald = Oswald({
     subsets: ['latin'],
     weight: ['500', '700'],
@@ -136,13 +147,6 @@ const theme = createTheme({
         overline: undefined,
     },
     components: {
-        MuiToolbar: {
-            styleOverrides: {
-                root: {
-                    minHeight: '111px !important',
-                },
-            },
-        },
         MuiAppBar: {
             styleOverrides: {
                 root: {
@@ -172,6 +176,13 @@ const theme = createTheme({
             styleOverrides: {
                 colorPrimary: '#E1D5C9',
             },
+        },
+    },
+    breakpoints: {
+        values: {
+            mobile: 0,
+            tablet: 768,
+            desktop: 1200,
         },
     },
 });
