@@ -12,9 +12,19 @@ import Change from './Change';
 type Props = {};
 
 const RadioIcon = styled('span')(({ theme }) => ({
+    [theme.breakpoints.up('mobile')]: {
+        height: 26,
+        width: 26,
+    },
+    [theme.breakpoints.up('tablet')]: {
+        height: 34,
+        width: 34,
+    },
+    [theme.breakpoints.up('desktop')]: {
+        height: 38,
+        width: 38,
+    },
     borderRadius: '50%',
-    width: 38,
-    height: 38,
     backgroundColor: '#E0E0E0',
     '.Mui-focusVisible &': {
         outline: `2px auto ${theme.palette.text.secondary}`,
@@ -22,19 +32,34 @@ const RadioIcon = styled('span')(({ theme }) => ({
     },
 }));
 
-const CheckedRadioIcon = styled(RadioIcon)({
+const CheckedRadioIcon = styled(RadioIcon)(({ theme }) => ({
     backgroundColor: '#E0E0E0',
     '&::before': {
+        [theme.breakpoints.up('mobile')]: {
+            height: 16,
+            width: 16,
+            top: '10px',
+            left: '14px',
+        },
+        [theme.breakpoints.up('tablet')]: {
+            height: 20,
+            width: 20,
+            top: '14px',
+            left: '16px',
+        },
+        [theme.breakpoints.up('desktop')]: {
+            height: 22,
+            width: 22,
+            top: '17px',
+            left: '17px',
+        },
         display: 'block',
-        width: 22,
-        height: 22,
         position: 'absolute',
-        top: '17px',
-        left: '17px',
+
         backgroundImage: 'radial-gradient(#F15C30,#F15C30 66%,transparent 74%)',
         content: '""',
     },
-});
+}));
 
 function CustomRadio(props: RadioProps) {
     return (
@@ -75,8 +100,8 @@ export default function Payments({}: Props) {
             <FormLabel
                 sx={{
                     fontWeight: 700,
-                    fontSize: '28px',
-                    marginBottom: '21px',
+                    fontSize: { mobile: '16px', tablet: '22px', desktop: '28px' },
+
                     '&.MuiFormLabel-root.Mui-focused': {
                         color: 'text.secondary',
                     },
@@ -91,7 +116,10 @@ export default function Payments({}: Props) {
                 onChange={handleCollapse}
                 sx={{
                     marginLeft: '3px',
-                    marginTop: '25px',
+                    marginTop: { mobile: '16px', tablet: '22px', desktop: '30px' },
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: { mobile: '1px', tablet: '5px', desktop: '4px' },
                 }}
             >
                 <FormControlLabel
@@ -99,15 +127,22 @@ export default function Payments({}: Props) {
                     control={<CustomRadio />}
                     label="Pay by card"
                     sx={{
-                        marginBottom: '13px',
-                        fontSize: '24px',
+                        fontSize: { mobile: '16px', tablet: '20px', desktop: '24px' },
+                        '& .MuiRadio-root': {
+                            py: { mobile: '5px', tablet: '7px', desktop: '9px' },
+                        },
                     }}
                 />
                 <FormControlLabel
                     value="cash"
                     control={<CustomRadio />}
                     label="Cash"
-                    sx={{ fontSize: '24px' }}
+                    sx={{
+                        fontSize: { mobile: '16px', tablet: '20px', desktop: '24px' },
+                        '& .MuiRadio-root': {
+                            py: { mobile: '5px', tablet: '7px', desktop: '9px' },
+                        },
+                    }}
                 />
             </RadioGroup>
             {/* </FormControl> */}

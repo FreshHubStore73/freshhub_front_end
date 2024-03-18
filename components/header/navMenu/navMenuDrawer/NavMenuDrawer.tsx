@@ -56,18 +56,18 @@ const NavMenuDrawer: FC<Props> = ({ categories }) => {
                 variant="temporary"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
-                ModalProps={
-                    {
-                        // keepMounted: true, // Better open performance on mobile.
-                    }
-                }
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
                 sx={{
                     display: { mobile: 'block', tablet: 'none' },
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
                         width: '45%',
                         maxWidth: '260px',
+                        maxHeight: 'calc(100dvh - 60px)',
                         top: '60px',
+                        borderRadius: '0 0 30px 0',
                     },
                     '& .MuiBackdrop-root': {
                         backgroundColor: 'rgba(0, 0, 0, 0.2)',

@@ -95,7 +95,7 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
                 {state.errorMessage !== 'Ok' ? (
                     <Typography
                         sx={{
-                            color: (theme) => theme.palette.error.main,
+                            color: 'error.main',
                             fontSize: '20px',
                         }}
                     >

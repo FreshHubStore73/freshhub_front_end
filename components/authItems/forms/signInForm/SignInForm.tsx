@@ -73,7 +73,7 @@ export default function SignInForm({}: Props) {
                     {state?.message !== 'Ok' ? (
                         <Typography
                             sx={{
-                                color: (theme) => theme.palette.error.main,
+                                color: 'error.main',
                                 mb: '24px',
                                 fontSize: '20px',
                             }}

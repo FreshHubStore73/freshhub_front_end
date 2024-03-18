@@ -112,25 +112,28 @@ const UserIcon = forwardRef<HTMLElement, UserIconProps>((props, ref) => {
                 <Menu
                     sx={{
                         '& .MuiPaper-root': {
-                            width: '182px',
-                            borderRadius: '18px',
+                            width: { mobile: '104px', tablet: '122px', desktop: '182px' },
+                            borderRadius: { mobile: '14px', tablet: '18px' },
                             boxShadow: '0px 2px 16px 1px rgba(0, 0, 0, 0.15)',
                         },
                         '& .MuiList-root': {
-                            padding: '16px 0px',
-                            // gap: '18px',
+                            padding: { mobile: '6px 0', tablet: '8px 0', desktop: '15px 0' },
                             display: 'flex',
                             flexDirection: 'column',
                         },
                         '& .MuiMenuItem-root': {
-                            padding: '10px 20px',
-                            fontSize: '20px',
+                            padding: {
+                                mobile: '4px 14px',
+                                tablet: '4px 14px',
+                                desktop: '4px 16px',
+                            },
+                            fontSize: { mobile: '12px', tablet: '14px', desktop: '16px' },
                             fontWeight: '400',
-                            lineHeight: '16.8px',
+                            minHeight: '0px',
                         },
                         '& .MuiButtonBase-root:hover': {
                             backgroundColor: 'white',
-                            color: (theme) => theme.palette.accent.main,
+                            color: 'accent.main',
                         },
                     }}
                     id="menu-appbar"

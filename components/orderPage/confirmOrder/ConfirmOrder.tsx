@@ -11,11 +11,23 @@ type Props = { handleSubmit?: React.MouseEventHandler<HTMLButtonElement> };
 
 const ConfirmBtn = styled((props: ButtonProps) => (
     <Button fullWidth type="submit" variant="contained" {...props} />
-))({
-    height: '78px',
-    borderRadius: '50px',
-    fontSize: '28px',
-});
+))(({ theme }) => ({
+    [theme.breakpoints.up('mobile')]: {
+        height: '44px',
+        fontSize: '16px',
+        borderRadius: '26px',
+    },
+    [theme.breakpoints.up('tablet')]: {
+        height: '69px',
+        fontSize: '24px',
+        borderRadius: '50px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        height: '78px',
+        fontSize: '28px',
+        borderRadius: '50px',
+    },
+}));
 
 export default function ConfirmOrder({ handleSubmit }: Props) {
     const { pending } = useFormStatus();

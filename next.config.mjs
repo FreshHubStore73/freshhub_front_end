@@ -13,7 +13,15 @@ const nextConfig = {
                 hostname: 'media.istockphoto.com',
                 port: '',
             },
+            {
+                protocol: 'http',
+                hostname: 'gmg38118-001-site1.jtempurl.com',
+                port: '',
+            },
         ],
+    },
+    env: {
+        SERV_URL: process.env.SERV_URL,
     },
 };
 

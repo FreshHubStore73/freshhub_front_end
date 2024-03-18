@@ -11,7 +11,10 @@ type Props = { isExpanded: boolean };
 
 const StartAdornment = styled((props: InputAdornmentProps) => <InputAdornment {...props} />)(
     ({ theme }) => ({
-        fontSize: '22px',
+        [theme.breakpoints.up('mobile')]: { fontSize: '12px' },
+        [theme.breakpoints.up('tablet')]: { fontSize: '20px' },
+        [theme.breakpoints.up('desktop')]: { fontSize: '22px' },
+
         '& .MuiTypography-root': {
             color: theme.palette.text.primary,
         },
@@ -20,9 +23,34 @@ const StartAdornment = styled((props: InputAdornmentProps) => <InputAdornment {.
 
 const ChangeInput = styled((props: TextFieldProps) => <TextField name="cashSum" {...props} />)(
     ({ theme }) => ({
+        [theme.breakpoints.up('mobile')]: {
+            '& .MuiInputBase-root': {
+                paddingInline: '18px 30px',
+                height: '48px',
+                '& .MuiInputBase-input': {
+                    fontSize: '12px',
+                },
+            },
+        },
+        [theme.breakpoints.up('tablet')]: {
+            '& .MuiInputBase-root': {
+                paddingInline: '28px 40px',
+                height: '68px',
+                '& .MuiInputBase-input': {
+                    fontSize: '20px',
+                },
+            },
+        },
+        [theme.breakpoints.up('desktop')]: {
+            '& .MuiInputBase-root': {
+                paddingInline: '24px 40px',
+                height: '73px',
+                '& .MuiInputBase-input': {
+                    fontSize: '22px',
+                },
+            },
+        },
         '& .MuiInputBase-root': {
-            paddingInline: '24px 40px',
-            height: '73px',
             borderRadius: '40px',
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.palette.text.secondary,
@@ -34,7 +62,6 @@ const ChangeInput = styled((props: TextFieldProps) => <TextField name="cashSum" 
         },
         '& .MuiInputBase-input': {
             padding: '0',
-            fontSize: '22px',
             textAlign: 'end',
         },
     }),
@@ -59,7 +86,7 @@ const Change = forwardRef<HTMLInputElement, Props>((props, ref) => {
         <Collapse
             in={isExpanded}
             sx={{
-                mt: '22px',
+                mt: { mobile: '9px', tablet: '9px', desktop: '14px' },
             }}
         >
             <FormControl fullWidth>

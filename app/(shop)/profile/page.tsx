@@ -20,12 +20,7 @@ const Page = async ({ params, searchParams }: Props) => {
     return (
         <>
             <BreadCrumbs useSearchParams={searchParams?.history} />
-            <Typography
-                variant="h2_Oswald"
-                component="h1"
-                mt={'14px'}
-                color="palette.text.secondary"
-            >
+            <Typography variant="h2_Oswald" component="h1" mt={'14px'} color="text.secondary">
                 Personal data
             </Typography>
             <Box

@@ -29,7 +29,6 @@ const HtmlTooltip = styled(
                 //     vertical: 'top',
                 //     horizontal: 'center',
                 // },
-
                 anchorEl: anchEl,
             }}
         />
@@ -125,7 +124,7 @@ const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
                                 fontWeight: 'bold',
                                 fontSize: '18px',
                                 marginBottom: '5px',
-                                color: (theme) => theme.palette.text.secondary,
+                                color: 'text.secondary',
                             }}
                         >
                             Your cart:

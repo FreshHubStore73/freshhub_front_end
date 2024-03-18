@@ -21,8 +21,9 @@ const CartDrawer: FC<{
         <>
             <Stack
                 component={'ul'}
-                flexGrow={'1'}
                 sx={{
+                    display: 'flex',
+                    flexGrow: 1,
                     overflowY: 'auto',
                     scrollbarWidth: 'thin',
                     '&.MuiStack-root': {
@@ -31,9 +32,9 @@ const CartDrawer: FC<{
                             width: 'thin',
                         },
                     },
+                    gap: { mobile: '16px', tablet: '28px', desktop: '32px' },
+                    marginBlock: { mobile: '12px', tablet: '30px', desktop: '46px' },
                 }}
-                gap={'32px'}
-                marginBlock={'46px'}
             >
                 {dishes.map((dish) => (
                     <CartListItem key={dish.id} dish={dish} />
@@ -43,12 +44,35 @@ const CartDrawer: FC<{
         </>
     );
     return (
-        <Drawer anchor="right" open={showDrawer} onClose={closeDrawer}>
+        <Drawer
+            anchor="right"
+            open={showDrawer}
+            onClose={closeDrawer}
+            sx={{
+                '& .MuiDrawer-paper': {
+                    borderRadius: '30px 0 0 30px',
+                },
+            }}
+        >
             <Box
                 sx={{
-                    width: '602px',
-                    padding: '44.3px 52px',
-                    height: '100%',
+                    width: {
+                        mobile: '63vw',
+                        tablet: '48vw',
+                        desktop: '602px',
+                    },
+                    minWidth: {
+                        mobile: '63vw',
+                        tablet: '48vw',
+                        desktop: '602px',
+                    },
+                    maxWidth: {
+                        mobile: '300px',
+                        tablet: '450px',
+                        desktop: '602px',
+                    },
+                    padding: { mobile: '18px 14px', tablet: '26px 20px', desktop: '44.3px 52px' },
+                    height: '100vh',
                     display: 'flex',
                     flexDirection: 'column',
                 }}
