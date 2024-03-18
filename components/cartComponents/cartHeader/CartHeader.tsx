@@ -18,7 +18,7 @@ export default function CartHeader({ closeDrawer }: Props) {
                     component={'h3'}
                     sx={{
                         fontWeight: 700,
-                        fontSize: '42px',
+                        fontSize: { mobile: '26px', tablet: '36px', desktop: '42px' },
                         color: 'text.secondary',
                     }}
                 >
@@ -28,6 +28,7 @@ export default function CartHeader({ closeDrawer }: Props) {
                     onClick={closeDrawer}
                     sx={{
                         cursor: 'pointer',
+                        height: { mobile: '12px', tablet: '18px', desktop: '22px' },
                         '&.MuiSvgIcon-root:hover path': {
                             stroke: '#F15C30',
                         },

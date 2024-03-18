@@ -32,7 +32,14 @@ const Header = ({ children }: { children: React.ReactNode[] }) => {
                 }}
             >
                 <div className="container">
-                    <Toolbar disableGutters>
+                    <Toolbar
+                        disableGutters
+                        sx={{
+                            '&': {
+                                minHeight: { mobile: '59px', tablet: '83px', desktop: '111px' },
+                            },
+                        }}
+                    >
                         <>
                             {BurgerMenu}
                             <Logo />

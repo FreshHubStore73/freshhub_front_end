@@ -10,10 +10,13 @@ type Props = { data: string };
 const User = ({ isEdit }: { isEdit: boolean }) => (
     <SvgIcon
         sx={{
-            width: '50px',
-            height: '50px',
-            '&.MuiSvgIcon-root path': {
-                stroke: isEdit ? 'text.secondary' : '#828282',
+            width: { mobile: '29px', tablet: '40px', desktop: '50px' },
+            height: { mobile: '29px', tablet: '40px', desktop: '50px' },
+            '& path': {
+                stroke: (theme) => (isEdit ? theme.palette.text.primary : '#828282'),
+            },
+            '.MuiOutlinedInput-root.Mui-focused & path ': {
+                stroke: (theme) => (isEdit ? theme.palette.text.secondary : '#828282'),
             },
         }}
     >
@@ -40,19 +43,32 @@ const User = ({ isEdit }: { isEdit: boolean }) => (
 );
 export const EditBtn = styled((props: ButtonProps) => <Button variant="text" {...props} />)(
     ({ theme }) => ({
-        '&.MuiButtonBase-root.MuiButton-root': {
-            color: '#50BC7B',
-            fontWeight: 400,
+        color: '#50BC7B',
+        fontWeight: 400,
+        [theme.breakpoints.up('mobile')]: {
+            fontSize: '14px',
+            padding: '6px',
+            minWidth: '44px',
+        },
+        [theme.breakpoints.up('tablet')]: {
+            fontSize: '20px',
+            padding: '6px 10px',
+            minWidth: '64px',
+        },
+        [theme.breakpoints.up('desktop')]: {
             fontSize: '24px',
-            paddingInline: 0,
-            transition: 'font 0.3s ease',
-            backgroundColor: '#FFF',
-            '&:hover': {
-                fontWeight: 700,
-            },
-            '&.Mui-focusVisible': {
-                // boxShadow: `0 0 0 0.1rem ${theme.palette.text.secondary}`,
-            },
+            padding: '10px',
+            minWidth: '64px',
+        },
+        transition: 'font 0.3s ease',
+        backgroundColor: '#FFF',
+        '&:hover': {
+            fontWeight: 700,
+        },
+        lineHeight: '1',
+        borderRadius: '12px',
+        '& .Mui-focusVisible': {
+            // boxShadow: `0 0 0 0.1rem ${theme.palette.text.secondary}`,
         },
     }),
 );
@@ -65,40 +81,60 @@ export const CustomInput = styled(
     ),
 )<StyledCustomInputProps>(({ theme, isdisabled }) => ({
     '& .MuiInputAdornment-root': {
-        marginRight: '0',
+        // marginRight: '0',
     },
     '& .MuiOutlinedInput-notchedOutline': {
         borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
     },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+        borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
+    },
     '& .MuiOutlinedInput-root': {
         borderRadius: '50px',
-        paddingInline: '29px',
-        height: '106px',
-        color: isdisabled ? '#828282' : theme.palette.text.secondary,
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
             borderWidth: isdisabled ? '1px' : '1,5px',
         },
-        '&.Mui-focused .MuiOutlinedInput-input': {
-            color: theme.palette.text.secondary,
+        '& .MuiInputBase-input': {
+            color: isdisabled ? '#828282' : theme.palette.text.primary,
+        },
+        '&.Mui-focused .MuiInputBase-input': {
+            color: isdisabled ? '#828282' : theme.palette.text.secondary,
         },
     },
-    '&:hover .MuiOutlinedInput-notchedOutline': {
-        borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
+    [theme.breakpoints.up('mobile')]: {
+        fontSize: '14px',
+        '& .MuiInputBase-input': {
+            padding: '0 0 0 15px',
+        },
+        '& .MuiOutlinedInput-root': {
+            paddingInline: '16px',
+            height: '44px',
+        },
     },
-    '& .MuiInputBase-input.MuiOutlinedInput-input': {
-        paddingLeft: '18px',
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '20px',
+        '& .MuiInputBase-input': {
+            padding: '0 0 0 20px',
+        },
+        '& .MuiOutlinedInput-root': {
+            paddingInline: '28px',
+            height: '74px',
+        },
     },
-    fontSize: '24px',
+    [theme.breakpoints.up('desktop')]: {
+        fontSize: '24px',
+        '& .MuiInputBase-input': {
+            padding: '0 0 0 18px',
+        },
+        '& .MuiOutlinedInput-root': {
+            paddingInline: '29px',
+            height: '106px',
+        },
+    },
     flexGrow: 1,
 }));
-export const StartAdornment = styled((props: InputAdornmentProps) => <InputAdornment {...props} />)(
-    () => ({
-        '&.MuiInputAdornment-root': {
-            mr: '18px',
-        },
-    }),
-);
+
 export default function ContactNameField({ data }: Props) {
     const [isEdit, setEdit] = useState(false);
     const [value, setValue] = useState(data);
@@ -128,9 +164,9 @@ export default function ContactNameField({ data }: Props) {
             onChange={handleChange}
             InputProps={{
                 startAdornment: (
-                    <StartAdornment position={'start'}>
+                    <InputAdornment position={'start'}>
                         <User isEdit={isEdit} />
-                    </StartAdornment>
+                    </InputAdornment>
                 ),
                 endAdornment: (
                     <InputAdornment position="end">

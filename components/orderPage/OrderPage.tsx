@@ -67,18 +67,19 @@ export default function OrderPage({}: Props) {
                 // onSubmit={handleSubmit}
                 sx={{
                     display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    marginTop: '36px',
-                    columnGap: '87px',
+                    gridTemplateColumns: { mobile: '1fr', desktop: '1fr 1fr' },
+                    marginTop: { mobile: '14px', tablet: '24px', desktop: '36px' },
+                    columnGap: { mobile: '0px', desktop: '87px' },
+                    rowGap: { mobile: '20px', tablet: '36px', desktop: '0px' },
                 }}
             >
-                <Box sx={{ overflow: 'hidden', marginRight: '10px' }}>
+                <Box sx={{ overflow: 'hidden', marginRight: { mobile: '0px', desktop: '10px' } }}>
                     <Typography
                         component={'h1'}
                         sx={{
                             fontWeight: 700,
-                            fontSize: '40px',
-                            marginBottom: '24px',
+                            fontSize: { mobile: '22px', tablet: '30px', desktop: '40px' },
+                            marginBottom: { mobile: '10px', tablet: '18px', desktop: '24px' },
                             color: 'text.secondary',
                             textTransform: 'none',
                         }}
@@ -91,17 +92,27 @@ export default function OrderPage({}: Props) {
                     <Time />
                     <PaymentsPC />
                 </Box>
-                <Box sx={{ overflow: 'hidden', marginLeft: '10px' }}>
+                <Box sx={{ overflow: 'hidden', marginLeft: { mobile: '0px', desktop: '10px' } }}>
                     <CustomizedAccordions />
-                    <Box sx={{ border: '1px solid #FFC182', borderRadius: '40px', p: '36px' }}>
+                    <Box
+                        sx={{
+                            border: '1px solid #FFC182',
+                            borderRadius: '40px',
+                            p: { mobile: '12px 18px', tablet: '26px 41px', desktop: '36px' },
+                        }}
+                    >
                         <OrderList />
                         {/* временная лабуда для отслеживания ошибок сервера */}
                         {state.message !== 'Ok' ? (
                             <Typography
                                 sx={{
-                                    color: (theme) => theme.palette.error.main,
-                                    marginBlock: '24px',
-                                    fontSize: '20px',
+                                    color: 'error.main',
+                                    marginBlock: {
+                                        mobile: '16px',
+                                        tablet: '20px',
+                                        desktop: '24px',
+                                    },
+                                    fontSize: { mobile: '12px', tablet: '16px', desktop: '20px' },
                                 }}
                             >
                                 {state.message}

@@ -2,18 +2,20 @@
 import { InputAdornment, SvgIcon } from '@mui/material';
 import { useState, FC, useRef } from 'react';
 import InputMask from 'react-input-mask';
-import { CustomInput, EditBtn, StartAdornment } from './ContactField';
+import { CustomInput, EditBtn } from './ContactField';
 
 type Props = { data: string };
 
 const Phone = ({ isEdit }: { isEdit: boolean }) => (
     <SvgIcon
         sx={{
-            width: '50px',
-            height: '50px',
-
-            '&.MuiSvgIcon-root path': {
-                fill: isEdit ? 'text.secondary' : '#828282',
+            width: { mobile: '29px', tablet: '40px', desktop: '50px' },
+            height: { mobile: '29px', tablet: '40px', desktop: '50px' },
+            '& path': {
+                fill: (theme) => (isEdit ? theme.palette.text.primary : '#828282'),
+            },
+            '.MuiOutlinedInput-root.Mui-focused & path ': {
+                fill: (theme) => (isEdit ? theme.palette.text.secondary : '#828282'),
             },
         }}
     >
@@ -60,9 +62,9 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
                 isdisabled={!isEdit}
                 InputProps={{
                     startAdornment: (
-                        <StartAdornment position={'start'}>
+                        <InputAdornment position={'start'}>
                             <Phone isEdit={isEdit} />
-                        </StartAdornment>
+                        </InputAdornment>
                     ),
                     endAdornment: (
                         <InputAdornment position="end">

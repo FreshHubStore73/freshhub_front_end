@@ -10,7 +10,7 @@ export default function PaymentsPC({}: Props) {
     return (
         <Box
             sx={{
-                mt: '40px',
+                mt: { mobile: '20px', tablet: '40px' },
             }}
         >
             <Persons />

@@ -8,8 +8,6 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Typography } from '@mui/material';
 
-import styles from './breadcrumbs.module.scss';
-
 export default function BreadCrumbs({
     singlePage,
     useSearchParams,
@@ -38,16 +36,48 @@ export default function BreadCrumbs({
         pathnames.push('purchase history');
     }
     return (
-        <Box pt="64px" role="presentation" className={styles.links}>
+        <Box
+            role="presentation"
+            sx={{
+                pt: { mobile: '16px', tablet: '30px', desktop: '64px' },
+            }}
+        >
             <Breadcrumbs
-                separator={<FiberManualRecordIcon sx={{ fontSize: '12px' }} />}
+                separator={
+                    <FiberManualRecordIcon
+                        sx={{
+                            fontSize: { mobile: '6px', tablet: '8px', desktop: '12px' },
+                            '&': {
+                                color: '#828282',
+                            },
+                        }}
+                    />
+                }
                 aria-label="breadcrumb"
             >
-                <Link href="/" className={styles.links_home}>
-                    Home
+                <Link href="/">
+                    <Typography
+                        sx={{
+                            fontSize: { mobile: '12px', tablet: '16px', desktop: '22px' },
+                            color: '#828282',
+                            '&:hover': {
+                                color: 'accent.main',
+                            },
+                        }}
+                    >
+                        Home
+                    </Typography>
                 </Link>
                 {singlePage ? (
-                    <Typography color="text.secondary" sx={{ fontSize: '22px' }}>
+                    <Typography
+                        color="text.secondary"
+                        sx={{
+                            fontSize: { mobile: '12px', tablet: '16px', desktop: '22px' },
+                            '&::first-letter': {
+                                textTransform: 'capitalize',
+                            },
+                        }}
+                    >
                         {singlePage}
                     </Typography>
                 ) : (
@@ -64,13 +94,35 @@ export default function BreadCrumbs({
                             <Typography
                                 key={content}
                                 color="text.secondary"
-                                sx={{ fontSize: '22px' }}
+                                sx={{
+                                    fontSize: { mobile: '12px', tablet: '16px', desktop: '22px' },
+                                    '&::first-letter': {
+                                        textTransform: 'capitalize',
+                                    },
+                                }}
                             >
                                 {content}
                             </Typography>
                         ) : (
                             <Link key={content} href={to}>
-                                {content}
+                                <Typography
+                                    sx={{
+                                        fontSize: {
+                                            mobile: '12px',
+                                            tablet: '16px',
+                                            desktop: '22px',
+                                        },
+                                        color: '#828282',
+                                        '&:hover': {
+                                            color: 'accent.main',
+                                        },
+                                        '&::first-letter': {
+                                            textTransform: 'capitalize',
+                                        },
+                                    }}
+                                >
+                                    {content}
+                                </Typography>
                             </Link>
                         );
                     })

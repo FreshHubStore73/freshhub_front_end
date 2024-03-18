@@ -8,15 +8,15 @@ export default function Logo() {
     return (
         <Box
             sx={{
-                flexGrow: { xs: 1, lg: 0 },
+                // flexGrow: { mobile: 1, tablet: 0 },
                 justifyContent: 'center',
             }}
         >
             <Link href="/">
                 <SvgIcon
                     sx={{
-                        height: '74px',
-                        width: '98px',
+                        height: { mobile: '33px', tablet: '48px', desktop: '74px' },
+                        width: { mobile: '44px', tablet: '64px', desktop: '98px' },
                     }}
                 >
                     <svg

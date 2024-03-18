@@ -24,31 +24,68 @@ const NumberInput = styled((props: TextFieldProps) => (
         borderColor: type === 'dish' ? theme.palette.accent.main : 'rgba(62, 59, 59, 0.4)',
     },
     '& .MuiOutlinedInput-root': {
-        width: type === 'order' ? '85px' : '112px',
-        height: type === 'order' ? '40px' : type === 'dish' ? '50px' : '52px',
+        [theme.breakpoints.up('mobile')]: {
+            width: type === 'order' ? '56px' : type === 'dish' ? '70px' : '57px',
+            height: type === 'order' ? '25px' : type === 'dish' ? '30px' : '26px',
+            paddingInline: type === 'order' ? '2px' : '5px',
+        },
+        [theme.breakpoints.up('tablet')]: {
+            width: type === 'order' ? '85px' : type === 'dish' ? '100px' : '85px',
+            height: type === 'order' ? '34px' : type === 'dish' ? '36px' : '40px',
+            paddingInline: type === 'order' ? '2px' : '5px',
+        },
+        [theme.breakpoints.up('desktop')]: {
+            width: type === 'order' ? '85px' : '112px',
+            height: type === 'order' ? '40px' : type === 'dish' ? '50px' : '52px',
+            paddingInline: type === 'order' ? '2px' : '5px',
+        },
         borderRadius: '50px',
-        paddingInline: type === 'order' ? '2px' : '5px',
         color: theme.palette.text.secondary,
         '&.Mui-focused .MuiOutlinedInput-notchedOutline, &:focus .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline':
             {
                 borderColor: type === 'dish' ? theme.palette.accent.main : 'rgba(62, 59, 59, 0.4)',
                 borderWidth: '1px',
             },
-
+        '& .MuiInputBase-input': {
+            padding: 0,
+        },
         '& .MuiInputBase-input.MuiOutlinedInput-input': {
             textAlign: 'center',
         },
         lineHeight: '1',
     },
-    fontSize: type === 'order' ? '20px' : '24px',
+    [theme.breakpoints.up('mobile')]: {
+        fontSize: type === 'order' ? '14px' : '12px',
+    },
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: type === 'order' ? '18px' : '18px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        fontSize: type === 'order' ? '20px' : '24px',
+    },
 }));
 
 const StyledIconButton = styled('div')<StyledNumberInputProps>(({ theme, type }) => ({
-    width: type === 'order' ? '27px' : '34px',
-    height: type === 'order' ? '27px' : '34px',
-    paddingBlock: type === 'order' ? '2px' : '5px',
-    borderRadius: '40px',
-    textAlign: 'center',
+    [theme.breakpoints.up('mobile')]: {
+        '& .MuiSvgIcon-root': {
+            fontSize: type === 'order' ? '18px' : '16px',
+        },
+        paddingTop: '1px',
+    },
+    [theme.breakpoints.up('tablet')]: {
+        '& .MuiSvgIcon-root': {
+            fontSize: type === 'order' ? '18px' : '20px',
+        },
+        padding: type === 'order' ? '4px 4px 2px' : '4px 3px 2px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        '& .MuiSvgIcon-root': {
+            fontSize: type === 'order' ? '24px' : '28px',
+        },
+        padding: type === 'order' ? '3px 2px 2px' : '4px 4px 2px',
+    },
+
+    borderRadius: '25px',
     cursor: 'pointer',
     transition: 'all 0.2s',
     color: theme.palette.text.secondary,

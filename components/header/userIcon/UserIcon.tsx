@@ -1,5 +1,5 @@
 'use client';
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { IconButton } from '@mui/material';
@@ -78,11 +78,15 @@ const UserIcon = forwardRef<HTMLElement, UserIconProps>((props, ref) => {
                     onClick={handleOpenUserMenu}
                     disableTouchRipple
                     sx={{
-                        px: '12px',
+                        px: { mobile: '8px', tablet: '10px', desktop: '12px' },
                         '&.MuiIconButton-root:hover': {
                             backgroundColor: '#fff',
                         },
                         '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
+                        '& svg': {
+                            height: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                            width: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                        },
                     }}
                 >
                     <svg
@@ -108,25 +112,28 @@ const UserIcon = forwardRef<HTMLElement, UserIconProps>((props, ref) => {
                 <Menu
                     sx={{
                         '& .MuiPaper-root': {
-                            width: '182px',
-                            borderRadius: '18px',
+                            width: { mobile: '104px', tablet: '122px', desktop: '182px' },
+                            borderRadius: { mobile: '14px', tablet: '18px' },
                             boxShadow: '0px 2px 16px 1px rgba(0, 0, 0, 0.15)',
                         },
                         '& .MuiList-root': {
-                            padding: '16px 0px',
-                            // gap: '18px',
+                            padding: { mobile: '6px 0', tablet: '8px 0', desktop: '15px 0' },
                             display: 'flex',
                             flexDirection: 'column',
                         },
                         '& .MuiMenuItem-root': {
-                            padding: '10px 20px',
-                            fontSize: '20px',
+                            padding: {
+                                mobile: '4px 14px',
+                                tablet: '4px 14px',
+                                desktop: '4px 16px',
+                            },
+                            fontSize: { mobile: '12px', tablet: '14px', desktop: '16px' },
                             fontWeight: '400',
-                            lineHeight: '16.8px',
+                            minHeight: '0px',
                         },
                         '& .MuiButtonBase-root:hover': {
                             backgroundColor: 'white',
-                            color: (theme) => theme.palette.accent.main,
+                            color: 'accent.main',
                         },
                     }}
                     id="menu-appbar"

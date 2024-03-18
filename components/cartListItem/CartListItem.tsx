@@ -14,6 +14,10 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
     const { id, photoUrl, productName, price, quantity } = dish;
     const { removeDish, changeQuantity } = useShoppingCart();
 
+    // const url = process.env.SERV_URL;
+    const photoPath = photoUrl
+        ? `${process.env.SERV_URL}/${photoUrl.replace(/\\+/g, '/')}`
+        : '/dishes/istockphoto-1206323282-612x612.jpg';
     const onRemove = () => {
         removeDish(dish);
     };
@@ -27,26 +31,36 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
             component={'li'}
             sx={{
                 display: 'grid',
-                gridTemplateColumns: isOrder ? '97px 1fr' : '146px auto',
+                gridTemplateColumns: isOrder
+                    ? { mobile: '71px 1fr', tablet: '97px 1fr', desktop: '97px 1fr' }
+                    : { mobile: '74px 1fr', tablet: '101px 1fr', desktop: '146px auto' },
                 gridTemplateRow: 'repeat(2, auto)',
-                columnGap: isOrder ? '20px' : '27px',
+                columnGap: isOrder
+                    ? { mobile: '12px', tablet: '20px' }
+                    : { mobile: '6px', tablet: '16px', desktop: '27px' },
                 rowGapGap: 'auto',
             }}
         >
             <Box
                 sx={{
-                    height: isOrder ? '81px' : '121px',
-                    borderRadius: '30px',
+                    height: isOrder
+                        ? { mobile: '59px', tablet: '81px', desktop: '81px' }
+                        : { mobile: '52px', tablet: '84px', desktop: '121px' },
+                    borderRadius: isOrder
+                        ? { mobile: '14px', tablet: '20px' }
+                        : { mobile: '10px', tablet: '20px', desktop: '40px' },
                     alignSelf: 'center',
                     position: 'relative',
                     overflow: 'hidden',
-                    objectFit: 'contain',
                     gridArea: '1 / 1 / 3 / 2',
                 }}
             >
                 <Image
-                    src={'/dishes/istockphoto-1206323282-612x612.jpg'}
+                    src={photoPath}
                     fill
+                    style={{
+                        objectFit: 'cover',
+                    }}
                     alt={productName}
                     sizes="(max-width: 768px) 50vw, (max-width: 1200px) 30vw, 15vw"
                 />
@@ -65,7 +79,9 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                 <Typography
                     sx={{
                         fontWeight: 700,
-                        fontSize: isOrder ? '24px' : '28px',
+                        fontSize: isOrder
+                            ? { mobile: '16px', tablet: '20px', desktop: '24px' }
+                            : { mobile: '14px', tablet: '22px', desktop: '28px' },
                         color: 'text.secondary',
                     }}
                 >
@@ -75,7 +91,9 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                     onClick={onRemove}
                     sx={{
                         cursor: 'pointer',
-                        height: isOrder ? '24px' : '30px',
+                        height: isOrder
+                            ? { mobile: '16px', tablet: '20px', desktop: '24px' }
+                            : { mobile: '13px', tablet: '22px', desktop: '30px' },
                         '&.MuiSvgIcon-root:hover path': {
                             stroke: '#F15C30',
                         },
@@ -120,7 +138,9 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                 <Typography
                     sx={{
                         fontWeight: isOrder ? 400 : 700,
-                        fontSize: isOrder ? '24px' : '30px',
+                        fontSize: isOrder
+                            ? { mobile: '16px', tablet: '24px', desktop: '24px' }
+                            : { mobile: '22px', tablet: '26px', desktop: '30px' },
                         color: 'text.secondary',
                     }}
                 >

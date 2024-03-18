@@ -9,14 +9,20 @@ type Props = {};
 export default function Contact({}: Props) {
     const { user } = useAuth();
     return (
-        <Box display={'flex'} flexDirection={'column'}>
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                mb: { mobile: '20px', tablet: '30px', desktop: '36px' },
+            }}
+        >
             <FormControl>
                 <FormLabel
                     sx={{
                         color: 'text.secondary',
                         fontWeight: 700,
-                        fontSize: '28px',
-                        mb: '36px',
+                        fontSize: { mobile: '16px', tablet: '22px', desktop: '28px' },
+                        mb: { mobile: '16px', tablet: '22px', desktop: '36px' },
                     }}
                 >
                     Your contact details
@@ -25,7 +31,7 @@ export default function Contact({}: Props) {
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '22px',
+                        gap: { mobile: '10px', tablet: '14px', desktop: '22px' },
                     }}
                 >
                     <ContactField data={user?.firstName.concat(' ', user?.lastName) || ''} />

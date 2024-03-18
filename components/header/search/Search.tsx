@@ -9,8 +9,8 @@ const SearchIcon = (props: any) => {
         <SvgIcon
             {...props}
             sx={{
-                width: '41px',
-                height: '41px',
+                width: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                height: { mobile: '24px', tablet: '30px', desktop: '41px' },
                 cursor: 'pointer',
                 '&.MuiSvgIcon-root:hover path': {
                     fill: '#F15C30',
@@ -78,7 +78,14 @@ export default function SearchInput({}: Props) {
     };
 
     return (
-        <Box sx={{ width: '250px', display: 'flex', justifyContent: 'flex-end' }}>
+        <Box
+            sx={{
+                width: { mobile: '180px', tablet: '220px', desktop: '270px' },
+                display: 'flex',
+                justifyContent: 'flex-end',
+                flexGrow: { mobile: 1, tablet: 0 },
+            }}
+        >
             <ClickAwayListener onClickAway={handleClickAway}>
                 <TextField
                     onKeyDown={handleKeyDown}
@@ -90,8 +97,10 @@ export default function SearchInput({}: Props) {
                         setSearch(e.target.value);
                     }}
                     sx={{
-                        mr: '10px',
-                        width: expanded ? '25ch' : '44px',
+                        mx: { mobile: '8px', tablet: '10px', desktop: '12px' },
+                        width: expanded
+                            ? '50ch'
+                            : { mobile: '24px', tablet: '30px', desktop: '41px' },
                         transition: 'all 0.3s',
                         '& .MuiOutlinedInput-root': {
                             paddingInline: '0px',
@@ -102,6 +111,10 @@ export default function SearchInput({}: Props) {
                                 borderBottomColor: 'inherit',
                             },
                         },
+                        '& .MuiInputBase-input': {
+                            paddingBlock: { mobile: '8.5px', tablet: '12.5px', desktop: '16.5px' },
+                            fontSize: { mobile: '14px', tablet: '18px', desktop: '22px' },
+                        },
                         '& .MuiOutlinedInput-notchedOutline': {
                             border: 'none',
                             borderBottom: expanded ? '1px solid black' : 'none',
@@ -109,12 +122,22 @@ export default function SearchInput({}: Props) {
                     }}
                     InputProps={{
                         startAdornment: (
-                            <InputAdornment position="start">
+                            <InputAdornment
+                                position="start"
+                                sx={{
+                                    mr: '4px',
+                                }}
+                            >
                                 <SearchIcon onClick={handleSearchClick} />
                             </InputAdornment>
                         ),
                         endAdornment: (
-                            <InputAdornment position="end">
+                            <InputAdornment
+                                position="end"
+                                sx={{
+                                    ml: '4px',
+                                }}
+                            >
                                 {expanded ? (
                                     <IconButton
                                         // disableRipple

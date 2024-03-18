@@ -18,8 +18,33 @@ const FreshSwitch = styled((props: SwitchProps) => (
         {...props}
     />
 ))(({ theme }) => ({
-    width: 68,
-    height: 38,
+    [theme.breakpoints.up('mobile')]: {
+        width: 44,
+        height: 26,
+        '& .MuiSwitch-thumb': {
+            width: 18,
+            height: 18,
+            boxShadow: '0px 0px 14px 1px rgba(0,0,0,0.25)',
+        },
+    },
+    [theme.breakpoints.up('tablet')]: {
+        width: 70,
+        height: 36,
+        '& .MuiSwitch-thumb': {
+            width: 30,
+            height: 28,
+            boxShadow: '0px 0px 14px 1px rgba(0,0,0,0.25)',
+        },
+    },
+    [theme.breakpoints.up('desktop')]: {
+        width: 68,
+        height: 38,
+        '& .MuiSwitch-thumb': {
+            width: 30,
+            height: 30,
+            boxShadow: '0px 0px 14px 1px rgba(0,0,0,0.25)',
+        },
+    },
     padding: 0,
     '&.MuiSwitch-root': {
         overflow: 'unset',
@@ -44,9 +69,6 @@ const FreshSwitch = styled((props: SwitchProps) => (
     },
     '& .MuiSwitch-thumb': {
         boxSizing: 'border-box',
-        width: 30,
-        height: 30,
-        boxShadow: '0px 0px 14px 1px rgba(0,0,0,0.25)',
     },
     '& .MuiSwitch-track': {
         borderRadius: 80,
@@ -61,8 +83,8 @@ const FreshSwitch = styled((props: SwitchProps) => (
 const CallIcon = () => (
     <SvgIcon
         sx={{
-            width: '48px',
-            height: '48px',
+            width: { mobile: '24px', tablet: '38px', desktop: '48px' },
+            height: { mobile: '24px', tablet: '38px', desktop: '48px' },
         }}
     >
         <svg
@@ -88,29 +110,29 @@ export default function Call({}: Props) {
                 alignItems: 'center',
                 alignContent: 'start',
                 justifyContent: 'space-between',
-                gap: '20px',
-                marginBottom: '36px',
+                gap: { mobile: '12px', tablet: '20px', desktop: '22px' },
+                marginBottom: { mobile: '20px', tablet: '30px', desktop: '36px' },
             }}
         >
-            <Box height={'65px'}>
+            <Box sx={{ height: { mobile: '49px', tablet: '55px', desktop: '65px' } }}>
                 <CallIcon />
             </Box>
             <Box flexGrow={'1'}>
                 <Typography
                     sx={{
                         fontWeight: 700,
-                        mb: '6px',
-                        fontSize: '26px',
-                        lineHeight: '31px',
+                        mb: { mobile: '2px', tablet: '6px', desktop: '4px' },
+                        fontSize: { mobile: '18px', tablet: '22px', desktop: '26px' },
+                        lineHeight: { mobile: '21.6px', tablet: '26.4px', desktop: '31.2px' },
                     }}
                 >
                     Call for clarification
                 </Typography>
                 <Typography
                     sx={{
-                        fontSize: '18px',
+                        fontSize: { mobile: '10px', tablet: '14px', desktop: '18px' },
+                        lineHeight: { mobile: '12px', tablet: '16.8px', desktop: '21.6px' },
                         color: '#828282',
-                        lineHeight: '22px',
                     }}
                 >
                     Please check your contact details to avoid inaccuracies

@@ -7,7 +7,12 @@ import NumberInput from '../../numberInput/Input';
 
 type Props = {};
 const PersonIcon = () => (
-    <SvgIcon sx={{ width: '48px', height: '48px' }}>
+    <SvgIcon
+        sx={{
+            width: { mobile: '24px', tablet: '38px', desktop: '48px' },
+            height: { mobile: '24px', tablet: '38px', desktop: '48px' },
+        }}
+    >
         <svg
             width="48"
             height="48"
@@ -30,15 +35,15 @@ export default function Persons({}: Props) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                gap: '20px',
-                marginBottom: '37px',
+                gap: { mobile: '12px', tablet: '20px' },
+                marginBottom: { mobile: '14px', tablet: '20px', desktop: '26px' },
                 p: '1px',
             }}
         >
             <PersonIcon />
             <Typography
                 sx={{
-                    fontSize: '26px',
+                    fontSize: { mobile: '18px', tablet: '22px', desktop: '26px' },
                     fontWeight: 700,
                     textAlign: 'start',
                     flexGrow: 1,

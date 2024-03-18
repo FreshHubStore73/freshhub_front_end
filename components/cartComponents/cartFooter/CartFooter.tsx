@@ -16,12 +16,25 @@ const CartFooter: FC<Props> = ({ totalAmount, closeDrawer }) => {
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    lineHeight: '49px',
-                    marginBlock: '12px',
+                    lineHeight: { mobile: '22px', tablet: '36px', desktop: '49px' },
+                    marginBlock: { mobile: '8px', tablet: '10px', desktop: '10px' },
                 }}
             >
-                <Typography sx={{ fontSize: '30px', color: 'text.primary' }}>Total:</Typography>
-                <Typography sx={{ fontSize: '38px', fontWeight: 700, color: 'text.secondary' }}>
+                <Typography
+                    sx={{
+                        fontSize: { mobile: '18px', tablet: '24px', desktop: '30px' },
+                        color: 'text.primary',
+                    }}
+                >
+                    Total:
+                </Typography>
+                <Typography
+                    sx={{
+                        fontSize: { mobile: '22px', tablet: '30px', desktop: '38px' },
+                        fontWeight: 700,
+                        color: 'text.secondary',
+                    }}
+                >
                     ${totalAmount}
                 </Typography>
             </Box>
@@ -33,10 +46,11 @@ const CartFooter: FC<Props> = ({ totalAmount, closeDrawer }) => {
                     onClick={closeDrawer}
                     sx={{
                         color: 'white',
-                        borderRadius: '50px',
-                        lineHeight: '77px',
+                        borderRadius: { mobile: '20px', tablet: '50px', desktop: '50px' },
+                        fontSize: { mobile: '14px', tablet: '20px', desktop: '28px' },
+                        lineHeight: { mobile: '36px', tablet: '52px', desktop: '77px' },
                         paddingBlock: 0,
-                        marginTop: '28px',
+                        marginTop: { mobile: '10px', tablet: '20px', desktop: '28px' },
                     }}
                 >
                     Checkout
