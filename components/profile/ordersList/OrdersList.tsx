@@ -12,7 +12,13 @@ export default function OrdersList({ history }: Props) {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: { mobile: '8px', tablet: '12px' },
+            }}
+        >
             {history.map((order, i) => (
                 <OrdersListItem
                     key={order.orderId}

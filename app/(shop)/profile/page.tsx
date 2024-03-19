@@ -35,11 +35,19 @@ const Page = async ({ params, searchParams }: Props) => {
                     display: 'flex',
                     flexDirection: { mobile: 'column', desktop: 'row' },
                     justifyContent: { mobile: 'flex-start', desktop: 'space-between' },
-                    gap: { mobile: '16px', tablet: '20px', desktop: '88px' },
+                    gap: {
+                        mobile: '16px',
+                        tablet: '20px',
+                        desktop: '60px', //88px
+                    },
                     mt: { mobile: '10px', tablet: '12px', desktop: '14px' },
                 }}
             >
-                <Box sx={{ minWidth: { mobile: '0px', desktop: '432px' } }}>
+                <Box
+                    sx={{
+                        minWidth: { mobile: '0px', desktop: '32vw' },
+                    }}
+                >
                     <UserCard firstName={data.user.firstName} phoneNumber={data.user.phoneNumber} />
                     <HistoryButton searchParams={!!searchParams?.history} />
                 </Box>
