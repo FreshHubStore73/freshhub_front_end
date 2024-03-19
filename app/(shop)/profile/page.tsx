@@ -20,18 +20,26 @@ const Page = async ({ params, searchParams }: Props) => {
     return (
         <>
             <BreadCrumbs useSearchParams={searchParams?.history} />
-            <Typography variant="h2_Oswald" component="h1" mt={'14px'} color="text.secondary">
+            <Typography
+                variant="h2_Oswald"
+                component="h1"
+                sx={{
+                    mt: { mobile: '14px', tablet: '24px', desktop: '14px' },
+                    color: 'text.secondary',
+                }}
+            >
                 Personal data
             </Typography>
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
-                    gap: '88px',
-                    mt: '14px',
+                    flexDirection: { mobile: 'column', desktop: 'row' },
+                    justifyContent: { mobile: 'flex-start', desktop: 'space-between' },
+                    gap: { mobile: '16px', tablet: '20px', desktop: '88px' },
+                    mt: { mobile: '10px', tablet: '12px', desktop: '14px' },
                 }}
             >
-                <Box sx={{ minWidth: '432px' }}>
+                <Box sx={{ minWidth: { mobile: '0px', desktop: '432px' } }}>
                     <UserCard firstName={data.user.firstName} phoneNumber={data.user.phoneNumber} />
                     <HistoryButton searchParams={!!searchParams?.history} />
                 </Box>

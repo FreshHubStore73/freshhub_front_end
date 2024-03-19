@@ -19,8 +19,13 @@ const HtmlTooltip = styled(
             {...props}
             classes={{ popper: className }}
             PopperProps={{
-                popperOptions: { placement: 'bottom' },
-                placement: 'top',
+                // popperOptions: { placement: 'bottom' },
+                placement: 'bottom',
+                // sx: {
+                //     '& .MuiTooltip-popper': {
+                //         display: { mobile: 'none', tablet: 'none' },
+                //     },
+                // },
                 // anchorOrigin: {
                 //     vertical: 'bottom',
                 //     horizontal: 'center',
@@ -37,11 +42,26 @@ const HtmlTooltip = styled(
     [`& .${tooltipClasses.tooltip}`]: {
         backgroundColor: '#fff',
         color: 'rgba(0, 0, 0, 0.87)',
-        padding: '8px 14px',
-        borderRadius: '18px',
-        maxWidth: '220px',
-        minWidth: '182px',
         boxShadow: '0px 2px 16px 1px rgba(0, 0, 0, 0.15)',
+
+        [theme.breakpoints.up('mobile')]: {
+            padding: '8px 14px',
+            borderRadius: '14px',
+            maxWidth: '140px',
+            minWidth: '104px',
+        },
+        [theme.breakpoints.up('tablet')]: {
+            padding: '8px 14px',
+            borderRadius: '18px',
+            maxWidth: '160px',
+            minWidth: '122px',
+        },
+        [theme.breakpoints.up('desktop')]: {
+            padding: '12px 16px',
+            borderRadius: '20px',
+            maxWidth: '220px',
+            minWidth: '167px',
+        },
     },
     '&.MuiTooltip-popper[data-popper-placement*="bottom"] .MuiTooltip-tooltip': {
         marginTop: '0px',
@@ -119,18 +139,20 @@ const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
                 title={
                     <>
                         <Typography
-                            // color="inherit"
                             sx={{
                                 fontWeight: 'bold',
-                                fontSize: '18px',
-                                marginBottom: '5px',
+                                fontSize: { mobile: '10px', tablet: '12px', desktop: '18px' },
+                                marginBottom: { mobile: '4px', tablet: '5px', desktop: '5px' },
                                 color: 'text.secondary',
                             }}
                         >
                             Your cart:
                         </Typography>
 
-                        <Typography color="inherit" sx={{ fontSize: '16px' }}>
+                        <Typography
+                            color="inherit"
+                            sx={{ fontSize: { mobile: '8px', tablet: '10px', desktop: '16px' } }}
+                        >
                             {`${totalDishes}`} {' product(s)  on  '}
                             <b>{`${totalAmount}$`}</b>
                         </Typography>

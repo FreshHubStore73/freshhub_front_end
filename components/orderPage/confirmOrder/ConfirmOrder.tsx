@@ -27,6 +27,9 @@ const ConfirmBtn = styled((props: ButtonProps) => (
         fontSize: '28px',
         borderRadius: '50px',
     },
+    '&:hover': {
+        backgroundColor: theme.palette.accent.main,
+    },
 }));
 
 export default function ConfirmOrder({ handleSubmit }: Props) {

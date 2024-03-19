@@ -11,7 +11,12 @@ import { SvgIcon, SvgIconProps } from '@mui/material';
 
 type Props = { categories: string[] };
 const MenuIcon = (props: SvgIconProps) => (
-    <SvgIcon>
+    <SvgIcon
+        sx={{
+            width: '22px',
+            height: '14px',
+        }}
+    >
         <svg
             width="22"
             height="14"
@@ -41,10 +46,19 @@ const NavMenuDrawer: FC<Props> = ({ categories }) => {
         <>
             <Box
                 onClick={handleDrawerToggle}
-                sx={{ display: { mobile: 'flex', tablet: 'none' }, mr: 3 }}
+                sx={{
+                    display: { mobile: 'flex', tablet: 'none' },
+                    pr: '14px',
+                    minHeight: '59px',
+                    borderRight: (theme) => `1px solid ${theme.palette.beige.main}`,
+                    '& .MuiButtonBase-root': {
+                        mt: '12px',
+                        height: '38px',
+                        p: '8px 8px',
+                    },
+                }}
             >
                 <IconButton
-                    size="large"
                     aria-label="dishes menu"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"

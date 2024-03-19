@@ -20,7 +20,8 @@ const NavBarLinks = ({ links }: { links: string[] }) => {
                                 fontSize: { mobile: '', tablet: '16px', desktop: '20px' },
                                 textTransform: 'capitalize',
                                 transition: 'color 0.2s',
-                                '&.MuiTypography-root.Mui-active': {
+                                color: 'text.primary',
+                                '&.Mui-active': {
                                     color: '#F15C30',
                                 },
                                 '&:hover': {

@@ -23,8 +23,8 @@ const DishCard = ({ item }: { item: DishItem }) => {
                     <div className={styles.dishImg}>
                         <Image
                             className={styles.img}
-                            src={'/dishes/istockphoto-1206323282-612x612.jpg'}
-                            alt={'dishImg'}
+                            src={photo}
+                            alt={'dish image'}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />

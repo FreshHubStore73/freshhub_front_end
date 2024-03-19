@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
@@ -48,6 +48,10 @@ export default function OrderPage({}: Props) {
             formRef.current?.requestSubmit();
         }
     };
+
+    useLayoutEffect(() => {
+        if (!dishes.length) replace('/');
+    }, [dishes]);
 
     useEffect(() => {
         console.log(state.message);

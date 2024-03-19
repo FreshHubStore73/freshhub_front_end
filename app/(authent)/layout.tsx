@@ -5,7 +5,13 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
             <HeaderAuth />
-            {/* <Toolbar /> */}
+            <Toolbar
+                sx={{
+                    '&': {
+                        minHeight: { mobile: '59px', tablet: '83px', desktop: '111px' },
+                    },
+                }}
+            />
             <main>
                 <section className="container">{children}</section>
             </main>

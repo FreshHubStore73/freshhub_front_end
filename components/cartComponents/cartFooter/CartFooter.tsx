@@ -51,6 +51,9 @@ const CartFooter: FC<Props> = ({ totalAmount, closeDrawer }) => {
                         lineHeight: { mobile: '36px', tablet: '52px', desktop: '77px' },
                         paddingBlock: 0,
                         marginTop: { mobile: '10px', tablet: '20px', desktop: '28px' },
+                        '&:hover': {
+                            backgroundColor: 'accent.main',
+                        },
                     }}
                 >
                     Checkout
