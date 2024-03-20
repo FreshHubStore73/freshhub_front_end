@@ -1,84 +1,184 @@
 .dishItem {
     padding-top: 66px;
 }
+
 .wrapper {
     display: flex;
     justify-content: space-between;
 }
+
 .picture {
     width: 49%;
     position: relative;
     border-radius: 40px;
     overflow: hidden;
 }
+
 .contentWrapper {
     width: 45.85%;
 }
+
 .title {
     color: var(--color-txt-black);
     font-size: 62px;
     font-weight: 700;
     margin-bottom: 22px;
 }
+
 .contentInfo {
     border-radius: 40px;
     border: 1px solid var(--color-beige);
     padding: 40px;
 }
+
 .titleInfo {
     display: flex;
     justify-content: space-between;
     margin-bottom: 22px;
 }
+
 .titleInfo h4 {
     color: var(--color-txt-black);
     // font-family: Lato;
     font-size: 28px;
     font-weight: 400;
 }
+
 .weight {
     color: var(--color-txt-big);
     font-size: 28px;
     font-weight: 400;
 }
+
 .description {
     color: var(--color-txt-big);
     font-size: 18px;
     margin-bottom: 30px;
 }
+
 .description span {
     color: var(--color-txt-black);
     font-weight: 700;
 }
+
 .cardInfo {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 28px;
 }
+
 .price {
     color: var(--color-txt-black);
     font-size: 40px;
     font-weight: 700;
 }
-.description + .delivery {
+
+.description+.delivery {
     margin-top: -14px;
 }
+
 .delivery {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
 }
+
 .delivery:last-child {
     margin-bottom: 0;
 }
+
 .delivery p {
     color: var(--color-txt-big);
     font-size: 14px;
     font-weight: 400;
 }
+
 .delivery img {
     width: 31px;
     height: 31px;
     margin-right: 10px;
+}
+
+@media screen and (max-width: 890px) {
+    .picture {
+        width: 100%;
+        max-width: 632px;
+        height: 435px;
+        margin-bottom: 24px;
+    }
+
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 36px;
+        margin-left: 13px;
+    }
+
+    .titleInfo h4 {
+        font-size: 24px;
+    }
+
+    .weight {
+        font-size: 24px;
+    }
+
+    .contentWrapper {
+        width: 100%;
+        max-width: 632px;
+        margin-bottom: 20px;
+    }
+
+    .description {
+        font-size: 16px;
+
+    }
+
+    .price {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .picture {
+        width: 100%;
+        max-width: 344px;
+        height: 248px;
+        margin-bottom: 16px;
+    }
+
+    .title {
+        font-size: 28px;
+        margin-left: 20px;
+    }
+
+    .contentWrapper {
+        width: 100%;
+        max-width: 344px;
+        margin-bottom: 20px;
+    }
+
+    .titleInfo h4 {
+        font-size: 20px;
+    }
+
+    .weight {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 14px;
+
+    }
+
+    .price {
+        font-size: 24px;
+    }
+
+    .delivery p {
+        font-size: 12px;
+    }
 }
