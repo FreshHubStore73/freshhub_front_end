@@ -24,12 +24,12 @@ type Props = {};
 export default function OrderPage({}: Props) {
     const [openSuccess, setOpenSuccess] = React.useState(false);
     const formRef = useRef<HTMLFormElement>(null);
-    const { replace } = useRouter();
-
-    const dishes = useShoppingCart((state) => state.dishes);
     const [state, formAction] = useFormState(orderAction, {
         message: '',
     });
+    const { replace } = useRouter();
+
+    const dishes = useShoppingCart((state) => state.dishes);
     const { clearCart } = useShoppingCart();
     const { startTimer, cancelTimer } = useTimeout(() => {
         replace('/profile?history=true');
@@ -54,7 +54,6 @@ export default function OrderPage({}: Props) {
     }, [dishes]);
 
     useEffect(() => {
-        console.log(state.message);
         if (state.message === 'Ok') {
             startTimer();
             setOpenSuccess(true);

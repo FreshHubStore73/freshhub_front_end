@@ -6,7 +6,7 @@ import { getUser } from '@/components/authItems/auth';
 import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 import UserCard from '@/components/profile/UserCard';
 import HistoryButton from '@/components/profile/HistoryButton';
-import OrdersList from '@/components/profile/ordersList/OrdersList';
+import ListOfOrders from '@/components/profile/ordersList/ListOfOrders';
 import PersonalInfo from '@/components/profile/personalInfo/PersonalInfo';
 import { getOrders } from '@/utils/getData';
 
@@ -45,7 +45,9 @@ const Page = async ({ params, searchParams }: Props) => {
             >
                 <Box
                     sx={{
-                        minWidth: { mobile: '0px', desktop: '32vw' },
+                        width: { desktop: '32vw' },
+                        minWidth: { desktop: '380px' },
+                        maxWidth: { desktop: '432px' },
                     }}
                 >
                     <UserCard firstName={data.user.firstName} phoneNumber={data.user.phoneNumber} />
@@ -53,7 +55,7 @@ const Page = async ({ params, searchParams }: Props) => {
                 </Box>
                 <Box sx={{ flexGrow: 1 }}>
                     {searchParams?.history ? (
-                        <OrdersList history={orders} />
+                        <ListOfOrders history={orders} />
                     ) : (
                         <PersonalInfo
                             firstName={data.user.firstName}

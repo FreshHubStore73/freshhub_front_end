@@ -1,12 +1,14 @@
 'use client';
+import { useState } from 'react';
+
 import { Box } from '@mui/material';
-import React from 'react';
-import OrdersListItem from './OrdersListItem';
+
+import OrderItem from './OrderItem';
 
 type Props = { history: IOrdersHistory[] };
 
-export default function OrdersList({ history }: Props) {
-    const [expanded, setExpanded] = React.useState<number | false>(false);
+export default function ListOfOrders({ history }: Props) {
+    const [expanded, setExpanded] = useState<number | false>(false);
     const handleChange = (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
         setExpanded(isExpanded ? panel : false);
     };
@@ -20,8 +22,9 @@ export default function OrdersList({ history }: Props) {
             }}
         >
             {history.map((order, i) => (
-                <OrdersListItem
-                    key={order.orderId}
+                <OrderItem
+                    // key={order.orderId}
+                    key={i}
                     order={order}
                     i={i}
                     expanded={expanded}

@@ -2,16 +2,14 @@
 
 import React from 'react';
 
-import { SvgIcon } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { SvgIcon, useMediaQuery } from '@mui/material';
+import { Theme, styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses, TooltipProps } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 
 import { useShoppingCart } from '../../../store';
-import CartDrawer from '../cartDrawer/CartDrawer';
-import { useTheme } from '@emotion/react';
 
 const HtmlTooltip = styled(
     ({ className, anchEl, ...props }: TooltipProps & { anchEl: HTMLElement | null }) => (
@@ -115,8 +113,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
             right: '7px',
             bottom: '7px',
             fontSize: '10px',
-            minWidth: '17px',
-            height: '17px',
+            minWidth: '18px',
+            height: '18px',
         },
         color: '#fff',
         padding: '2px',
@@ -128,68 +126,72 @@ type Props = {
     toggleDrawer: () => void;
     anchEl: HTMLElement | null;
 };
+
 const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
+    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('tablet'));
+
     const totalDishes = useShoppingCart((state) => state.totalDishes);
     const totalAmount = useShoppingCart((state) => state.totalAmount);
-    const theme = useTheme();
-    return (
-        <>
-            <HtmlTooltip
-                anchEl={anchEl}
-                title={
-                    <>
-                        <Typography
-                            sx={{
-                                fontWeight: 'bold',
-                                fontSize: { mobile: '10px', tablet: '12px', desktop: '18px' },
-                                marginBottom: { mobile: '4px', tablet: '5px', desktop: '5px' },
-                                color: 'text.secondary',
-                            }}
-                        >
-                            Your cart:
-                        </Typography>
 
-                        <Typography
-                            color="inherit"
-                            sx={{ fontSize: { mobile: '8px', tablet: '10px', desktop: '16px' } }}
-                        >
-                            {`${totalDishes}`} {' product(s)  on  '}
-                            <b>{`${totalAmount}$`}</b>
-                        </Typography>
-                    </>
-                }
+    const simpleIcon = (
+        <IconButton
+            size="large"
+            onClick={toggleDrawer}
+            disableTouchRipple
+            sx={{
+                '& svg': {
+                    height: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                    width: { mobile: '24px', tablet: '30px', desktop: '41px' },
+                },
+                '&.MuiIconButton-root:hover': {
+                    backgroundColor: '#fff',
+                },
+                '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
+            }}
+        >
+            <StyledBadge
+                badgeContent={totalDishes}
+                showZero
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
             >
-                <span>
-                    <IconButton
-                        size="large"
-                        onClick={toggleDrawer}
-                        disableTouchRipple
+                <ShoppingBasket />
+            </StyledBadge>
+        </IconButton>
+    );
+    const iconWithTooltip = (
+        <HtmlTooltip
+            anchEl={anchEl}
+            title={
+                <>
+                    <Typography
                         sx={{
-                            '& svg': {
-                                height: { mobile: '24px', tablet: '30px', desktop: '41px' },
-                                width: { mobile: '24px', tablet: '30px', desktop: '41px' },
-                            },
-                            '&.MuiIconButton-root:hover': {
-                                backgroundColor: '#fff',
-                            },
-                            '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
+                            fontWeight: 'bold',
+                            fontSize: { mobile: '10px', tablet: '12px', desktop: '18px' },
+                            marginBottom: { mobile: '4px', tablet: '5px', desktop: '5px' },
+                            color: 'text.secondary',
                         }}
                     >
-                        <StyledBadge
-                            badgeContent={totalDishes}
-                            showZero
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            }}
-                        >
-                            <ShoppingBasket />
-                        </StyledBadge>
-                    </IconButton>
-                </span>
-            </HtmlTooltip>
-        </>
+                        Your cart:
+                    </Typography>
+
+                    <Typography
+                        color="inherit"
+                        sx={{ fontSize: { mobile: '8px', tablet: '10px', desktop: '16px' } }}
+                    >
+                        {`${totalDishes}`} {' product(s)  on  '}
+                        <b>{`${totalAmount}$`}</b>
+                    </Typography>
+                </>
+            }
+        >
+            <span>{simpleIcon}</span>
+        </HtmlTooltip>
     );
+
+    return <>{isMobile ? simpleIcon : iconWithTooltip}</>;
 };
 
 export default CartIcon;

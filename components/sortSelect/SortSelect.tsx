@@ -76,7 +76,7 @@ export default function SortSelect() {
             </ListItemText>
         );
     return (
-        <div>
+        <>
             <Button
                 id="demo-customized-button"
                 aria-controls={open ? 'lock-menu for sorting' : undefined}
@@ -87,6 +87,7 @@ export default function SortSelect() {
                 onClick={handleClickSortButton}
                 endIcon={<ExpandMoreRoundedIcon />}
                 sx={{
+                    alignSelf: 'center',
                     '&.MuiButton-root': {
                         height: { mobile: '28px', tablet: '45px', desktop: '60px' },
                         width: { mobile: '164px', tablet: '240px', desktop: '374px' },
@@ -167,6 +168,6 @@ export default function SortSelect() {
                     </MenuItem>
                 ))}
             </Menu>
-        </div>
+        </>
     );
 }

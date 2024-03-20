@@ -1,60 +1,52 @@
-.card {
-    width: calc((100% - 90px) / 4);
-    // margin-right: 30px;
-    padding-bottom: 25px;
-    margin-bottom: 40px;
+.wrapper {
+    width: calc((100% - 40px) / 3);
+    padding-bottom: 23px;
+    box-sizing: border-box;
+    &:hover {
+        outline: 1px solid var(--color-title);
+        border-radius: 47px;
+        img {
+            transform: scale(103%);
+        }
+    }
 }
-.card:nth-child(4) {
-    margin-right: 0;
-}
-
 .dishImg {
+    width: calc(100% - 12px);
+    aspect-ratio: 1.198;
     border-radius: 40px;
     overflow: hidden;
-    height: 334px;
     position: relative;
-    margin-bottom: 10px;
+    margin: 6px 6px 10px;
 }
 .dishImg img {
+    object-fit: cover;
     transition: all 0.5s ease-in-out;
 }
-.dishImg:hover img {
-    transform: scale(103%);
-}
-
 .dishTitleInfo {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
     padding: 0 14px;
-
-    height: 40px; //added
 }
 .dishTitle {
     color: var(--color-txt-black);
     font-size: 28px;
-    font-weight: 500;
-
     text-overflow: ellipsis; //added
     -webkit-box-orient: vertical; //added
     display: -webkit-box; //added
-    -webkit-line-clamp: 2; //added
+    -webkit-line-clamp: 1; //added
     overflow: hidden; //added
 }
 .dishWeight {
-    color: var(--color-txt-big);
     font-size: 20px;
-    font-weight: 400;
+    color: var(--color-txt-big);
 }
 .dishDescr {
-    color: var(--color-txt-big);
     font-size: 20px;
-    font-weight: 400;
-    line-height: 1.2;
-    min-height: 48px;
     margin-bottom: 14px;
     padding: 0 14px;
+    color: var(--color-txt-big);
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -66,36 +58,69 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 14px;
-}
-.dishPrice {
     color: var(--color-txt-black);
     font-size: 30px;
     font-weight: 700;
 }
-@media screen and (max-width: 1440px) {
-    .card {
-        width: calc((100% - 40px) / 3);
-        margin-right: 20px;
-        padding-bottom: 25px;
-        margin-bottom: 40px;
+
+@media screen and (max-width: 1200px) {
+    .wrapper {
+        width: calc((100% - 40px) / 2);
+        padding-bottom: 22px;
+        &:hover {
+            border-radius: 27px;
+        }
     }
-    .card:nth-child(3) {
-        margin-right: 0;
-    }
-    .card:nth-child(4) {
-        margin-right: 20px;
-    }
-}
-@media screen and (max-width: 992px) {
     .dishImg {
-        height: 224px;
+        aspect-ratio: 1.14;
+        border-radius: 30px;
+        margin: 6px 6px 12px;
+    }
+    .dishTitle {
+        font-size: 24px;
+    }
+    .dishWeight {
+        display: none;
+    }
+    .dishDescr {
+        font-size: 18px;
+    }
+    .dishPrice {
+        font-size: 28px;
     }
 }
-@media screen and (max-width: 575px) {
-    .card {
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        width: calc((100% - 32px) / 2);
+        padding-bottom: 4px;
+        &:hover {
+            outline: none;
+            border-radius: none;
+        }
+    }
+    .dishImg {
+        aspect-ratio: 1.14;
+        border-radius: 20px;
+        margin: 0px 0px 8px;
         width: 100%;
-        margin-right: 0;
-        padding-bottom: 25px;
-        margin-bottom: 40px;
+    }
+    .dishTitleInfo {
+        margin-bottom: 6px;
+        padding: 0 6px;
+    }
+    .dishTitle {
+        font-size: 18px;
+    }
+    .dishDescr {
+        font-size: 12px;
+        margin-bottom: 10px;
+        padding: 0 6px;
+    }
+    .dishPrice {
+        padding: 0 6px;
+    }
+    .dishPrice {
+        font-size: 20px;
     }
 }

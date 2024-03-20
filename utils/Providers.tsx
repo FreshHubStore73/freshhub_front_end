@@ -107,13 +107,13 @@ const theme = createTheme({
         //     lineHeight: '91.88px',
         // },
         h1: undefined,
-        h2: {
-            fontFamily: lato.style.fontFamily,
-            fontSize: '52px',
-            fontWeight: 400,
-            lineHeight: '62.4px',
-            color: 'primary',
-        },
+        // h2: {
+        //     fontFamily: lato.style.fontFamily,
+        //     fontSize: '52px',
+        //     fontWeight: 400,
+        //     lineHeight: '62.4px',
+        //     color: 'primary',
+        // },
         h3: {
             fontFamily: lato.style.fontFamily,
             fontSize: '28px',
@@ -196,6 +196,23 @@ theme.typography.h2_Oswald = {
     [theme.breakpoints.up('desktop')]: {
         fontSize: '62px',
         lineHeight: '91.88px',
+    },
+};
+theme.typography.h2 = {
+    [theme.breakpoints.up('mobile')]: {
+        fontFamily: lato.style.fontFamily,
+        fontWeight: 400,
+        color: 'primary',
+        fontSize: '26px',
+        lineHeight: '31.2px',
+    },
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '36px',
+        lineHeight: '43.2px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        fontSize: '52px',
+        lineHeight: '62.4px',
     },
 };
 

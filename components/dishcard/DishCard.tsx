@@ -17,14 +17,14 @@ const DishCard = ({ item }: { item: DishItem }) => {
         `${url}/Images/`,
     );
     return (
-        <div className={styles.card}>
+        <>
             <div className={styles.wrapper}>
                 <Link href={link} className={styles.link}>
                     <div className={styles.dishImg}>
                         <Image
                             className={styles.img}
                             src={photo}
-                            alt={'dish image'}
+                            alt={productName}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
@@ -40,7 +40,7 @@ const DishCard = ({ item }: { item: DishItem }) => {
                     </div>
                 </Link>
             </div>
-        </div>
+        </>
     );
 };
 

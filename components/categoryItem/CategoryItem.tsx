@@ -30,12 +30,17 @@ export default async function CategoryItem({ dishes, path, searchParams }: Props
             <BreadCrumbs />
 
             <Box
-                display="flex"
-                justifyContent={
-                    title === 'This is no such category... Ups' ? 'center' : 'space-between'
-                }
-                mt={'44px'}
-                mb={'30px'}
+                sx={{
+                    display: 'flex',
+                    justifyContent:
+                        title === 'This is no such category... Ups' ? 'center' : 'space-between',
+                    alignContent: 'center',
+                    margin: {
+                        mobile: '16px 0 14px',
+                        tablet: '25px 0 21px',
+                        desktop: '44px 0 29px',
+                    },
+                }}
             >
                 <Typography
                     variant="h2"
@@ -55,7 +60,15 @@ export default async function CategoryItem({ dishes, path, searchParams }: Props
                     sx={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        gap: '30px',
+                        columnGap: {
+                            mobile: '16px',
+                            tablet: '20px',
+                        },
+                        rowGap: {
+                            mobile: '14px',
+                            tablet: '20px',
+                            desktop: '40px',
+                        },
                         justifyContent: `${dishes.length ? 'flex-start' : 'center'}`,
                     }}
                 >
