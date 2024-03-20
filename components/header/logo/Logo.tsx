@@ -17,6 +17,7 @@ export default function Logo() {
                     sx={{
                         height: { mobile: '33px', tablet: '48px', desktop: '74px' },
                         width: { mobile: '44px', tablet: '64px', desktop: '98px' },
+                        ml: { mobile: '14px', tablet: '0' },
                     }}
                 >
                     <svg

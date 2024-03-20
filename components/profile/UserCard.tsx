@@ -47,12 +47,20 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
-                padding: '54px 20px',
+                padding: { mobile: '48px 30px', tablet: '39px 41px', desktop: '54px 20px' },
                 backgroundColor: '#FFC182',
-                borderRadius: '50px',
+                borderRadius: { mobile: '36px', tablet: '40px', desktop: '50px' },
             }}
         >
-            <Box sx={{ width: '135px' }}>
+            <Box
+                sx={{
+                    width: { mobile: '71px', tablet: '108px', desktop: '135px' },
+                    '& svg': {
+                        height: 'auto',
+                        width: '100%',
+                    },
+                }}
+            >
                 <BurgerSvg />
             </Box>
             <Box
@@ -62,7 +70,7 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    gap: '8px',
+                    gap: { mobile: '8px', tablet: '12px', desktop: '8px' },
 
                     backgroundColor: '#FFC182',
                 }}
@@ -71,8 +79,9 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                     component={'h3'}
                     sx={{
                         fontWeight: 700,
-                        fontSize: '34px',
-                        lineHeight: '41px',
+                        fontSize: { mobile: '26px', tablet: '30px', desktop: '34px' },
+                        // lineHeight: '29px',
+
                         color: 'palette.text.secondary',
                     }}
                 >
@@ -80,7 +89,11 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                 </Typography>
                 <Typography
                     component={'h3'}
-                    sx={{ fontSize: '24px', lineHeight: '29px', fontWeight: 400 }}
+                    sx={{
+                        fontSize: { mobile: '18px', tablet: '22px', desktop: '24px' },
+                        // lineHeight: '29px',
+                        fontWeight: 400,
+                    }}
                 >
                     {addSpaces(phoneNumber)}
                 </Typography>

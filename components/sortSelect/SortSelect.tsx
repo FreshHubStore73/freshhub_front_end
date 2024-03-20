@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -52,7 +52,13 @@ export default function SortSelect() {
     const content = (isActive: boolean, text: string) =>
         isActive ? (
             <>
-                <ListItemIcon>
+                <ListItemIcon
+                    sx={{
+                        '& .MuiSvgIcon-root': {
+                            fontSize: { mobile: '14px', tablet: '22px', desktop: '27px' },
+                        },
+                    }}
+                >
                     <Check htmlColor="#040705" />
                 </ListItemIcon>
                 {text}
@@ -70,7 +76,7 @@ export default function SortSelect() {
             </ListItemText>
         );
     return (
-        <div>
+        <>
             <Button
                 id="demo-customized-button"
                 aria-controls={open ? 'lock-menu for sorting' : undefined}
@@ -81,15 +87,18 @@ export default function SortSelect() {
                 onClick={handleClickSortButton}
                 endIcon={<ExpandMoreRoundedIcon />}
                 sx={{
-                    '&.MuiButtonBase-root.MuiButton-root': {
+                    alignSelf: 'center',
+                    '&.MuiButton-root': {
+                        height: { mobile: '28px', tablet: '45px', desktop: '60px' },
+                        width: { mobile: '164px', tablet: '240px', desktop: '374px' },
+                        lineHeight: 'unset',
+                        fontSize: { mobile: '10px', tablet: '14px', desktop: '20px' },
+                        borderRadius: { mobile: '24px', tablet: '50px' },
+                        justifyContent: 'space-between',
+                        paddingInline: { mobile: '12px', tablet: '20px', desktop: '50px' },
                         backgroundColor: 'white',
                         color: '#3E3B3B',
-                        justifyContent: 'space-between',
-                        padding: '12px 50px',
                         border: '1px solid #3E3B3B',
-                        borderRadius: '50px',
-                        fontSize: '20px',
-                        width: '374px',
                     },
                 }}
             >
@@ -104,12 +113,21 @@ export default function SortSelect() {
                     'aria-labelledby': 'lock-button',
                     role: 'listbox',
                 }}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
                 sx={{
-                    '& .MuiPaper-root.MuiPopover-paper.MuiMenu-paper': {
-                        transform: 'translateY(-60px) !important',
-                        width: '374px',
-                        borderRadius: '28px',
-                        paddingBlock: '25px',
+                    '& .MuiPopover-paper': {
+                        width: { mobile: '164px', tablet: '240px', desktop: '374px' },
+                        borderRadius: { mobile: '12px', tablet: '20px', desktop: '28px' },
+                    },
+                    '& .MuiList-root': {
+                        paddingBlock: { mobile: '10px', tablet: '17px', desktop: '29px' },
                     },
                 }}
             >
@@ -120,13 +138,25 @@ export default function SortSelect() {
                         selected={index === selectedIndex}
                         onClick={(event) => handleMenuItemClick(event, index)}
                         sx={{
-                            fontSize: '20px',
-                            padding: '7px 48px',
+                            fontSize: { mobile: '10px', tablet: '14px', desktop: '20px' },
+                            minHeight: 'unset',
+                            padding: {
+                                mobile: '2px 14px',
+                                tablet: '5px 24px',
+                                desktop: '7px 48px',
+                            },
                             backgroundColor: 'white',
-                            '&.MuiButtonBase-root.MuiMenuItem-root:hover': {
+
+                            '& .MuiListItemText-inset': {
+                                paddingLeft: { mobile: '21px', tablet: '34px', desktop: '41px' },
+                            },
+                            '& .MuiListItemIcon-root': {
+                                minWidth: { mobile: '21px', tablet: '34px', desktop: '41px' },
+                            },
+                            '&:hover': {
                                 backgroundColor: 'white',
                             },
-                            '&.MuiButtonBase-root.MuiMenuItem-root.Mui-selected ': {
+                            '&.Mui-selected ': {
                                 backgroundColor: 'white',
                                 fontWeight: 700,
                                 color: '#040705',
@@ -138,6 +168,6 @@ export default function SortSelect() {
                     </MenuItem>
                 ))}
             </Menu>
-        </div>
+        </>
     );
 }

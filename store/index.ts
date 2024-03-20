@@ -23,13 +23,19 @@ export const useShoppingCart = create<UseShoppingCart>()(
                                             : item;
                                     }),
                                 ],
-                                totalAmount: state.totalAmount + dish.quantity * dish.price,
+                                totalAmount:
+                                    Math.round(
+                                        (state.totalAmount + dish.quantity * dish.price) * 100,
+                                    ) / 100,
                                 totalDishes: state.totalDishes + dish.quantity,
                             };
                         } else {
                             return {
                                 dishes: [...state.dishes, dish],
-                                totalAmount: state.totalAmount + dish.quantity * dish.price,
+                                totalAmount:
+                                    Math.round(
+                                        (state.totalAmount + dish.quantity * dish.price) * 100,
+                                    ) / 100,
                                 totalDishes: state.totalDishes + dish.quantity,
                             };
                         }
@@ -46,8 +52,11 @@ export const useShoppingCart = create<UseShoppingCart>()(
                                 }),
                             ],
                             totalAmount:
-                                state.totalAmount -
-                                (dishInCart.quantity - quantity) * dishInCart.price,
+                                Math.round(
+                                    (state.totalAmount -
+                                        (dishInCart.quantity - quantity) * dishInCart.price) *
+                                        100,
+                                ) / 100,
                             totalDishes: state.totalDishes - dishInCart.quantity + quantity,
                         };
                     }),
@@ -55,7 +64,9 @@ export const useShoppingCart = create<UseShoppingCart>()(
                     set((state) => {
                         return {
                             dishes: [...state.dishes.filter((item) => item.id !== dish.id)],
-                            totalAmount: state.totalAmount - dish.quantity * dish.price,
+                            totalAmount:
+                                Math.round((state.totalAmount - dish.quantity * dish.price) * 100) /
+                                100,
                             totalDishes: state.totalDishes - dish.quantity,
                         };
                     }),

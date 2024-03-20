@@ -70,7 +70,7 @@ export default function Address() {
                     name="floor"
                     sx={{
                         width: '100%',
-                        ffontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
+                        fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
                         fontWeight: '400',
                         bgcolor: '#FFFFFF',
                         borderRadius: '50px',

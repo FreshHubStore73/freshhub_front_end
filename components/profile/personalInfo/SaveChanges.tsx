@@ -18,10 +18,12 @@ const SaveChanges = ({ handleSave, isChangeActive, disabled }: Props) => {
             disabled={disabled || pending}
             sx={{
                 width: '100%',
-                maxWidth: '370px',
+                maxWidth: { mobile: '306px', tablet: '370px' },
+                fontSize: { mobile: '20px', tablet: '22px', desktop: '28px' },
                 whiteSpace: 'nowrap',
-                borderRadius: '50px',
-                height: '74px',
+                borderRadius: { mobile: '40px', desktop: '50px' },
+                height: { mobile: '48px', tablet: '64px', desktop: '74px' },
+                mt: { mobile: '6px', tablet: 'unset' },
             }}
         >
             {isChangeActive ? 'Save changes' : 'Change'}

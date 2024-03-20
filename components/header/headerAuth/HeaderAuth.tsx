@@ -7,7 +7,14 @@ export default function HeaderAuth() {
     return (
         <AppBar position="fixed">
             <div className="container">
-                <Toolbar disableGutters>
+                <Toolbar
+                    disableGutters
+                    sx={{
+                        '&': {
+                            minHeight: { mobile: '59px', tablet: '83px', desktop: '111px' },
+                        },
+                    }}
+                >
                     <>
                         <Logo />
                     </>

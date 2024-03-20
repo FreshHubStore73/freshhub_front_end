@@ -1,4 +1,3 @@
-import { addSpaces } from '@/utils/helpers';
 import {
     Accordion,
     AccordionDetails,
@@ -6,21 +5,19 @@ import {
     Box,
     Divider,
     SvgIcon,
-    Tooltip,
     Typography,
 } from '@mui/material';
-import Image from 'next/image';
-import React from 'react';
 
-type Props = {
-    order: IOrdersHistory;
-    i: number;
-    expanded: number | false;
-    handleChange: (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => void;
-};
+import { addSpaces } from '@/utils/helpers';
+import { ListOfDishes } from './ListOfDishes';
 
 const ArrowDownIcon = () => (
-    <SvgIcon>
+    <SvgIcon
+        sx={{
+            width: { mobile: '22px', tablet: '32px', desktop: '34px' },
+            height: { mobile: '10px', tablet: '14px', desktop: '16px' },
+        }}
+    >
         <svg
             width="34"
             height="16"
@@ -58,13 +55,13 @@ const OrderItemTitle = ({
             sx={{
                 width: '100%',
                 display: 'flex',
-                gap: '24px',
+                gap: { mobile: '15px', tablet: '27px', desktop: '21px' },
             }}
         >
             <Box
                 sx={{
                     backgroundColor: backgroundColor(orderStatus),
-                    height: '52px',
+                    height: { mobile: '48px', tablet: '60px' },
                     width: '6px',
                     borderRadius: '6px',
                 }}
@@ -76,20 +73,23 @@ const OrderItemTitle = ({
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'flex-start',
-                    gap: '4px',
-                    fontSize: '16px',
+                    gap: { mobile: '4px', tablet: '9px' },
+                    fontSize: { mobile: '10px', tablet: '14px', desktop: '16px' },
                     color: 'text.primary',
                 }}
             >
                 <div>
-                    <Box component={'span'} sx={{ mr: '24px' }}>
-                        {orderNumber}
+                    <Box
+                        component={'span'}
+                        sx={{ mr: { mobile: '12px', tablet: '30px', desktop: '24px' } }}
+                    >
+                        № {orderNumber}
                     </Box>
                     <Box component={'span'}>{ordered}</Box>
                 </div>
                 <Box
                     sx={{
-                        fontSize: '24px',
+                        fontSize: { mobile: '16px', tablet: '22px', desktop: '24px' },
                         color: 'text.secondary',
                         fontWeight: 400,
                         '&::first-letter': {
@@ -109,12 +109,12 @@ const OrderItemTitle = ({
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'flex-start',
-                        gap: '4px',
+                        gap: { mobile: '4px', tablet: '7px' },
                     }}
                 >
                     <Box
                         sx={{
-                            fontSize: '16px',
+                            fontSize: { mobile: '10px', tablet: '14px', desktop: '16px' },
                             color: 'text.primary',
                             fontWeight: 400,
                         }}
@@ -124,7 +124,7 @@ const OrderItemTitle = ({
                     </Box>
                     <Box
                         sx={{
-                            fontSize: '24px',
+                            fontSize: { mobile: '16px', tablet: '22px', desktop: '24px' },
                             color: 'text.secondary',
                             fontWeight: 400,
                         }}
@@ -137,145 +137,6 @@ const OrderItemTitle = ({
     );
 };
 
-const OrdersListDish = ({
-    dish,
-}: {
-    dish: {
-        dishId: string;
-        dishName: string;
-        dishPrice: number;
-        dishQuantity: number;
-        dishImage: string;
-    };
-}) => {
-    const { dishId, dishName, dishPrice, dishQuantity, dishImage } = dish;
-    return (
-        <Box
-            sx={{
-                display: 'grid',
-                gridTemplateColumns: '50px minmax(150px, 250px) 40px 55px 50px',
-                gridTemplateRaws: 'repeat(2, auto)',
-                columnGap: '16px',
-                rowGap: '3px',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-            }}
-        >
-            <Image
-                src={dishImage}
-                alt={dishName}
-                width="50"
-                height="40"
-                style={{ gridArea: '1 / 1 / 3 / 2', objectFit: 'contain' }}
-            />
-            <Tooltip
-                title={dishName}
-                placement="top"
-                componentsProps={{
-                    tooltip: {
-                        sx: {
-                            backgroundColor: '#BDBDBD',
-                            color: 'text.secondary',
-                            padding: '8px 14px',
-                            borderRadius: '10px',
-                            fontSize: '14px',
-                            boxShadow: '0px 2px 16px 1px rgba(0, 0, 0, 0.15)',
-                        },
-                    },
-                }}
-            >
-                <Typography
-                    sx={{
-                        alignContent: 'flex-start',
-                        fontSize: '18px',
-                        color: 'text.secondary',
-                        gridArea: '1 / 2 / 3 / 3',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        cursor: 'pointer',
-                    }}
-                >
-                    {dishName}
-                </Typography>
-            </Tooltip>
-            <Box
-                component={'span'}
-                sx={{
-                    color: 'text.primary',
-                    fontSize: '14px',
-                    lineHeight: '16.8px',
-                    gridArea: '1 / 3 / 2 / 4',
-                    justifySelf: 'center',
-                }}
-            >
-                Price
-            </Box>
-            <Box
-                component={'span'}
-                sx={{
-                    color: 'text.secondary',
-                    fontSize: '18px',
-                    lineHeight: '21.6px',
-                    gridArea: '2 / 3 / 3 / 4',
-                    justifySelf: 'center',
-                }}
-            >
-                ${dishPrice}
-            </Box>
-            <Box
-                component={'span'}
-                sx={{
-                    color: 'text.primary',
-                    fontSize: '14px',
-                    lineHeight: '16.8px',
-                    justifySelf: 'center',
-                    gridArea: '1 / 4 / 2 / 5',
-                }}
-            >
-                Quantity
-            </Box>
-            <Box
-                component={'span'}
-                sx={{
-                    color: 'text.secondary',
-                    fontSize: '18px',
-                    lineHeight: '21.6px',
-                    gridArea: '2 / 4 / 3 / 5',
-                    justifySelf: 'center',
-                    alignSelf: 'center',
-                }}
-            >
-                {dishQuantity}
-            </Box>
-            <Box
-                component={'span'}
-                sx={{
-                    color: 'text.primary',
-                    fontSize: '14px',
-                    lineHeight: '16.8px',
-                    justifySelf: 'center',
-                    gridArea: '1 / 5 / 2 / 6',
-                }}
-            >
-                Amount
-            </Box>
-            <Box
-                component={'span'}
-                sx={{
-                    color: 'text.secondary',
-                    fontSize: '18px',
-                    lineHeight: '21.6px',
-                    justifySelf: 'center',
-                    gridArea: '2 / 5 / 3 / 6',
-                }}
-            >
-                ${dishQuantity * dishPrice}
-            </Box>
-        </Box>
-    );
-};
-
 const OrderItemFooter = ({
     payment,
     totalAmount,
@@ -284,11 +145,11 @@ const OrderItemFooter = ({
     totalAmount: number;
 }) => {
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', mt: { mobile: '2px', tablet: '4px', desktop: '0px' } }}>
             <Divider
                 sx={{
                     backgroundColor: 'peach.main',
-                    mb: '12px',
+                    mb: { mobile: '16px', tablet: '12px' },
                 }}
             />
             <Box
@@ -297,8 +158,7 @@ const OrderItemFooter = ({
                     display: 'grid',
                     gridTemplate: 'repeat(3, auto) / 1fr 1fr',
                     rowGap: '8px',
-                    fontSize: '14px',
-                    lineHeight: '16.8px',
+                    fontSize: { mobile: '12px', tablet: '14px' },
                 }}
             >
                 <Box component={'span'}>Payment</Box>
@@ -337,40 +197,39 @@ const OrderItemBody = ({
         <Box
             sx={{
                 display: 'flex',
+                flexDirection: { mobile: 'column', tablet: 'row' },
                 justifyContent: 'flex-start',
                 alignItems: 'flex-start',
-                gap: '20px',
+                gap: { mobile: '16px', tablet: '20px' },
                 width: '100%',
             }}
         >
             <Box
                 sx={{
-                    width: '40%',
+                    width: { mobile: '100%', tablet: '40%' },
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
-                    gap: '18px',
+                    gap: { mobile: '10px', tablet: '16px', desktop: '18px' },
                 }}
             >
                 <Typography
                     sx={{
-                        fontSize: '18px',
-                        lineHeight: '21.6px',
+                        fontSize: { mobile: '10px', tablet: '16px', desktop: '18px' },
                     }}
                 >
                     {deliveryAddress}
                 </Typography>
                 <Box
                     sx={{
-                        fontSize: '20px',
-                        lineHeight: '24px',
+                        fontSize: { mobile: '12px', tablet: '18px', desktop: '20px' },
                         color: 'text.secondary',
                         display: 'flex',
-                        flexDirection: 'column',
+                        flexDirection: { mobile: 'row', tablet: 'column' },
                         justifyContent: 'flex-start',
                         alignItems: 'flex-start',
-                        gap: '6px',
+                        gap: { mobile: '38px', tablet: '8px', desktop: '6px' },
                     }}
                 >
                     <p>{recipientName}</p>
@@ -383,20 +242,34 @@ const OrderItemBody = ({
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
-                    gap: '16px',
+                    // width: '100%',
+                    // flexGrow: 1,
+                    gap: { mobile: '10px', tablet: '12px', desktop: '16px' },
                 }}
             >
-                <Typography fontSize={'18px'}>Order</Typography>
-                {orderedDishes.map((dish) => (
-                    <OrdersListDish key={dish.dishId} dish={dish} />
-                ))}
+                <Typography
+                    sx={{
+                        fontSize: { mobile: '14px', tablet: '16px', desktop: '18px' },
+                    }}
+                >
+                    Order
+                </Typography>
+                <ListOfDishes orderedDishes={orderedDishes} />
+
                 <OrderItemFooter payment={payment} totalAmount={totalAmount} />
             </Box>
         </Box>
     );
 };
 
-export default function OrdersListItem({ order, i, expanded, handleChange }: Props) {
+type Props = {
+    order: IOrdersHistory;
+    i: number;
+    expanded: number | false;
+    handleChange: (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => void;
+};
+
+export default function OrderItem({ order, i, expanded, handleChange }: Props) {
     const {
         orderNumber,
         ordered,
@@ -420,13 +293,13 @@ export default function OrdersListItem({ order, i, expanded, handleChange }: Pro
                     height: '0px',
                 },
                 '&.MuiPaper-root': {
-                    borderRadius: '50px',
+                    borderRadius: { mobile: '36px', tablet: '50px' },
                 },
                 '& .MuiAccordionSummary-root': {
-                    padding: '0 40px',
+                    padding: { mobile: '0 27px', tablet: '0 37px', desktop: '0 37px' },
                 },
                 '& .MuiAccordionSummary-content': {
-                    margin: '28px 0',
+                    margin: { mobile: '13px 0', tablet: '24px 0' },
                 },
             }}
         >
@@ -442,7 +315,11 @@ export default function OrdersListItem({ order, i, expanded, handleChange }: Pro
             <AccordionDetails
                 sx={{
                     '&.MuiAccordionDetails-root': {
-                        padding: '0px 40px 28px',
+                        padding: {
+                            mobile: '5px 30px 19px',
+                            tablet: '1px 40px 28px',
+                            desktop: '0px 40px 28px',
+                        },
                     },
                 }}
             >

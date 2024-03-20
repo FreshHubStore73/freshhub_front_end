@@ -29,11 +29,17 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
             onClick={handleClick}
             type="submit"
             sx={{
-                width: simple ? '174px' : '143px',
-                height: simple ? '50px' : '41px',
-                borderRadius: '50px',
-                fontSize: simple ? '24px' : '16px',
-                '&.MuiButtonBase-root.Mui-disabled': {
+                width: simple
+                    ? { mobile: '112px', tablet: '140px', desktop: '174px' }
+                    : { mobile: '94px', tablet: '147px', desktop: '143px' },
+                height: simple
+                    ? { mobile: '30px', tablet: '36px', desktop: '50px' }
+                    : { mobile: '24px', tablet: '38px', desktop: '50px' },
+                borderRadius: { mobile: '24px', tablet: '40px', desktop: '50px' },
+                fontSize: simple
+                    ? { mobile: '16px', tablet: '18px', desktop: '24px' }
+                    : { mobile: '12px', tablet: '18px', desktop: '24px' },
+                '&.Mui-disabled': {
                     color: '#F15C30',
                     backgroundColor: 'white',
                     border: '1px solid #F15C30',

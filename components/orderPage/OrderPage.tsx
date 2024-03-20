@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
@@ -24,12 +24,12 @@ type Props = {};
 export default function OrderPage({}: Props) {
     const [openSuccess, setOpenSuccess] = React.useState(false);
     const formRef = useRef<HTMLFormElement>(null);
-    const { replace } = useRouter();
-
-    const dishes = useShoppingCart((state) => state.dishes);
     const [state, formAction] = useFormState(orderAction, {
         message: '',
     });
+    const { replace } = useRouter();
+
+    const dishes = useShoppingCart((state) => state.dishes);
     const { clearCart } = useShoppingCart();
     const { startTimer, cancelTimer } = useTimeout(() => {
         replace('/profile?history=true');
@@ -49,8 +49,11 @@ export default function OrderPage({}: Props) {
         }
     };
 
+    useLayoutEffect(() => {
+        if (!dishes.length) replace('/');
+    }, [dishes]);
+
     useEffect(() => {
-        console.log(state.message);
         if (state.message === 'Ok') {
             startTimer();
             setOpenSuccess(true);

@@ -100,20 +100,20 @@ const theme = createTheme({
             fontWeight: 700,
             lineHeight: '145.24px',
         },
-        h2_Oswald: {
-            fontFamily: oswald.style.fontFamily,
-            fontSize: '62px',
-            fontWeight: 500,
-            lineHeight: '91.88px',
-        },
+        // h2_Oswald: {
+        //     fontFamily: oswald.style.fontFamily,
+        //     fontSize: '62px',
+        //     fontWeight: 500,
+        //     lineHeight: '91.88px',
+        // },
         h1: undefined,
-        h2: {
-            fontFamily: lato.style.fontFamily,
-            fontSize: '52px',
-            fontWeight: 400,
-            lineHeight: '62.4px',
-            color: 'primary',
-        },
+        // h2: {
+        //     fontFamily: lato.style.fontFamily,
+        //     fontSize: '52px',
+        //     fontWeight: 400,
+        //     lineHeight: '62.4px',
+        //     color: 'primary',
+        // },
         h3: {
             fontFamily: lato.style.fontFamily,
             fontSize: '28px',
@@ -156,11 +156,6 @@ const theme = createTheme({
                 },
             },
         },
-        MuiTypography: {
-            defaultProps: {
-                color: '#3E3B3B',
-            },
-        },
         MuiButton: {
             styleOverrides: {
                 containedSuccess: {
@@ -186,6 +181,40 @@ const theme = createTheme({
         },
     },
 });
+
+theme.typography.h2_Oswald = {
+    [theme.breakpoints.up('mobile')]: {
+        fontFamily: oswald.style.fontFamily,
+        fontWeight: 500,
+        fontSize: '32px',
+        lineHeight: '47.42px',
+    },
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '46px',
+        lineHeight: '68.17px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        fontSize: '62px',
+        lineHeight: '91.88px',
+    },
+};
+theme.typography.h2 = {
+    [theme.breakpoints.up('mobile')]: {
+        fontFamily: lato.style.fontFamily,
+        fontWeight: 400,
+        color: 'primary',
+        fontSize: '26px',
+        lineHeight: '31.2px',
+    },
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '36px',
+        lineHeight: '43.2px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        fontSize: '52px',
+        lineHeight: '62.4px',
+    },
+};
 
 type Props = { children: React.ReactNode };
 
