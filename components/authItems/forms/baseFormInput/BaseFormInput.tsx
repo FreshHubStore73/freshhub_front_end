@@ -1,13 +1,22 @@
-import { BorderAll } from '@mui/icons-material';
+// import { BorderAll } from '@mui/icons-material';
 import { TextField, TextFieldProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { forwardRef } from 'react';
-
 const StyledTextField = styled(TextField)(({ theme }) => ({
     '& .MuiOutlinedInput-root': {
         borderRadius: '50px',
         paddingInline: '38px',
         height: '106px',
+
+        '@media (max-width: 600px)': {
+            height: '56px', // Мобільні пристрої
+        },
+        '@media (min-width: 601px) and (max-width: 960px)': {
+            height: '88px', // Планшети
+        },
+        '@media (min-width: 961px)': {
+            height: '106px', // Робочі станції та великі екрани
+        },
 
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.secondary,
@@ -20,6 +29,16 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     '& .MuiInputBase-input.MuiOutlinedInput-input ': {
         fontSize: '24px',
         color: theme.palette.text.primary,
+        '@media (max-width: 600px)': {
+            fontSize: '16px',
+        },
+        '@media (min-width: 601px) and (max-width: 960px)': {
+            fontSize: '18px',
+        },
+        '@media (min-width: 961px)': {
+            fontSize: '24px',
+        },
+
     },
     '& input::placeholder': {
         color: '#828282',

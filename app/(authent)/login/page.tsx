@@ -16,7 +16,7 @@ const LoginPage = (params: Props) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                width: '742px',
+                width: { mobile: '344px', tablet: '510px', desktop: '742px' },
                 margin: '90px auto 0',
             }}
         >
@@ -29,7 +29,7 @@ const LoginPage = (params: Props) => {
             <Box
                 sx={{
                     mt: '44px',
-                    fontSize: '24px',
+                    fontSize: { mobile: '16px', tablet: '22px', desktop: '24px' },
                     display: 'flex',
                     alignItems: 'center',
                     gap: '8px',
@@ -52,7 +52,7 @@ const LoginPage = (params: Props) => {
                     Create an account
                 </Button>
             </Box>
-        </Box>
+        </Box >
     );
 };
 

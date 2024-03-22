@@ -14,7 +14,7 @@ import PasswordInput from '../signUpForm/PasswordInput';
 
 type Props = {};
 const initialState: ISignInFormState = { message: '', user: null };
-export default function SignInForm({}: Props) {
+export default function SignInForm({ }: Props) {
     const [state, formAction] = useFormState(login, initialState);
     const { signIn } = useAuth();
     const { replace } = useRouter();
