@@ -1,84 +1,246 @@
 .dishItem {
     padding-top: 66px;
 }
+
 .wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 65px;
 }
+
 .picture {
     width: 49%;
+    height: auto;
     position: relative;
     border-radius: 40px;
     overflow: hidden;
+    img {
+        object-fit: cover;
+    }
 }
+
 .contentWrapper {
-    width: 45.85%;
+    // width: 45.61%;
 }
+
 .title {
     color: var(--color-txt-black);
     font-size: 62px;
+    line-height: 91.88px;
     font-weight: 700;
     margin-bottom: 22px;
 }
+
 .contentInfo {
     border-radius: 40px;
     border: 1px solid var(--color-beige);
-    padding: 40px;
+    padding: 36px 40px;
 }
+
 .titleInfo {
     display: flex;
     justify-content: space-between;
     margin-bottom: 22px;
 }
+
 .titleInfo h4 {
     color: var(--color-txt-black);
     // font-family: Lato;
     font-size: 28px;
     font-weight: 400;
 }
+
 .weight {
     color: var(--color-txt-big);
     font-size: 28px;
     font-weight: 400;
 }
+
 .description {
     color: var(--color-txt-big);
     font-size: 18px;
     margin-bottom: 30px;
 }
+
 .description span {
     color: var(--color-txt-black);
     font-weight: 700;
 }
+
 .cardInfo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
 }
+
 .price {
     color: var(--color-txt-black);
     font-size: 40px;
+    line-height: 59.28px;
     font-weight: 700;
 }
+
 .description + .delivery {
     margin-top: -14px;
 }
+
 .delivery {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
 }
+
 .delivery:last-child {
     margin-bottom: 0;
 }
+
 .delivery p {
     color: var(--color-txt-big);
     font-size: 14px;
     font-weight: 400;
 }
+
 .delivery img {
     width: 31px;
     height: 31px;
     margin-right: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .dishItem {
+        padding-top: 24px;
+    }
+    .wrapper {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .picture {
+        width: 100%;
+        // max-width: 632px;
+        // height: 435px;
+        height: auto;
+        // margin-bottom: 24px;
+    }
+
+    .contentWrapper {
+        width: 100%;
+        // max-width: 632px;
+        // margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 36px;
+        line-height: 53.35px;
+        margin-bottom: 10px;
+        padding-left: 20px;
+    }
+
+    .contentInfo {
+        padding: 20px;
+    }
+
+    .titleInfo {
+        margin-bottom: 9px;
+        h4 {
+            font-size: 24px;
+        }
+    }
+
+    .weight {
+        font-size: 24px;
+    }
+
+    .description {
+        font-size: 16px;
+        margin-bottom: 26px;
+    }
+
+    .cardInfo {
+        margin-bottom: 16px;
+    }
+
+    .price {
+        font-size: 28px;
+        line-height: 41.5px;
+    }
+
+    .description + .delivery {
+        margin-top: -16px;
+    }
+
+    .delivery img {
+        width: 26px;
+        height: 26px;
+        margin-right: 6px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dishItem {
+        padding-top: 16px;
+    }
+    .wrapper {
+        gap: 16px;
+    }
+    .picture {
+        // max-width: 344px;
+        // height: 248px;
+        height: auto;
+        // margin-bottom: 16px;
+    }
+
+    .title {
+        font-size: 28px;
+        line-height: 41.5px;
+    }
+
+    .contentWrapper {
+        // width: 100%;
+        // max-width: 344px;
+        // margin-bottom: 20px;
+    }
+
+    .titleInfo {
+        margin-bottom: 10px;
+        h4 {
+            font-size: 20px;
+        }
+    }
+
+    .weight {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 12px;
+        margin-bottom: 19px;
+    }
+
+    .cardInfo {
+        margin-bottom: 19px;
+    }
+
+    .price {
+        font-size: 24px;
+        line-height: 35.57px;
+    }
+
+    .description + .delivery {
+        margin-top: -10px;
+    }
+
+    .cardInfo + .description {
+        font-size: 14px;
+    }
+
+    .delivery img {
+        width: 23px;
+        height: 23px;
+    }
+
+    .delivery p {
+        font-size: 12px;
+    }
 }
