@@ -8,14 +8,14 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
         paddingInline: '38px',
         height: '106px',
 
-        '@media (max-width: 600px)': {
-            height: '56px', // Мобільні пристрої
+        '@media (max-width: 767px)': {
+            height: '56px',
         },
-        '@media (min-width: 601px) and (max-width: 960px)': {
-            height: '88px', // Планшети
+        '@media (min-width: 768px) and (max-width: 960px)': {
+            height: '86px',
         },
         '@media (min-width: 961px)': {
-            height: '106px', // Робочі станції та великі екрани
+            height: '106px',
         },
 
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
