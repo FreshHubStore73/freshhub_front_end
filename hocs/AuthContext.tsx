@@ -4,21 +4,21 @@ import { ReactNode, createContext, useEffect, useState } from 'react';
 interface IAuthContext {
     user: IUserInfo | null;
     isAuthorized: boolean;
-    // isAdmin: boolean;
+    isAdmin: boolean;
     signOut: () => void;
     signIn: (newUser: IUserInfo) => void;
 }
 const initialUser: IAuthContext = {
     user: null,
     isAuthorized: false,
-    // isAdmin: false,
+    isAdmin: false,
     signOut: () => {},
     signIn: () => {},
 };
 export const AuthContext = createContext<IAuthContext>({
     user: null,
     isAuthorized: false,
-    // isAdmin: false,
+    isAdmin: false,
     signIn: () => {},
     signOut: () => {},
 });
@@ -26,18 +26,18 @@ export const AuthContext = createContext<IAuthContext>({
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<IUserInfo | null>(null);
     const [isAuthorized, setAuthorized] = useState(false);
-    // const [isAdmin, setAdmin] = useState(false);
+    const [isAdmin, setAdmin] = useState(false);
 
     const signIn = (newUser: IUserInfo) => {
         setUser(newUser);
         setAuthorized(true);
-        // if (newUser.userRole === 'admin') setAdmin(true);
+        if (newUser.userRole === 'admin') setAdmin(true);
         // cb();
     };
 
     const signOut = () => {
         setUser(null);
-        // setAdmin(false);
+        setAdmin(false);
         setAuthorized(false);
         // cb();
     };
@@ -46,7 +46,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         (async () => {
             const data = await getUser();
 
-            // if (data.error === 'Unauthorized') setAuthorized(false);
+            if (data.error) {
+                console.log(data.error);
+                // setAuthorized(false);
+                signOut();
+            }
 
             if (data.user) {
                 signIn(data.user);
@@ -57,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const value = {
         user,
         isAuthorized,
-        // isAdmin,
+        isAdmin,
         signIn,
         signOut,
     };

@@ -65,8 +65,7 @@ interface IUserInfo {
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    // history: any[];
-    // userRole: 'admin' | 'user';
+    userRole: 'admin' | 'user';
 }
 interface IUserResponse {
     user: IUserInfo | null;
@@ -77,24 +76,24 @@ interface ISignInFormState {
     user: IUserInfo | null;
 }
 interface IOrderedDish {
-    id: string;
+    productId: string;
     quantity: number;
     price: number;
 }
 interface IOrder {
+    deliveryTime: string | null;
     recipient: string;
     phoneNumber: string;
-    streetHouse: string;
-    flat: string;
-    floor: string;
-    deliveryDate: string;
-    deliveryTime: string;
+    comment: string;
     numberPerson: number;
     call?: boolean;
     payment?: string;
     cashSum: number;
-    comment: string;
-    orderedDishes: IOrderedDish[] | [];
+    paymentStatus: boolean;
+    streetHouse: string;
+    flat: string;
+    floor: string;
+    items: IOrderedDish[] | [];
 }
 type ValidateRules = {
     minLength?: {
@@ -112,20 +111,22 @@ type ValidateRules = {
 interface IOrdersHistoryTitle {
     orderNumber: string;
     ordered: string; //'17.03.2021, 5:37:00'
-    orderStatus: 'in progress' | 'done' | 'rejected';
+    orderStatus: 'In progress' | 'Done' | 'Rejected';
     totalAmount: number;
+}
+interface IOrderedDishes {
+    dishId: string;
+    dishName: string;
+    dishPrice: number;
+    dishQuantity: number;
+    dishImage: string;
+    categoryName: string;
 }
 interface IOrdersHistoryBody {
     deliveryAddress: string;
     recipientName: string;
     recipientPhoneNumber: string;
-    orderedDishes: {
-        dishId: string;
-        dishName: string;
-        dishPrice: number;
-        dishQuantity: number;
-        dishImage: string;
-    }[];
+    orderedDishes: IOrderedDishes[];
     totalAmount: number;
     payment: 'cash' | 'card';
 }

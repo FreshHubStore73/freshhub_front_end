@@ -1,13 +1,10 @@
 'use client';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Box, FormControl, FormLabel, InputLabel, Typography } from '@mui/material';
 import ContactField from './ContactField';
 import ContactPhoneField from './ContactPhoneField';
-import { useAuth } from '@/hooks/useAuth';
-type Props = {};
 
-export default function Contact({}: Props) {
-    const { user } = useAuth();
+export default function Contact() {
     return (
         <Box
             sx={{
@@ -34,8 +31,8 @@ export default function Contact({}: Props) {
                         gap: { mobile: '10px', tablet: '14px', desktop: '22px' },
                     }}
                 >
-                    <ContactField data={user?.firstName.concat(' ', user?.lastName) || ''} />
-                    <ContactPhoneField data={user?.phoneNumber || ''} />
+                    <ContactField />
+                    <ContactPhoneField />
                 </Box>
             </FormControl>
         </Box>

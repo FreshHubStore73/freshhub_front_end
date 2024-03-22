@@ -23,8 +23,7 @@ export default function ListOfOrders({ history }: Props) {
         >
             {history.map((order, i) => (
                 <OrderItem
-                    // key={order.orderId}
-                    key={i}
+                    key={order.orderId}
                     order={order}
                     i={i}
                     expanded={expanded}

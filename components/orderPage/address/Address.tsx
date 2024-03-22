@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { TextField, Box, Typography } from '@mui/material';
 
 export default function Address() {
@@ -18,6 +20,7 @@ export default function Address() {
             <TextField
                 name="streetHouse"
                 placeholder="Enter street and house number"
+                required
                 sx={{
                     fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
                     fontWeight: '400',
@@ -47,6 +50,7 @@ export default function Address() {
                 <TextField
                     placeholder="Flat"
                     name="flat"
+                    required
                     sx={{
                         width: '100%',
                         fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
@@ -68,6 +72,7 @@ export default function Address() {
                 <TextField
                     placeholder="Floor"
                     name="floor"
+                    required
                     sx={{
                         width: '100%',
                         fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
