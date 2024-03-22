@@ -1,12 +1,12 @@
 'use client';
 import Button, { ButtonProps } from '@mui/material/Button';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
-import InputAdornment, { InputAdornmentProps } from '@mui/material/InputAdornment';
-import React, { useRef, useState } from 'react';
+import InputAdornment from '@mui/material/InputAdornment';
+import { useRef, useState, useEffect, ChangeEventHandler } from 'react';
 import { SvgIcon } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useAuth } from '@/hooks/useAuth';
 
-type Props = { data: string };
 const User = ({ isEdit }: { isEdit: boolean }) => (
     <SvgIcon
         sx={{
@@ -80,6 +80,7 @@ export const CustomInput = styled(
         <TextField {...otherProps} autoComplete="off" />
     ),
 )<StyledCustomInputProps>(({ theme, isdisabled }) => ({
+    flexGrow: 1,
     '& .MuiInputAdornment-root': {
         // marginRight: '0',
     },
@@ -132,16 +133,22 @@ export const CustomInput = styled(
             height: '106px',
         },
     },
-    flexGrow: 1,
 }));
 
-export default function ContactNameField({ data }: Props) {
+export default function ContactNameField() {
+    const { user } = useAuth();
     const [isEdit, setEdit] = useState(false);
-    const [value, setValue] = useState(data);
+    const [value, setValue] = useState<string>('');
 
     const btnText = isEdit ? 'Save' : 'Change';
 
     const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (user && user.firstName && user.lastName) {
+            setValue(user?.firstName.concat(' ', user?.lastName));
+        }
+    }, [user]);
 
     const toggleEdit = () => {
         setEdit((prevState) => !prevState);
@@ -150,7 +157,7 @@ export default function ContactNameField({ data }: Props) {
         }
     };
 
-    const handleChange = (e: any) => {
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         if (!isEdit) return;
         setValue(e.target.value);
     };
@@ -158,10 +165,12 @@ export default function ContactNameField({ data }: Props) {
     return (
         <CustomInput
             inputRef={inputRef}
+            required
             name="recipient"
             aria-label="user-name"
             isdisabled={!isEdit}
             onChange={handleChange}
+            value={value}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position={'start'}>
@@ -174,7 +183,6 @@ export default function ContactNameField({ data }: Props) {
                     </InputAdornment>
                 ),
             }}
-            value={value}
         />
     );
 }

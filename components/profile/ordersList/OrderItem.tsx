@@ -38,13 +38,13 @@ const OrderItemTitle = ({
     totalAmount,
     isExpanded,
 }: IOrdersHistoryTitle & { isExpanded: boolean }) => {
-    const backgroundColor = (orderStatus: 'in progress' | 'done' | 'rejected') => {
+    const backgroundColor = (orderStatus: 'In progress' | 'Done' | 'Rejected') => {
         switch (orderStatus) {
-            case 'in progress':
+            case 'In progress':
                 return 'peach.main';
-            case 'done':
+            case 'Done':
                 return '#37B268';
-            case 'rejected':
+            case 'Rejected':
                 return 'accent.main';
             default:
                 return 'text.secondary';
@@ -85,7 +85,7 @@ const OrderItemTitle = ({
                     >
                         № {orderNumber}
                     </Box>
-                    <Box component={'span'}>{ordered}</Box>
+                    <Box component={'span'}>{ordered || 'trali-vali, trali-vali'}</Box>
                 </div>
                 <Box
                     sx={{
@@ -104,11 +104,11 @@ const OrderItemTitle = ({
             {isExpanded ? null : (
                 <Box
                     sx={{
-                        flexGrow: 1,
+                        width: '20%',
                         display: 'flex',
+                        marginRight: '20%',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        alignItems: 'flex-start',
                         gap: { mobile: '4px', tablet: '7px' },
                     }}
                 >
@@ -117,6 +117,7 @@ const OrderItemTitle = ({
                             fontSize: { mobile: '10px', tablet: '14px', desktop: '16px' },
                             color: 'text.primary',
                             fontWeight: 400,
+                            alignSelf: 'center',
                         }}
                         component={'h4'}
                     >
@@ -127,6 +128,7 @@ const OrderItemTitle = ({
                             fontSize: { mobile: '16px', tablet: '22px', desktop: '24px' },
                             color: 'text.secondary',
                             fontWeight: 400,
+                            alignSelf: 'center',
                         }}
                     >
                         ${totalAmount}

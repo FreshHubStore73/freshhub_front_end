@@ -1,10 +1,9 @@
 'use client';
 import { InputAdornment, SvgIcon } from '@mui/material';
-import { useState, FC, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import InputMask from 'react-input-mask';
 import { CustomInput, EditBtn } from './ContactField';
-
-type Props = { data: string };
+import { useAuth } from '@/hooks/useAuth';
 
 const Phone = ({ isEdit }: { isEdit: boolean }) => (
     <SvgIcon
@@ -34,9 +33,10 @@ const Phone = ({ isEdit }: { isEdit: boolean }) => (
     </SvgIcon>
 );
 
-const ContactPhoneField: FC<Props> = ({ data }) => {
+const ContactPhoneField = () => {
+    const { user } = useAuth();
     const [isEdit, setEdit] = useState(false);
-    const [value, setValue] = useState(data);
+    const [value, setValue] = useState<string>('');
 
     const btnText = isEdit ? 'Save' : 'Change';
 
@@ -52,6 +52,11 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
         if (!isEdit) return;
         setValue(e.target.value);
     };
+    useEffect(() => {
+        if (user && user.phoneNumber) {
+            setValue(user.phoneNumber);
+        }
+    }, [user]);
 
     return (
         <InputMask mask="+1 999 999 9999" onChange={handleChange} value={value} maskPlaceholder="x">
@@ -60,6 +65,7 @@ const ContactPhoneField: FC<Props> = ({ data }) => {
                 name="phoneNumber"
                 aria-label="user-phone"
                 isdisabled={!isEdit}
+                required
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position={'start'}>

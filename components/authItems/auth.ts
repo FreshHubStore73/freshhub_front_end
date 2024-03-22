@@ -120,53 +120,37 @@ export async function logout() {
 }
 
 export async function getUser(t?: string) {
-    var token = t || cookies().get('user_session')?.value;
+    const token = t || cookies().get('user_session')?.value;
 
     if (!token) {
-        return {
-            user: null,
-            error: 'Error when receiving token',
-        };
+        redirect('/login');
+        // return {
+        //     user: null,
+        //     error: 'Error when receiving token',
+        // };
     }
 
-    //Logic for Yurij
-    // const res = await fetch(`${url}/api/User/GetInfoAboutUser`, {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`,
-    //     },
-    // next: {
-    //     tags: ['user'];
-    // }
-    // });
-    // if (!res.ok) {
-    //     return {
-    //         user: null,
-    //         error: `Failed to fetch user: ${res.statusText}`,
-    //     };
-    // }
-    // const body = await res.json();
-
-    // Tmp logic
-    const body = await new Promise<IUserInfo>((resolve) =>
-        setTimeout(
-            () =>
-                resolve({
-                    firstName: 'Homer',
-                    lastName: 'Simpson',
-                    phoneNumber: '+12345678912',
-                    // history: [],
-                    // userRole: 'user',
-                }),
-            1000,
-        ),
-    );
+    const res = await fetch(`${url}/api/User/GetInfoAboutUser`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        next: {
+            tags: ['user'],
+        },
+    });
+    if (!res.ok) {
+        return {
+            user: null,
+            error: `Failed to fetch user: ${res.statusText}`,
+        };
+    }
+    const body = await res.json();
 
     const user = {
         firstName: body.firstName,
         lastName: body.lastName,
         phoneNumber: body.phoneNumber,
-        // history: body.history,
-        // userRole: body.userRole,
+        userRole: body.userRoles,
     };
 
     return {

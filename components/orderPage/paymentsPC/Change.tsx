@@ -1,4 +1,10 @@
-import React, { ChangeEvent, forwardRef, useLayoutEffect, useState } from 'react';
+import React, {
+    ChangeEvent,
+    FocusEventHandler,
+    forwardRef,
+    useLayoutEffect,
+    useState,
+} from 'react';
 
 import Collapse from '@mui/material/Collapse';
 import FormControl from '@mui/material/FormControl';
@@ -72,10 +78,14 @@ const Change = forwardRef<HTMLInputElement, Props>((props, ref) => {
     const { isExpanded } = props;
 
     const totalAmount = useShoppingCart((state) => state.totalAmount);
-    const [value, setValue] = useState(totalAmount);
+    const [value, setValue] = useState<number>(totalAmount);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(parseInt(e.target.value) || 0);
+    };
+
+    const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+        parseInt(e.target.value) < totalAmount ? setValue(Math.ceil(totalAmount / 50) * 50) : null;
     };
 
     useLayoutEffect(() => {
@@ -95,6 +105,7 @@ const Change = forwardRef<HTMLInputElement, Props>((props, ref) => {
                     disabled={!isExpanded}
                     error={value < totalAmount}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     value={value}
                     InputProps={{
                         startAdornment: (

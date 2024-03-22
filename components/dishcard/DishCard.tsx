@@ -12,10 +12,9 @@ const DishCard = ({ item }: { item: DishItem }) => {
     const link = `/categories/${categoryName.toLowerCase()}/${id}/${productName
         .toLowerCase()
         .replace(/\s+/g, '_')}`;
-    const photo = (photoUrl || '/dishes/istockphoto-1206323282-612x612.jpg').replace(
-        /Images\\/g,
-        `${url}/Images/`,
-    );
+    const photo = photoUrl
+        ? photoUrl.replace(/Images\\/g, `${url}/Images/`)
+        : `/dishes/stub-${categoryName}.jpg`;
     return (
         <>
             <div className={styles.wrapper}>

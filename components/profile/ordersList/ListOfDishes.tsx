@@ -4,11 +4,7 @@ import Image from 'next/image';
 
 import { Box, Theme, Tooltip, Typography, useMediaQuery } from '@mui/material';
 
-export const ListOfDishes = ({
-    orderedDishes,
-}: {
-    orderedDishes: IOrdersHistoryBody['orderedDishes'];
-}) => {
+export const ListOfDishes = ({ orderedDishes }: { orderedDishes: IOrderedDishes[] }) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('tablet'));
     return (
         <>
@@ -19,20 +15,13 @@ export const ListOfDishes = ({
     );
 };
 
-const DishItemInOrder = ({
-    dish,
-    isMobile,
-}: {
-    dish: {
-        dishId: string;
-        dishName: string;
-        dishPrice: number;
-        dishQuantity: number;
-        dishImage: string;
-    };
-    isMobile: boolean;
-}) => {
-    const { dishId, dishName, dishPrice, dishQuantity, dishImage } = dish;
+const url = process.env.SERV_URL;
+
+const DishItemInOrder = ({ dish, isMobile }: { dish: IOrderedDishes; isMobile: boolean }) => {
+    const { dishId, dishName, dishPrice, dishQuantity, dishImage, categoryName } = dish;
+
+    const photo = dishImage ? `${url}/Images/${dishImage}` : `/dishes/stub-${categoryName}.jpg`;
+
     const simpleTitle = (
         <Typography
             sx={{
@@ -94,7 +83,7 @@ const DishItemInOrder = ({
                 }}
             >
                 <Image
-                    src={dishImage}
+                    src={photo}
                     alt={dishName}
                     fill
                     sizes="(max-width: 768px) 30vw, (max-width: 1200px) 20vw, 10vw"
