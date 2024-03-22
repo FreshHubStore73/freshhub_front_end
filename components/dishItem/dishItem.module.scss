@@ -5,22 +5,29 @@
 .wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 65px;
 }
 
 .picture {
     width: 49%;
+    height: auto;
     position: relative;
     border-radius: 40px;
     overflow: hidden;
+    img {
+        object-fit: cover;
+    }
 }
 
 .contentWrapper {
-    width: 45.85%;
+    // width: 45.61%;
 }
 
 .title {
     color: var(--color-txt-black);
     font-size: 62px;
+    line-height: 91.88px;
     font-weight: 700;
     margin-bottom: 22px;
 }
@@ -28,7 +35,7 @@
 .contentInfo {
     border-radius: 40px;
     border: 1px solid var(--color-beige);
-    padding: 40px;
+    padding: 36px 40px;
 }
 
 .titleInfo {
@@ -65,16 +72,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
 }
 
 .price {
     color: var(--color-txt-black);
     font-size: 40px;
+    line-height: 59.28px;
     font-weight: 700;
 }
 
-.description+.delivery {
+.description + .delivery {
     margin-top: -14px;
 }
 
@@ -100,69 +108,105 @@
     margin-right: 10px;
 }
 
-@media screen and (max-width: 890px) {
-    .picture {
-        width: 100%;
-        max-width: 632px;
-        height: 435px;
-        margin-bottom: 24px;
+@media screen and (max-width: 1200px) {
+    .dishItem {
+        padding-top: 24px;
     }
-
     .wrapper {
         flex-direction: column;
-        align-items: center;
+        gap: 24px;
+    }
+    .picture {
+        width: 100%;
+        // max-width: 632px;
+        // height: 435px;
+        height: auto;
+        // margin-bottom: 24px;
+    }
+
+    .contentWrapper {
+        width: 100%;
+        // max-width: 632px;
+        // margin-bottom: 20px;
     }
 
     .title {
         font-size: 36px;
-        margin-left: 13px;
+        line-height: 53.35px;
+        margin-bottom: 10px;
+        padding-left: 20px;
     }
 
-    .titleInfo h4 {
-        font-size: 24px;
+    .contentInfo {
+        padding: 20px;
+    }
+
+    .titleInfo {
+        margin-bottom: 9px;
+        h4 {
+            font-size: 24px;
+        }
     }
 
     .weight {
         font-size: 24px;
-    }
-
-    .contentWrapper {
-        width: 100%;
-        max-width: 632px;
-        margin-bottom: 20px;
     }
 
     .description {
         font-size: 16px;
+        margin-bottom: 26px;
+    }
 
+    .cardInfo {
+        margin-bottom: 16px;
     }
 
     .price {
         font-size: 28px;
+        line-height: 41.5px;
+    }
+
+    .description + .delivery {
+        margin-top: -16px;
+    }
+
+    .delivery img {
+        width: 26px;
+        height: 26px;
+        margin-right: 6px;
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
+    .dishItem {
+        padding-top: 16px;
+    }
+    .wrapper {
+        gap: 16px;
+    }
     .picture {
-        width: 100%;
-        max-width: 344px;
-        height: 248px;
-        margin-bottom: 16px;
+        // max-width: 344px;
+        // height: 248px;
+        height: auto;
+        // margin-bottom: 16px;
     }
 
     .title {
         font-size: 28px;
-        margin-left: 20px;
+        line-height: 41.5px;
     }
 
     .contentWrapper {
-        width: 100%;
-        max-width: 344px;
-        margin-bottom: 20px;
+        // width: 100%;
+        // max-width: 344px;
+        // margin-bottom: 20px;
     }
 
-    .titleInfo h4 {
-        font-size: 20px;
+    .titleInfo {
+        margin-bottom: 10px;
+        h4 {
+            font-size: 20px;
+        }
     }
 
     .weight {
@@ -170,12 +214,30 @@
     }
 
     .description {
-        font-size: 14px;
+        font-size: 12px;
+        margin-bottom: 19px;
+    }
 
+    .cardInfo {
+        margin-bottom: 19px;
     }
 
     .price {
         font-size: 24px;
+        line-height: 35.57px;
+    }
+
+    .description + .delivery {
+        margin-top: -10px;
+    }
+
+    .cardInfo + .description {
+        font-size: 14px;
+    }
+
+    .delivery img {
+        width: 23px;
+        height: 23px;
     }
 
     .delivery p {
