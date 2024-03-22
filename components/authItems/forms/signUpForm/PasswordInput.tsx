@@ -6,7 +6,9 @@ import { IconButton, InputAdornment, SvgIcon, SvgIconProps } from '@mui/material
 type Props = { variant?: 'signin' | 'signup' };
 
 const Visibility = (props: SvgIconProps) => (
-    <SvgIcon fontSize="large" {...props}>
+    <SvgIcon fontSize="large" {...props} sx={{
+        height: { mobile: '20px', tablet: '28px', desctop: '38px' },
+    }}>
         <svg
             width="38"
             height="38"
@@ -31,7 +33,9 @@ const Visibility = (props: SvgIconProps) => (
 );
 
 const VisibilityOff = (props: SvgIconProps) => (
-    <SvgIcon fontSize="large" {...props}>
+    <SvgIcon fontSize="large" {...props} sx={{
+        height: { mobile: '20px', tablet: '28px', desctop: '38px' },
+    }}>
         <svg
             width="38"
             height="38"
@@ -83,16 +87,16 @@ export default function PasswordInput({ variant = 'signup' as 'signup' }: Props)
                     variant === 'signin'
                         ? undefined
                         : {
-                              value: 8,
-                              message: 'Password must contain at least 8 characters',
-                          },
+                            value: 8,
+                            message: 'Password must contain at least 8 characters',
+                        },
                 maxLength:
                     variant === 'signin'
                         ? undefined
                         : {
-                              value: 15,
-                              message: "Password shouldn't contain more than 15 characters",
-                          },
+                            value: 15,
+                            message: "Password shouldn't contain more than 15 characters",
+                        },
             }}
             render={({ field: { onChange, ...rest } }) => (
                 <BaseFormInput
@@ -107,8 +111,8 @@ export default function PasswordInput({ variant = 'signup' as 'signup' }: Props)
                         errors.password?.type
                             ? `${errors.password?.message}`
                             : variant === 'signin'
-                            ? ''
-                            : 'Must have minimum of 8 characters'
+                                ? ''
+                                : 'Must have minimum of 8 characters'
                     }
                     InputProps={{
                         endAdornment: (

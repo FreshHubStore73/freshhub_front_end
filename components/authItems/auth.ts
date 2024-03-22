@@ -8,8 +8,8 @@ const MAX_AGE = 60 * 60 * 24 * 5 - 600;
 export async function register(
     prevState:
         | {
-              message: string;
-          }
+            message: string;
+        }
         | undefined,
     formData: FormData,
 ) {
@@ -123,11 +123,11 @@ export async function getUser(t?: string) {
     const token = t || cookies().get('user_session')?.value;
 
     if (!token) {
-        redirect('/login');
-        // return {
-        //     user: null,
-        //     error: 'Error when receiving token',
-        // };
+        // redirect('/login');
+        return {
+            user: null,
+            error: 'Error when receiving token',
+        };
     }
 
     const res = await fetch(`${url}/api/User/GetInfoAboutUser`, {

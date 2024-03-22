@@ -16,7 +16,7 @@ import PhoneInput from './PhoneInput';
 
 type Props = {};
 
-export default function SignUpForm({}: Props) {
+export default function SignUpForm({ }: Props) {
     const [state, formAction] = useFormState(register, { message: '' });
 
     const methods = useForm<IUserSignUp>({
@@ -50,10 +50,11 @@ export default function SignUpForm({}: Props) {
                 action={formAction}
                 ref={formRef}
                 sx={{
-                    width: '100%',
-                    mt: '50px',
-                    display: 'grid',
-                    rowGap: '38px',
+                    width: { desktop: '908px' },
+                    mt: { mobile: '30px', tablet: '40px', desktop: '50px' },
+                    display: { mobile: 'flex', tablet: 'grid' },
+                    flexDirection: { mobile: 'column' },
+                    rowGap: { mobile: '14px', tablet: '24px', desktop: '38px' },
                     columnGap: '20px',
                     gridTemplate: 'repeat(4, auto) / 1fr 1fr',
                 }}
@@ -96,6 +97,6 @@ export default function SignUpForm({}: Props) {
                     />
                 </Box>
             </Box>
-        </FormProvider>
+        </FormProvider >
     );
 }

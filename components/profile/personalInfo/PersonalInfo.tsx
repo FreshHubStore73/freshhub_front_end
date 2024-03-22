@@ -39,6 +39,7 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
             component={'form'}
             action={formAction}
             sx={{
+
                 borderRadius: { mobile: '36px', tablet: '50px', desktop: '50px' },
                 padding: { mobile: '19px', tablet: '34px 41px', desktop: '43px 46px 45px' },
                 border: '1px solid',
@@ -51,8 +52,8 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
                     mobile: 'unset',
                     tablet: `
                 '${`${firstName.replace(/\W+/, '').slice(0, 5)} ${lastName
-                    .replace(/\W+/, '')
-                    .slice(0, 5)}`}'
+                            .replace(/\W+/, '')
+                            .slice(0, 5)}`}'
                 'phone phone'
                 'btn btn'`,
                 },

@@ -4,7 +4,7 @@ import { BaseFormInput } from '../baseFormInput/BaseFormInput';
 
 type Props = {};
 
-export default function FirstNameInput({}: Props) {
+export default function FirstNameInput({ }: Props) {
     const {
         control,
         trigger,

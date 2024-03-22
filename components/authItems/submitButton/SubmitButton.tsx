@@ -14,8 +14,8 @@ function SubmitButton({ text, ...rest }: Props) {
             disabled={pending}
             {...rest}
             sx={{
-                width: '380px',
-                height: '106px',
+                width: { mobile: '344px', tablet: '347px', desctop: '380px' },
+                height: { mobile: '56px', tablet: '86px', desctop: '106px' },
                 borderRadius: '50px',
                 fontSize: '28px',
                 '&.MuiButton-root.Mui-disabled': {
