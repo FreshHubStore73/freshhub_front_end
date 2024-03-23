@@ -1,11 +1,18 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function useTimeout(callback: () => void, timeout: number) {
-    const timeoutRef = React.useRef<NodeJS.Timeout>();
+    const timeoutRef = useRef<NodeJS.Timeout>();
+    const savedCb = useRef(callback);
+
+    useEffect(() => {
+        savedCb.current = callback;
+    }, [callback]);
 
     const startTimer = useCallback(() => {
-        timeoutRef.current = setTimeout(callback, timeout);
-    }, [callback, timeout]);
+        timeoutRef.current = setTimeout(() => {
+            savedCb.current();
+        }, timeout);
+    }, [timeout]);
 
     const cancelTimer = useCallback(() => {
         if (timeoutRef.current) {
@@ -19,5 +26,8 @@ export default function useTimeout(callback: () => void, timeout: number) {
         };
     }, [cancelTimer]);
 
-    return { startTimer, cancelTimer };
+    return {
+        startTimer,
+        cancelTimer,
+    };
 }

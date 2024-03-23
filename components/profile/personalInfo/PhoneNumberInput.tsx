@@ -23,7 +23,7 @@ export default function PhoneNumberInput({ val, disabled, setIsFieldValid }: Pro
 
     return (
         <ReactInputMask
-            mask="+1 (999) 999 9999"
+            mask="+1 999 999 9999"
             maskPlaceholder="x"
             onChange={handleChange}
             disabled={disabled}

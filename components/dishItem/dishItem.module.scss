@@ -5,13 +5,13 @@
 .wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     gap: 65px;
 }
 
 .picture {
     width: 49%;
-    height: auto;
+    // height: 635px;
     position: relative;
     border-radius: 40px;
     overflow: hidden;
@@ -46,7 +46,6 @@
 
 .titleInfo h4 {
     color: var(--color-txt-black);
-    // font-family: Lato;
     font-size: 28px;
     font-weight: 400;
 }
@@ -114,20 +113,17 @@
     }
     .wrapper {
         flex-direction: column;
+        align-items: center;
+
         gap: 24px;
     }
     .picture {
         width: 100%;
-        // max-width: 632px;
-        // height: 435px;
-        height: auto;
-        // margin-bottom: 24px;
+        height: 435px;
     }
 
     .contentWrapper {
         width: 100%;
-        // max-width: 632px;
-        // margin-bottom: 20px;
     }
 
     .title {
@@ -185,21 +181,12 @@
         gap: 16px;
     }
     .picture {
-        // max-width: 344px;
-        // height: 248px;
-        height: auto;
-        // margin-bottom: 16px;
+        height: 248px;
     }
 
     .title {
         font-size: 28px;
         line-height: 41.5px;
-    }
-
-    .contentWrapper {
-        // width: 100%;
-        // max-width: 344px;
-        // margin-bottom: 20px;
     }
 
     .titleInfo {

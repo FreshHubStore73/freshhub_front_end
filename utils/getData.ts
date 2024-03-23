@@ -63,7 +63,11 @@ export async function getOrders() {
     const res = await fetch(`${url}/api/Order/GetAllByUser`, {
         next: { revalidate: 600, tags: ['orders'] },
     });
-    if (!res.ok) throw new Error('Failed to fetch orders history');
+
+    if (!res.ok) {
+        const str = await res.text();
+        throw new Error('Failed to fetch orders history: ' + str);
+    }
 
     const body = await res.json();
     const history: IOrdersHistory[] = body.map((order: any) => {
