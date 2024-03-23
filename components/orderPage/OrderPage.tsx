@@ -24,24 +24,27 @@ import { useShoppingCart } from '@/store';
 type Props = {};
 
 export default function OrderPage({}: Props) {
-    //guarantee that updating cart on reload page (or hard navigation) doesn't cause redirecting to the home page
     const { replace } = useRouter();
-    if (typeof window !== 'undefined') {
-        const cartInLS = window.localStorage.getItem('cart');
-        if (cartInLS && !JSON.parse(cartInLS).state.dishes.length) replace('/');
-    }
 
     const [state, formAction] = useFormState(orderAction, { message: '' });
     const [openSuccess, setOpenSuccess] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
 
     const { clearCart } = useShoppingCart();
+    const [isOrdered, setIsOrdered] = useState(false);
     const dishes = useShoppingCart((state) => state.dishes);
 
     const { startTimer, cancelTimer } = useTimeout(() => {
         replace('/profile?history=true');
         clearCart();
     }, 1500);
+
+    //guarantee that updating cart on reload page (or hard navigation) doesn't cause redirecting to the home page
+    if (typeof window !== 'undefined') {
+        const cartInLS = window.localStorage.getItem('cart');
+        if (cartInLS && !JSON.parse(cartInLS).state.dishes.length && !isOrdered)
+            setTimeout(() => replace('/'), 0);
+    }
 
     const handleCloseSuccess = useCallback(() => {
         replace('/profile?history=true');
@@ -60,6 +63,7 @@ export default function OrderPage({}: Props) {
         if (state.message === 'Ok') {
             startTimer();
             setOpenSuccess(true);
+            setIsOrdered(true);
         }
     }, [state]);
 

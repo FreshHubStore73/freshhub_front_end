@@ -47,7 +47,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const data = await getUser();
 
             if (data.error) {
-                console.log(data.error);
                 // setAuthorized(false);
                 signOut();
             }

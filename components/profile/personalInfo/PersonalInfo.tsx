@@ -12,7 +12,7 @@ import SaveChanges from './SaveChanges';
 type Props = { firstName: string; lastName: string; phoneNumber: string };
 
 export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props) {
-    const [state, formAction] = useFormState(updateUserInfo, { errorMessage: '' });
+    const [state, formAction] = useFormState(updateUserInfo, { message: '' });
     const [isChangeActive, setIsChangeActive] = useState(false);
     const [isValidFields, setIsValidFields] = useState({
         firstName: true,
@@ -29,8 +29,8 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
     };
 
     useEffect(() => {
-        if (state.errorMessage === 'Ok') setIsChangeActive((prevState) => !prevState);
-    }, [state.errorMessage]);
+        if (state.message === 'Ok') setIsChangeActive((prevState) => !prevState);
+    }, [state.message]);
 
     const isSubmitDisabled = Object.values(isValidFields).some((valid) => valid);
     const fieldLabels = ['Your first name', 'Your last name'];
@@ -93,18 +93,19 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    gap: state.errorMessage === 'Ok' ? { mobile: '20px', desktop: '24px' } : '0',
+                    gap: state.message === 'Ok' ? { mobile: '20px', desktop: '24px' } : '0',
                 }}
             >
                 {/* временная лабуда для отслеживания ошибок сервера */}
-                {state.errorMessage !== 'Ok' ? (
+                {state.message !== 'Ok' ? (
                     <Typography
                         sx={{
                             color: 'error.main',
                             fontSize: { mobile: '16px', tablet: '18px', desktop: '20px' },
+                            mb: { mobile: '16px', tablet: '18px', desktop: '20px' },
                         }}
                     >
-                        {state.errorMessage}
+                        {state.message}
                     </Typography>
                 ) : null}
                 <SaveChanges
