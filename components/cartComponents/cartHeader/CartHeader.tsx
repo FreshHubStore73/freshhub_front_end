@@ -30,7 +30,7 @@ export default function CartHeader({ closeDrawer }: Props) {
                         cursor: 'pointer',
                         height: { mobile: '12px', tablet: '18px', desktop: '22px' },
                         '&.MuiSvgIcon-root:hover path': {
-                            stroke: '#F15C30',
+                            stroke: (theme) => theme.palette.accent.main,
                         },
                     }}
                 >

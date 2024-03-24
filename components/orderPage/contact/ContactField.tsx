@@ -41,37 +41,38 @@ const User = ({ isEdit }: { isEdit: boolean }) => (
         </svg>
     </SvgIcon>
 );
-export const EditBtn = styled((props: ButtonProps) => <Button variant="text" {...props} />)(
-    ({ theme }) => ({
-        color: '#50BC7B',
-        fontWeight: 400,
-        [theme.breakpoints.up('mobile')]: {
-            fontSize: '14px',
-            padding: '6px',
-            minWidth: '44px',
-        },
-        [theme.breakpoints.up('tablet')]: {
-            fontSize: '20px',
-            padding: '6px 10px',
-            minWidth: '64px',
-        },
-        [theme.breakpoints.up('desktop')]: {
-            fontSize: '24px',
-            padding: '10px',
-            minWidth: '64px',
-        },
-        transition: 'font 0.3s ease',
-        backgroundColor: '#FFF',
-        '&:hover': {
-            fontWeight: 700,
-        },
-        lineHeight: '1',
-        borderRadius: '12px',
-        '& .Mui-focusVisible': {
-            // boxShadow: `0 0 0 0.1rem ${theme.palette.text.secondary}`,
-        },
-    }),
-);
+export const EditBtn = styled((props: ButtonProps) => (
+    <Button variant="text" disableTouchRipple {...props} />
+))(({ theme }) => ({
+    color: '#50BC7B',
+    fontWeight: 400,
+    [theme.breakpoints.up('mobile')]: {
+        fontSize: '14px',
+        padding: '6px',
+        minWidth: '44px',
+    },
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '20px',
+        padding: '6px 10px',
+        minWidth: '64px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        fontSize: '24px',
+        padding: '10px',
+        minWidth: '64px',
+    },
+    transition: 'font 0.3s ease',
+    backgroundColor: '#FFF',
+    '&:hover': {
+        fontWeight: 700,
+        backgroundColor: '#fff',
+    },
+    lineHeight: '1',
+    borderRadius: '12px',
+    '& .Mui-focusVisible': {
+        // boxShadow: `0 0 0 0.1rem ${theme.palette.text.secondary}`,
+    },
+}));
 interface StyledCustomInputProps {
     isdisabled?: boolean;
 }
@@ -82,19 +83,19 @@ export const CustomInput = styled(
 )<StyledCustomInputProps>(({ theme, isdisabled }) => ({
     flexGrow: 1,
     '& .MuiInputAdornment-root': {
-        // marginRight: '0',
+        marginRight: '0',
     },
     '& .MuiOutlinedInput-notchedOutline': {
         borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
         borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
+        borderWidth: isdisabled ? '1px' : '2px',
     },
     '& .MuiOutlinedInput-root': {
-        borderRadius: '50px',
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: isdisabled ? '#828282' : theme.palette.text.secondary,
-            borderWidth: isdisabled ? '1px' : '1,5px',
+            borderWidth: isdisabled ? '1px' : '2px',
         },
         '& .MuiInputBase-input': {
             color: isdisabled ? '#828282' : theme.palette.text.primary,
@@ -109,6 +110,7 @@ export const CustomInput = styled(
             padding: '0 0 0 15px',
         },
         '& .MuiOutlinedInput-root': {
+            borderRadius: '26px',
             paddingInline: '16px',
             height: '44px',
         },
@@ -119,6 +121,7 @@ export const CustomInput = styled(
             padding: '0 0 0 20px',
         },
         '& .MuiOutlinedInput-root': {
+            borderRadius: '50px',
             paddingInline: '28px',
             height: '74px',
         },

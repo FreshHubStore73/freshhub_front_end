@@ -13,6 +13,7 @@ const SaveChanges = ({ handleSave, isChangeActive, disabled }: Props) => {
 
     return (
         <Button
+            disableTouchRipple
             variant="contained"
             onClick={handleSave}
             disabled={disabled || pending}

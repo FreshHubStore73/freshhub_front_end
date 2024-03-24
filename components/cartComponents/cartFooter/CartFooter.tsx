@@ -41,6 +41,7 @@ const CartFooter: FC<Props> = ({ totalAmount, closeDrawer }) => {
             <Divider sx={{ borderColor: '#E1D5C9' }} />
             <Link href="/order">
                 <Button
+                    disableTouchRipple
                     fullWidth
                     variant="contained"
                     onClick={closeDrawer}

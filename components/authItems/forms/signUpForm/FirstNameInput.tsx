@@ -36,7 +36,7 @@ export default function FirstNameInput({}: Props) {
                     helperText={errors.firstName?.type ? `${errors.firstName?.message}` : ''}
                     {...rest}
                     sx={{
-                        gridArea: '1 / 1 / 2 / 2',
+                        gridArea: { mobile: 'unset', tablet: '1 / 1 / 2 / 2' },
                     }}
                 />
             )}

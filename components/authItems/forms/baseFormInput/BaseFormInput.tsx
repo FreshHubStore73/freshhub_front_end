@@ -4,23 +4,74 @@ import { styled } from '@mui/material/styles';
 import { forwardRef } from 'react';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
-    '& .MuiOutlinedInput-root': {
-        borderRadius: '50px',
-        paddingInline: '38px',
-        height: '106px',
+    [theme.breakpoints.up('mobile')]: {
+        '& .MuiInputBase-input': {
+            padding: 0,
+        },
+        '& .MuiOutlinedInput-root': {
+            borderRadius: '28px',
+            paddingInline: '24px',
+            height: '56px',
+            '&.Mui-focused': {
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: theme.palette.text.secondary,
+                    borderWidth: '2px',
+                },
+                '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+                    borderColor: theme.palette.accent.main,
+                },
+                '& .MuiInputBase-input': {
+                    color: theme.palette.text.secondary,
+                },
+            },
 
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.text.secondary,
-            borderWidth: '1,5px',
+            '&.Mui-error': {
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: theme.palette.accent.main,
+                },
+                '& .MuiInputBase-input ': {
+                    color: theme.palette.accent.main,
+                },
+            },
         },
-        '&.Mui-focused .MuiOutlinedInput-input': {
-            color: theme.palette.text.secondary,
+        '& .MuiInputBase-input ': {
+            fontSize: '18px',
+            color: theme.palette.text.primary,
+        },
+        '& .MuiFormHelperText-root': {
+            fontSize: '12px',
+            margin: '4px 24px 0',
         },
     },
-    '& .MuiInputBase-input.MuiOutlinedInput-input ': {
-        fontSize: '24px',
-        color: theme.palette.text.primary,
+    [theme.breakpoints.up('tablet')]: {
+        '& .MuiOutlinedInput-root': {
+            borderRadius: '40px',
+            paddingInline: '26px',
+            height: '86px',
+        },
+        '& .MuiInputBase-input ': {
+            fontSize: '22px',
+        },
+        '& .MuiFormHelperText-root': {
+            fontSize: '16px',
+            margin: '8px 20px 0',
+        },
     },
+    [theme.breakpoints.up('desktop')]: {
+        '& .MuiOutlinedInput-root': {
+            borderRadius: '50px',
+            paddingInline: '38px',
+            height: '106px',
+        },
+        '& .MuiInputBase-input ': {
+            fontSize: '24px',
+        },
+        '& .MuiFormHelperText-root': {
+            fontSize: '18px',
+            margin: '10px 20px 0',
+        },
+    },
+
     '& input::placeholder': {
         color: '#828282',
         opacity: 1,
@@ -28,15 +79,16 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     '& .MuiOutlinedInput-notchedOutline': {
         borderColor: theme.palette.text.primary,
     },
-    '& .MuiFormHelperText-root': {
-        fontSize: '18px',
-        margin: '10px 20px 0',
+    '& .MuiOutlinedInput-root': {
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.palette.text.primary,
+        },
     },
 }));
 
 // eslint-disable-next-line react/display-name
 const BaseFormInput = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-    return <StyledTextField ref={ref} {...props} />;
+    return <StyledTextField autoComplete="off" ref={ref} {...props} />;
 });
 
 export { BaseFormInput };

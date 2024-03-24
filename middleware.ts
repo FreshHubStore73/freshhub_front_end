@@ -1,20 +1,19 @@
-import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
     const token = request.cookies.get('user_session')?.value;
-    // const callbackUrl = headers().get('next-url');
-    // const url = new URL(request.url);
 
-    if (!token) {
+    if (!token && !['/login', '/signup'].some((path) => path === new URL(request.url).pathname)) {
         return NextResponse.redirect(
             new URL(`/login?callbackUrl=${request.nextUrl.pathname}`, request.url),
         );
     }
-    // return NextResponse.redirect(new URL('/dashboard', request.url));
+    if (token && ['/login', '/signup'].some((path) => path === new URL(request.url).pathname)) {
+        return NextResponse.redirect(new URL('/profile', request.url));
+    }
 }
 
 export const config = {
-    matcher: ['/order', '/profile'],
+    matcher: ['/order', '/profile', '/login', '/signup'],
 };

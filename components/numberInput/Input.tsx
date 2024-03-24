@@ -91,11 +91,12 @@ const StyledIconButton = styled('div')<StyledNumberInputProps>(({ theme, type })
     color: theme.palette.text.secondary,
     '&:hover': {
         color: theme.palette.accent.main,
-        backgroundColor: 'rgba(224, 224, 224, 0.5)',
+        // backgroundColor: 'rgba(224, 224, 224, 0.5)',
     },
     '&:focus-visible': {
-        outline: `2px auto ${theme.palette.text.secondary}`,
-        backgroundColor: 'rgba(224, 224, 224, 0.5)',
+        // outline: `2px auto ${theme.palette.text.secondary}`,
+        // backgroundColor: 'rgba(224, 224, 224, 0.5)',
+        backgroundColor: 'rgba(224, 224, 224, 0.8)',
     },
 }));
 

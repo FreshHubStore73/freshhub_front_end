@@ -3,6 +3,30 @@ import { Dispatch, SetStateAction } from 'react';
 import { TextField, Box, Typography } from '@mui/material';
 
 export default function Address() {
+    const textFieldSettings = {
+        fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
+        '& .MuiInputBase-input': {
+            padding: 0,
+            color: 'text.primary',
+        },
+        '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'text.primary',
+            border: '1px solid',
+        },
+        '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderWidth: '2px',
+            borderColor: 'text.secondary',
+        },
+        '& .MuiOutlinedInput-root': {
+            height: { mobile: '44px', tablet: '74px', desktop: '106px' },
+            borderRadius: { mobile: '26px', tablet: '50px' },
+            paddingInline: { mobile: '16px', tablet: '28px', desktop: '36px' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'text.secondary',
+                borderWidth: '2px',
+            },
+        },
+    };
     return (
         <>
             <Typography
@@ -21,23 +45,11 @@ export default function Address() {
                 name="streetHouse"
                 placeholder="Enter street and house number"
                 required
+                fullWidth
+                autoComplete="off"
                 sx={{
-                    fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
-                    fontWeight: '400',
-                    bgcolor: '#FFFFFF',
-                    width: '100%',
                     marginBottom: { mobile: '10px', tablet: '14px', desktop: '22px' },
-                    '& .MuiOutlinedInput-root': {
-                        borderRadius: '50px',
-                        paddingX: { mobile: '16px', tablet: '28px', desktop: '36px' },
-                        border: '1px solid #3e3b3b',
-                        color: '#3e3b3b',
-                        width: '100%',
-                        height: { mobile: '44px', tablet: '74px', desktop: '106px' },
-                    },
-                    '& .MuiOutlinedInput-notchedOutline': {
-                        border: 'none',
-                    },
+                    ...textFieldSettings,
                 }}
             />
             <Box
@@ -51,44 +63,20 @@ export default function Address() {
                     placeholder="Flat"
                     name="flat"
                     required
+                    autoComplete="off"
                     sx={{
-                        width: '100%',
-                        fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
-                        fontWeight: '400',
-                        bgcolor: '#FFFFFF',
-                        borderRadius: '50px',
-                        '& .MuiOutlinedInput-root': {
-                            height: { mobile: '44px', tablet: '74px', desktop: '106px' },
-                            borderRadius: '50px',
-                            paddingX: { mobile: '16px', tablet: '28px', desktop: '36px' },
-                            border: '1px solid #3E3B3B',
-                            color: '#3E3B3B',
-                        },
-                        '& .MuiOutlinedInput-notchedOutline': {
-                            border: 'none',
-                        },
+                        flexGrow: 1,
+                        ...textFieldSettings,
                     }}
                 />
                 <TextField
                     placeholder="Floor"
                     name="floor"
                     required
+                    autoComplete="off"
                     sx={{
-                        width: '100%',
-                        fontSize: { mobile: '14px', tablet: '20px', desktop: '24px' },
-                        fontWeight: '400',
-                        bgcolor: '#FFFFFF',
-                        borderRadius: '50px',
-                        '& .MuiOutlinedInput-root': {
-                            height: { mobile: '44px', tablet: '74px', desktop: '106px' },
-                            borderRadius: '50px',
-                            paddingX: { mobile: '16px', tablet: '28px', desktop: '36px' },
-                            border: '1px solid #3E3B3B',
-                            color: '#3E3B3B',
-                        },
-                        '& .MuiOutlinedInput-notchedOutline': {
-                            border: 'none',
-                        },
+                        flexGrow: 1,
+                        ...textFieldSettings,
                     }}
                 />
             </Box>

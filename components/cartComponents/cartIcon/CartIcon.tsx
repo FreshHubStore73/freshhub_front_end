@@ -135,7 +135,6 @@ const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
 
     const simpleIcon = (
         <IconButton
-            size="large"
             onClick={toggleDrawer}
             disableTouchRipple
             sx={{
@@ -146,7 +145,7 @@ const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
                 '&.MuiIconButton-root:hover': {
                     backgroundColor: '#fff',
                 },
-                '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
+                '&.MuiIconButton-root:hover path': { stroke: (theme) => theme.palette.accent.main },
             }}
         >
             <StyledBadge

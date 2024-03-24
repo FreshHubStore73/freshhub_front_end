@@ -82,7 +82,9 @@ const UserIcon = forwardRef<HTMLElement, UserIconProps>((props, ref) => {
                         '&.MuiIconButton-root:hover': {
                             backgroundColor: '#fff',
                         },
-                        '&.MuiIconButton-root:hover path': { stroke: '#F15C30' },
+                        '&.MuiIconButton-root:hover path': {
+                            stroke: (theme) => theme.palette.accent.main,
+                        },
                         '& svg': {
                             height: { mobile: '24px', tablet: '30px', desktop: '41px' },
                             width: { mobile: '24px', tablet: '30px', desktop: '41px' },

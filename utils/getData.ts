@@ -49,7 +49,7 @@ export async function getDishes(category: string, requestSearchParams: IRequestS
 
 export async function getDish(dishId: string) {
     const res = await fetch(`${url}/api/Product/GetProductById/${dishId}`);
-    if (!res.ok) throw new Error('Failed to fetch dish');
+    if (!res.ok) throw new Error('Failed to fetch dish ' + res.statusText);
     return res.json();
 }
 

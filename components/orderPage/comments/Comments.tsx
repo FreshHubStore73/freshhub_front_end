@@ -62,7 +62,7 @@ const CommentsArea = styled((props: TextFieldProps) => (
         },
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.secondary,
-            borderWidth: '1,5px',
+            borderWidth: '2px',
         },
     },
 }));

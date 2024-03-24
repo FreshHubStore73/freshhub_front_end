@@ -1,10 +1,11 @@
 'use client';
-import { Box, Button, Typography } from '@mui/material';
-import SignInForm from '@/components/authItems/forms/signInForm/SignInForm';
+import { Suspense } from 'react';
+
 import Link from 'next/link';
 
-import styles from './page.module.scss';
-import { Suspense } from 'react';
+import { Box, Button, Typography } from '@mui/material';
+
+import SignInForm from '@/components/authItems/forms/signInForm/SignInForm';
 
 type Props = { params: {} };
 
@@ -16,8 +17,12 @@ const LoginPage = (params: Props) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                width: '742px',
-                margin: '90px auto 0',
+                width: { mobile: '344px', tablet: '410px', desktop: '742px' },
+                margin: {
+                    mobile: '0px auto 40px',
+                    tablet: '0px auto 50px',
+                    desktop: '0px auto 120px',
+                },
             }}
         >
             <Typography variant="h2_Oswald" component={'h1'} color="text.secondary">
@@ -28,29 +33,34 @@ const LoginPage = (params: Props) => {
             </Suspense>
             <Box
                 sx={{
-                    mt: '44px',
-                    fontSize: '24px',
+                    mt: { mobile: '20px', tablet: '28px', desktop: '44px' },
+
+                    fontSize: { mobile: '16px', tablet: '22px', desktop: '24px' },
+
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px',
+                    gap: { mobile: '6px', tablet: '10px', desktop: '9px' },
                 }}
             >
                 <p>Not Registered? {'   '}</p>
-                <Button
-                    disableTouchRipple
-                    variant="text"
-                    href="/signup"
-                    sx={{
-                        padding: '0px',
-                        fontWeight: 700,
-                        fontSize: '24px',
-                        '&.MuiButton-root:hover': {
+                <Link href="/signup" tabIndex={-1}>
+                    <Button
+                        disableTouchRipple
+                        variant="text"
+                        sx={{
+                            padding: '0px',
+                            fontWeight: 700,
+                            fontSize: { mobile: '16px', tablet: '22px', desktop: '24px' },
+                            color: 'accent.main',
                             backgroundColor: '#fff',
-                        },
-                    }}
-                >
-                    Create an account
-                </Button>
+                            '&:hover': {
+                                backgroundColor: '#fff',
+                            },
+                        }}
+                    >
+                        Create an account
+                    </Button>
+                </Link>
             </Box>
         </Box>
     );

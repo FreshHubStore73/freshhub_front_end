@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 type Props = { handleSubmit?: React.MouseEventHandler<HTMLButtonElement> };
 
 const ConfirmBtn = styled((props: ButtonProps) => (
-    <Button fullWidth type="submit" variant="contained" {...props} />
+    <Button fullWidth type="submit" variant="contained" disableTouchRipple {...props} />
 ))(({ theme }) => ({
     [theme.breakpoints.up('mobile')]: {
         height: '44px',
