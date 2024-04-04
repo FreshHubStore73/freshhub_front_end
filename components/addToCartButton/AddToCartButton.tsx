@@ -39,10 +39,15 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
                 fontSize: simple
                     ? { mobile: '16px', tablet: '18px', desktop: '24px' }
                     : { mobile: '12px', tablet: '18px', desktop: '24px' },
+                borderColor: 'accent.main',
+                '&:hover': {
+                    backgroundColor: 'accent.main',
+                },
                 '&.Mui-disabled': {
-                    color: '#F15C30',
+                    color: 'accent.main',
                     backgroundColor: 'white',
-                    border: '1px solid #F15C30',
+                    border: '1px solid',
+                    borderColor: 'accent.main',
                 },
             }}
         >

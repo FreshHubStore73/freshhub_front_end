@@ -26,7 +26,7 @@ export default function SignUpForm({}: Props) {
             phoneNumber: '',
             password: '',
         },
-        mode: 'onSubmit',
+        mode: 'onBlur',
     });
 
     const {
@@ -43,6 +43,7 @@ export default function SignUpForm({}: Props) {
         // if (typeof state.message === 'object' && state.message.phoneNumber)
         //     methods.setError('phoneNumber', { type: 'custom', message: state.message.phoneNumber });
     }, [state.message, methods, replace]);
+
     return (
         <FormProvider {...methods}>
             <Box
@@ -51,11 +52,14 @@ export default function SignUpForm({}: Props) {
                 ref={formRef}
                 sx={{
                     width: '100%',
-                    mt: '50px',
+                    mt: { mobile: '30px', tablet: '40px', desktop: '50px' },
                     display: 'grid',
-                    rowGap: '38px',
-                    columnGap: '20px',
-                    gridTemplate: 'repeat(4, auto) / 1fr 1fr',
+                    rowGap: { mobile: '14px', tablet: '24px', desktop: '38px' },
+                    columnGap: { mobile: '0px', tablet: '20px' },
+                    gridTemplate: {
+                        mobile: 'repeat(5, auto) / 1fr',
+                        tablet: 'repeat(4, auto) / 1fr 1fr',
+                    },
                 }}
             >
                 <FirstNameInput />
@@ -65,8 +69,8 @@ export default function SignUpForm({}: Props) {
 
                 <Box
                     sx={{
-                        mt: '12px',
-                        gridArea: '4 / 1 / 5 / 3',
+                        mt: { mobile: '10px', tablet: '6px', desktop: '12px' },
+                        gridArea: { mobile: 'unset', tablet: '4 / 1 / 5 / 3' },
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
@@ -78,8 +82,8 @@ export default function SignUpForm({}: Props) {
                         <Typography
                             sx={{
                                 color: 'error.main',
-                                mb: '24px',
-                                fontSize: '20px',
+                                mb: { mobile: '16px', tablet: '20px', desktop: '24px' },
+                                fontSize: { mobile: '16px', tablet: '18px', desktop: '20px' },
                             }}
                         >
                             {state.message}
@@ -88,6 +92,7 @@ export default function SignUpForm({}: Props) {
 
                     <SubmitButton
                         text="Sign up"
+                        disabled={!isValid}
                         onClick={(e) => {
                             e.preventDefault();
                             trigger(['firstName', 'lastName', 'phoneNumber', 'password']);

@@ -1,9 +1,12 @@
+import { Metadata } from 'next';
+
 import OrderPage from '@/components/orderPage/OrderPage';
-import styles from './page.module.scss';
 
-type Props = { params: {} };
+export const metadata: Metadata = {
+    title: 'Complete order',
+};
 
-const Page = async (params: Props) => {
+const Page = async () => {
     return <OrderPage />;
 };
 

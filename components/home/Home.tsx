@@ -12,6 +12,8 @@ import ContactImg from '@/public/images/contact.png';
 import CalendarImg from '@/public/images/calendar.svg';
 
 import styles from './home.module.scss';
+import { Button } from '@mui/material';
+import Link from 'next/link';
 
 const oswald = Oswald({
     subsets: ['latin'],
@@ -27,15 +29,31 @@ const Home = () => {
                         Hot Delicious Fresh
                     </h1>
                     <p className={styles.main_description}>Free delivery to everyone</p>
-                    <a className={styles.main_btn} href="#delivery">
-                        Learn more
-                    </a>
+                    <Link href="#delivery" tabIndex={-1}>
+                        <Button
+                            variant="outlined"
+                            sx={{
+                                borderColor: 'accent.main',
+                                '&:hover': {
+                                    borderWidth: '2px',
+                                    borderColor: 'accent.main',
+                                    backgroundColor: '#fff',
+                                    color: 'accent.main',
+                                },
+                                width: { mobile: '142px', tablet: '195px', desktop: '340px' },
+                                height: { mobile: '34px', tablet: '55px', desktop: '96px' },
+                                borderRadius: { mobile: '20px', tablet: '30px', desktop: '50px' },
+                                fontSize: { mobile: '14px', tablet: '18px', desktop: '28px' },
+                            }}
+                        >
+                            Learn more
+                        </Button>
+                    </Link>
                 </div>
                 <div className={styles.main_img}>
                     <Image
                         src={MainImg}
                         alt="pizza"
-                        placeholder="blur"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 </div>
@@ -44,7 +62,7 @@ const Home = () => {
                 <h2 className={`${styles.title} ${oswald.className}`}>About us</h2>
                 <div className={styles.about_container}>
                     <div className={styles.about_img}>
-                        <Image src={AboutImg} alt="about_us" placeholder="blur" fill />
+                        <Image src={AboutImg} alt="about_us" fill />
                     </div>
                     <ul className={styles.about_list}>
                         <li className={styles.about_item}>
@@ -163,7 +181,6 @@ const Home = () => {
                         <Image
                             src={ContactImg}
                             alt="contact"
-                            placeholder="blur"
                             sizes="(max-width: 768px) 0vw, (max-width: 1200px) 50vw, 33vw"
                         />
                     </div>
@@ -188,10 +205,6 @@ const Home = () => {
                                             />
                                         </g>
                                     </svg>
-
-                                    {/* <Image src={CalendarImg} alt="calendar" /> */}
-                                    {/* <img src="/images/calendar.svg" /> */}
-
                                     <p className={styles.contacts_text}>We accept your orders:</p>
                                     <p className={styles.contacts_details}>From 10:30 to 21:30</p>
                                 </div>

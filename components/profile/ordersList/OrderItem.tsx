@@ -85,7 +85,16 @@ const OrderItemTitle = ({
                     >
                         № {orderNumber}
                     </Box>
-                    <Box component={'span'}>{ordered || 'trali-vali, trali-vali'}</Box>
+                    <Box component={'span'}>
+                        {new Date(ordered).toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: '2-digit',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                            hour12: true,
+                        }) || 'trali-vali, trali-vali'}
+                    </Box>
                 </div>
                 <Box
                     sx={{
@@ -131,7 +140,7 @@ const OrderItemTitle = ({
                             alignSelf: 'center',
                         }}
                     >
-                        ${totalAmount}
+                        ${totalAmount.toFixed(2)}
                     </Box>
                 </Box>
             )}
@@ -180,7 +189,7 @@ const OrderItemFooter = ({
                 </Box>
                 <Box component={'span'}>Total</Box>
                 <Box component={'span'} sx={{ justifySelf: 'flex-end', color: 'text.secondary' }}>
-                    ${totalAmount}
+                    ${totalAmount.toFixed(2)}
                 </Box>
             </Box>
         </Box>

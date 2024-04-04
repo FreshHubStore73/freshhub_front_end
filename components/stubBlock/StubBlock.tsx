@@ -15,7 +15,7 @@ export default function StubBlock({ text = 'Northing' }: Props) {
                 alignItems: 'center',
                 '& svg': {
                     height: 'auto',
-                    width: '100%',
+                    maxWidth: '100%',
                 },
                 gap: { mobile: '12px', tablet: '28.5px', desktop: '24px' },
             }}
@@ -55,6 +55,7 @@ export default function StubBlock({ text = 'Northing' }: Props) {
                 textAlign={'center'}
                 sx={{
                     textAlign: 'center',
+                    color: 'text.primary',
                     fontSize: { mobile: '30px', tablet: '46px', desktop: '62px' },
                     lineHeight: { mobile: '44.46px', tablet: '68.17px', desktop: '91.88px' },
                 }}

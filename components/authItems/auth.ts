@@ -77,15 +77,18 @@ export async function login(prevState: ISignInFormState | undefined, formData: F
                 throw new Error('Error in credentials! ' + (await resToken.text()));
             } else if (resToken.status === 400) {
                 const errorBody = await resToken.json();
-                throw new Error('Error in credentials!' + errorBody.message);
+                throw new Error('Error in credentials! ' + errorBody.message);
+            } else {
+                const errorBody = await resToken.json();
+                throw new Error('Error logging in! ' + errorBody.message);
             }
         }
-
         const data: {
             token: string;
             phoneNumber: string;
         } = await resToken.json();
 
+        console.log(data);
         //add token to session
         cookies().set('user_session', data.token, {
             httpOnly: true,
@@ -147,11 +150,49 @@ export async function getUser(t?: string) {
     }
     const body = await res.json();
 
-    const user = {
+    const orders: IOrdersHistory[] = body.orders.length
+        ? body.orders.map((order: any) => {
+              const {
+                  id,
+                  createdDate,
+                  orderStatus,
+                  deliveryAddress,
+                  recipient,
+                  phoneNumber,
+                  orderDatails,
+                  payment,
+              } = order;
+              return {
+                  orderId: id,
+                  orderNumber: id,
+                  ordered: createdDate,
+                  orderStatus: orderStatus.name,
+                  deliveryAddress: deliveryAddress,
+                  recipientName: recipient,
+                  recipientPhoneNumber: phoneNumber,
+                  orderedDishes: orderDatails.map((order: any) => ({
+                      dishId: order.productId,
+                      dishName: order.product.productName,
+                      dishPrice: order.price,
+                      dishQuantity: order.quantity,
+                      dishImage: order.product.photoUrl,
+                      categoryName: order.product.category || 'burgers',
+                  })),
+                  totalAmount: orderDatails.reduce((total: number, dish: any) => {
+                      total += dish.price * dish.quantity;
+                      return total;
+                  }, 0),
+                  payment: payment,
+              };
+          })
+        : [];
+
+    const user: IUserInfo = {
         firstName: body.firstName,
         lastName: body.lastName,
         phoneNumber: body.phoneNumber,
-        userRole: body.userRoles,
+        // userRole: body.userRoles,
+        orders,
     };
 
     return {

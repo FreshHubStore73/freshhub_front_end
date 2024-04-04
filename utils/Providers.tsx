@@ -71,9 +71,6 @@ export const lato = Lato({
 
 const theme = createTheme({
     palette: {
-        primary: {
-            main: '#F15C30',
-        },
         accent: {
             main: '#F15C30',
         },
@@ -162,7 +159,8 @@ const theme = createTheme({
                     backgroundColor: '#F15C30',
                 },
                 root: {
-                    // backgroundColor: '#F15C30',
+                    backgroundColor: '#F15C30',
+                    color: '#fff',
                     textTransform: 'none',
                 },
             },

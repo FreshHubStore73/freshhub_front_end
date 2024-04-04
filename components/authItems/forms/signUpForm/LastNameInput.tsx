@@ -36,7 +36,7 @@ export default function LastNameInput({}: Props) {
                     helperText={errors.lastName?.type ? `${errors.lastName?.message}` : ''}
                     {...rest}
                     sx={{
-                        gridArea: '1 / 2 / 2 / 3',
+                        gridArea: { mobile: 'unset', tablet: '1 / 2 / 2 / 3' },
                     }}
                 />
             )}

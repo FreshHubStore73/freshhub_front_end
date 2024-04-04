@@ -39,7 +39,10 @@ export default function PhoneInput({ variant = 'signup' as 'signup' }: Props) {
                             errors.phoneNumber?.type ? `${errors.phoneNumber?.message}` : ''
                         }
                         sx={{
-                            gridArea: variant === 'signin' ? 'auto' : '2 / 1 / 3 / 3',
+                            gridArea:
+                                variant === 'signin'
+                                    ? 'auto'
+                                    : { mobile: 'unset', tablet: '2 / 1 / 3 / 3' },
                         }}
                     />
                 </ReactInputMask>

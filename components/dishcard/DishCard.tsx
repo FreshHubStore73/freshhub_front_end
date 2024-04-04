@@ -10,6 +10,7 @@ const DishCard = ({ item }: { item: DishItem }) => {
     const { id, photoUrl, productName, categoryId, price, description, weight, categoryName } =
         item;
     const link = `/categories/${categoryName.toLowerCase()}/${id}/${productName
+        .trim()
         .toLowerCase()
         .replace(/\s+/g, '_')}`;
     const photo = photoUrl

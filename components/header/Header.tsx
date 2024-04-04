@@ -10,8 +10,6 @@ import Logo from './logo';
 import UserIcon from './userIcon';
 import Cart from '../cartComponents/cart/Cart';
 
-import styles from './header.module.scss';
-
 const Header = ({ children }: { children: React.ReactNode[] }) => {
     const BurgerMenu = children[0];
     const Navbar = children[1];

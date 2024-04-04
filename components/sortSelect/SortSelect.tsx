@@ -68,7 +68,7 @@ export default function SortSelect() {
                 inset={!isActive}
                 sx={{
                     '& .MuiTypography-root:hover': {
-                        color: '#F15C30',
+                        color: 'accent.main',
                     },
                 }}
             >
@@ -86,6 +86,7 @@ export default function SortSelect() {
                 disableElevation
                 onClick={handleClickSortButton}
                 endIcon={<ExpandMoreRoundedIcon />}
+                disableTouchRipple
                 sx={{
                     alignSelf: 'center',
                     '&.MuiButton-root': {

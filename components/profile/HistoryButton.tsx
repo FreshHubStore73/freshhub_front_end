@@ -26,6 +26,7 @@ export default function HistoryButton({ searchParams }: Props) {
         <Link href={`/profile${searchParams ? '' : '?history=true'}`}>
             {' '}
             <Button
+                disableTouchRipple
                 fullWidth
                 variant={searchParams ? 'contained' : 'outlined'}
                 startIcon={<BreakSvg />}

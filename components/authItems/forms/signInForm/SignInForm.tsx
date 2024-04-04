@@ -49,10 +49,9 @@ export default function SignInForm({}: Props) {
                 ref={formRef}
                 sx={{
                     width: '100%',
-                    mt: '50px',
+                    mt: { mobile: '30px', tablet: '40px', desktop: '50px' },
                     display: 'grid',
-                    rowGap: '38px',
-                    columnGap: '20px',
+                    rowGap: { mobile: '14px', tablet: '24px', desktop: '38px' },
                     gridTemplate: 'repeat(3, auto) / 1fr',
                 }}
             >
@@ -61,7 +60,7 @@ export default function SignInForm({}: Props) {
 
                 <Box
                     sx={{
-                        mt: '12px',
+                        mt: { mobile: '10px', tablet: '16px', desktop: '12px' },
                         gridArea: 'auto',
                         display: 'flex',
                         flexDirection: 'column',
@@ -74,8 +73,8 @@ export default function SignInForm({}: Props) {
                         <Typography
                             sx={{
                                 color: 'error.main',
-                                mb: '24px',
-                                fontSize: '20px',
+                                mb: { mobile: '16px', tablet: '20px', desktop: '24px' },
+                                fontSize: { mobile: '16px', tablet: '18px', desktop: '20px' },
                             }}
                         >
                             {state?.message}
@@ -84,6 +83,7 @@ export default function SignInForm({}: Props) {
 
                     <SubmitButton
                         text="Sign in"
+                        isValid={isValid}
                         onClick={(e) => {
                             e.preventDefault();
                             trigger(['phoneNumber', 'password']);

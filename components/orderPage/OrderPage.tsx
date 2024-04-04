@@ -24,7 +24,7 @@ import { useShoppingCart } from '@/store';
 type Props = {};
 
 export default function OrderPage({}: Props) {
-    const { replace } = useRouter();
+    const { replace, push } = useRouter();
 
     const [state, formAction] = useFormState(orderAction, { message: '' });
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -42,8 +42,8 @@ export default function OrderPage({}: Props) {
     //guarantee that updating cart on reload page (or hard navigation) doesn't cause redirecting to the home page
     if (typeof window !== 'undefined') {
         const cartInLS = window.localStorage.getItem('cart');
-        if (cartInLS && !JSON.parse(cartInLS).state.dishes.length && !isOrdered)
-            setTimeout(() => replace('/'), 0);
+        if (cartInLS && !JSON.parse(cartInLS).state.dishes.length && !isOrdered) push('/');
+        // setTimeout(() => replace('/'), 0);
     }
 
     const handleCloseSuccess = useCallback(() => {

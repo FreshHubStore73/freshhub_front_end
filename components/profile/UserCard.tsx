@@ -50,10 +50,13 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                 padding: { mobile: '48px 30px', tablet: '39px 41px', desktop: '54px 20px' },
                 backgroundColor: '#FFC182',
                 borderRadius: { mobile: '36px', tablet: '40px', desktop: '50px' },
+                mt: { mobile: '10px', tablet: '12px', desktop: '14px' },
+                overflow: 'hidden',
             }}
         >
             <Box
                 sx={{
+                    flex: '0 0 auto',
                     width: { mobile: '71px', tablet: '108px', desktop: '135px' },
                     '& svg': {
                         height: 'auto',
@@ -65,14 +68,14 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
             </Box>
             <Box
                 sx={{
-                    flexGrow: 1,
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
                     gap: { mobile: '8px', tablet: '12px', desktop: '8px' },
-
                     backgroundColor: '#FFC182',
+                    overflow: 'hidden',
+                    width: '100%',
                 }}
             >
                 <Typography
@@ -80,9 +83,13 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                     sx={{
                         fontWeight: 700,
                         fontSize: { mobile: '26px', tablet: '30px', desktop: '34px' },
-                        // lineHeight: '29px',
-
-                        color: 'palette.text.secondary',
+                        color: 'text.secondary',
+                        wordBreak: 'break-word',
+                        whiteSpace: 'nowrap',
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden',
+                        width: '100%',
+                        textAlign: 'center',
                     }}
                 >
                     {firstName}
@@ -91,7 +98,7 @@ export default function UserCard({ firstName, phoneNumber }: Props) {
                     component={'h3'}
                     sx={{
                         fontSize: { mobile: '18px', tablet: '22px', desktop: '24px' },
-                        // lineHeight: '29px',
+                        textAlign: 'center',
                         fontWeight: 400,
                     }}
                 >

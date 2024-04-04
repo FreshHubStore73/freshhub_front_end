@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import { Box, SvgIcon, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import { useShoppingCart } from '@/store';
 
 import NumberInput from '../numberInput/Input';
@@ -10,13 +10,13 @@ interface ICartListItem {
     dish: DishInCart;
     isOrder?: boolean;
 }
+const url = process.env.SERV_URL;
 const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
     const { id, photoUrl, productName, price, quantity } = dish;
     const { removeDish, changeQuantity } = useShoppingCart();
 
-    // const url = process.env.SERV_URL;
     const photoPath = photoUrl
-        ? `${process.env.SERV_URL}/${photoUrl.replace(/\\+/g, '/')}`
+        ? `${url}/${photoUrl.replace(/\\+/g, '/')}`
         : '/dishes/istockphoto-1206323282-612x612.jpg';
     const onRemove = () => {
         removeDish(dish);
@@ -87,25 +87,31 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                 >
                     {productName}
                 </Typography>
-                <SvgIcon
+                <IconButton
                     onClick={onRemove}
+                    disableTouchRipple
+                    tabIndex={0}
                     sx={{
+                        alignSelf: 'center',
                         cursor: 'pointer',
+                        '&': {
+                            p: 0,
+                        },
                         height: isOrder
                             ? { mobile: '16px', tablet: '20px', desktop: '24px' }
                             : { mobile: '13px', tablet: '22px', desktop: '30px' },
-                        '&.MuiSvgIcon-root:hover path': {
-                            stroke: '#F15C30',
+                        '& svg': {
+                            height: '100%',
+                        },
+                        '&:hover': {
+                            backgroundColor: '#fff',
+                        },
+                        '&.MuiIconButton-root:hover path': {
+                            stroke: (theme) => theme.palette.accent.main,
                         },
                     }}
                 >
-                    <svg
-                        width="26"
-                        height="30"
-                        viewBox="0 0 26 30"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M25.2777 6.09497H0.722168M22.8698 9.94052L22.2054 20.5542C21.9497 24.6367 21.8226 26.6779 20.5732 27.9223C19.3237 29.1683 17.4012 29.1683 13.5589 29.1683H12.4409C8.59872 29.1683 6.67617 29.1683 5.42672 27.9223C4.17728 26.6779 4.04872 24.6367 3.7945 20.5542L3.13006 9.94052M9.38883 13.7861L10.1111 21.4772M16.6111 13.7861L15.8888 21.4772"
                             stroke="#3E3B3B"
@@ -118,7 +124,7 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                             strokeWidth="1.5"
                         />
                     </svg>
-                </SvgIcon>
+                </IconButton>
             </Box>
             <Box
                 sx={{

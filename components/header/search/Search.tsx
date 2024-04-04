@@ -13,7 +13,7 @@ const SearchIcon = (props: any) => {
                 height: { mobile: '24px', tablet: '30px', desktop: '41px' },
                 cursor: 'pointer',
                 '&.MuiSvgIcon-root:hover path': {
-                    fill: '#F15C30',
+                    fill: (theme) => theme.palette.accent.main,
                 },
             }}
         >
