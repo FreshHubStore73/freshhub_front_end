@@ -12,7 +12,11 @@ export async function generateMetadata({ params }: Props) {
     const id = dishId[0];
     const dishItem = await getDish(id);
     return {
-        title: dishItem.productName.slice(0, 60) + '...',
+        title: `${
+            dishItem.productName.length > 59
+                ? dishItem.productName.slice(0, 60) + '...'
+                : dishItem.productName
+        }  | FresHHub`,
     };
 }
 

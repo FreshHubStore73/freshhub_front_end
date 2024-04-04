@@ -11,7 +11,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
         title: searchParams?.search
             ? 'Search | FresHHub'
             : `${
-                  params.category.charAt(0).toLocaleUpperCase + params.category.slice(1)
+                  params.category.charAt(0).toLocaleUpperCase() + params.category.slice(1)
               } | FresHHub`,
     };
 }
