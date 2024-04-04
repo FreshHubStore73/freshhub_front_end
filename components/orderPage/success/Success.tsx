@@ -22,6 +22,8 @@ function Success({ open, onClose }: Props) {
                     disableTouchRipple
                     sx={{
                         fontSize: '48px',
+                        color: 'text.primary',
+                        backgroundColor: '#fff',
                         '&:hover': {
                             backgroundColor: '#fff',
                         },
