@@ -10,7 +10,7 @@ type Props = {
     setIsFieldValid?: (isValid: boolean) => void;
 };
 export const nameInputSettings = (disabled: boolean, val: string) => ({
-    gridArea: val.replace(/\W+/, ''),
+    gridArea: val.replace(/\W+/g, ''),
     '& .MuiInputBase-root': {
         borderRadius: { mobile: '26px', tablet: '40px' },
     },

@@ -17,21 +17,7 @@ const HtmlTooltip = styled(
             {...props}
             classes={{ popper: className }}
             PopperProps={{
-                // popperOptions: { placement: 'bottom' },
                 placement: 'bottom',
-                // sx: {
-                //     '& .MuiTooltip-popper': {
-                //         display: { mobile: 'none', tablet: 'none' },
-                //     },
-                // },
-                // anchorOrigin: {
-                //     vertical: 'bottom',
-                //     horizontal: 'center',
-                // },
-                // transformOrigin: {
-                //     vertical: 'top',
-                //     horizontal: 'center',
-                // },
                 anchorEl: anchEl,
             }}
         />

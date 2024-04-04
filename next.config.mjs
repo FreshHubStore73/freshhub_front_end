@@ -14,8 +14,8 @@ const nextConfig = {
                 port: '',
             },
             {
-                protocol: 'http',
-                hostname: 'gmg38118-001-site1.jtempurl.com',
+                protocol: 'https',
+                hostname: 'tempaspnet0001.bsite.net',
                 port: '',
             },
         ],

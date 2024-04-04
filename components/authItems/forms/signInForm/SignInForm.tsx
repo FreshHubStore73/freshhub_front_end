@@ -83,7 +83,7 @@ export default function SignInForm({}: Props) {
 
                     <SubmitButton
                         text="Sign in"
-                        disabled={!isValid}
+                        isValid={isValid}
                         onClick={(e) => {
                             e.preventDefault();
                             trigger(['phoneNumber', 'password']);

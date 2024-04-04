@@ -26,19 +26,6 @@
     line-height: 1.2;
     margin-bottom: 40px;
 }
-.main_btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 340px;
-    height: 96px;
-    border-radius: 50px;
-    border: 2px solid var(--color-title);
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--color-title);
-    transition: all 0.3s ease-in-out;
-}
 .main_btn:hover {
     color: #fff;
     background-color: var(--color-title);
@@ -202,6 +189,10 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: repeat(2, auto);
     grid-column-gap: 24px;
+    &:focus {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
 }
 
 .contacts_link:hover .contacts_details {
@@ -246,11 +237,6 @@
     .main_description {
         font-size: 26px;
         margin-bottom: 22px;
-    }
-    .main_btn {
-        font-size: 18px;
-        width: 195px;
-        height: 55px;
     }
     .main {
         height: 360px;
@@ -354,11 +340,6 @@
     .main_description {
         font-size: 18px;
         margin-bottom: 16px;
-    }
-    .main_btn {
-        font-size: 14px;
-        width: 142px;
-        height: 34px;
     }
     .main {
         height: 232px;

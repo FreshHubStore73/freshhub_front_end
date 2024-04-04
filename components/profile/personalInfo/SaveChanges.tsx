@@ -25,6 +25,9 @@ const SaveChanges = ({ handleSave, isChangeActive, disabled }: Props) => {
                 borderRadius: { mobile: '40px', desktop: '50px' },
                 height: { mobile: '48px', tablet: '64px', desktop: '74px' },
                 mt: { mobile: '6px', tablet: 'unset' },
+                '&:hover': {
+                    backgroundColor: 'accent.main',
+                },
             }}
         >
             {isChangeActive ? 'Save changes' : 'Change'}

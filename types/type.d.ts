@@ -65,7 +65,8 @@ interface IUserInfo {
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    userRole: 'admin' | 'user';
+    // userRole: 'admin' | 'user';
+    orders: IOrdersHistory[];
 }
 interface IUserResponse {
     user: IUserInfo | null;

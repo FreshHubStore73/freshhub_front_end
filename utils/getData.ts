@@ -47,7 +47,7 @@ export async function getDishes(category: string, requestSearchParams: IRequestS
     return dishes;
 }
 
-export async function getDish(dishId: string) {
+export async function getDish(dishId: string): Promise<DishItem> {
     const res = await fetch(`${url}/api/Product/GetProductById/${dishId}`);
     if (!res.ok) throw new Error('Failed to fetch dish ' + res.statusText);
     return res.json();

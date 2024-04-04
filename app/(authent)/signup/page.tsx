@@ -1,12 +1,15 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 import { Box, Button, Typography } from '@mui/material';
 
 import SignUpForm from '@/components/authItems/forms/signUpForm/SignUpForm';
 
-type Props = { params: {} };
+export const metadata: Metadata = {
+    title: 'Register | FresHHub',
+};
 
-const SignUpPage = (params: Props) => {
+const SignUpPage = () => {
     return (
         <Box
             sx={{

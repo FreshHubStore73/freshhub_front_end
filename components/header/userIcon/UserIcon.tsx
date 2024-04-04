@@ -9,10 +9,8 @@ import Menu from '@mui/material/Menu';
 import { logout } from '@/components/authItems/auth';
 import { useAuth } from '@/hooks/useAuth';
 
-interface UserIconProps {}
-
 // eslint-disable-next-line react/display-name
-const UserIcon = forwardRef<HTMLElement, UserIconProps>((props, ref) => {
+const UserIcon = forwardRef<HTMLElement>((props, ref) => {
     {
         const { isAuthorized, signOut } = useAuth();
         const { push } = useRouter();

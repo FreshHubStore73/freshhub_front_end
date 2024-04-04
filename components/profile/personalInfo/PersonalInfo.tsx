@@ -25,11 +25,15 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
             e.preventDefault();
             setIsChangeActive((prevState) => !prevState);
         }
-        if (isChangeActive) e.currentTarget.form?.requestSubmit();
+        if (isChangeActive) {
+            e.currentTarget.form?.requestSubmit();
+            setIsChangeActive(false);
+        }
     };
 
     useEffect(() => {
-        if (state.message === 'Ok') setIsChangeActive((prevState) => !prevState);
+        // if (state.message) setIsChangeActive(true);
+        if (state.message && state.message !== 'Ok') setIsChangeActive(true);
     }, [state.message]);
 
     const isSubmitDisabled = Object.values(isValidFields).some((valid) => valid);
@@ -50,9 +54,7 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
                 gridTemplateAreas: {
                     mobile: 'unset',
                     tablet: `
-                '${`${firstName.replace(/\W+/, '').slice(0, 5)} ${lastName
-                    .replace(/\W+/, '')
-                    .slice(0, 5)}`}'
+                '${`${fieldLabels[0].replace(/\W+/g, '')} ${fieldLabels[1].replace(/\W+/g, '')}`}'
                 'phone phone'
                 'btn btn'`,
                 },

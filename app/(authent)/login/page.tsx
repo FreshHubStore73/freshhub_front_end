@@ -1,15 +1,17 @@
-'use client';
 import { Suspense } from 'react';
 
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 import { Box, Button, Typography } from '@mui/material';
 
 import SignInForm from '@/components/authItems/forms/signInForm/SignInForm';
 
-type Props = { params: {} };
+export const metadata: Metadata = {
+    title: 'Login | FresHHub',
+};
 
-const LoginPage = (params: Props) => {
+const LoginPage = () => {
     return (
         <Box
             sx={{
@@ -26,7 +28,7 @@ const LoginPage = (params: Props) => {
             }}
         >
             <Typography variant="h2_Oswald" component={'h1'} color="text.secondary">
-                Log In
+                Log in
             </Typography>
             <Suspense>
                 <SignInForm />

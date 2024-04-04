@@ -1,23 +1,25 @@
 'use client';
 import Link from 'next/link';
-import { Box, SvgIcon, Typography } from '@mui/material';
-
-import styles from './logo.module.scss';
+import { Box, SvgIcon } from '@mui/material';
 
 export default function Logo() {
     return (
         <Box
+            tabIndex={0}
             sx={{
-                // flexGrow: { mobile: 1, tablet: 0 },
                 justifyContent: 'center',
             }}
         >
-            <Link href="/">
+            <Link href="/" tabIndex={-1}>
                 <SvgIcon
+                    // tabIndex={0}
                     sx={{
                         height: { mobile: '33px', tablet: '48px', desktop: '74px' },
                         width: { mobile: '44px', tablet: '64px', desktop: '98px' },
                         ml: { mobile: '14px', tablet: '0' },
+                        '&:focused .MuiSvgIcon-root': {
+                            backgroundColor: 'yellow',
+                        },
                     }}
                 >
                     <svg

@@ -1,9 +1,9 @@
 import { Button, ButtonProps } from '@mui/material';
 import { useFormStatus } from 'react-dom';
 
-type Props = ButtonProps & { text: string };
+type Props = ButtonProps & { text: string; isValid: boolean };
 
-function SubmitButton({ text, ...rest }: Props) {
+function SubmitButton({ text, isValid, ...rest }: Props) {
     const { pending } = useFormStatus();
 
     return (
@@ -12,7 +12,7 @@ function SubmitButton({ text, ...rest }: Props) {
             disableTouchRipple
             aria-disabled={pending}
             variant="contained"
-            disabled={pending}
+            disabled={pending || !isValid}
             {...rest}
             sx={{
                 width: { mobile: '100%', tablet: '347px', desktop: '380px' },

@@ -1,8 +1,16 @@
+import { Metadata } from 'next';
+
+import { Toolbar } from '@mui/material';
+
 import NavMenu from '@/components/header/navMenu';
 import NavBar from '@/components/header/navBar';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
-import { Toolbar } from '@mui/material';
+
+export const metadata: Metadata = {
+    title: 'FresHHub',
+    description: 'Hot, delicious, fresh dishes with free delivery to everyone',
+};
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
