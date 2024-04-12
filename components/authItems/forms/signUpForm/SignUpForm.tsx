@@ -92,7 +92,7 @@ export default function SignUpForm({}: Props) {
 
                     <SubmitButton
                         text="Sign up"
-                        isValid={!isValid}
+                        isValid={isValid}
                         onClick={(e) => {
                             e.preventDefault();
                             trigger(['firstName', 'lastName', 'phoneNumber', 'password']);
