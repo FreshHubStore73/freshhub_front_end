@@ -10,12 +10,12 @@ export const useShoppingCart = create<UseShoppingCart>()(
                 totalDishes: 0,
                 addDish: (dish) =>
                     set((state) => {
-                        const dishInCartId = state.dishes.find((el) => el.id == dish.id)?.id;
+                        const dishInCartId = state.dishes.find((el) => el._id == dish._id)?._id;
                         if (dishInCartId) {
                             return {
                                 dishes: [
                                     ...state.dishes.map((item) => {
-                                        return item.id === dishInCartId
+                                        return item._id === dishInCartId
                                             ? {
                                                   ...item,
                                                   quantity: item.quantity + dish.quantity,
@@ -42,11 +42,11 @@ export const useShoppingCart = create<UseShoppingCart>()(
                     }),
                 changeQuantity: (id, quantity) =>
                     set((state) => {
-                        const dishInCart = state.dishes.find((el) => el.id == id)!;
+                        const dishInCart = state.dishes.find((el) => el._id == id)!;
                         return {
                             dishes: [
                                 ...state.dishes.map((item) => {
-                                    return item.id === dishInCart.id
+                                    return item._id === dishInCart._id
                                         ? { ...item, quantity: quantity }
                                         : item;
                                 }),
@@ -63,7 +63,7 @@ export const useShoppingCart = create<UseShoppingCart>()(
                 removeDish: (dish) =>
                     set((state) => {
                         return {
-                            dishes: [...state.dishes.filter((item) => item.id !== dish.id)],
+                            dishes: [...state.dishes.filter((item) => item._id !== dish._id)],
                             totalAmount:
                                 Math.round((state.totalAmount - dish.quantity * dish.price) * 100) /
                                 100,

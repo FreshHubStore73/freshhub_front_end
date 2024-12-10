@@ -1,12 +1,9 @@
 'use client';
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useFormState } from 'react-dom';
-
 import { useRouter } from 'next/navigation';
-
 import { Box, CircularProgress, Typography } from '@mui/material';
 
-import BreadCrumbs from '../breadcrumbs/Breadcrumbs';
 import Contact from './contact/Contact';
 import Address from './address/Address';
 import Time from './time/Time';
@@ -16,14 +13,13 @@ import CustomizedAccordions from './comments/Comments';
 import OrderedDishes from './orderedDishes/OrderedDishes';
 import OrderList from './orderList/OrderList';
 import Success from './success/Success';
-
 import useTimeout from '@/hooks/useTimeout';
 import { orderAction } from '@/utils/actions';
 import { useShoppingCart } from '@/store';
 
 type Props = {};
 
-export default function OrderPage({}: Props) {
+export default function OrderPage({ }: Props) {
     const { replace, push } = useRouter();
 
     const [state, formAction] = useFormState(orderAction, { message: '' });
@@ -69,7 +65,6 @@ export default function OrderPage({}: Props) {
 
     return (
         <>
-            <BreadCrumbs singlePage="Order Page" />
             {!dishes.length ? (
                 <Box
                     sx={{

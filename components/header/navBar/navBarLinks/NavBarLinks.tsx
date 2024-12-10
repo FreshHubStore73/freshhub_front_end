@@ -2,14 +2,19 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 
-const NavBarLinks = ({ links }: { links: string[] }) => {
+type Props = {
+    data: CategoryItem[];
+}
+
+const NavBarLinks = ({ data }: Props) => {
     const pathname = usePathname().split('/')[2];
+    const links = data.map((item) => item.path);
     return (
         <>
             {links.map((link) => {
-                const catName = link.toLowerCase();
+                const catName = link;
                 const isActive = pathname === catName;
                 return (
                     <Link href={`/categories/${catName}`} key={catName} tabIndex={-1}>

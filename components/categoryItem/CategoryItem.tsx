@@ -1,39 +1,27 @@
 import React from 'react';
-
 import { Box, Typography } from '@mui/material';
-import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 
 import DishCard from '@/components/dishcard';
 import SortSelect from '@/components/sortSelect/SortSelect';
 import StubBlock from '../stubBlock/StubBlock';
-import { getCategories } from '@/utils/getData';
 
 type Props = {
-    path: string;
-    searchParams: {
-        [key: string]: string;
-    };
+    title: string;
+    categoryName: string;
     dishes: DishItem[];
 };
 
-export default async function CategoryItem({ dishes, path, searchParams }: Props) {
-    const { pages } = await getCategories();
-    const searchQuery = searchParams?.search;
-    const title = !new RegExp(path, 'i').test(pages.join('.'))
-        ? 'This is no such category... Ups'
-        : path === 'search'
-        ? (path = `Search for "${searchQuery}"`)
-        : path;
+export default async function CategoryItem({ dishes, title, categoryName }: Props) {
+
+    const getLink = (id: string, productName: string) =>
+        `/categories/${categoryName}/${id}/${productName?.trim().toLowerCase().replace(/\s+/g, '_')}`;
 
     return (
         <>
-            <BreadCrumbs />
-
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent:
-                        title === 'This is no such category... Ups' ? 'center' : 'space-between',
+                    justifyContent: 'space-between',
                     alignContent: 'center',
                     margin: {
                         mobile: '16px 0 14px',
@@ -73,7 +61,7 @@ export default async function CategoryItem({ dishes, path, searchParams }: Props
                     }}
                 >
                     {dishes.length ? (
-                        dishes.map((dish) => <DishCard key={dish.id} item={dish} />)
+                        dishes.map((dish) => <DishCard key={dish._id} item={{ ...dish, link: getLink(dish._id, dish.productName) }} />)
                     ) : (
                         <StubBlock />
                     )}

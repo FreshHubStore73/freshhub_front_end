@@ -4,7 +4,8 @@ import NavBarLinks from './navBarLinks';
 import { getCategories } from '@/utils/getData';
 
 const NavBar = async () => {
-    const { categories } = await getCategories();
+    const categoriesData = await getCategories();
+    if (!categoriesData) return null;
     return (
         <Box
             sx={{
@@ -15,7 +16,7 @@ const NavBar = async () => {
                 justifyContent: 'center',
             }}
         >
-            <NavBarLinks links={categories} />
+            <NavBarLinks data={categoriesData} />
         </Box>
     );
 };

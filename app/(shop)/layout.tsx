@@ -6,6 +6,7 @@ import NavMenu from '@/components/header/navMenu';
 import NavBar from '@/components/header/navBar';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 
 export const metadata: Metadata = {
     title: 'FresHHub',
@@ -27,7 +28,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 }}
             />
             <main>
-                <div className="container">{children}</div>
+                <div className="container">
+                    <BreadCrumbs />
+                    {children}
+                </div>
             </main>
 
             <Footer />

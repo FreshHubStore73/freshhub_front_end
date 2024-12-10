@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation';
 import { Box, Typography } from '@mui/material';
 
 import { getUser } from '@/components/authItems/auth';
-import BreadCrumbs from '@/components/breadcrumbs/Breadcrumbs';
 import UserCard from '@/components/profile/UserCard';
 import HistoryButton from '@/components/profile/HistoryButton';
 import ListOfOrders from '@/components/profile/ordersList/ListOfOrders';
@@ -27,8 +26,6 @@ const Page = async ({ searchParams }: Props) => {
 
     return (
         <>
-            <BreadCrumbs useSearchParams={searchParams?.history} />
-
             <Box
                 sx={{
                     display: 'flex',
@@ -68,7 +65,7 @@ const Page = async ({ searchParams }: Props) => {
                         mt: {
                             desktop:
                                 !searchParams?.history ||
-                                (data.user.orders.length && searchParams?.history)
+                                    (data.user.orders.length && searchParams?.history)
                                     ? '105.88px'
                                     : '0px',
                         },

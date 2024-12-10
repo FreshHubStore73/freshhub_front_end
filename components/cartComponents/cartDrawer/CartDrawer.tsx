@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 
 import { Box, Stack } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
@@ -37,7 +37,7 @@ const CartDrawer: FC<{
                 }}
             >
                 {dishes.map((dish) => (
-                    <CartListItem key={dish.id} dish={dish} />
+                    <CartListItem key={dish._id} dish={dish} />
                 ))}
             </Stack>
             <CartFooter totalAmount={totalAmount} closeDrawer={closeDrawer} />

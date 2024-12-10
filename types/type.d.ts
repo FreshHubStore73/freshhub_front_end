@@ -1,21 +1,21 @@
+type ProductCategory = 'burgers' | 'pizza' | 'salads' | 'desserts';
+
 type CategoryItem = {
     id: string;
     name: string;
-    priority: string;
-    product: any[];
+    path: string;
 };
-interface IRequestSearchParams {
-    [key: string]: string;
-}
+
+type SortType = 'asc' | 'desc';
+
 type DishItem = {
-    id: string;
+    _id: string;
     photoUrl: string;
     productName: string;
     categoryId: string;
     price: number;
     description: string;
     weight: string;
-    categoryName: string;
 };
 
 type DishInCart = DishItem & { quantity: number };
