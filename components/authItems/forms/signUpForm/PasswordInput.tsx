@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { BaseFormInput } from '../baseFormInput/BaseFormInput';
 import { IconButton, InputAdornment, SvgIcon, SvgIconProps } from '@mui/material';
+
+import { BaseFormInput } from '../baseFormInput/BaseFormInput';
 
 type Props = { variant?: 'signin' | 'signup' };
 
@@ -101,16 +102,16 @@ export default function PasswordInput({ variant = 'signup' as 'signup' }: Props)
                     variant === 'signin'
                         ? undefined
                         : {
-                              value: 8,
-                              message: 'Password must contain at least 8 characters',
-                          },
+                            value: 8,
+                            message: 'Password must contain at least 8 characters',
+                        },
                 maxLength:
                     variant === 'signin'
                         ? undefined
                         : {
-                              value: 15,
-                              message: "Password shouldn't contain more than 15 characters",
-                          },
+                            value: 15,
+                            message: "Password shouldn't contain more than 15 characters",
+                        },
             }}
             render={({ field: { onChange, ...rest } }) => (
                 <BaseFormInput
@@ -127,23 +128,25 @@ export default function PasswordInput({ variant = 'signup' as 'signup' }: Props)
                         errors.password?.type
                             ? `${errors.password?.message}`
                             : variant === 'signin'
-                            ? ''
-                            : 'Must have minimum of 8 characters'
+                                ? ''
+                                : 'Must have minimum of 8 characters'
                     }
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton
-                                    disableTouchRipple
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>
-                        ),
+                    slotProps={{
+                        input: {
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        disableTouchRipple
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }
                     }}
                     sx={{
                         gridArea:

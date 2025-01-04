@@ -1,9 +1,6 @@
 import { useFormStatus } from 'react-dom';
-
 import Button, { ButtonProps } from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-
-type Props = { handleSubmit?: React.MouseEventHandler<HTMLButtonElement> };
 
 const ConfirmBtn = styled((props: ButtonProps) => (
     <Button fullWidth type="submit" variant="contained" disableTouchRipple {...props} />
@@ -28,14 +25,12 @@ const ConfirmBtn = styled((props: ButtonProps) => (
     },
 }));
 
-export default function ConfirmOrder({ handleSubmit }: Props) {
+export default function ConfirmOrder() {
     const { pending } = useFormStatus();
 
     return (
-        <>
-            <ConfirmBtn disabled={pending} onClick={handleSubmit}>
-                Confirm order
-            </ConfirmBtn>
-        </>
+        <ConfirmBtn disabled={pending}>
+            Confirm order
+        </ConfirmBtn>
     );
 }

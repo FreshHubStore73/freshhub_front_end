@@ -17,6 +17,7 @@ const SaveChanges = ({ handleSave, isChangeActive, disabled }: Props) => {
             variant="contained"
             onClick={handleSave}
             disabled={disabled || pending}
+            type='submit'
             sx={{
                 width: '100%',
                 maxWidth: { mobile: '306px', tablet: '370px' },

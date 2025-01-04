@@ -1,29 +1,26 @@
 'use client';
-import { FC } from 'react';
 import Image from 'next/image';
-
 import { Box, IconButton, Typography } from '@mui/material';
-import { useShoppingCart } from '@/store';
 
 import NumberInput from '../numberInput/Input';
-interface ICartListItem {
+import { useCartStore } from '@/stores/Stores-providers';
+
+type Props = {
     dish: DishInCart;
     isOrder?: boolean;
 }
-const url = process.env.SERV_URL;
-const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
-    const { id, photoUrl, productName, price, quantity } = dish;
-    const { removeDish, changeQuantity } = useShoppingCart();
 
-    const photoPath = photoUrl
-        ? `${url}/${photoUrl.replace(/\\+/g, '/')}`
-        : '/dishes/istockphoto-1206323282-612x612.jpg';
+export default function CartListItem({ dish, isOrder = false }: Props) {
+    const { _id, photoUrl, productName, price, quantity } = dish;
+    const removeDish = useCartStore(state => state.removeDish);
+    const changeQuantity = useCartStore(state => state.changeQuantity);
+
     const onRemove = () => {
         removeDish(dish);
     };
 
     const onChange = (q: number) => {
-        changeQuantity(id, q);
+        changeQuantity(_id, q);
     };
 
     return (
@@ -56,7 +53,7 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
                 }}
             >
                 <Image
-                    src={photoPath}
+                    src={photoUrl}
                     fill
                     style={{
                         objectFit: 'cover',
@@ -155,6 +152,4 @@ const CartListItem: FC<ICartListItem> = ({ dish, isOrder = false }) => {
             </Box>
         </Box>
     );
-};
-
-export default CartListItem;
+}

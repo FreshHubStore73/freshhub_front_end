@@ -12,20 +12,18 @@ const oswald = Oswald({
     subsets: ['latin'],
     weight: ['500', '700'],
 });
-const url = process.env.SERV_URL;
+type Props = {
+    dish: DishItem;
+}
 
-const DishItem = ({ dish }: { dish: DishItem }) => {
+const DishItem = ({ dish }: Props) => {
     const { photoUrl, productName, price, description, weight } = dish;
-    const photo = (photoUrl || '/dishes/istockphoto-1206323282-612x612.jpg').replace(
-        /Images\\/g,
-        `${url}/Images/`,
-    );
     return (
         <section className={styles.dishItem}>
             <div className={styles.wrapper}>
                 <div className={styles.picture}>
                     <Image
-                        src={photo}
+                        src={photoUrl}
                         alt={productName}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

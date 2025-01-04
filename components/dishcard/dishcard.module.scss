@@ -1,8 +1,11 @@
 .wrapper {
-    width: calc((100% - 40px) / 3);
     padding-bottom: 23px;
     box-sizing: border-box;
+    border-radius: 47px;
+    outline: 1px solid transparent;
+    transition: outline-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .dishImg {
     width: calc(100% - 12px);
     aspect-ratio: 1.198;
@@ -11,10 +14,12 @@
     position: relative;
     margin: 6px 6px 10px;
 }
+
 .dishImg img {
     object-fit: cover;
     transition: all 0.5s ease-in-out;
 }
+
 .dishTitleInfo {
     display: flex;
     justify-content: space-between;
@@ -22,6 +27,7 @@
     margin-bottom: 12px;
     padding: 0 14px;
 }
+
 .dishTitle {
     color: var(--color-txt-black);
     font-size: 28px;
@@ -31,10 +37,12 @@
     -webkit-line-clamp: 1; //added
     overflow: hidden; //added
 }
+
 .dishWeight {
     font-size: 20px;
     color: var(--color-txt-big);
 }
+
 .dishDescr {
     font-size: 20px;
     margin-bottom: 14px;
@@ -47,6 +55,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
 }
+
 .dishPrice {
     display: flex;
     justify-content: space-between;
@@ -56,11 +65,13 @@
     font-size: 30px;
     font-weight: 700;
 }
+
 @media (hover: hover) {
     .wrapper {
         &:hover {
-            outline: 1px solid var(--color-title);
-            border-radius: 47px;
+            outline-color: var(--color-title);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+
             img {
                 transform: scale(103%);
             }
@@ -68,34 +79,31 @@
     }
 }
 
-@media (hover: hover) and (max-width: 1200px) {
-    .wrapper {
-        &:hover {
-            border-radius: 27px;
-        }
-    }
-}
-
 @media screen and (max-width: 1200px) {
     .wrapper {
-        width: calc((100% - 40px) / 2);
+        border-radius: 27px;
         padding-bottom: 22px;
     }
+
     .dishImg {
         aspect-ratio: 1.14;
         border-radius: 30px;
         margin: 6px 6px 12px;
     }
+
     .dishTitle {
         font-size: 24px;
     }
+
     .dishWeight {
         display: none;
     }
+
     .dishDescr {
         font-size: 18px;
         min-height: 43.2px;
     }
+
     .dishPrice {
         font-size: 28px;
     }
@@ -103,31 +111,36 @@
 
 @media screen and (max-width: 768px) {
     .wrapper {
-        width: calc((100% - 32px) / 2);
         padding-bottom: 4px;
     }
+
     .dishImg {
         aspect-ratio: 1.14;
         border-radius: 20px;
         margin: 0px 0px 8px;
         width: 100%;
     }
+
     .dishTitleInfo {
         margin-bottom: 6px;
         padding: 0 6px;
     }
+
     .dishTitle {
         font-size: 18px;
     }
+
     .dishDescr {
         font-size: 12px;
         margin-bottom: 10px;
         padding: 0 6px;
         min-height: 28.8px;
     }
+
     .dishPrice {
         padding: 0 6px;
     }
+
     .dishPrice {
         font-size: 20px;
     }

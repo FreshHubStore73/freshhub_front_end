@@ -1,19 +1,27 @@
+import { withAuth } from 'next-auth/middleware';
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-    const token = request.cookies.get('user_session')?.value;
+export default withAuth(
+    function middleware(req) {
+        const { pathname } = req.nextUrl;
 
-    if (!token && !['/login', '/signup'].some((path) => path === new URL(request.url).pathname)) {
-        return NextResponse.redirect(
-            new URL(`/login?callbackUrl=${request.nextUrl.pathname}`, request.url),
-        );
-    }
-    if (token && ['/login', '/signup'].some((path) => path === new URL(request.url).pathname)) {
-        return NextResponse.redirect(new URL('/profile', request.url));
-    }
-}
+        const isAuthenticated = !!req.nextauth.token;
+
+        if (isAuthenticated && (pathname === '/login' || pathname === '/signup')) {
+            const url = req.nextUrl.clone();
+            url.pathname = '/';
+            return NextResponse.redirect(url);
+        }
+
+        return NextResponse.next();
+    },
+    {
+        pages: {
+            signIn: '/login',
+        },
+    },
+);
 
 export const config = {
-    matcher: ['/order', '/profile', '/login', '/signup'],
+    matcher: ['/order', '/profile'],
 };

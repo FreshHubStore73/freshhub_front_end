@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import SvgIcon from '@mui/material/SvgIcon';
 import NumberInput from '../../numberInput/Input';
 
-type Props = {};
 const PersonIcon = () => (
     <SvgIcon
         sx={{
@@ -27,7 +26,8 @@ const PersonIcon = () => (
         </svg>
     </SvgIcon>
 );
-export default function Persons({}: Props) {
+
+export default function Persons() {
     const [quantity, setQuantity] = useState(1);
     return (
         <InputLabel
@@ -54,7 +54,7 @@ export default function Persons({}: Props) {
             <NumberInput
                 quantity={quantity}
                 setQuantity={setQuantity}
-                name="numberPerson"
+                name="numberOfPersons"
                 type="persons"
             />
         </InputLabel>

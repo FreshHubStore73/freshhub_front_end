@@ -4,40 +4,47 @@ import { useFormState } from 'react-dom';
 
 import { Box, Typography } from '@mui/material';
 
-import { updateUserInfo } from '@/utils/actions';
+import { updateUserInfo } from '@/actions/auth';
 import NameInput from './NameInput';
 import PhoneNumberInput from './PhoneNumberInput';
 import SaveChanges from './SaveChanges';
+import { useSession } from 'next-auth/react';
 
-type Props = { firstName: string; lastName: string; phoneNumber: string };
+type Props = { name: string; lastName: string; phoneNumber: string };
 
-export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props) {
-    const [state, formAction] = useFormState(updateUserInfo, { message: '' });
+const fieldLabels = ['Your first name', 'Your last name'];
+
+export default function PersonalInfo({ name, lastName, phoneNumber }: Props) {
+    const [state, formAction] = useFormState(updateUserInfo, { message: '', data: null });
     const [isChangeActive, setIsChangeActive] = useState(false);
+    const { update } = useSession();
+
     const [isValidFields, setIsValidFields] = useState({
-        firstName: true,
-        lastName: true,
-        phoneNumber: true,
+        name: false,
+        lastName: false,
+        phoneNumber: false,
     });
 
-    const onSave: MouseEventHandler<HTMLButtonElement> = (e) => {
+    const onSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
         if (!isChangeActive) {
             e.preventDefault();
             setIsChangeActive((prevState) => !prevState);
         }
-        if (isChangeActive) {
-            e.currentTarget.form?.requestSubmit();
-            setIsChangeActive(false);
-        }
     };
 
     useEffect(() => {
-        // if (state.message) setIsChangeActive(true);
-        if (state.message && state.message !== 'Ok') setIsChangeActive(true);
+        if (state.message === 'Ok' && state.data) {
+            update({
+                name: state.data.name,
+                lastName: state.data.lastName,
+                phoneNumber: state.data.phoneNumber,
+            });
+            setIsChangeActive(false);
+        }
     }, [state.message]);
 
-    const isSubmitDisabled = Object.values(isValidFields).some((valid) => valid);
-    const fieldLabels = ['Your first name', 'Your last name'];
+    const isSubmitDisabled = Object.values(isValidFields).some((valid) => valid === false);
+
     return (
         <Box
             component={'form'}
@@ -64,12 +71,12 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
             }}
         >
             <NameInput
-                val={firstName}
-                name="firstName"
+                val={name}
+                name="name"
                 label={fieldLabels[0]}
                 disabled={!isChangeActive}
                 setIsFieldValid={(isValid: boolean) =>
-                    setIsValidFields((prevState) => ({ ...prevState, firstName: isValid }))
+                    setIsValidFields((prevState) => ({ ...prevState, name: isValid }))
                 }
             />
             <NameInput
@@ -111,9 +118,9 @@ export default function PersonalInfo({ firstName, lastName, phoneNumber }: Props
                     </Typography>
                 ) : null}
                 <SaveChanges
-                    handleSave={onSave}
+                    handleSave={onSubmit}
                     isChangeActive={isChangeActive}
-                    disabled={isSubmitDisabled}
+                    disabled={isSubmitDisabled && isChangeActive}
                 />
             </Box>
         </Box>

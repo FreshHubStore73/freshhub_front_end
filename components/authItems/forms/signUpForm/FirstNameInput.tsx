@@ -2,17 +2,14 @@ import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { BaseFormInput } from '../baseFormInput/BaseFormInput';
 
-type Props = {};
-
-export default function FirstNameInput({}: Props) {
+export default function FirstNameInput() {
     const {
         control,
-        trigger,
         formState: { errors },
     } = useFormContext();
     return (
         <Controller
-            name="firstName"
+            name="name"
             control={control}
             rules={{
                 required: 'This field is required',
@@ -32,8 +29,8 @@ export default function FirstNameInput({}: Props) {
                         onChange(e.target.value.trimStart().replace(/\s{2,}/g, ' '));
                     }}
                     placeholder="Your first name"
-                    error={!!errors.firstName?.type}
-                    helperText={errors.firstName?.type ? `${errors.firstName?.message}` : ''}
+                    error={!!errors.name?.type}
+                    helperText={errors.name?.type ? `${errors.name?.message}` : ''}
                     {...rest}
                     sx={{
                         gridArea: { mobile: 'unset', tablet: '1 / 1 / 2 / 2' },

@@ -30,15 +30,18 @@ const ArrowDownIcon = () => (
         </svg>
     </SvgIcon>
 );
+type OrderItemTitleProps = Pick<OrderItemDB, 'orderStatus' | 'totalAmount' | 'createdAt' | 'orderNumber'> & {
 
+    isExpanded: boolean
+}
 const OrderItemTitle = ({
     orderNumber,
-    ordered,
+    createdAt,
     orderStatus,
     totalAmount,
     isExpanded,
-}: IOrdersHistoryTitle & { isExpanded: boolean }) => {
-    const backgroundColor = (orderStatus: 'In progress' | 'Done' | 'Rejected') => {
+}: OrderItemTitleProps) => {
+    const backgroundColor = (orderStatus: OrderItem['orderStatus']) => {
         switch (orderStatus) {
             case 'In progress':
                 return 'peach.main';
@@ -86,7 +89,7 @@ const OrderItemTitle = ({
                         № {orderNumber}
                     </Box>
                     <Box component={'span'}>
-                        {new Date(ordered).toLocaleString('en-US', {
+                        {new Date(createdAt).toLocaleString('en-US', {
                             year: 'numeric',
                             month: 'short',
                             day: '2-digit',
@@ -148,13 +151,11 @@ const OrderItemTitle = ({
     );
 };
 
+type OrderItemFooterProps = Pick<OrderItemDB, 'paymentType' | 'totalAmount'>;
 const OrderItemFooter = ({
-    payment,
+    paymentType,
     totalAmount,
-}: {
-    payment: 'cash' | 'card';
-    totalAmount: number;
-}) => {
+}: OrderItemFooterProps) => {
     return (
         <Box sx={{ width: '100%', mt: { mobile: '2px', tablet: '4px', desktop: '0px' } }}>
             <Divider
@@ -181,7 +182,7 @@ const OrderItemFooter = ({
                         color: 'text.secondary',
                     }}
                 >
-                    {payment}
+                    {paymentType}
                 </Box>
                 <Box component={'span'}>Delivery</Box>
                 <Box component={'span'} sx={{ justifySelf: 'flex-end', color: 'text.secondary' }}>
@@ -196,14 +197,15 @@ const OrderItemFooter = ({
     );
 };
 
+type OrderItemBodyProps = Pick<OrderItemDB, 'deliveryAddress' | 'recipient' | 'phoneNumber' | 'items' | 'paymentType' | 'totalAmount'>;
 const OrderItemBody = ({
     deliveryAddress,
-    recipientName,
-    recipientPhoneNumber,
-    orderedDishes,
-    payment,
+    recipient,
+    phoneNumber,
+    items,
+    paymentType,
     totalAmount,
-}: IOrdersHistoryBody) => {
+}: OrderItemBodyProps) => {
     return (
         <Box
             sx={{
@@ -228,6 +230,7 @@ const OrderItemBody = ({
                 <Typography
                     sx={{
                         fontSize: { mobile: '10px', tablet: '16px', desktop: '18px' },
+                        wordBreak: 'break-word',
                     }}
                 >
                     {deliveryAddress}
@@ -243,8 +246,8 @@ const OrderItemBody = ({
                         gap: { mobile: '38px', tablet: '8px', desktop: '6px' },
                     }}
                 >
-                    <p>{recipientName}</p>
-                    <p>{addSpaces(recipientPhoneNumber)}</p>
+                    <p>{recipient}</p>
+                    <p>{addSpaces(phoneNumber)}</p>
                 </Box>
             </Box>
             <Box
@@ -265,32 +268,32 @@ const OrderItemBody = ({
                 >
                     Order
                 </Typography>
-                <ListOfDishes orderedDishes={orderedDishes} />
+                <ListOfDishes orderedDishes={items} />
 
-                <OrderItemFooter payment={payment} totalAmount={totalAmount} />
+                <OrderItemFooter paymentType={paymentType} totalAmount={totalAmount} />
             </Box>
         </Box>
     );
 };
 
-type Props = {
-    order: IOrdersHistory;
+type OrderItemProps = {
+    order: OrderItemDB;
     i: number;
-    expanded: number | false;
+    expanded: number | null;
     handleChange: (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => void;
 };
 
-export default function OrderItem({ order, i, expanded, handleChange }: Props) {
+export default function OrderItem({ order, i, expanded, handleChange }: OrderItemProps) {
     const {
         orderNumber,
-        ordered,
+        createdAt,
         orderStatus,
         totalAmount,
         deliveryAddress,
-        recipientName,
-        recipientPhoneNumber,
-        orderedDishes,
-        payment,
+        recipient,
+        phoneNumber,
+        items,
+        paymentType,
     } = order;
     return (
         <Accordion
@@ -317,7 +320,7 @@ export default function OrderItem({ order, i, expanded, handleChange }: Props) {
             <AccordionSummary expandIcon={<ArrowDownIcon />} aria-controls="panel1bh-content">
                 <OrderItemTitle
                     orderNumber={orderNumber}
-                    ordered={ordered}
+                    createdAt={createdAt}
                     orderStatus={orderStatus}
                     totalAmount={totalAmount}
                     isExpanded={expanded === i}
@@ -336,11 +339,11 @@ export default function OrderItem({ order, i, expanded, handleChange }: Props) {
             >
                 <OrderItemBody
                     deliveryAddress={deliveryAddress}
-                    recipientName={recipientName}
-                    recipientPhoneNumber={recipientPhoneNumber}
-                    orderedDishes={orderedDishes}
+                    recipient={recipient}
+                    phoneNumber={phoneNumber}
+                    items={items}
                     totalAmount={totalAmount}
-                    payment={payment}
+                    paymentType={paymentType}
                 />
             </AccordionDetails>
         </Accordion>

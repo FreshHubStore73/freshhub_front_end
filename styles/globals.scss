@@ -11,13 +11,15 @@
     --color-peach: #ffc182;
     // --header-h: 60px;
 }
+
 * {
     box-sizing: border-box;
 }
+
 html {
     font-size: 100%;
     scroll-behavior: smooth;
-} /*16px*/
+}
 
 body {
     margin: 0;
@@ -43,6 +45,7 @@ select:hover {
 body *:focus {
     outline: none;
 }
+
 a {
     text-decoration: none;
 }
@@ -53,14 +56,17 @@ a {
     padding: 0;
     box-sizing: border-box;
 }
+
 p {
     margin: 0;
 }
+
 ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
+
 h1,
 h2,
 h3,
@@ -68,6 +74,7 @@ h4,
 h5 {
     margin: 0;
 }
+
 .container {
     max-width: 1440px;
     width: 100%;
@@ -87,6 +94,7 @@ h5 {
         padding-inline: 15px;
     }
 }
+
 @media screen and (max-width: 768px) {
     .container {
         padding-inline: 8px;

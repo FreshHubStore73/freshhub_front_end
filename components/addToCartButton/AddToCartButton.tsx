@@ -2,12 +2,11 @@
 
 import { MouseEventHandler } from 'react';
 import { Button } from '@mui/material';
-
-import { useShoppingCart } from '../../store';
+import { useCartStore } from '@/stores/Stores-providers';
 
 const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: boolean }) => {
-    const addDish = useShoppingCart((state) => state.addDish);
-    const dishes = useShoppingCart((state) => state.dishes);
+    const addDish = useCartStore((state) => state.addDish);
+    const dishes = useCartStore((state) => state.dishes);
 
     const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         if (!simple) e.preventDefault();
@@ -18,7 +17,7 @@ const AddToCartButton = ({ dish, simple = true }: { dish: DishInCart; simple?: b
     if (simple) {
         content = 'Add';
     } else {
-        isInCart = dishes.findIndex((item) => item.id === dish.id) !== -1;
+        isInCart = dishes?.findIndex((item) => item._id === dish._id) !== -1;
         content = isInCart ? '✓' : 'Add';
     }
 

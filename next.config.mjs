@@ -5,17 +5,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'cdn.pixabay.com',
-                port: '',
-            },
-            {
-                protocol: 'https',
-                hostname: 'media.istockphoto.com',
-                port: '',
-            },
-            {
-                protocol: 'https',
-                hostname: 'tempaspnet0001.bsite.net',
+                hostname: 'res.cloudinary.com',
                 port: '',
             },
         ],

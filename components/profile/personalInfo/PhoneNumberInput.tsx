@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ReactInputMask from 'react-input-mask';
 import { TextField } from '@mui/material';
 
@@ -14,11 +14,17 @@ type Props = {
 export default function PhoneNumberInput({ val, disabled, setIsFieldValid }: Props) {
     const { value, error, handleChange } = useValidation(val, {
         required: 'This field is required',
-        custom: (value) => value.replace(/[^+0-9]/g, '').length !== 12,
+        isEqualLength: {
+            value: 12,
+            get message() {
+                return `The phone must contain ${this.value} digits`;
+            },
+            doValidate: (str: string, length: number) => str.replace(/[^+0-9]/g, '').length !== length
+        },
     });
 
     useEffect(() => {
-        setIsFieldValid(Boolean(error));
+        setIsFieldValid(!Boolean(error));
     }, [error]);
 
     return (
@@ -27,7 +33,7 @@ export default function PhoneNumberInput({ val, disabled, setIsFieldValid }: Pro
             maskPlaceholder="x"
             onChange={handleChange}
             disabled={disabled}
-            defaultValue={val}
+            value={value}
         >
             <TextField
                 label="Phone number"
