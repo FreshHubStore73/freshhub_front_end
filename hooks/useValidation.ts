@@ -5,7 +5,7 @@ const useValidation = (initialValue: string, rules: ValidateRules) => {
     const [error, setError] = useState<string | undefined>();
 
     const validate = (str: string) => {
-        const { minLength, maxLength, required, custom } = rules;
+        const { minLength, maxLength, required, isEqualLength } = rules;
         if (required && !str.length) {
             setError(required);
             return;
@@ -18,8 +18,8 @@ const useValidation = (initialValue: string, rules: ValidateRules) => {
             setError(maxLength.message);
             return;
         }
-        if (custom && custom(str)) {
-            setError('The number must contain 11 digits');
+        if (isEqualLength && isEqualLength.doValidate(str, isEqualLength.value)) {
+            setError(isEqualLength.message);
             return;
         }
         setError(undefined);

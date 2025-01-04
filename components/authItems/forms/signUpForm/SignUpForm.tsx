@@ -2,26 +2,22 @@
 import React, { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
-
 import { Box, Typography } from '@mui/material';
-
 import { useForm, FormProvider } from 'react-hook-form';
 
 import SubmitButton from '../../submitButton/SubmitButton';
-import { register } from '@/components/authItems/auth';
+import { register } from '@/actions/auth';
 import FirstNameInput from './FirstNameInput';
 import LastNameInput from './LastNameInput';
 import PasswordInput from './PasswordInput';
 import PhoneInput from './PhoneInput';
 
-type Props = {};
-
-export default function SignUpForm({}: Props) {
+export default function SignUpForm() {
     const [state, formAction] = useFormState(register, { message: '' });
 
-    const methods = useForm<IUserSignUp>({
+    const methods = useForm<UserSignUp>({
         defaultValues: {
-            firstName: '',
+            name: '',
             lastName: '',
             phoneNumber: '',
             password: '',
@@ -40,9 +36,7 @@ export default function SignUpForm({}: Props) {
 
     useEffect(() => {
         if (state.message === 'Ok') replace('/login');
-        // if (typeof state.message === 'object' && state.message.phoneNumber)
-        //     methods.setError('phoneNumber', { type: 'custom', message: state.message.phoneNumber });
-    }, [state.message, methods, replace]);
+    }, [state.message, replace]);
 
     return (
         <FormProvider {...methods}>
@@ -95,7 +89,7 @@ export default function SignUpForm({}: Props) {
                         isValid={isValid}
                         onClick={(e) => {
                             e.preventDefault();
-                            trigger(['firstName', 'lastName', 'phoneNumber', 'password']);
+                            trigger(['name', 'lastName', 'phoneNumber', 'password']);
                             if (isValid) formRef.current?.requestSubmit();
                         }}
                     />

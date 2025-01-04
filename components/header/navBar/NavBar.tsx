@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 
 import NavBarLinks from './navBarLinks';
-import { getCategories } from '@/utils/getData';
+import { getCategories } from '@/actions/dishes';
 
-const NavBar = async () => {
+export default async function NavBar() {
     const categoriesData = await getCategories();
     if (!categoriesData) return null;
     return (
@@ -19,6 +19,4 @@ const NavBar = async () => {
             <NavBarLinks data={categoriesData} />
         </Box>
     );
-};
-
-export default NavBar;
+}

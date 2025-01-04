@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { TextField } from '@mui/material';
+
 import useValidation from '@/hooks/useValidation';
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
     label: string;
     disabled: boolean;
     name: string;
-    setIsFieldValid?: (isValid: boolean) => void;
+    setIsFieldValid: (isValid: boolean) => void;
 };
 export const nameInputSettings = (disabled: boolean, val: string) => ({
     gridArea: val.replace(/\W+/g, ''),
@@ -100,16 +101,20 @@ export default function NameInput({ val, label, disabled, setIsFieldValid, name 
         required: 'This field is required',
         minLength: {
             value: 2,
-            message: 'This field must be at least 2 characters long',
+            get message() {
+                return `This field must be at least ${this.value} characters long`
+            },
         },
         maxLength: {
             value: 20,
-            message: 'This field cannot be more than 20 characters long',
+            get message() {
+                return `This field cannot be more than ${this.value} characters long`
+            },
         },
     });
 
     useEffect(() => {
-        setIsFieldValid && setIsFieldValid(Boolean(error));
+        setIsFieldValid(!Boolean(error));
     }, [error]);
 
     return (

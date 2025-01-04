@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-
 import { Box, Theme, Tooltip, Typography, useMediaQuery } from '@mui/material';
 
-export const ListOfDishes = ({ orderedDishes }: { orderedDishes: IOrderedDishes[] }) => {
+type ListOfDishesProps = {
+    orderedDishes: Array<OrderedDish & { photoUrl: string }>;
+}
+
+export const ListOfDishes = ({ orderedDishes }: ListOfDishesProps) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('tablet'));
     return (
         <>
@@ -15,12 +18,8 @@ export const ListOfDishes = ({ orderedDishes }: { orderedDishes: IOrderedDishes[
     );
 };
 
-const url = process.env.SERV_URL;
-
-const DishItemInOrder = ({ dish, isMobile }: { dish: IOrderedDishes; isMobile: boolean }) => {
-    const { dishId, dishName, dishPrice, dishQuantity, dishImage, categoryName } = dish;
-
-    const photo = dishImage ? `${url}/Images/${dishImage}` : `/dishes/stub-${categoryName}.jpg`;
+const DishItemInOrder = ({ dish, isMobile }: { dish: OrderedDish & { photoUrl: string }; isMobile: boolean }) => {
+    const { productName, price, quantity, photoUrl } = dish;
 
     const simpleTitle = (
         <Typography
@@ -35,16 +34,16 @@ const DishItemInOrder = ({ dish, isMobile }: { dish: IOrderedDishes; isMobile: b
                 cursor: 'pointer',
             }}
         >
-            {dishName}
+            {productName}
         </Typography>
     );
     const title = isMobile ? (
         simpleTitle
     ) : (
         <Tooltip
-            title={dishName}
+            title={productName}
             placement="top"
-            componentsProps={{
+            slotProps={{
                 tooltip: {
                     sx: {
                         backgroundColor: '#BDBDBD',
@@ -83,8 +82,8 @@ const DishItemInOrder = ({ dish, isMobile }: { dish: IOrderedDishes; isMobile: b
                 }}
             >
                 <Image
-                    src={photo}
-                    alt={dishName}
+                    src={photoUrl}
+                    alt={productName}
                     fill
                     sizes="(max-width: 768px) 30vw, (max-width: 1200px) 20vw, 10vw"
                     style={{
@@ -113,7 +112,7 @@ const DishItemInOrder = ({ dish, isMobile }: { dish: IOrderedDishes; isMobile: b
                     justifySelf: 'center',
                 }}
             >
-                ${dishPrice}
+                ${price}
             </Box>
             <Box
                 component={'span'}
@@ -136,7 +135,7 @@ const DishItemInOrder = ({ dish, isMobile }: { dish: IOrderedDishes; isMobile: b
                     alignSelf: 'center',
                 }}
             >
-                {dishQuantity}
+                {quantity}
             </Box>
             <Box
                 component={'span'}
@@ -158,7 +157,7 @@ const DishItemInOrder = ({ dish, isMobile }: { dish: IOrderedDishes; isMobile: b
                     gridArea: '2 / 5 / 3 / 6',
                 }}
             >
-                ${dishQuantity * dishPrice}
+                ${quantity * price}
             </Box>
         </Box>
     );

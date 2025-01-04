@@ -1,20 +1,27 @@
-import StubBlock from '@/components/stubBlock/StubBlock';
+import React, { memo, useEffect } from 'react';
 import {
     Button,
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
-    DialogTitle,
 } from '@mui/material';
-import React from 'react';
 
-type Props = { open: boolean; onClose: () => void };
+type Props = { open: boolean; onClose: () => void, children: React.ReactNode };
 
-function Success({ open, onClose }: Props) {
+const Success = memo(function Success({ open, onClose, children }: Props) {
+
+    useEffect(() => {
+        let timerId: NodeJS.Timeout;
+        if (open) {
+            timerId = setTimeout(() => onClose(), 1500);
+        }
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [open, onClose]);
+
     return (
         <Dialog fullScreen={true} open={open} onClose={onClose}>
-            {/* <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle> */}
             <DialogActions>
                 <Button
                     autoFocus
@@ -33,10 +40,10 @@ function Success({ open, onClose }: Props) {
                 </Button>
             </DialogActions>
             <DialogContent>
-                <StubBlock text="Your order has been successfully placed" />
+                {children}
             </DialogContent>
         </Dialog>
     );
-}
+});
 
 export default Success;

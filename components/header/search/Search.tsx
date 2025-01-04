@@ -33,9 +33,7 @@ const SearchIcon = (props: any) => {
     );
 };
 
-type Props = {};
-
-export default function SearchInput({}: Props) {
+export default function SearchInput() {
     const searchParams = useSearchParams();
     const [search, setSearch] = useState(searchParams.get('search') || '');
     const [expanded, setExpanded] = useState(!!search.length);
@@ -120,40 +118,42 @@ export default function SearchInput({}: Props) {
                             borderBottom: expanded ? '1px solid black' : 'none',
                         },
                     }}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment
-                                position="start"
-                                sx={{
-                                    mr: '4px',
-                                }}
-                            >
-                                <SearchIcon onClick={handleSearchClick} />
-                            </InputAdornment>
-                        ),
-                        endAdornment: (
-                            <InputAdornment
-                                position="end"
-                                sx={{
-                                    ml: '4px',
-                                }}
-                            >
-                                {expanded ? (
-                                    <IconButton
-                                        // disableRipple
-                                        aria-label="clear search"
-                                        onClick={handleResetSearch}
-                                        sx={{
-                                            '&.MuiButtonBase-root.MuiIconButton-root ': {
-                                                padding: '2px 8px',
-                                            },
-                                        }}
-                                    >
-                                        &times;
-                                    </IconButton>
-                                ) : null}
-                            </InputAdornment>
-                        ),
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment
+                                    position="start"
+                                    sx={{
+                                        mr: '4px',
+                                    }}
+                                >
+                                    <SearchIcon onClick={handleSearchClick} />
+                                </InputAdornment>
+                            ),
+                            endAdornment: (
+                                <InputAdornment
+                                    position="end"
+                                    sx={{
+                                        ml: '4px',
+                                    }}
+                                >
+                                    {expanded ? (
+                                        <IconButton
+                                            // disableRipple
+                                            aria-label="clear search"
+                                            onClick={handleResetSearch}
+                                            sx={{
+                                                '&.MuiButtonBase-root.MuiIconButton-root ': {
+                                                    padding: '2px 8px',
+                                                },
+                                            }}
+                                        >
+                                            &times;
+                                        </IconButton>
+                                    ) : null}
+                                </InputAdornment>
+                            )
+                        }
                     }}
                 ></TextField>
             </ClickAwayListener>

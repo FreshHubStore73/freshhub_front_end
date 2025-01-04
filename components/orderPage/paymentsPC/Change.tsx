@@ -5,13 +5,13 @@ import React, {
     useLayoutEffect,
     useState,
 } from 'react';
-
 import Collapse from '@mui/material/Collapse';
 import FormControl from '@mui/material/FormControl';
 import InputAdornment, { InputAdornmentProps } from '@mui/material/InputAdornment';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
-import { useShoppingCart } from '@/store';
+
+import { useCartStore } from '@/stores/Stores-providers';
 
 type Props = { isExpanded: boolean };
 
@@ -77,7 +77,7 @@ const ChangeInput = styled((props: TextFieldProps) => <TextField name="cashSum" 
 const Change = forwardRef<HTMLInputElement, Props>((props, ref) => {
     const { isExpanded } = props;
 
-    const totalAmount = useShoppingCart((state) => state.totalAmount);
+    const totalAmount = useCartStore((state) => state.totalAmount);
     const [value, setValue] = useState<number>(totalAmount);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,10 +107,12 @@ const Change = forwardRef<HTMLInputElement, Props>((props, ref) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={value}
-                    InputProps={{
-                        startAdornment: (
-                            <StartAdornment position={'start'}>Prepare change with:</StartAdornment>
-                        ),
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <StartAdornment position={'start'}>Prepare change with:</StartAdornment>
+                            ),
+                        }
                     }}
                     helperText={
                         value < totalAmount

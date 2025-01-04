@@ -46,8 +46,11 @@ export default async function CategoryItem({ dishes, title, categoryName }: Prop
             <section>
                 <Box
                     sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
+                        display: 'grid',
+                        gridTemplateColumns: {
+                            mobile: 'repeat(2, 1fr)',
+                            desktop: 'repeat(3, 1fr)',
+                        },
                         columnGap: {
                             mobile: '16px',
                             tablet: '20px',

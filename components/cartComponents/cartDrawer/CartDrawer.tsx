@@ -3,19 +3,20 @@ import { FC } from 'react';
 import { Box, Stack } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 
-import { useShoppingCart } from '../../../store';
-
 import StubBlock from '@/components/stubBlock/StubBlock';
 import CartHeader from '../cartHeader/CartHeader';
 import CartListItem from '../../cartListItem/CartListItem';
 import CartFooter from '../cartFooter/CartFooter';
+import { useCartStore } from '@/stores/Stores-providers';
 
-const CartDrawer: FC<{
+type Props = {
     showDrawer: boolean;
     closeDrawer: () => void;
-}> = ({ showDrawer, closeDrawer }) => {
-    const dishes = useShoppingCart((state) => state.dishes);
-    const totalAmount = useShoppingCart((state) => state.totalAmount);
+}
+
+export default function CartDrawer({ showDrawer, closeDrawer }: Props) {
+    const dishes = useCartStore((state) => state.dishes);
+    const totalAmount = useCartStore((state) => state.totalAmount);
 
     const content = (
         <>
@@ -36,7 +37,7 @@ const CartDrawer: FC<{
                     marginBlock: { mobile: '12px', tablet: '30px', desktop: '46px' },
                 }}
             >
-                {dishes.map((dish) => (
+                {dishes?.map((dish) => (
                     <CartListItem key={dish._id} dish={dish} />
                 ))}
             </Stack>
@@ -79,10 +80,8 @@ const CartDrawer: FC<{
                 role="presentation"
             >
                 <CartHeader closeDrawer={closeDrawer} />
-                {dishes.length ? content : <StubBlock />}
+                {dishes?.length ? content : <StubBlock />}
             </Box>
         </Drawer>
     );
-};
-
-export default CartDrawer;
+}

@@ -1,10 +1,10 @@
 'use client';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { Box, CircularProgress, Typography } from '@mui/material';
 
-import Contact from './contact/Contact';
+import Contacts from './contacts/Contacts';
 import Address from './address/Address';
 import Time from './time/Time';
 import PaymentsPC from './paymentsPC/PaymentsPC';
@@ -13,59 +13,43 @@ import CustomizedAccordions from './comments/Comments';
 import OrderedDishes from './orderedDishes/OrderedDishes';
 import OrderList from './orderList/OrderList';
 import Success from './success/Success';
-import useTimeout from '@/hooks/useTimeout';
-import { orderAction } from '@/utils/actions';
-import { useShoppingCart } from '@/store';
+import { orderAction } from '@/actions/order';
+import { useCartStore } from '@/stores/Stores-providers';
+import StubBlock from '../stubBlock/StubBlock';
 
-type Props = {};
-
-export default function OrderPage({ }: Props) {
-    const { replace, push } = useRouter();
+export default function OrderPage() {
+    const { replace } = useRouter();
 
     const [state, formAction] = useFormState(orderAction, { message: '' });
     const [openSuccess, setOpenSuccess] = useState(false);
+
     const formRef = useRef<HTMLFormElement>(null);
 
-    const { clearCart } = useShoppingCart();
-    const [isOrdered, setIsOrdered] = useState(false);
-    const dishes = useShoppingCart((state) => state.dishes);
+    const clearCart = useCartStore(state => state.clearCart);
 
-    const { startTimer, cancelTimer } = useTimeout(() => {
-        replace('/profile?history=true');
-        clearCart();
-    }, 1500);
-
-    //guarantee that updating cart on reload page (or hard navigation) doesn't cause redirecting to the home page
-    if (typeof window !== 'undefined') {
-        const cartInLS = window.localStorage.getItem('cart');
-        if (cartInLS && !JSON.parse(cartInLS).state.dishes.length && !isOrdered) push('/');
-        // setTimeout(() => replace('/'), 0);
-    }
+    const dishes = useCartStore((state) => state.dishes);
 
     const handleCloseSuccess = useCallback(() => {
         replace('/profile?history=true');
         clearCart();
-        cancelTimer();
-    }, []);
-
-    const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-        e.preventDefault();
-        if (formRef.current) {
-            formRef.current?.requestSubmit();
-        }
-    };
+        //окно не закрываем, т.к. оно само размонтируется после перехода на страницу профиля 
+    }, [clearCart, replace]);
 
     useEffect(() => {
         if (state.message === 'Ok') {
-            startTimer();
             setOpenSuccess(true);
-            setIsOrdered(true);
         }
     }, [state]);
 
+    useEffect(() => {
+        if (dishes && !dishes.length && !openSuccess) {
+            replace('/');
+        }
+    }, [replace, dishes, openSuccess]);
+
     return (
         <>
-            {!dishes.length ? (
+            {dishes === null || !dishes.length ? (
                 <Box
                     sx={{
                         display: 'flex',
@@ -81,17 +65,19 @@ export default function OrderPage({ }: Props) {
                     component={'form'}
                     ref={formRef}
                     action={formAction}
-                    // onSubmit={handleSubmit}
                     sx={{
                         display: 'grid',
                         gridTemplateColumns: { mobile: '1fr', desktop: '1fr 1fr' },
                         marginTop: { mobile: '14px', tablet: '24px', desktop: '36px' },
-                        columnGap: { mobile: '0px', desktop: '87px' },
+                        columnGap: { mobile: '0px', desktop: '107px' },
                         rowGap: { mobile: '20px', tablet: '36px', desktop: '0px' },
                     }}
                 >
                     <Box
-                        sx={{ overflow: 'hidden', marginRight: { mobile: '0px', desktop: '10px' } }}
+                        sx={{
+                            // overflow: 'hidden',
+                            // marginRight: { mobile: '0px', desktop: '10px' }
+                        }}
                     >
                         <Typography
                             component={'h1'}
@@ -106,13 +92,16 @@ export default function OrderPage({ }: Props) {
                             {' '}
                             Placing an order
                         </Typography>
-                        <Contact />
+                        <Contacts />
                         <Address />
                         <Time />
                         <PaymentsPC />
                     </Box>
                     <Box
-                        sx={{ overflow: 'hidden', marginLeft: { mobile: '0px', desktop: '10px' } }}
+                        sx={{
+                            // overflow: 'hidden',
+                            // marginLeft: { mobile: '0px', desktop: '10px' }
+                        }}
                     >
                         <CustomizedAccordions />
                         <Box
@@ -143,13 +132,15 @@ export default function OrderPage({ }: Props) {
                                     {state.message}
                                 </Typography>
                             ) : null}
-                            <ConfirmOrderButton handleSubmit={handleSubmit} />
+                            <ConfirmOrderButton />
                             <OrderedDishes dishes={dishes} />
                         </Box>
                     </Box>
                 </Box>
             )}
-            <Success onClose={handleCloseSuccess} open={openSuccess} />
+            <Success onClose={handleCloseSuccess} open={openSuccess}>
+                <StubBlock text="Your order has been successfully placed" />
+            </Success>
         </>
     );
 }

@@ -1,7 +1,7 @@
 import { Box, Divider, Typography } from '@mui/material';
 
 import CartListItem from '@/components/cartListItem/CartListItem';
-import { useShoppingCart } from '@/store';
+import { useCartStore } from '@/stores/Stores-providers';
 
 const Title = () => {
     return (
@@ -20,7 +20,8 @@ const Title = () => {
 };
 
 const Dishes = () => {
-    const dishes = useShoppingCart((state) => state.dishes);
+    const dishes = useCartStore((state) => state.dishes);
+    if (!dishes) return;
     return (
         <Box
             component={'ul'}
@@ -32,14 +33,14 @@ const Dishes = () => {
             }}
         >
             {dishes.map((dish) => (
-                <CartListItem key={dish.id} dish={dish} isOrder={true} />
+                <CartListItem key={dish.productName} dish={dish} isOrder={true} />
             ))}
         </Box>
     );
 };
 
 const Footer = () => {
-    const totalAmount = useShoppingCart((state) => state.totalAmount);
+    const totalAmount = useCartStore((state) => state.totalAmount);
     return (
         <>
             <Box

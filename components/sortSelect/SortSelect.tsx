@@ -1,7 +1,6 @@
 'use client';
-import * as React from 'react';
+import React, { MouseEventHandler, useState, } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,21 +12,20 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 export default function SortSelect() {
     const options = ['Featured', 'Price: low-high', 'Price: high-low'];
     const rawQuery = useSearchParams();
-    const searchParams = new URLSearchParams(rawQuery);
+    const searchParams = new URLSearchParams(rawQuery?.toString());
     const router = useRouter();
     const sortValues = ['', 'asc', 'desc'];
 
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const [selectedIndex, setSelectedIndex] = useState(0);
 
     const open = Boolean(anchorEl);
 
-    const handleClickSortButton: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    const handleClickSortButton: MouseEventHandler<HTMLButtonElement> = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
     const handleMenuItemClick = (
-        event: React.MouseEvent<HTMLLIElement, MouseEvent>,
         index: number,
     ) => {
         setSelectedIndex(index);
@@ -137,7 +135,7 @@ export default function SortSelect() {
                         key={option}
                         disabled={index === selectedIndex}
                         selected={index === selectedIndex}
-                        onClick={(event) => handleMenuItemClick(event, index)}
+                        onClick={() => handleMenuItemClick(index)}
                         sx={{
                             fontSize: { mobile: '10px', tablet: '14px', desktop: '20px' },
                             minHeight: 'unset',

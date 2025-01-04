@@ -1,6 +1,7 @@
-import Dish from '@/utils/models/Dish';
-import connect from '@/utils/db';
 import { NextResponse } from 'next/server';
+
+import connect from '@/utils/db';
+import Dish from '@/utils/models/Dish';
 import Category from '@/utils/models/Category';
 
 export const GET = async (req: Request) => {

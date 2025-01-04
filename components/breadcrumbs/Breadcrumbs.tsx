@@ -8,7 +8,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 import { basePages } from '@/data/pages';
-import { getCategories, getDishById } from '@/utils/getData';
+import { getCategories, getDishById } from '@/actions/dishes';
 
 export default function BreadCrumbs() {
 
@@ -68,53 +68,52 @@ export default function BreadCrumbs() {
         })();
     }, [params, pathArray]);
 
+    if (!breadcrumbs.length || breadcrumbs.length === 1) return null;
+
     return (
-        <>
-            {
-                breadcrumbs.length > 1 && <Box
-                    role="presentation"
-                    sx={{
-                        pt: { mobile: '16px', tablet: '30px', desktop: '64px' },
-                    }}
-                >
-                    <Breadcrumbs
-                        separator={
-                            <FiberManualRecordIcon
-                                sx={{
-                                    fontSize: { mobile: '6px', tablet: '8px', desktop: '12px' },
-                                    '&': {
-                                        color: '#828282',
-                                    },
-                                }}
-                            />
-                        }
-                        aria-label="breadcrumb"
-                    >
-                        {
-                            breadcrumbs.map(({ text, href }, i) => (
-                                <Typography
-                                    key={text}
-                                    // component={href ? <Link href={href} /> as unknown as ElementType : 'span'}
-                                    component={href ? Link : 'span'}
-                                    href={href || '/'}
-                                    sx={[{
-                                        fontSize: {
-                                            mobile: '12px',
-                                            tablet: '16px',
-                                            desktop: '22px',
-                                        },
-                                    }, i !== breadcrumbs.length - 1 && {
-                                        color: '#828282',
-                                        '&:hover': {
-                                            color: 'accent.main',
-                                        }
-                                    }]}
-                                >{text}</Typography>
-                            ))
-                        }
-                    </Breadcrumbs>
-                </Box>
-            }
-        </>
+        <Box
+            role="presentation"
+            sx={{
+                pt: { mobile: '16px', tablet: '30px', desktop: '64px' },
+            }}
+        >
+            <Breadcrumbs
+                separator={
+                    <FiberManualRecordIcon
+                        sx={{
+                            fontSize: { mobile: '6px', tablet: '8px', desktop: '12px' },
+                            '&': {
+                                color: '#828282',
+                            },
+                        }}
+                    />
+                }
+                aria-label="breadcrumb"
+            >
+                {
+                    breadcrumbs.map(({ text, href }, i) => (
+                        <Typography
+                            key={text}
+                            // component={href ? <Link href={href} /> as unknown as ElementType : 'span'}
+                            component={href ? Link : 'span'}
+                            href={href || '/'}
+                            sx={[{
+                                fontSize: {
+                                    mobile: '12px',
+                                    tablet: '16px',
+                                    desktop: '22px',
+                                },
+                            }, i !== breadcrumbs.length - 1 && {
+                                color: '#828282',
+                                '&:hover': {
+                                    color: 'accent.main',
+                                }
+                            }]}
+                        >{text}</Typography>
+                    ))
+                }
+            </Breadcrumbs>
+        </Box>
+
     );
 }

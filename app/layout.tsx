@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import { Oswald, Lato } from 'next/font/google';
+import { Lato } from 'next/font/google';
+import { AuthStoreProvider } from '@/stores/Stores-providers';
+
 import '@/styles/globals.scss';
-import Providers from '@/utils/Providers';
 
 const lato = Lato({
     subsets: ['latin'],
@@ -17,7 +17,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={lato.className}>
-                <Providers>{children}</Providers>
+                <AuthStoreProvider>{children}</AuthStoreProvider>
             </body>
         </html>
     );

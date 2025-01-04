@@ -1,15 +1,13 @@
 'use client';
-
 import React from 'react';
-
-import { SvgIcon, useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import { Theme, styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses, TooltipProps } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 
-import { useShoppingCart } from '../../../store';
+import { useCartStore } from '@/stores/Stores-providers';
 
 const HtmlTooltip = styled(
     ({ className, anchEl, ...props }: TooltipProps & { anchEl: HTMLElement | null }) => (
@@ -54,7 +52,6 @@ const HtmlTooltip = styled(
 
 const ShoppingBasket = () => {
     return (
-        // <SvgIcon>
         <svg
             width="41"
             height="41"
@@ -75,7 +72,6 @@ const ShoppingBasket = () => {
                 strokeLinecap="round"
             />
         </svg>
-        // </SvgIcon>
     );
 };
 
@@ -113,11 +109,11 @@ type Props = {
     anchEl: HTMLElement | null;
 };
 
-const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
+export default function CartIcon({ toggleDrawer, anchEl }: Props) {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('tablet'));
 
-    const totalDishes = useShoppingCart((state) => state.totalDishes);
-    const totalAmount = useShoppingCart((state) => state.totalAmount);
+    const totalDishes = useCartStore((state) => state.totalDishes);
+    const totalAmount = useCartStore((state) => state.totalAmount);
 
     const simpleIcon = (
         <IconButton
@@ -177,6 +173,4 @@ const CartIcon = ({ toggleDrawer, anchEl }: Props) => {
     );
 
     return <>{isMobile ? simpleIcon : iconWithTooltip}</>;
-};
-
-export default CartIcon;
+}
