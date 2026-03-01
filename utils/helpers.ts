@@ -16,6 +16,8 @@ export function addSpaces(text: string): string {
         .join('');
 }
 
+export const countProps = (object: Record<string, unknown>): number => Object.keys(object).length;
+
 ///////////////////////////////////////////////////////
 //For Time and Date Pickers
 
